@@ -1,0 +1,14 @@
+#
+# Executes commands at the start of an interactive session
+#
+
+# Source Prezto
+if [[ -s "$ZDOTDIR/.zprezto/init.zsh" ]]; then
+  source "$ZDOTDIR/.zprezto/init.zsh"
+fi
+
+# Set keymappings
+bindkey '^l' autosuggest-accept  # Ctrl-l to accept auto-suggestion
+
+# Load starship prompt
+[ -x "$(command -v starship)" ] && eval "$(starship init zsh)"

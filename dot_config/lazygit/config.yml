@@ -1,0 +1,8 @@
+gui:
+  theme:
+    activebordercolor:
+    - cyan
+    - bold
+quitOnTopLevelReturn: false
+reporting: "off"
+startupPopupVersion: 1

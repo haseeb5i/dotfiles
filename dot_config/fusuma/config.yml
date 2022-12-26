@@ -1,0 +1,44 @@
+swipe:
+  3:
+    left:
+      command: "xdotool key alt+Shift+Tab"
+      threshold: 0.5
+    right:
+      command: "xdotool key alt+Tab"
+      threshold: 0.5
+    up:
+      window:
+        maximized: toggle
+    down:
+      command: "xdotool key super+h" #hide
+    
+  4:
+    left:
+      command: "xdotool key super+Left" # Move window to left side
+      keypress:
+        LEFTSHIFT: 
+          window: 'prev' # nove window to prev
+          
+    right:
+      command: "xdotool key super+Right"  # Move window to right side
+      keypress:
+        LEFTSHIFT: 
+          window: 'next' # Move window to next      
+         
+    up:
+      command: "xdotool key ctrl+alt+Up" # Switch to prev
+    down:
+      command: "xdotool key ctrl+alt+Down" # Switch to next
+
+pinch:
+  in:
+    command: "xdotool keydown ctrl click 4 keyup ctrl" # Zoom in
+  out:
+    command: "xdotool keydown ctrl click 5 keyup ctrl" # Zoom out
+plugin:
+  inputs:
+    libinput_command_input:
+      show-keycodes: true
+interval:
+  pinch: 0.5
+  
