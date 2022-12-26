@@ -1,7 +1,7 @@
 # Personal Dotfiles
 
 - install [chezmoi](https://www.chezmoi.io/install/) and make sure it is available in `$PATH`
-- initialize chezmoi with these dotfiles
+- initialize chezmoi with these dotfiles (alternatively use ssh)
 ```
 chezmoi init https://github.com/xCodeR01/dotfiles.git 
 ```
@@ -9,7 +9,7 @@ chezmoi init https://github.com/xCodeR01/dotfiles.git
 ```
 chezmoi diff
 ```
-- apply all or partial dotfiles (pass --dry-run or -n to see changes without applying)
+- apply all or partial dotfiles (pass `--dry-run` or `-n` to see changes without applying)
 ```
 chezmoi apply -v
 chezmoi apply ~/.config/zsh -v
