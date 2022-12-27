@@ -31,10 +31,10 @@ local options = {
   numberwidth = 3, -- set number column width (default 4)
   ruler = false,
 
-  -- indenting, handled by vim-seluth plugin
-  -- shiftwidth = 2, -- spaces to be inserted for each indent (default 8)
-  -- tabstop = 2, -- insert 2 spaces for a tab (default 8)
+  -- indenting, handled by vim-seluth
+  -- shiftwidth = 2, -- no. of spaces for one indent (default 8)
   -- softtabstop = 2,
+  -- tabstop = 2, -- insert 2 spaces for a tab (default 8)
   -- expandtab = true, -- convert tabs to spaces
   -- smarttab = true,
   -- smartindent = true, -- make indenting smarter again
@@ -55,20 +55,4 @@ if vim.g.neovide then
   vim.g.neovide_scroll_animation_length = 0.2
   vim.g.neovide_confirm_quit = true
   -- vim.g.neovide_transparency = 0.8
-end
-
--- disable some builtin vim plugins
-local default_plugins = {
-  "2html_plugin",
-  "gzip",
-  "netrwPlugin",
-  "matchit",
-  "tarPlugin",
-  "spellfile_plugin",
-  "tutor",
-  "zipPlugin",
-}
-
-for _, plugin in pairs(default_plugins) do
-  vim.g["loaded_" .. plugin] = 1
 end

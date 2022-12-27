@@ -20,6 +20,7 @@ mason.setup {
 
 require("mason-lspconfig").setup {
   ensure_installed = {
+    "jsonls",
     "sumneko_lua",
     "tsserver",
   },
