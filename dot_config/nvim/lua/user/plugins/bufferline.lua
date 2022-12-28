@@ -1,6 +1,5 @@
 local M = {
   "akinsho/nvim-bufferline.lua",
-  enable = "false",
   version = "v3.*",
   event = "BufAdd",
   dependencies = {
