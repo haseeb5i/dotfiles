@@ -46,8 +46,11 @@ cmp.setup {
   formatting = {
     format = function(_, vim_item)
       vim_item.kind = kind_icons[vim_item.kind] .. vim_item.kind
-      -- vim_item.abbr = string.sub(vim_item.abbr, 1, 40)
-      vim_item.menu = ""
+      local maxwidth = 45
+      local label = vim_item.abbr
+      if #label > maxwidth then
+        vim_item.abbr = string.sub(label, 1, maxwidth) .. "..."
+      end
       return vim_item
     end,
   },

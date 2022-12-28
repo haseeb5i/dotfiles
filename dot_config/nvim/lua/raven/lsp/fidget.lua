@@ -4,13 +4,9 @@ if not present then
 end
 
 fidget.setup {
-  window = {
-    blend = 0,
-  },
+  window = { blend = 0 },
   sources = {
-    ["null-ls"] = {
-      ignore = true,
-    },
+    ["null-ls"] = { ignore = true },
   },
 }
 

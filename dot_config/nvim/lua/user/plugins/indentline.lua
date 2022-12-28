@@ -1,11 +1,10 @@
-local status_ok, indentline = pcall(require, "indent_blankline")
-if not status_ok then
-  return
-end
-
-indentline.setup {
+local M = {
+  "lukas-reineke/indent-blankline.nvim",
+  event = "BufReadPre",
+}
+M.config = {
   buftype_exclude = { "terminal", "nofile" },
-  char = "▏",
+  char = "│",
   filetype_exclude = {
     "lspinfo",
     "help",
@@ -23,5 +22,4 @@ indentline.setup {
   use_treesitter_scope = false,
 }
 
--- HACK: work-around for https://github.com/lukas-reineke/indent-blankline.nvim/issues/59
-vim.wo.colorcolumn = "99999"
+return M

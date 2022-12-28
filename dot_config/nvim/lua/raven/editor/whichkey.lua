@@ -3,12 +3,8 @@ if not present then
   return
 end
 
+-- https://github.com/folke/which-key.nvim#%EF%B8%8F-configuration
 wk.setup {
-  icons = {
-    breadcrumb = "»",
-    separator = "  ",
-    group = "+",
-  },
   plugins = {
     presets = {
       operators = false,
@@ -16,24 +12,11 @@ wk.setup {
       windows = false,
     },
   },
-  operators = { gc = "Comments" },
   window = {
     border = "single",
-    winblend = 0,
   },
   layout = {
     spacing = 4,
-  },
-
-  hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " },
-  triggers = "auto",
-  triggers_blacklist = {
-    i = { "j", "k" },
-    v = { "j", "k" },
-  },
-  disable = {
-    buftypes = {},
-    filetypes = { "TelescopePrompt" },
   },
 }
 
