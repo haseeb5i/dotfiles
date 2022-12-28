@@ -16,17 +16,18 @@ local M = {
       end,
       desc = "Prev Reference",
     },
-  }
+  },
 }
 
-function M.config()  
-	require("illuminate").configure({ delay = 200, 
-filetypes_denylist = {
-        'dirvish',
-        'fugitive',
+function M.config()
+  require("illuminate").configure {
+    delay = 200,
+    filetypes_denylist = {
+      "NvimTree",
+      "lazy",
+      "mason",
     },
-	})
+  }
 end
-
 
 return M

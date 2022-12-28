@@ -24,22 +24,26 @@ function M.setup_diagnostics()
     },
   }
 
-  vim.keymap.set("n", "gl", vim.diagnostic.open_float)
-  vim.keymap.set("n", "[d", vim.diagnostic.goto_next)
-  vim.keymap.set("n", "]d", vim.diagnostic.goto_prev)
-  vim.keymap.set("n", "<leader>lq", vim.diagnostic.setloclist)
+  local function nmap(lhs, rhs, desc)
+    vim.keymap.set("n", lhs, rhs, { desc = desc })
+  end
+
+  nmap("gl", vim.diagnostic.open_float, "View Diagnostic")
+  nmap("[d", vim.diagnostic.goto_next, "Goto Next Diagnostic")
+  nmap("]d", vim.diagnostic.goto_prev, "Goto Prev Diagnostic")
+  nmap("<leader>ld", vim.diagnostic.setloclist, "Document Diagnostics")
+  nmap("<leader>wd", vim.diagnostic.setqflist, "Workspace Diagnostics")
 end
 
 function M.setup_handlers()
-	-- add round border to float windows
-  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-    vim.lsp.handlers.hover, {
+  -- add round border to float windows
+  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
     border = "rounded",
     relative = "cursor",
   })
 
-  vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
-    vim.lsp.handlers.signature_help, {
+  vim.lsp.handlers["textDocument/signatureHelp"] =
+    vim.lsp.with(vim.lsp.handlers.signature_help, {
       border = "rounded",
       relative = "cursor",
       focusable = false,
@@ -56,7 +60,6 @@ function M.setup_handlers()
       vim.api.nvim_echo({ { msg } }, true, {})
     end
   end
-
 end
 
 function M.setup_keymaps(bufnr)
@@ -65,8 +68,7 @@ function M.setup_keymaps(bufnr)
   end
 
   -- add client specific maapings
--- client.name == "tsserver",
-
+  -- client.name == "tsserver",
   map("n", "gd", vim.lsp.buf.definition, "Goto Definition")
   map("n", "gD", vim.lsp.buf.declaration, "Goto Declaration")
   map("n", "gi", vim.lsp.buf.implementation, "Got Implementation")
@@ -82,10 +84,10 @@ function M.setup_keymaps(bufnr)
   map("n", "<leader>wa", vim.lsp.buf.add_workspace_folder)
   map("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder)
   map("n", "<leader>wl", vim.lsp.buf.list_workspace_folders)
-  map("n", "<leader>wd", vim.lsp.buf.document_symbol)
-  map("n", "<leader>ws", vim.lsp.buf.workspace_symbol)
+  -- map("n", "<leader>ls", vim.lsp.buf.document_symbol)
+  -- map("n", "<leader>ws", vim.lsp.buf.workspace_symbol)
+  map("n", "<leader>ls", "<cmd>Telescope lsp_document_symbol<cr>")
+  map("n", "<leader>ws", "<cmd>Telescope lsp_workspace_symbol<cr>")
 end
-
-
 
 return M

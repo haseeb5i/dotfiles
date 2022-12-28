@@ -32,8 +32,8 @@ function colors.onedark()
   vim.cmd.colorscheme "onedark"
 end
 
--- https://github.com/catppuccin/nvim/tree/main/lua/catppuccin/groups
 -- make neovim transparent
+-- https://github.com/catppuccin/nvim/tree/main/lua/catppuccin/groups
 -- vim.api.nvim_create_autocmd("ColorScheme",{
 --   pattern = "*",
 --   callback = function()
