@@ -1,6 +1,7 @@
 local autocmd = vim.api.nvim_create_autocmd
+local augroup = vim.api.nvim_create_augroup
 
--- dont list quickfix buffers
+-- don't list quickfix buffers
 autocmd("FileType", {
   pattern = "qf",
   callback = function()
@@ -28,24 +29,14 @@ autocmd("TextYankPost", {
   end,
 })
 
+-- make some windows easy to close
 autocmd("FileType", {
   pattern = { "qf", "help", "man", "floaterm", "lspinfo", "null-ls-info" },
   command = "nnoremap <silent> <buffer> q :close<CR>",
 })
 
-vim.cmd [[
-  augroup _auto_resize
-    autocmd!
-    autocmd VimResized * tabdo wincmd = 
-  augroup end
-
-  augroup cdpwd
-    autocmd!
-    autocmd VimEnter * cd $PWD
-  augroup END
-
-  augroup _alpha
-    autocmd!
-    autocmd User AlphaReady set showtabline=0 | autocmd BufUnload <buffer> set showtabline=2
-  augroup end
-]]
+autocmd("VimResized", {
+  pattern = "*",
+  callback = "tabdo wincmd =",
+  group = augroup("_auto_resize", { clear = true }),
+})

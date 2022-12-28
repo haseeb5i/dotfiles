@@ -67,8 +67,8 @@ M.config = {
           ignored = "",
           renamed = "➜",
           unmerged = "",
-          unstaged = "",
-          untracked = "*",
+          unstaged = "", -- !
+          untracked = "*", -- ?
         },
       },
     },

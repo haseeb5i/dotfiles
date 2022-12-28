@@ -26,6 +26,7 @@ function M.config()
       "NvimTree",
       "lazy",
       "mason",
+      "help",
     },
   }
 end
