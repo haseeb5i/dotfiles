@@ -31,8 +31,8 @@ local cmp_autopairs = require "nvim-autopairs.completion.cmp"
 local cmp = require "cmp"
 
 cmp.event:on("confirm_done", function(evt)
-  local node_type = ts_utils.get_node_at_cursor():type()
-  if node_type ~= "named_imports" then
+  local tsnode = ts_utils.get_node_at_cursor()
+  if tsnode:type() ~= "named_imports" then
     cmp_autopairs.on_confirm_done()(evt)
   end
 end)

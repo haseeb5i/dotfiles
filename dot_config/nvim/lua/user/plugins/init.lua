@@ -10,7 +10,6 @@ return {
       vim.g.startuptime_tries = 10
     end,
   },
-
   -- colorschemes
   "navarasu/onedark.nvim",
   "ellisonleao/gruvbox.nvim",

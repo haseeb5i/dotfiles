@@ -31,10 +31,6 @@ function M.config()
     },
   }
 
-  -- require("dapui").float_element(<element ID>, <optional settings>)
-  -- require("dapui").eval(<expression>)
-  -- vnoremap <M-k> <Cmd>lua require("dapui").eval()<CR>
-
   dap.listeners.after.event_initialized["dapui_config"] = function()
     dapui.open()
   end

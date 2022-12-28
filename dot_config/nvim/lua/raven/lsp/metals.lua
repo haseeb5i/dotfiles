@@ -16,8 +16,6 @@ function M.setup()
   config.on_attach = function(client, bufnr)
     require("raven.lsp.handlers").set_lsp_keymaps(bufnr)
     vim.keymap.set("n", "<leader>ws", metals.hover_worksheet, { buffer = bufnr })
-
-    pcall(require("illuminate").on_attach, client)
     metals.setup_dap()
   end
 

@@ -14,8 +14,6 @@ local function on_attach(client, bufnr)
   client.server_capabilities.documentRangeFormattingProvider = false
 
   require("raven.lsp.handlers").set_lsp_keymaps(bufnr)
-
-  pcall(require("illuminate").on_attach, client)
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()

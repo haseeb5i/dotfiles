@@ -1,239 +1,185 @@
-local M = {}
+local map = vim.keymap.set
 
-M.general = {
-  i = {
-    ["jk"] = { "<Esc>", "Exit insert mode" },
-    ["<C-b>"] = { "<ESC>^i", "論 beginning of line" },
-    ["<C-e>"] = { "<End>", "壟 end of line" },
-    ["<C-s>"] = { "<cmd> w <CR>", "﬚  Save File" },
-  },
+-- insert mode maps
+map("i", "jk", "<Esc>", { desc = "Exit insert mode" })
+map("i", "<C-b>", "<ESC>^i", { desc = "論 beginning of line" })
+map("i", "<C-e>", "<End>", { desc = "壟 end of line" })
+map("i", "<C-s>", "<cmd> w <CR>", { desc = "﬚  Save File" })
 
-  n = {
-    ["<leader>a"] = { "<cmd> Alpha <cr>", "Alpha" },
-    -- switch between windows and buffers
-    ["<C-h>"] = { "<C-w>h", " window left" },
-    ["<C-l>"] = { "<C-w>l", " window right" },
-    ["<C-j>"] = { "<C-w>j", " window down" },
-    ["<C-k>"] = { "<C-w>k", " window up" },
-    -- resize window
-    ["<C-Up>"] = { "<cmd> resize +2<CR>", "Increase window height" },
-    ["<C-Down>"] = { "<cmd> resize -2<CR>", "Decrease window height" },
-    ["<C-Left>"] = { "<cmd> vertical resize +2<CR>", "Decrease window width" },
-    ["<C-Right>"] = { "<cmd> vertical resize -2<CR>", "Increase window width" },
-    -- save, close and quit
-    ["<C-s>"] = { "<cmd> w <CR>", "Save File" },
-    ["<C-q>"] = { "<cmd> qa <CR>", "Quit Neovim" },
-    ["<leader>q"] = { "<cmd> q <CR>", "Quit Window" },
-    ["<leader>c"] = { "<cmd> Bdelete <CR>", "Close Buffer" },
+-- switch between buffers
+-- map("n", "", "<cmd> BufferLinePick <cr>")
+map("n", "<S-l>", "<cmd> BufferLineCycleNext <cr>")
+map("n", "<S-h>", "<cmd> BufferLineCyclePrev <cr>")
+map("n", "<M-l>", "<cmd> BufferLineMoveNext <cr>")
+map("n", "<M-h>", "<cmd> BufferLineMovePrev <cr>")
 
-    ["<A-j>"] = { "<cmd> move .+1<CR>==", "Move text down" },
-    ["<A-k>"] = { "<cmd> move .-2<CR>==", "Move text up" },
+-- switch between windows
+map("n", "<C-h>", "<C-w>h", { desc = " window left" })
+map("n", "<C-l>", "<C-w>l", { desc = " window right" })
+map("n", "<C-j>", "<C-w>j", { desc = " window down" })
+map("n", "<C-k>", "<C-w>k", { desc = " window up" })
 
-    -- Allow moving the cursor through wrapped lines with j, k, <Up> and <Down>
-    -- http://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/
-    -- empty mode is same as using <cmd> :map
-    -- also don't use g[j|k] when in operator pending mode, so it doesn't alter d, y or c behaviour
-    -- ["j"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true } },
-    -- ["k"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
-    -- ["<Up>"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
-    -- ["<Down>"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true } },
+-- resize window
+map("n", "<C-Up>", "<cmd> resize +2<CR>")
+map("n", "<C-Down>", "<cmd> resize -2<CR>")
+map("n", "<C-Left>", "<cmd> vertical resize +2<CR>")
+map("n", "<C-Right>", "<cmd> vertical resize -2<CR>")
 
-    -- open link in browser, only for unix
-    ["gx"] = {
-      '<cmd>call jobstart(["xdg-open", expand("<cfile>")], {"detach": v:true})<cr>',
-      "Open link",
-    },
-  },
+-- save, close and quit
+map("n", "<C-s>", "<cmd> w <CR>", { desc = "Save File" })
+map("n", "<C-q>", "<cmd> qa <CR>", { desc = "Quit Neovim" })
 
-  v = {
-    -- Stay in indent mode
-    ["<"] = { "<gv", opts = { silent = true } },
-    [">"] = { ">gv", opts = { silent = true } },
-    -- Don't copy the replaced text after pasting in visual mode
-    -- https://vim.fandom.com/wiki/Replace_a_word_with_yanked_text#Alternative_mapping_for_paste
-    -- "_dP
-    ["p"] = { 'p:let @+=@0<CR>:let @"=@0<CR>', opts = { silent = true } },
-  },
-  x = {
-    ["<A-j>"] = { ":m '>+1<cr>gv", "Move text down" },
-    ["<A-k>"] = { ":m '<-2<CR>gv", "Move text up" },
-  },
-}
+-- move lines
+map("n", "<A-j>", "<cmd> move .+1<CR>==")
+map("n", "<A-k>", "<cmd> move .-2<CR>==")
+map("x", "<A-j>", ":m '>+1<cr>gv")
+map("x", "<A-k>", ":m '<-2<CR>gv")
+-- vim.keymap.set("n", "<A-j>", ":m .+1<CR>==")
+-- vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv")
+-- vim.keymap.set("i", "<A-j>", "<Esc>:m .+1<CR>==gi")
+-- vim.keymap.set("n", "<A-k>", ":m .-2<CR>==")
+-- vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv")
+-- vim.keymap.set("i", "<A-k>", "<Esc>:m .-2<CR>==gi")
+-- vim.keymap.set("n", "<C-Left>", "<cmd>bdelete<cr>")
+-- vim.keymap.set("n", "<C-Left>", "<cmd>bprevious<cr>")
+-- vim.keymap.set("n", "<C-Right>", "<cmd>bnext<cr>")
+
+-- misc maps
+map(
+  "n",
+  "gx",
+  '<cmd>call jobstart(["xdg-open", expand("<cfile>")], {"detach": v:true})<cr>',
+  { desc = "Open Link" }
+)
+-- allow moving the cursor through wrapped lines with j, k, <Up> and <Down>
+-- http://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/
+-- empty mode is same as using <cmd> :map
+-- also don't use g[j|k] when in operator pending mode, so it doesn't alter d, y or c behaviour
+-- ["j"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true } },
+-- ["k"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
+-- ["<Up>"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
+-- ["<Down>"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true } },
+
+-- Stay in indent mode
+-- ["<"] = { "<gv", opts = { silent = true } },
+-- [">"] = { ">gv", opts = { silent = true } },
+-- Don't copy the replaced text after pasting in visual mode
+-- https://vim.fandom.com/wiki/Replace_a_word_with_yanked_text#Alternative_mapping_for_paste
+-- "_dP
+-- ["p"] = { 'p:let @+=@0<CR>:let @"=@0<CR>', opts = { silent = true } },
 
 -- TODO: fix this
--- vim.cmd [[
---   cnoremap <expr>  <C-j>  pumvisible() ? "<C-n>" : "<C-j>"
--- ]]
+-- vim.cmd [[ cnoremap <expr>  <C-j>  pumvisible() ? "<C-n>" : "<C-j>" ]]
 -- vim.keymap.set("c", "<C-j>", function()
 --   return vim.fn.pumvisible() == 1 and "<C-n>" or "<C-j>"
 -- end, { expr = true, noremap = true })
 
-M.bufferline = {
-  n = {
-    -- TODO: map <cmd> BufferLinePick <cr>
-    ["<S-l>"] = { "<cmd> BufferLineCycleNext <cr>", "Buffer right" },
-    ["<S-h>"] = { "<cmd> BufferLineCyclePrev <cr>", "Buffer left" },
-    ["<M-l>"] = { "<cmd> BufferLineMoveNext <cr>", "Buffer right" },
-    ["<M-h>"] = { "<cmd> BufferLineMovePrev <cr>", "Buffer left" },
-  },
-}
-
-
-M.nvimtree = {
-  n = {
-    ["<C-n>"] = { "<cmd> NvimTreeToggle <CR>", "  Toggle Nvimtree" },
-    ["<leader>e"] = { "<cmd> NvimTreeFocus <CR>", "focus nvimtree" },
-  },
-}
-
-M.mason = {
-  n = {
-    ["<leader>m"] = { "<cmd> Mason <cr>", "Mason Info" },
-  },
-}
-
-M.telescope = {
-  n = {
-    ["<leader>f"] = {
-      "<cmd> Telescope find_files theme=dropdown previewer=false<cr>",
-      "Find Files",
-    },
-    ["<leader>F"] = {
-      "<cmd> Telescope live_grep theme=ivy <CR>",
-      "Live grep",
-    },
-    ["<leader>b"] = {
-      "<cmd> Telescope buffers theme=dropdown previewer=false <cr>",
-      "Buffers",
-    },
-
-    ["<leader>sw"] = {
-      "<cmd> Telescope grep_string theme=ivy <cr>",
-      "Search Word",
-    },
-    -- vim
-    ["<leader>sc"] = { "<cmd> Telescope colorscheme<cr>", "Colorscheme" },
-    ["<leader>sh"] = { "<cmd> Telescope help_tags<cr>", "Find Help" },
-    ["<leader>sr"] = { "<cmd> Telescope oldfiles<cr>", "Open Recent File" },
-    ["<leader>sR"] = { "<cmd> Telescope registers<cr>", "Registers" },
-    ["<leader>sk"] = { "<cmd> Telescope keymaps<cr>", "Keymaps" },
-    ["<leader>sC"] = { "<cmd> Telescope commands<cr>", "Commands" },
-    -- git
-    ["<leader>gf"] = { "<cmd>Telescope git_files<cr>", "Search git files" },
-    ["<leader>go"] = { "<cmd>Telescope git_status<cr>", "Open changed files" },
-    ["<leader>gb"] = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
-    ["<leader>gc"] = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
-  },
-}
-
-M.gitsigns = {
-  n = {
-    ["<leader>gg"] = { "<cmd>lua _LAZYGIT_TOGGLE()<CR>", "Lazygit" },
-    ["<leader>gj"] = {
-      "<cmd>lua require 'gitsigns'.next_hunk()<cr>",
-      "Next Hunk",
-    },
-    ["<leader>gk"] = {
-      "<cmd>lua require 'gitsigns'.prev_hunk()<cr>",
-      "Prev Hunk",
-    },
-    ["<leader>gl"] = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame" },
-    ["<leader>gp"] = {
-      "<cmd>lua require 'gitsigns'.preview_hunk()<cr>",
-      "Preview Hunk",
-    },
-    ["<leader>gr"] = {
-      "<cmd>lua require 'gitsigns'.reset_hunk()<cr>",
-      "Reset Hunk",
-    },
-    ["<leader>gR"] = {
-      "<cmd>lua require 'gitsigns'.reset_buffer()<cr>",
-      "Reset Buffer",
-    },
-    ["<leader>gs"] = {
-      "<cmd>lua require 'gitsigns'.stage_hunk()<cr>",
-      "Stage Hunk",
-    },
-    ["<leader>gu"] = {
-      "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
-      "Undo Stage Hunk",
-    },
-    ["<leader>gd"] = { "<cmd>Gitsigns diffthis HEAD<cr>", "Diff" },
-  },
-}
-
+-- ["<C-n>"] = { "<cmd> NvimTreeToggle <CR>", "  Toggle Nvimtree" },
 -- <cmd>lua require('neogen').generate({
 --     type = "func" -- can be func, class, type, file
 -- })<cr>
 
-M.dap = {
-  n = {
+local wk = require "which-key"
 
-    ["<leader>db"] = {
+wk.setup {
+  plugins = {
+    registers = true,
+    presets = {
+      operators = false,
+      nav = false,
+      windows = false,
+    },
+  },
+  window = { border = "single" },
+  layout = { spacing = 4 },
+}
+
+wk.register({
+  a = { "<cmd> Alpha <cr>", "Alpha" },
+  c = { "<cmd> Bdelete <cr>", "Close Buffer" },
+  e = { "<cmd> NvimTreeFocus <cr>", "Focus NvimTree" },
+  b = {
+    "<cmd> Telescope buffers theme=dropdown previewer=false <cr>",
+    "Buffers",
+  },
+  f = {
+    "<cmd> Telescope find_files theme=dropdown previewer=false <cr>",
+    "Find Files",
+  },
+  F = { "<cmd> Telescope live_grep theme=ivy <CR>", "Live grep" },
+  l = { name = "LSP" },
+  m = { "<cmd> Mason <cr>", "Mason Info" },
+  r = { "<cmd> SessionManager load_session<cr>", "Load Session" },
+  q = { "<cmd> q <cr>", "Quit Window" },
+
+  g = {
+    name = "+git",
+    g = { "<cmd>lua _LAZYGIT_TOGGLE()<CR>", "Lazygit" },
+    -- gitsigns
+    j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
+    k = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
+    l = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame" },
+    p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
+    r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
+    R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
+    s = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
+    u = { "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>", "Undo Stage Hunk" },
+    d = { "<cmd>Gitsigns diffthis HEAD<cr>", "Open Diff" },
+    -- d = { "<cmd>DiffviewOpen<cr>", "DiffView" },
+    -- telescope
+    f = { "<cmd>Telescope git_files<cr>", "Search git files" },
+    o = { "<cmd>Telescope git_status<cr>", "Open changed files" },
+    b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
+    c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
+  },
+
+  s = {
+    name = "Search",
+    w = { "<cmd> Telescope grep_string theme=ivy <cr>", "Search Word" },
+    c = { "<cmd> Telescope colorscheme<cr>", "Colorscheme" },
+    h = { "<cmd> Telescope help_tags<cr>", "Find Help" },
+    r = { "<cmd> Telescope oldfiles<cr>", "Open Recent File" },
+    R = { "<cmd> Telescope registers<cr>", "Registers" },
+    k = { "<cmd> Telescope keymaps<cr>", "Keymaps" },
+    C = { "<cmd> Telescope commands<cr>", "Commands" },
+  },
+
+  d = {
+    name = "DAP",
+    b = {
       "<cmd>lua require 'dap'.toggle_breakpoint()<cr>",
       "Toggle Breakpoint",
     },
-    --   require("dap.ui.widgets").hover()
-    ["<leader>dc"] = { "<cmd>lua require 'dap'.continue()<cr>", "Continue" },
-    ["<leader>di"] = { "<cmd>lua require 'dap'.step_into()<cr>", "Step Into" },
-    ["<leader>do"] = { "<cmd>lua require 'dap'.step_over()<cr>", "Step Over" },
-    ["<leader>dO"] = { "<cmd>lua require 'dap'.step_out()<cr>", "Step Out" },
-    ["<leader>dr"] = {
-      "<cmd>lua require 'dap'.repl.toggle()<cr>",
-      "Toggle REPL",
-    },
-    ["<leader>dl"] = { "<cmd>lua require 'dap'.run_last()<cr>", "Run Last" },
-    ["<leader>dt"] = { "<cmd>lua require 'dap'.terminate()<cr>", "Terminate" },
-    ["<leader>du"] = {
-      "<cmd>lua require 'dapui'.toggle()<cr>",
-      "Toggle DAP UI",
-    },
+    c = { "<cmd>lua require 'dap'.continue()<cr>", "Continue" },
+    i = { "<cmd>lua require 'dap'.step_into()<cr>", "Step Into" },
+    o = { "<cmd>lua require 'dap'.step_over()<cr>", "Step Over" },
+    O = { "<cmd>lua require 'dap'.step_out()<cr>", "Step Out" },
+    r = { "<cmd>lua require 'dap'.repl.toggle()<cr>", "Toggle REPL" },
+    l = { "<cmd>lua require 'dap'.run_last()<cr>", "Run Last" },
+    t = { "<cmd>lua require 'dap'.terminate()<cr>", "Terminate" },
+    u = { "<cmd>lua require 'dapui'.toggle()<cr>", "Toggle DAP UI" },
+    -- require("dap.ui.widgets").hover()
+    -- require("dapui").float_element(<element ID>, <optional settings>)
+    -- require("dapui").eval(<expression>)
+    -- vnoremap <M-k> <Cmd>lua require("dapui").eval()<CR>
   },
-}
 
-M.packer = {
-  n = {
-    ["<leader>pc"] = { "<cmd>PackerCompile<cr>", "Compile" },
-    ["<leader>pi"] = { "<cmd>PackerInstall<cr>", "Install" },
-    ["<leader>ps"] = { "<cmd>PackerSync<cr>", "Sync" },
-    ["<leader>pS"] = { "<cmd>PackerStatus<cr>", "Status" },
-    ["<leader>pu"] = { "<cmd>PackerUpdate<cr>", "Update" },
+  p = {
+    name = "Packer",
+    c = { "<cmd> PackerCompile <cr>", "Compile" },
+    i = { "<cmd> PackerInstall <cr>", "Install" },
+    s = { "<cmd> PackerSync <cr>", "Sync" },
+    S = { "<cmd> PackerStatus <cr>", "Status" },
+    u = { "<cmd> PackerUpdate <cr>", "Update" },
   },
-}
 
-M.terminal = {
-  n = {
-    ["<leader>tn"] = { "<cmd>lua _NODE_TOGGLE()<cr>", "Node" },
-    ["<leader>tt"] = { "<cmd>lua _HTOP_TOGGLE()<cr>", "Htop" },
-    ["<leader>tp"] = { "<cmd>lua _PYTHON_TOGGLE()<cr>", "Python" },
-    ["<leader>tf"] = { "<cmd>ToggleTerm direction=float<cr>", "Float" },
-    ["<leader>th"] = {
-      "<cmd>ToggleTerm size=10 direction=horizontal<cr>",
-      "Horizontal",
-    },
-    ["<leader>tv"] = {
-      "<cmd>ToggleTerm size=80 direction=vertical<cr>",
-      "Vertical",
-    },
+  t = {
+    name = "Terminal",
+    n = { "<cmd>lua _NODE_TOGGLE()<cr>", "Node" },
+    t = { "<cmd>lua _HTOP_TOGGLE()<cr>", "Htop" },
+    p = { "<cmd>lua _PYTHON_TOGGLE()<cr>", "Python" },
+    f = { "<cmd>ToggleTerm direction=float<cr>", "Float" },
+    h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
+    v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
   },
-}
-
-M.session = {
-  n = {
-    ["<leader>r"] = { "<cmd> SessionManager load_session<cr>", "Load Session" },
-  },
-}
-
-local function load_mappings(mappings)
-  for mode, mode_values in pairs(mappings) do
-    for keybind, keybind_info in pairs(mode_values) do
-      local opts = keybind_info.opts or {}
-      opts.desc = keybind_info[2]
-      vim.keymap.set(mode, keybind, keybind_info[1], opts)
-    end
-  end
-end
-
-for _, section_mappings in pairs(M) do
-  load_mappings(section_mappings)
-end
+}, { prefix = "<leader>" })
