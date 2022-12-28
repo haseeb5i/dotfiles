@@ -26,11 +26,13 @@ function M.config()
     },
   }
 
+  local ts_utils = require "nvim-treesitter.ts_utils"
   local cmp_autopairs = require "nvim-autopairs.completion.cmp"
 
   require("cmp").event:on("confirm_done", function(evt)
-    local node = vim.treesitter.get_node_at_cursor()
-    if node:type() ~= "named_imports" then
+    local tsnode = ts_utils.get_node_at_cursor()
+    -- local tsnode = vim.treesitter.get_node_at_cursor()
+    if tsnode:type() ~= "named_imports" then
       cmp_autopairs.on_confirm_done()(evt)
     end
   end)
