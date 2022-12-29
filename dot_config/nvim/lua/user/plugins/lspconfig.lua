@@ -6,8 +6,13 @@ local M = {
     "williamboman/mason-lspconfig.nvim",
     "b0o/SchemaStore.nvim",
     "jose-elias-alvarez/typescript.nvim",
-    -- { "folke/neodev.nvim", config = true },
-    -- "j-hui/fidget.nvim",
+    {
+      "folke/neodev.nvim",
+      config = {
+        library = { plugins = false },
+        setup_jsonls = false,
+      },
+    },
   },
 }
 
