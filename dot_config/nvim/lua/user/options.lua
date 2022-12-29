@@ -20,8 +20,8 @@ local options = {
   mouse = "a", -- allow the mouse to be used in neovim
   smartcase = true, -- smart case
   swapfile = false, -- creates a swapfile
-  timeoutlen = 600, -- time to wait for a mapped sequence to complete (1000ms default)
-  updatetime = 300, -- faster completion (4000ms default)
+  timeoutlen = 500, -- time to wait for a mapped sequence to complete (1000ms default)
+  updatetime = 250, -- faster completion (4000ms default)
   undofile = true, -- enable persistent undo
   wrap = false, -- display lines as one long line
 

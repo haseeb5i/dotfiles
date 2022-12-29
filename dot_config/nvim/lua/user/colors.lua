@@ -54,10 +54,12 @@ end
 --   end
 -- })
 
+
 vim.cmd [[
   hi! Pmenu guibg=none
-  hi! CmpItemAbbrMatch guibg=none
+  hi! CmpItemAbbrMatch guibg=none 
   hi! link CmpItemAbbrMatchFuzzy CmpItemAbbrMatch
+  hi! CmpItemAbbrDeprecated gui=strikethrough
 ]]
 
 -- setup a theme

@@ -1,23 +1,26 @@
 local map = vim.keymap.set
 
--- insert mode maps
-map("i", "jk", "<Esc>", { desc = "Exit insert mode" })
-map("i", "<C-b>", "<ESC>^i", { desc = "論 beginning of line" })
-map("i", "<C-e>", "<End>", { desc = "壟 end of line" })
-map("i", "<C-s>", "<cmd> w <CR>", { desc = "﬚  Save File" })
+-- save, close and quit
+map("i", "jk", "<Esc>")
+map("n", "<C-q>", "<cmd> qa <cr>")
+map("i", "<C-e>", "<End>")
+map("i", "<C-b>", "<ESC>^i")
+map({ "i", "n" }, "<C-s>", "<cmd> w <CR>")
 
 -- switch between buffers
--- map("n", "", "<cmd> BufferLinePick <cr>")
+-- map("n", "<S-l>", "<cmd> bnext <cr>")
+-- map("n", "<S-h>", "<cmd> bprevious <cr>")
 map("n", "<S-l>", "<cmd> BufferLineCycleNext <cr>")
 map("n", "<S-h>", "<cmd> BufferLineCyclePrev <cr>")
 map("n", "<M-l>", "<cmd> BufferLineMoveNext <cr>")
 map("n", "<M-h>", "<cmd> BufferLineMovePrev <cr>")
+-- map("n", "", "<cmd> BufferLinePick <cr>")
 
 -- switch between windows
-map("n", "<C-h>", "<C-w>h", { desc = " window left" })
-map("n", "<C-l>", "<C-w>l", { desc = " window right" })
-map("n", "<C-j>", "<C-w>j", { desc = " window down" })
-map("n", "<C-k>", "<C-w>k", { desc = " window up" })
+map("n", "<C-h>", "<C-w>h")
+map("n", "<C-l>", "<C-w>l")
+map("n", "<C-j>", "<C-w>j")
+map("n", "<C-k>", "<C-w>k")
 
 -- resize window
 map("n", "<C-Up>", "<cmd> resize +2<CR>")
@@ -25,56 +28,38 @@ map("n", "<C-Down>", "<cmd> resize -2<CR>")
 map("n", "<C-Left>", "<cmd> vertical resize +2<CR>")
 map("n", "<C-Right>", "<cmd> vertical resize -2<CR>")
 
--- save, close and quit
-map("n", "<C-s>", "<cmd> w <CR>", { desc = "Save File" })
-map("n", "<C-q>", "<cmd> qa <CR>", { desc = "Quit Neovim" })
-
 -- move lines
-map("n", "<A-j>", "<cmd> move .+1<CR>==")
-map("n", "<A-k>", "<cmd> move .-2<CR>==")
-map("x", "<A-j>", ":m '>+1<cr>gv")
-map("x", "<A-k>", ":m '<-2<CR>gv")
--- vim.keymap.set("n", "<A-j>", ":m .+1<CR>==")
--- vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv")
--- vim.keymap.set("i", "<A-j>", "<Esc>:m .+1<CR>==gi")
--- vim.keymap.set("n", "<A-k>", ":m .-2<CR>==")
--- vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv")
--- vim.keymap.set("i", "<A-k>", "<Esc>:m .-2<CR>==gi")
--- vim.keymap.set("n", "<C-Left>", "<cmd>bdelete<cr>")
--- vim.keymap.set("n", "<C-Left>", "<cmd>bprevious<cr>")
--- vim.keymap.set("n", "<C-Right>", "<cmd>bnext<cr>")
+map("n", "<A-j>", "<cmd> move .+1<cr>==")
+map("n", "<A-k>", "<cmd> move .-2<cr>==")
+map("x", "<A-j>", ":m '>+1<cr>gv=gv")
+map("x", "<A-k>", ":m '<-2<cr>gv=gv")
 
--- misc maps
+-- miscellaneous maps
 map(
   "n",
   "gx",
   '<cmd>call jobstart(["xdg-open", expand("<cfile>")], {"detach": v:true})<cr>',
   { desc = "Open Link" }
 )
+-- map("v", "<", "<gv", { silent = true })
+-- map("v", ">", ">gv", { silent = true })
+
+-- Don't copy the replaced text after pasting in visual mode
+-- https://vim.fandom.com/wiki/Replace_a_word_with_yanked_text#Alternative_mapping_for_paste
+map("x", "p", 'p:let @+=@0<CR>:let @"=@0<CR>', { silent = true })
+
 -- allow moving the cursor through wrapped lines with j, k, <Up> and <Down>
 -- http://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/
 -- empty mode is same as using <cmd> :map
 -- also don't use g[j|k] when in operator pending mode, so it doesn't alter d, y or c behaviour
--- ["j"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true } },
--- ["k"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
--- ["<Up>"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
--- ["<Down>"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true } },
-
--- Stay in indent mode
--- ["<"] = { "<gv", opts = { silent = true } },
--- [">"] = { ">gv", opts = { silent = true } },
--- Don't copy the replaced text after pasting in visual mode
--- https://vim.fandom.com/wiki/Replace_a_word_with_yanked_text#Alternative_mapping_for_paste
--- "_dP
--- ["p"] = { 'p:let @+=@0<CR>:let @"=@0<CR>', opts = { silent = true } },
+-- map("k", 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', { expr = true })
+-- map("j", 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', { expr = true })
+-- map("<Up>", 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', { expr = true })
+-- map("<Down>", 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', { expr = true })
 
 -- TODO: fix this
 -- vim.cmd [[ cnoremap <expr>  <C-j>  pumvisible() ? "<C-n>" : "<C-j>" ]]
--- vim.keymap.set("c", "<C-j>", function()
---   return vim.fn.pumvisible() == 1 and "<C-n>" or "<C-j>"
--- end, { expr = true, noremap = true })
-
--- ["<C-n>"] = { "<cmd> NvimTreeToggle <CR>", "  Toggle Nvimtree" },
+-- vim.cmd [[ nnoremap <C-n> :NvimTreeToggle ]]
 -- <cmd>lua require('neogen').generate({
 --     type = "func" -- can be func, class, type, file
 -- })<cr>

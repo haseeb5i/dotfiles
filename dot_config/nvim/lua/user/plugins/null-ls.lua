@@ -1,11 +1,9 @@
 local M = {
   "jose-elias-alvarez/null-ls.nvim",
-  event = "BufReadPre"
+  event = "BufReadPre",
 }
 
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md
-  local eslint_config_files = { 
-	".eslintrc.js", ".eslintrc.cjs", ".eslintrc.json" }
 function M.config()
   local null_ls = require "null-ls"
 
@@ -24,7 +22,7 @@ function M.config()
       code_actions.eslint_d,
       diagnostics.eslint_d.with {
         condition = function(utils)
-          return utils.root_has_file(eslint_config_files)
+          return utils.root_has_file_matches "^.eslintrc*"
         end,
       },
       formatting.prettierd,

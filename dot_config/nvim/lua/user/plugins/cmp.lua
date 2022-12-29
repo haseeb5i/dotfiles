@@ -2,22 +2,22 @@ local M = {
   "hrsh7th/nvim-cmp",
   event = { "CmdlineEnter", "InsertEnter" },
   dependencies = {
+    "L3MON4D3/LuaSnip",
+    "rafamadriz/friendly-snippets",
+    "saadparwaiz1/cmp_luasnip",
+
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-cmdline",
     "hrsh7th/cmp-path",
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-nvim-lua",
-
-    "L3MON4D3/LuaSnip",
-    "rafamadriz/friendly-snippets",
-    "saadparwaiz1/cmp_luasnip",
   },
 }
 
 function M.config()
-  local luasnip = require "luasnip"
   local kind_icons = require("user.icons").lspkind
   local cmp = require "cmp"
+  local luasnip = require "luasnip"
 
   require("luasnip.loaders.from_vscode").lazy_load()
 
@@ -68,6 +68,12 @@ function M.config()
         return vim_item
       end,
     },
+    -- sources = {
+    --   { name = "nvim_lsp" },
+    --   { name = "luasnip" },
+    --   { name = "buffer" },
+    --   { name = "path" },
+    -- },
     sources = cmp.config.sources({
       { name = "nvim_lsp" },
       { name = "luasnip" },
