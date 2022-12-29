@@ -54,7 +54,6 @@ end
 --   end
 -- })
 
-
 vim.cmd [[
   hi! Pmenu guibg=none
   hi! CmpItemAbbrMatch guibg=none 

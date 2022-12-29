@@ -1,24 +1,12 @@
 local M = {
   "lewis6991/gitsigns.nvim",
-  event = "BufReadPre",
+  event = "BufRead",
 }
 
---[[
-function()
-  autocmd({ "BufRead" }, {
-    group = vim.api.nvim_create_augroup("GitSignsLazyLoad", { clear = true }),
-    callback = function()
-      vim.fn.system("git -C " .. vim.fn.expand "%:p:h" .. " rev-parse")
-      if vim.v.shell_error == 0 then
-        vim.api.nvim_del_augroup_by_name "GitSignsLazyLoad"
-        vim.schedule(function()
-          require("packer").loader "gitsigns.nvim"
-        end)
-      end
-    end,
-  })
+function M.cond()
+  vim.fn.system("git -C " .. vim.fn.expand "%:p:h" .. " rev-parse")
+  return vim.v.shell_error == 0
 end
-]]
 
 M.config = {
   signs = {

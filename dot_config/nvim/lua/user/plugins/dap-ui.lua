@@ -4,8 +4,8 @@ local M = {
 
 -- docs => https://github.com/rcarriga/nvim-dap-ui#configuration
 function M.config()
-  local dapui = require "dapui"
   local dap = require "dap"
+  local dapui = require "dapui"
 
   dapui.setup {
     icons = { expanded = "⯆", collapsed = "⯈", circular = "↺" },

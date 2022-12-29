@@ -1,6 +1,6 @@
 -- check for code action capability
 local code_action_cap_found = false
-    -- local clients = vim.lsp.get_active_clients()
+-- local clients = vim.lsp.get_active_clients()
 -- vim.fn.bufnr()
 for _, client in pairs(vim.lsp.buf_get_clients()) do
   if client.supports_method "textDocument/codeAction" then

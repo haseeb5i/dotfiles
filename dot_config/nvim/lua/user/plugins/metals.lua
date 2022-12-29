@@ -16,7 +16,7 @@ function M.config()
   }
 
   config.capabilities = require("cmp_nvim_lsp").default_capabilities()
-  config.on_attach = function(client, bufnr)
+  config.on_attach = function(_, bufnr)
     require("user.lsp.handlers").setup_keymaps(bufnr)
     vim.keymap.set("n", "<leader>ws", metals.hover_worksheet, { buffer = bufnr })
     metals.setup_dap()

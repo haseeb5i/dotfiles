@@ -1,11 +1,10 @@
 local M = {
-"akinsho/toggleterm.nvim", 
-version = '*',
-event = "VeryLazy"
-
+  "akinsho/toggleterm.nvim",
+  version = "*",
+  event = "VeryLazy",
 }
 
- M.config= {
+M.config = {
   size = 20,
   open_mapping = [[<C-\>]],
   hide_numbers = true,
@@ -21,8 +20,6 @@ event = "VeryLazy"
     winblend = 0,
   },
 }
-
-
 
 function _G.set_terminal_keymaps()
   local opts = { noremap = true }
@@ -70,6 +67,5 @@ function _PYTHON_TOGGLE()
   python:toggle()
 end
 ]]
-
 
 return M
