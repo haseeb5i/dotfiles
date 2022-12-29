@@ -74,62 +74,50 @@ M.devicons = {
     icon = "",
     name = "Default",
   },
-
   c = {
     icon = "",
     name = "c",
   },
-
   deb = {
     icon = "",
     name = "deb",
   },
-
   mp3 = {
     icon = "",
     name = "mp3",
   },
-
   mp4 = {
     icon = "",
     name = "mp4",
   },
-
   out = {
     icon = "",
     name = "out",
   },
-
   ["robots.txt"] = {
     icon = "ﮧ",
     name = "robots",
   },
-
   ttf = {
     icon = "",
     name = "TrueTypeFont",
   },
-
   rpm = {
     icon = "",
     name = "rpm",
   },
-
   woff = {
     icon = "",
     name = "WebOpenFontFormat",
   },
-
   woff2 = {
     icon = "",
     name = "WebOpenFontFormat2",
   },
-
   xz = {
     icon = "",
     name = "xz",
   },
-
   zip = {
     icon = "",
     name = "zip",

@@ -1,6 +1,6 @@
 local M = {
   "lewis6991/gitsigns.nvim",
-  event = "BufRead",
+  event = "BufReadPost",
 }
 
 function M.cond()

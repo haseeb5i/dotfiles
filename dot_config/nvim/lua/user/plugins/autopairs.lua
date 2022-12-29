@@ -31,7 +31,6 @@ function M.config()
 
   require("cmp").event:on("confirm_done", function(evt)
     local tsnode = ts_utils.get_node_at_cursor()
-    -- local tsnode = vim.treesitter.get_node_at_cursor()
     if tsnode:type() ~= "named_imports" then
       cmp_autopairs.on_confirm_done()(evt)
     end

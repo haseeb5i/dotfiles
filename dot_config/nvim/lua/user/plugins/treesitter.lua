@@ -6,15 +6,6 @@ local M = {
     "nvim-treesitter/nvim-treesitter-textobjects",
   },
 }
--- {
---   "nvim-treesitter/playground",
---   cmd = { "TSPlaygroundToggle", "TSCaptureUnderCursor" },
--- },
--- { "windwp/nvim-ts-autotag", event = "InsertEnter" },
--- {
---   "p00f/nvim-ts-rainbow",
---   event = { "CursorHold", "CursorHoldI" },
--- },
 
 function M.config()
   require("nvim-treesitter.configs").setup {

@@ -40,18 +40,12 @@ function M.config()
         find_command = { "rg", "--files", "--color", "never", "--glob", "!**/.git/*" },
         hidden = true, -- injected to the find_command
       },
-      grep_string = {
-        -- could be a table in next version
-        additional_args = function()
-          return { "--hidden", "--glob", "!**/.git/*" }
-        end,
-      },
       live_grep = {
         -- hidden = true, -- will be supported in next version
-        -- glob_pattern = "!**/.git/*", -- supported
-        additional_args = function()
-          return { "--hidden", "--glob", "!**/.git/*" }
-        end,
+        -- glob_pattern = "!**/.git/*",
+        -- additional_args = function()
+        --   return { "--hidden" }
+        -- end,
       },
     },
     extensions = {

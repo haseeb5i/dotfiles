@@ -57,7 +57,7 @@ function M.config()
     formatting = {
       format = function(_, vim_item)
         vim_item.kind = kind_icons[vim_item.kind] .. vim_item.kind
-        local maxwidth = 45
+        local maxwidth = 42
         local label = vim_item.abbr
         if #label > maxwidth then
           vim_item.abbr = string.sub(label, 1, maxwidth) .. "..."

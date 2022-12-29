@@ -35,14 +35,14 @@ map("x", "<A-j>", ":m '>+1<cr>gv=gv")
 map("x", "<A-k>", ":m '<-2<cr>gv=gv")
 
 -- miscellaneous maps
+map("v", "<", "<gv", { silent = true })
+map("v", ">", ">gv", { silent = true })
 map(
   "n",
   "gx",
   '<cmd>call jobstart(["xdg-open", expand("<cfile>")], {"detach": v:true})<cr>',
   { desc = "Open Link" }
 )
--- map("v", "<", "<gv", { silent = true })
--- map("v", ">", ">gv", { silent = true })
 
 -- Don't copy the replaced text after pasting in visual mode
 -- https://vim.fandom.com/wiki/Replace_a_word_with_yanked_text#Alternative_mapping_for_paste
@@ -99,7 +99,7 @@ wk.register({
   w = { name = "Workspace" },
 
   g = {
-    name = "+git",
+    name = "Git",
     g = { "<cmd>lua _LAZYGIT_TOGGLE()<CR>", "Lazygit" },
     -- gitsigns
     j = { "<cmd>lua require'gitsigns'.next_hunk()<cr>", "Next Hunk" },
@@ -152,15 +152,15 @@ wk.register({
 
   p = {
     name = "Plugins",
-    -- c = { "<cmd> PackerCompile <cr>", "Compile" },
     i = { "<cmd> Lazy Install <cr>", "Install" },
-    -- i = { "<cmd> PackerInstall <cr>", "Install" },
     p = { "<cmd> Lazy profile <cr>", "Profile" },
     s = { "<cmd> Lazy sync <cr>", "Sync" },
-    -- s = { "<cmd> PackerSync <cr>", "Sync" },
     S = { "<cmd> Lazy show <cr>", "Status" },
-    -- S = { "<cmd> PackerStatus <cr>", "Status" },
     u = { "<cmd> Lazy update <cr>", "Update" },
+    -- c = { "<cmd> PackerCompile <cr>", "Compile" },
+    -- i = { "<cmd> PackerInstall <cr>", "Install" },
+    -- s = { "<cmd> PackerSync <cr>", "Sync" },
+    -- S = { "<cmd> PackerStatus <cr>", "Status" },
     -- u = { "<cmd> PackerUpdate <cr>", "Update" },
   },
 
