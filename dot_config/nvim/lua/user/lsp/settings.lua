@@ -7,11 +7,7 @@ table.insert(path, "lua/?/init.lua")
 M.sumneko_lua = {
   settings = {
     Lua = {
-      runtime = {
-        version = "LuaJIT",
-        path = path,
-      },
-      completion = { callSnippet = "Both" },
+      completion = { callSnippet = "Replace" },
       diagnostics = {
         globals = { "vim" },
       },
@@ -20,6 +16,10 @@ M.sumneko_lua = {
           [vim.fn.expand "$VIMRUNTIME/lua"] = true,
           [vim.fn.stdpath "config" .. "/lua"] = true,
         },
+      },
+      runtime = {
+        version = "LuaJIT",
+        path = path,
       },
       telemetry = { enable = false },
     },

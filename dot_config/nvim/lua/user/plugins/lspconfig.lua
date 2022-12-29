@@ -5,8 +5,9 @@ local M = {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
     "b0o/SchemaStore.nvim",
+    "jose-elias-alvarez/typescript.nvim",
+    -- { "folke/neodev.nvim", config = true },
     -- "j-hui/fidget.nvim",
-    -- "jose-elias-alvarez/typescript.nvim"
   },
 }
 
@@ -64,24 +65,19 @@ function M.config()
   local lspconfig = require "lspconfig"
   local server_opts = require "user.lsp.settings"
 
+  local options = {
+    on_attach = on_attach,
+    capabilities = capabilities,
+  }
+
   for _, lsp in ipairs(servers) do
-    local opts = vim.tbl_extend("force", server_opts[lsp] or {}, {
-      on_attach = on_attach,
-      capabilities = capabilities,
-    })
-
-    lspconfig[lsp].setup(opts)
+    local opts = vim.tbl_extend("force", options, server_opts[lsp] or {})
+    if lsp == "tsserver" then
+      require("typescript").setup { server = opts }
+    else
+      lspconfig[lsp].setup(opts)
+    end
   end
-  -- for server, opts in pairs(servers) do
-  --     opts = vim.tbl_deep_extend("force", {}, options, opts or {})
-  --     if server == "tsserver" then
-  --       require("typescript").setup({ server = opts })
-  --     else
-  --       require("lspconfig")[server].setup(opts)
-  --     end
-  --   end
-
-  --   require("config.plugins.null-ls").setup(options)
 end
 
 return M

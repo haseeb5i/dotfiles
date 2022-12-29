@@ -19,6 +19,7 @@ function M.config()
       formatting.black,
 
       -- js/ts
+    -- require("typescript.extensions.null-ls.code-actions"),
       code_actions.eslint_d,
       diagnostics.eslint_d.with {
         condition = function(utils)
