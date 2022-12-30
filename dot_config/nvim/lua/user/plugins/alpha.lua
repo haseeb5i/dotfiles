@@ -1,6 +1,6 @@
 local M = {
   "goolord/alpha-nvim",
-  enable = false,
+  enabled = false,
 }
 
 M.config = function()

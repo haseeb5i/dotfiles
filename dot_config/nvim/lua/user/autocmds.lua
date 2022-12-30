@@ -5,7 +5,7 @@ local augroup = vim.api.nvim_create_augroup
 autocmd("FileType", {
   pattern = "qf",
   callback = function()
-    vim.opt_local.buflisted = false
+    vim.bo.buflisted = false
   end,
 })
 

@@ -69,7 +69,7 @@ M.on_attach = function(client, bufnr)
   map("n", "gr", vim.lsp.buf.references, "Goto References")
   map("n", "K", vim.lsp.buf.hover, "Hover Documentation")
   map("i", "<C-k>", vim.lsp.buf.signature_help, "Signature Help")
-  map({ "n", "v" }, "<leader>lf", function()
+  map("n", "<leader>lf", function()
     vim.lsp.buf.format { async = true }
   end, "Format Document")
   map("n", "<leader>lr", vim.lsp.buf.rename, "LSP Rename")
@@ -84,10 +84,10 @@ M.on_attach = function(client, bufnr)
   map("n", "<leader>ws", "<cmd>Telescope lsp_workspace_symbol<cr>")
 
   -- add client specific maapings
-  if client.name == "tsserver" then
-    map("n", "", "<cmd>TypescriptOrganizeImports<cr>", "Organize Imports")
-    map("n", "", "<cmd>TypescriptRenameFile<cr>", "Rename File")
-  end
+  -- if client.name == "tsserver" then
+  --   map("n", "", "<cmd>TypescriptOrganizeImports<cr>", "Organize Imports")
+  --   map("n", "", "<cmd>TypescriptRenameFile<cr>", "Rename File")
+  -- end
 
   -- for now disabling this for all servers, should be per client
   client.server_capabilities.documentFormattingProvider = false
