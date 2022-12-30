@@ -46,9 +46,9 @@ if [[ -z "$LESSOPEN" ]] && (( $#commands[(i)lesspipe(|.sh)] )); then
   export LESSOPEN="| /usr/bin/env $commands[(i)lesspipe(|.sh)] %s 2>&-"
 fi
 
-# setup node environement
+# setup node environement (not working properly)
 export NVM_DIR="$HOME/.local/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
+# [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh" (sourcing in .zshrc)
 
 # setup scala environment
 export PATH="$PATH:$HOME/.local/share/coursier/bin"
