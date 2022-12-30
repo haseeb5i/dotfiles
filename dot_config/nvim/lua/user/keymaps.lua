@@ -95,6 +95,7 @@ wk.register({
   m = { "<cmd> Mason <cr>", "Mason Info" },
   r = { "<cmd> SessionManager load_session<cr>", "Load Session" },
   q = { "<cmd> q <cr>", "Quit Window" },
+  -- c = { name = "Code" },
   l = { name = "LSP" },
   w = { name = "Workspace" },
 

@@ -1,9 +1,5 @@
 local M = {}
 
-local path = vim.split(package.path, ";")
-table.insert(path, "lua/?.lua")
-table.insert(path, "lua/?/init.lua")
-
 M.sumneko_lua = {
   settings = {
     Lua = {

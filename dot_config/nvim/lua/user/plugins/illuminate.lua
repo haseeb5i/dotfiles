@@ -1,6 +1,6 @@
 local M = {
   "RRethy/vim-illuminate",
-  event = "BufReadPost",
+  event = "BufRead",
   keys = {
     {
       "]]",
@@ -19,10 +19,11 @@ local M = {
   },
 }
 
-function M.config()
+M.config= function ()
   require("illuminate").configure {
     delay = 200,
     filetypes_denylist = {
+      "alpha",
       "NvimTree",
       "lazy",
       "mason",

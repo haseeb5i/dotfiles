@@ -3,7 +3,7 @@ local M = {
   enable = false,
 }
 
-function M.config()
+M.config = function()
   local dashboard = require "alpha.themes.dashboard"
   dashboard.section.header.val = {
     [[                               __                ]],

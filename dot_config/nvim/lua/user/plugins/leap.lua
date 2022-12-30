@@ -6,7 +6,7 @@ local M = {
   },
 }
 
-function M.config()
+M.config= function ()
   require("leap").add_default_mappings()
 
   require("flit").setup {

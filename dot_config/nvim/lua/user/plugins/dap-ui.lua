@@ -3,7 +3,7 @@ local M = {
 }
 
 -- docs => https://github.com/rcarriga/nvim-dap-ui#configuration
-function M.config()
+M.config= function ()
   local dap = require "dap"
   local dapui = require "dapui"
 

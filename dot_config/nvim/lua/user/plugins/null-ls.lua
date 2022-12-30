@@ -1,10 +1,10 @@
 local M = {
   "jose-elias-alvarez/null-ls.nvim",
-  event = "BufReadPre",
+  event = "BufReadPost",
 }
 
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md
-function M.config()
+M.config = function()
   local null_ls = require "null-ls"
 
   local code_actions = null_ls.builtins.code_actions
@@ -19,7 +19,7 @@ function M.config()
       formatting.black,
 
       -- js/ts
-    -- require("typescript.extensions.null-ls.code-actions"),
+      require("typescript.extensions.null-ls.code-actions"),
       code_actions.eslint_d,
       diagnostics.eslint_d.with {
         condition = function(utils)

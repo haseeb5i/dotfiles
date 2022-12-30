@@ -32,6 +32,20 @@ function colors.onedark()
   vim.cmd.colorscheme "onedark"
 end
 
+-- setup mode and colorscheme
+vim.cmd "set background=dark"
+pcall(colors.onedark)
+
+vim.cmd [[
+  hi! IndentBlanklineChar guifg=#404040 
+  hi! IndentBlanklineContextChar guifg=#707070
+
+  hi! Pmenu guibg=none
+  hi! CmpItemAbbrMatch guibg=none 
+  hi! link CmpItemAbbrMatchFuzzy CmpItemAbbrMatch
+  hi! CmpItemAbbrDeprecated gui=strikethrough
+]]
+
 -- make neovim transparent
 -- https://github.com/catppuccin/nvim/tree/main/lua/catppuccin/groups
 -- vim.api.nvim_create_autocmd("ColorScheme",{
@@ -53,14 +67,3 @@ end
 --       end
 --   end
 -- })
-
-vim.cmd [[
-  hi! Pmenu guibg=none
-  hi! CmpItemAbbrMatch guibg=none 
-  hi! link CmpItemAbbrMatchFuzzy CmpItemAbbrMatch
-  hi! CmpItemAbbrDeprecated gui=strikethrough
-]]
-
--- setup a theme
-vim.cmd "set background=dark"
-pcall(colors.onedark)

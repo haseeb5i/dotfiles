@@ -13,7 +13,7 @@ local M = {
   },
 }
 
-function M.config()
+M.config= function ()
   local kind_icons = require("user.icons").lspkind
   local cmp = require "cmp"
   local luasnip = require "luasnip"

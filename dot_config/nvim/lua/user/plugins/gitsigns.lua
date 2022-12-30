@@ -3,7 +3,7 @@ local M = {
   event = "BufReadPost",
 }
 
-function M.cond()
+M.cond= function ()
   vim.fn.system("git -C " .. vim.fn.expand "%:p:h" .. " rev-parse")
   return vim.v.shell_error == 0
 end

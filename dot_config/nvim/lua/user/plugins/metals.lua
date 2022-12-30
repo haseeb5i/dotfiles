@@ -5,8 +5,9 @@ local M = {
 
 function M.config()
   local metals = require "metals"
-  local config = metals.bare_config()
+  local handlers = require "user.lsp.handlers"
 
+  local config = metals.bare_config()
   config.settings = {
     excludedPackages = {
       "akka.actor.typed.javadsl",
@@ -15,10 +16,13 @@ function M.config()
     showImplicitArguments = true,
   }
 
-  config.capabilities = require("cmp_nvim_lsp").default_capabilities()
-  config.on_attach = function(_, bufnr)
-    require("user.lsp.handlers").setup_keymaps(bufnr)
+  config.capabilities = handlers.capabilities
+
+  config.on_attach = function(client, bufnr)
+    handlers.on_attach(client, bufnr)
+    -- set this on handlers on_attach
     vim.keymap.set("n", "<leader>ws", metals.hover_worksheet, { buffer = bufnr })
+
     metals.setup_dap()
   end
 

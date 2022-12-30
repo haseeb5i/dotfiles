@@ -4,7 +4,7 @@ local M = {
 }
 
 -- https://github.com/windwp/nvim-autopairs#default-values
-function M.config()
+M.config= function ()
   require("nvim-autopairs").setup {
     check_ts = true,
     ts_config = {

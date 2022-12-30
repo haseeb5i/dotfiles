@@ -4,15 +4,10 @@ local M = {
   dependencies = {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
+
     "b0o/SchemaStore.nvim",
+    "folke/neodev.nvim",
     "jose-elias-alvarez/typescript.nvim",
-    {
-      "folke/neodev.nvim",
-      config = {
-        library = { plugins = false },
-        setup_jsonls = false,
-      },
-    },
   },
 }
 
@@ -41,20 +36,18 @@ function M.config()
     automatic_installation = false,
   }
 
+  require("neodev").setup {
+    library = {
+      plugins = false,
+    },
+    setup_jsonls = false,
+  }
+
   local handlers = require "user.lsp.handlers"
+  local settings = require "user.lsp.settings"
+  local lspconfig = require "lspconfig"
 
-  handlers.setup_diagnostics()
-  handlers.setup_handlers()
-
-  local function on_attach(client, bufnr)
-    client.server_capabilities.documentFormattingProvider = false
-    client.server_capabilities.documentRangeFormattingProvider = false
-
-    handlers.setup_keymaps(bufnr)
-  end
-
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
-  capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+  handlers.setup()
 
   local servers = {
     "tsserver",
@@ -67,16 +60,15 @@ function M.config()
     "sumneko_lua",
   }
 
-  local lspconfig = require "lspconfig"
-  local server_opts = require "user.lsp.settings"
-
-  local options = {
-    on_attach = on_attach,
-    capabilities = capabilities,
+  local common_opts = {
+    on_attach = handlers.on_attach,
+    capabilities = handlers.capabilities,
   }
 
   for _, lsp in ipairs(servers) do
-    local opts = vim.tbl_extend("force", options, server_opts[lsp] or {})
+    local overrides = settings[lsp] or {}
+    local opts = vim.tbl_extend("force", common_opts, overrides)
+
     if lsp == "tsserver" then
       require("typescript").setup { server = opts }
     else
