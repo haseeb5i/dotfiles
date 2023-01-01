@@ -16,10 +16,11 @@ function M.config()
     defaults = {
       prompt_prefix = " ",
       selection_caret = " ",
-      path_display = { "smart" },
+      path_display = { "absolute" },
       file_ignore_patterns = {},
       mappings = {
         i = {
+          ["<esc>"] = "close",
           ["<C-j>"] = "move_selection_next",
           ["<C-k>"] = "move_selection_previous",
           -- ["<Tab>"] = "move_selection_next",
@@ -39,6 +40,7 @@ function M.config()
       find_files = {
         find_command = { "rg", "--files", "--color", "never", "--glob", "!**/.git/*" },
         hidden = true, -- injected to the find_command
+        -- path_display = function(opts, path) end
       },
       live_grep = {
         -- hidden = true, -- will be supported in next version

@@ -1,6 +1,6 @@
 local M = {
   "goolord/alpha-nvim",
-  enabled = false,
+  event = "VimEnter",
 }
 
 M.config = function()

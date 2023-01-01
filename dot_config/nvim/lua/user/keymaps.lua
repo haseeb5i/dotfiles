@@ -41,7 +41,7 @@ map(
   "n",
   "gx",
   '<cmd>call jobstart(["xdg-open", expand("<cfile>")], {"detach": v:true})<cr>',
-  { desc = "Open Link" }
+  { desc = "Open link under cursor" }
 )
 
 -- Don't copy the replaced text after pasting in visual mode
