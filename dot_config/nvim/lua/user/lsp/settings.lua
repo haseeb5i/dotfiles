@@ -30,40 +30,32 @@ M.pyright = {
         diagnosticMode = "workspace",
         typeCheckingMode = "strict",
         useLibraryCodeForTypes = true,
-        completeFunctionParens = true,
       },
     },
   },
   on_new_config = function(new_config)
-    if vim.env.VIRTUAL_ENV ~= nil then
+    -- if venv is active, don't change anything
+    if vim.env.VIRTUAL_ENV then
       return
     end
 
-    local path = require("lspconfig.util").path
-    local is_pipenv_root = path.exists "Pipfile"
-
-    if is_pipenv_root then
-      vim.notify "activating pipenv environment"
-      -- existance of Pipfile doesn't guarantee venv presesne
-      local return_text = vim.fn.system "pipenv --venv"
-      if return_text:find "^No virtualenv" ~= nil then
-        return
-      end
-
-      vim.env.VIRTUAL_ENV = vim.fn.trim(return_text)
-      vim.env.PATH = vim.env.VIRTUAL_ENV .. "/bin:" .. vim.env.PATH
-      vim.env.PIPENV_ACTIVE = "1"
-      -- some other env vars set by pipenv
-      -- SHLVL=2
-      -- OLDPWD=/home/raven/Development/python/cses
-      -- PIP_DISABLE_PIP_VERSION_CHECK=1
-      -- PIP_PYTHON_PATH=/usr/bin/python3
-      -- PYTHONDONTWRITEBYTECODE=1
-      --
+    -- check if poetry
+    local poetry_return = vim.fn.system "poetry env info --path"
+    if vim.v.shell_error == 0 then
+      local venv_path = vim.fn.trim(poetry_return)
+      vim.env.PATH = venv_path .. "/bin:" .. vim.env.PATH
+      new_config.settings.python.pythonPath = venv_path .. "/bin/python"
+      return
     end
 
-    -- what does this do?
-    new_config.settings.python.pythonPath = vim.fn.exepath "python"
+    -- check if pipenv
+    local pipenv_return = vim.fn.system "pipenv --venv"
+    if vim.v.shell_error == 0 then
+      local venv_path = vim.fn.trim(pipenv_return:match "/home.+")
+      vim.env.PATH = venv_path .. "/bin:" .. vim.env.PATH
+      new_config.settings.python.pythonPath = venv_path .. "/bin/python"
+      return
+    end
   end,
 }
 

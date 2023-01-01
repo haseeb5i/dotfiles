@@ -7,10 +7,13 @@ if [[ -s "$ZDOTDIR/.zprezto/init.zsh" ]]; then
   source "$ZDOTDIR/.zprezto/init.zsh"
 fi
 
-[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
-
 # Set keymappings
 bindkey '^l' autosuggest-accept  # Ctrl-l to accept auto-suggestion
 
 # Load starship prompt
 [ -x "$(command -v starship)" ] && eval "$(starship init zsh)"
+
+# Development
+[ -x "$(command -v pyenv)" ] && eval "$(pyenv init -)"
+[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
+

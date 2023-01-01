@@ -1,20 +1,5 @@
-local function match_files_in_root(pattern)
-  local root = vim.loop.cwd()
-  local handle = vim.loop.fs_scandir(root)
-  local entry = vim.loop.fs_scandir_next(handle)
-
-  while entry do
-    if entry:match(pattern) then
-      return true
-    end
-
-    entry = vim.loop.fs_scandir_next(handle)
-  end
-
-  return false
-end
-
-match_files_in_root "styl*"
+---@diagnostic disable: unused-local
+---@diagnostic disable: unused-function
 
 local function preview_location_callback(_, result)
   if result == nil or vim.tbl_isempty(result) then
@@ -24,17 +9,14 @@ local function preview_location_callback(_, result)
     -- border = "rounded"
   })
 end
+-- local params = vim.lsp.util.make_position_params(nil, "")
+--  vim.lsp.buf_request(
+--   0,
+--   "textDocument/definition",
+--   params,
+--   preview_location_callback
+-- )
 
-function PeekDefinition()
-  local params = vim.lsp.util.make_position_params(nil, "")
-  vim.pretty_print(params)
-  return vim.lsp.buf_request(
-    0,
-    "textDocument/definition",
-    params,
-    preview_location_callback
-  )
-end
 
 --[[
 set nofoldenable
