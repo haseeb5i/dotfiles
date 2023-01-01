@@ -40,6 +40,8 @@ vim.cmd [[
   hi! IndentBlanklineChar guifg=#404040 
   hi! IndentBlanklineContextChar guifg=#707070
 
+  hi link FidgetTask Comment
+
   hi! Pmenu guibg=none
   hi! CmpItemAbbrMatch guibg=none 
   hi! link CmpItemAbbrMatchFuzzy CmpItemAbbrMatch

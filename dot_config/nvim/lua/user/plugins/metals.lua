@@ -15,14 +15,12 @@ function M.config()
     },
     showImplicitArguments = true,
   }
-
+  -- config.init_options.statusBarProvider = "on"
   config.capabilities = handlers.capabilities
-
   config.on_attach = function(client, bufnr)
     handlers.on_attach(client, bufnr)
-    -- set this on handlers on_attach
+    -- move this inside handlers on_attach, under clinet specific maps
     vim.keymap.set("n", "<leader>ws", metals.hover_worksheet, { buffer = bufnr })
-
     metals.setup_dap()
   end
 

@@ -6,8 +6,23 @@ local M = {
     "williamboman/mason-lspconfig.nvim",
 
     "b0o/SchemaStore.nvim",
-    "folke/neodev.nvim",
     "jose-elias-alvarez/typescript.nvim",
+    {
+      "folke/neodev.nvim",
+      config = {
+        library = { plugins = false },
+        setup_jsonls = false,
+      },
+    },
+    {
+      "j-hui/fidget.nvim",
+      config = {
+        window = { blend = 0 },
+        sources = {
+          ["null-ls"] = { ignore = true },
+        },
+      },
+    },
   },
 }
 
@@ -36,45 +51,26 @@ function M.config()
     automatic_installation = false,
   }
 
-  require("neodev").setup {
-    library = {
-      plugins = false,
-    },
-    setup_jsonls = false,
-  }
-
+  -- TODO: update name of this handlers file
   local handlers = require "user.lsp.handlers"
   local settings = require "user.lsp.settings"
-  local lspconfig = require "lspconfig"
 
   handlers.setup()
 
-  local servers = {
-    "tsserver",
-    "html",
-    "cssls",
-    "jsonls",
-    "graphql",
-    "rust_analyzer",
-    "pyright",
-    "sumneko_lua",
-  }
-
-  local common_opts = {
+  local opts = {
     on_attach = handlers.on_attach,
     capabilities = handlers.capabilities,
   }
 
-  for _, lsp in ipairs(servers) do
-    local overrides = settings[lsp] or {}
-    local opts = vim.tbl_extend("force", common_opts, overrides)
-
-    if lsp == "tsserver" then
+  require("mason-lspconfig").setup_handlers {
+    function(server_name)
+      local merged_opts = vim.tbl_extend("force", opts, settings[server_name] or {})
+      require("lspconfig")[server_name].setup(merged_opts)
+    end,
+    tsserver = function()
       require("typescript").setup { server = opts }
-    else
-      lspconfig[lsp].setup(opts)
-    end
-  end
+    end,
+  }
 end
 
 return M

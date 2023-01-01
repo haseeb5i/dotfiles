@@ -1,7 +1,6 @@
 local M = {}
 
 M.setup = function()
-  -- update nvim diagnostic config
   local signs = {
     Error = " ",
     Warn = " ",
@@ -25,7 +24,6 @@ M.setup = function()
     },
   }
 
-  -- setup diagnostic keymaps
   local function nmap(lhs, rhs, desc)
     vim.keymap.set("n", lhs, rhs, { desc = desc })
   end
@@ -42,14 +40,13 @@ M.setup = function()
   nmap("<leader>ld", vim.diagnostic.setloclist, "Document Diagnostics")
   nmap("<leader>wd", vim.diagnostic.setqflist, "Workspace Diagnostics")
 
-  -- update ui of lsp handlers
   vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
     border = "rounded",
     relative = "cursor",
   })
 
   vim.lsp.handlers["textDocument/signatureHelp"] =
-    vim.lsp.with(vim.lsp.signature_help, {
+    vim.lsp.with(vim.lsp.handlers.signature_help, {
       border = "rounded",
       relative = "cursor",
       focusable = false,
@@ -94,4 +91,11 @@ M.on_attach = function(client, bufnr)
   client.server_capabilities.documentRangeFormattingProvider = false
 end
 
+-- set handlers per server?
+-- M.handlers = {
+--   ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+--     border = "rounded",
+--     relative = "cursor",
+--   }),
+-- }
 return M
