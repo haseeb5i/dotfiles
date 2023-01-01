@@ -38,8 +38,11 @@ M.config = function()
       ["<Tab>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_next_item()
-        elseif luasnip.expand_or_jumpable() then
-          luasnip.expand_or_jump()
+          -- elseif luasnip.expand_or_jumpable() then
+          -- luasnip.expand_or_jump()
+          -- don't want to expant on <Tab>
+        elseif luasnip.jumpable(1) then
+          luasnip.jump(1)
         else
           fallback()
         end
@@ -55,6 +58,7 @@ M.config = function()
       end, { "i", "s" }),
     },
     formatting = {
+      fields = { "abbr", "kind", "menu" },
       format = function(_, vim_item)
         vim_item.kind = kind_icons[vim_item.kind] .. vim_item.kind
         local maxwidth = 42
@@ -73,7 +77,11 @@ M.config = function()
       { name = "path" },
     }),
     window = {
-      completion = cmp.config.window.bordered(),
+      completion = {
+        border = "rounded",
+        -- col_offset = -3,
+        -- side_padding = 1,
+      },
       documentation = {
         border = "rounded",
         max_width = 50,
