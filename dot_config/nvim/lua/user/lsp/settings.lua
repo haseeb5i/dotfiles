@@ -28,35 +28,37 @@ M.pyright = {
     python = {
       analysis = {
         diagnosticMode = "workspace",
-        typeCheckingMode = "strict",
+        typeCheckingMode = "basic",
         useLibraryCodeForTypes = true,
       },
     },
   },
-  on_new_config = function(new_config)
+  -- slow startup, activate venv with pipenv shell or 
+  -- poetry shell command and then start nvim/neovide
+  -- on_new_config = function(new_config)
     -- if venv is active, don't change anything
-    if vim.env.VIRTUAL_ENV then
-      return
-    end
+    -- if vim.env.VIRTUAL_ENV then
+    --   return
+    -- end
 
     -- check if poetry
-    local poetry_return = vim.fn.system "poetry env info --path"
-    if vim.v.shell_error == 0 then
-      local venv_path = vim.fn.trim(poetry_return)
-      vim.env.PATH = venv_path .. "/bin:" .. vim.env.PATH
-      new_config.settings.python.pythonPath = venv_path .. "/bin/python"
-      return
-    end
+    -- local poetry_return = vim.fn.system "poetry env info --path"
+    -- if vim.v.shell_error == 0 then
+    --   local venv_path = vim.fn.trim(poetry_return)
+    --   vim.env.PATH = venv_path .. "/bin:" .. vim.env.PATH
+    --   new_config.settings.python.pythonPath = venv_path .. "/bin/python"
+    --   return
+    -- end
 
     -- check if pipenv
-    local pipenv_return = vim.fn.system "pipenv --venv"
-    if vim.v.shell_error == 0 then
-      local venv_path = vim.fn.trim(pipenv_return:match "/home.+")
-      vim.env.PATH = venv_path .. "/bin:" .. vim.env.PATH
-      new_config.settings.python.pythonPath = venv_path .. "/bin/python"
-      return
-    end
-  end,
+    -- local pipenv_return = vim.fn.system "pipenv --venv"
+    -- if vim.v.shell_error == 0 then
+    --   local venv_path = vim.fn.trim(pipenv_return:match "/home.+")
+    --   vim.env.PATH = venv_path .. "/bin:" .. vim.env.PATH
+    --   new_config.settings.python.pythonPath = venv_path .. "/bin/python"
+    --   return
+    -- end
+  -- end,
 }
 
 return M
