@@ -1,36 +1,25 @@
 local M = {
   "nvim-treesitter/nvim-treesitter",
   build = ":TSUpdate",
-  event = "BufReadPost",
+  event = "BufRead",
   dependencies = {
     "nvim-treesitter/nvim-treesitter-textobjects",
   },
 }
 
-function M.config()
-  vim.opt.foldmethod = "expr"
-  vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-  vim.opt.foldenable = false
+M.config = function()
 
   require("nvim-treesitter.configs").setup {
     ensure_installed = {
-      "bash",
-      -- "comment",
       "css",
-      "graphql",
       "help",
       "html",
       "javascript",
       "json",
-      -- "lua",
       "python",
-      "rust",
       "scala",
-      "toml",
       "tsx",
       "typescript",
-      -- "vim",
-      "yaml",
     },
     highlight = { enable = true },
     indent = {
@@ -77,12 +66,6 @@ function M.config()
       enable = true,
       disable = {},
       updatetime = 25,
-    },
-    -- for p00f/nvim-ts-rainbow
-    rainbow = {
-      enable = true,
-      extended_mode = false,
-      max_file_lines = 9000,
     },
   }
 end

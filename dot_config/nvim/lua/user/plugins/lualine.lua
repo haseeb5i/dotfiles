@@ -107,7 +107,7 @@ end
 
 local location = { "location", padding = 0 }
 
-M.config = {
+M.opts = {
   options = {
     icons_enabled = true,
     theme = "auto",

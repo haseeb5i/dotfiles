@@ -6,7 +6,7 @@ local M = {
 }
 
 -- https://github.com/numToStr/Comment.nvim#configuration-optional
-M.config= function ()
+M.config = function()
   local integration = require "ts_context_commentstring.integrations.comment_nvim"
 
   require("Comment").setup {

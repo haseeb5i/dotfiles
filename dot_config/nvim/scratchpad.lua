@@ -1,85 +1,72 @@
----@diagnostic disable: unused-local
+---@diagnostic disable: unused-local, missing-parameter
 ---@diagnostic disable: unused-function
 
 local function preview_location_callback(_, result)
   if result == nil or vim.tbl_isempty(result) then
     return nil
   end
+  vim.pretty_print(result)
   vim.lsp.util.preview_location(result[1], {
-    -- border = "rounded"
+    border = "rounded",
   })
 end
--- local params = vim.lsp.util.make_position_params(nil, "")
---  vim.lsp.buf_request(
---   0,
---   "textDocument/definition",
---   params,
---   preview_location_callback
--- )
 
+local function preview_location_callback2(_, result)
+  -- result might not be a table, check vim.tbl_islist(result)
+  local location = result[1]
+  local uri = location.targetUri
+  if uri == nil then
+    return
+  end
 
---[[
-set nofoldenable
-set foldlevel=99
-set fillchars=fold:\
-set foldtext=CustomFoldText()
-setlocal foldmethod=expr
-setlocal foldexpr=GetPotionFold(v:lnum)
+  local bufnr = vim.uri_to_bufnr(uri)
+  if not vim.api.nvim_buf_is_loaded(bufnr) then
+    vim.fn.bufload(bufnr)
+  end
+  local range = location.targetRange
+  local before_context = 0
+  local context = 15
+  local contents = vim.api.nvim_buf_get_lines(
+    bufnr,
+    range.start.line - before_context,
+    range["end"].line + 1 + context,
+    false
+  )
+  local filetype = vim.api.nvim_buf_get_option(bufnr, "filetype")
+  return vim.lsp.util.open_floating_preview(contents, filetype, {
+    border = "rounded",
+  })
+end
 
-function! GetPotionFold(lnum)
-  if getline(a:lnum) =~? '\v^\s*$'
-    return '-1'
-  endif
+function PeekD()
+  local params = vim.lsp.util.make_position_params()
+  vim.lsp.buf_request(
+    0,
+    "textDocument/definition",
+    params,
+    preview_location_callback2
+  )
+end
 
-  let this_indent = IndentLevel(a:lnum)
-  let next_indent = IndentLevel(NextNonBlankLine(a:lnum))
-
-  if next_indent == this_indent
-    return this_indent
-  elseif next_indent < this_indent
-    return this_indent
-  elseif next_indent > this_indent
-    return '>' . next_indent
-  endif
-endfunction
-
-function! IndentLevel(lnum)
-    return indent(a:lnum) / &shiftwidth
-endfunction
-
-function! NextNonBlankLine(lnum)
-  let numlines = line('$')
-  let current = a:lnum + 1
-
-  while current <= numlines
-      if getline(current) =~? '\v\S'
-          return current
-      endif
-
-      let current += 1
-  endwhile
-
-  return -2
-endfunction
-
-function! CustomFoldText()
-  " get first non-blank line
-  let fs = v:foldstart
-
-  while getline(fs) =~ '^\s*$' | let fs = nextnonblank(fs + 1)
-  endwhile
-
-  if fs > v:foldend
-      let line = getline(v:foldstart)
-  else
-      let line = substitute(getline(fs), '\t', repeat(' ', &tabstop), 'g')
-  endif
-
-  let w = winwidth(0) - &foldcolumn - (&number ? 8 : 0)
-  let foldSize = 1 + v:foldend - v:foldstart
-  let foldSizeStr = " " . foldSize . " lines "
-  let foldLevelStr = repeat("+--", v:foldlevel)
-  let expansionString = repeat(" ", w - strwidth(foldSizeStr.line.foldLevelStr))
-  return line . expansionString . foldSizeStr . foldLevelStr
-endfunction
-]]
+function SelectEnv()
+  local venvs = {}
+  -- local path = vim.env.XDG_DATA_HOME .. "/virtualenvs"
+  local path = vim.env.XDG_CACHE_HOME .. "/pypoetry/virtualenvs"
+  for i in vim.fs.dir(path) do
+    venvs[#venvs + 1] = path .. "/" .. i
+  end
+  vim.ui.select(venvs, { prompt = "Select a virtualenv" }, function(item)
+    if not item then
+      return
+    end
+    vim.env.PATH = item .. "/bin:" .. vim.env.PATH
+    -- vim.env.VIRTUAL_ENV = item
+    vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+      pattern = "*.py",
+      once = true,
+      callback = function()
+        vim.cmd "LspRestart"
+      end,
+    })
+  end)
+end

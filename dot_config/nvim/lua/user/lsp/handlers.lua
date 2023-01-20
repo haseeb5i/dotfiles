@@ -54,6 +54,11 @@ M.setup = function()
 end
 
 M.capabilities = require("cmp_nvim_lsp").default_capabilities()
+-- as long as neovim don't include this by default
+M.capabilities.textDocument.foldingRange = {
+  dynamicRegistration = false,
+  lineFoldingOnly = true,
+}
 
 M.on_attach = function(client, bufnr)
   local function map(mode, lhs, rhs, desc)

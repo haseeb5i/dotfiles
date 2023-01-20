@@ -48,6 +48,7 @@ map(
 -- https://vim.fandom.com/wiki/Replace_a_word_with_yanked_text#Alternative_mapping_for_paste
 map("x", "p", 'p:let @+=@0<CR>:let @"=@0<CR>', { silent = true })
 
+-- TODO: fix this
 -- allow moving the cursor through wrapped lines with j, k, <Up> and <Down>
 -- http://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/
 -- empty mode is same as using <cmd> :map
@@ -56,13 +57,8 @@ map("x", "p", 'p:let @+=@0<CR>:let @"=@0<CR>', { silent = true })
 -- map("j", 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', { expr = true })
 -- map("<Up>", 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', { expr = true })
 -- map("<Down>", 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', { expr = true })
-
--- TODO: fix this
 -- vim.cmd [[ cnoremap <expr>  <C-j>  pumvisible() ? "<C-n>" : "<C-j>" ]]
 -- vim.cmd [[ nnoremap <C-n> :NvimTreeToggle ]]
--- <cmd>lua require('neogen').generate({
---     type = "func" -- can be func, class, type, file
--- })<cr>
 
 local wk = require "which-key"
 
@@ -81,7 +77,6 @@ wk.setup {
 
 wk.register({
   a = { "<cmd> Alpha <cr>", "Alpha" },
-  c = { "<cmd> Bdelete <cr>", "Close Buffer" },
   e = { "<cmd> NvimTreeFocus <cr>", "Focus NvimTree" },
   b = {
     "<cmd> Telescope buffers theme=dropdown previewer=false <cr>",
@@ -95,9 +90,23 @@ wk.register({
   m = { "<cmd> Mason <cr>", "Mason Info" },
   r = { "<cmd> SessionManager load_session<cr>", "Load Session" },
   q = { "<cmd> q <cr>", "Quit Window" },
-  -- c = { name = "Code" },
+  c = { "<cmd> Bdelete <cr>", "Close Buffer" },
   l = { name = "LSP" },
   w = { name = "Workspace" },
+
+  -- c = {
+  --   name = "Code",
+  --   f = {
+  --     "<cmd>lua require'neogen'.generate{type = 'func'}<cr>",
+  --     "Function Annotation",
+  --   },
+  --   c = {
+  --     "<cmd>lua require'neogen'.generate{type = 'class'}<cr>",
+  --     "Class Annotation",
+  --   },
+  --   t = { "<cmd>lua require'neogen'.generate{type = 'type'}<cr>", "Type Annotation" },
+  --   F = { "<cmd>lua require'neogen'.generate{type = 'file'}<cr>", "File Annotation" },
+  -- },
 
   g = {
     name = "Git",
@@ -111,8 +120,8 @@ wk.register({
     R = { "<cmd>lua require'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
     s = { "<cmd>lua require'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
     u = { "<cmd>lua require'gitsigns'.undo_stage_hunk()<cr>", "Undo Stage Hunk" },
-    d = { "<cmd>Gitsigns diffthis HEAD<cr>", "Open Diff" },
-    -- d = { "<cmd>DiffviewOpen<cr>", "DiffView" },
+    -- d = { "<cmd>Gitsigns diffthis HEAD<cr>", "Open Diff" },
+    d = { "<cmd>DiffviewOpen<cr>", desc = "DiffView" },
     -- telescope
     f = { "<cmd>Telescope git_files<cr>", "Search git files" },
     o = { "<cmd>Telescope git_status<cr>", "Open changed files" },
@@ -155,8 +164,8 @@ wk.register({
     name = "Plugins",
     i = { "<cmd> Lazy Install <cr>", "Install" },
     p = { "<cmd> Lazy profile <cr>", "Profile" },
-    s = { "<cmd> Lazy sync <cr>", "Sync" },
-    S = { "<cmd> Lazy show <cr>", "Status" },
+    s = { "<cmd> Lazy show <cr>", "Status" },
+    S = { "<cmd> Lazy sync <cr>", "Sync" },
     u = { "<cmd> Lazy update <cr>", "Update" },
     -- c = { "<cmd> PackerCompile <cr>", "Compile" },
     -- i = { "<cmd> PackerInstall <cr>", "Install" },

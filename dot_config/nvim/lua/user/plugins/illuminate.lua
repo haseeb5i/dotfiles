@@ -1,6 +1,6 @@
 local M = {
   "RRethy/vim-illuminate",
-  event = "BufRead",
+  event = "BufReadPost",
   keys = {
     {
       "]]",

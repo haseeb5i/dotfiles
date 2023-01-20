@@ -8,7 +8,6 @@ function colors.gruvbox()
     italic = false,
     invert_signs = false,
     invert_tabline = false,
-    invert_intend_guides = false,
     overrides = {},
   }
 
@@ -34,18 +33,30 @@ end
 
 -- setup mode and colorscheme
 vim.cmd "set background=dark"
-pcall(colors.onedark)
+pcall(colors.dracula)
 
 vim.cmd [[
-  hi! IndentBlanklineChar guifg=#404040 
-  hi! IndentBlanklineContextChar guifg=#707070
+  hi! Pmenu guibg=none
+
+  " hi! IndentBlanklineChar guifg=#404040 
+  " hi! IndentBlanklineContextChar guifg=#707070
 
   hi link FidgetTask Comment
 
-  hi! Pmenu guibg=none
-  hi! CmpItemAbbrMatch guibg=none 
+  hi! CmpItemAbbrMatch guibg=none
   hi! link CmpItemAbbrMatchFuzzy CmpItemAbbrMatch
-  hi! CmpItemAbbrDeprecated gui=strikethrough
+  hi! CmpItemAbbrDeprecated gui=strikethrough guifg=#808080
+
+  hi! CmpItemKindVariable guibg=none guifg=#9CDCFE
+  hi! link CmpItemKindInterface CmpItemKindVariable
+  hi! link CmpItemKindText CmpItemKindVariable
+
+  hi! CmpItemKindFunction guibg=none guifg=#C586C0
+  hi! link CmpItemKindMethod CmpItemKindFunction
+
+  hi! CmpItemKindKeyword guibg=none guifg=#D4D4D4
+  hi! link CmpItemKindProperty CmpItemKindKeyword
+  hi! link CmpItemKindUnit CmpItemKindKeyword
 ]]
 
 -- make neovim transparent

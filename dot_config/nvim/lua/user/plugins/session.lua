@@ -9,6 +9,11 @@ M.config = function()
     autosave_ignore_dirs = {
       vim.env.HOME,
     },
+    autosave_ignore_filetypes = {
+      "alpha",
+      "NvimTree",
+      "gitcommit",
+    },
   }
 end
 

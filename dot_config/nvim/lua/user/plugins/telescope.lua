@@ -7,7 +7,7 @@ local M = {
   },
 }
 
-function M.config()
+M.config = function()
   local telescope = require "telescope"
   local action_layout = require "telescope.actions.layout"
 
@@ -23,8 +23,8 @@ function M.config()
           ["<esc>"] = "close",
           ["<C-j>"] = "move_selection_next",
           ["<C-k>"] = "move_selection_previous",
-          -- ["<Tab>"] = "move_selection_next",
-          -- ["<S-Tab>"] = "move_selection_previous",
+          ["<Tab>"] = "move_selection_next",
+          ["<S-Tab>"] = "move_selection_previous",
           ["<Down>"] = "cycle_history_next",
           ["<Up>"] = "cycle_history_prev",
           ["<M-p>"] = action_layout.toggle_preview,
@@ -40,7 +40,6 @@ function M.config()
       find_files = {
         find_command = { "rg", "--files", "--color", "never", "--glob", "!**/.git/*" },
         hidden = true, -- injected to the find_command
-        -- path_display = function(opts, path) end
       },
       live_grep = {
         -- hidden = true, -- will be supported in next version

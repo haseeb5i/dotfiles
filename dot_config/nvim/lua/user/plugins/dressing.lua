@@ -3,7 +3,7 @@ local M = {
   event = "VeryLazy",
 }
 
-M.config = {
+M.opts = {
   select = {
     backend = { "builtin" },
     builtin = {

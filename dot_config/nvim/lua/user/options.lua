@@ -18,6 +18,7 @@ local options = {
   clipboard = "unnamedplus", -- allows neovim to access the system clipboard
   ignorecase = true, -- ignore case in search patterns
   mouse = "a", -- allow the mouse to be used in neovim
+  -- grepprg = "rg -S --vimgrep", -- use ripgrep for grepping in vim
   smartcase = true, -- smart case
   swapfile = false, -- creates a swapfile
   timeoutlen = 500, -- time to wait for a mapped sequence to complete (1000ms default)
@@ -44,8 +45,8 @@ for k, v in pairs(options) do
   vim.opt[k] = v
 end
 
-vim.opt.completeopt:append "menuone,noselect"
 vim.opt.fillchars:append "foldclose:+"
+vim.opt.completeopt:append "menuone,noselect"
 vim.opt.shortmess:append "csI"
 vim.opt.whichwrap:append "<,>,[,]"
 
