@@ -1,11 +1,8 @@
 return {
   "nvim-lua/plenary.nvim",
-
-  -- various plugins
   "folke/which-key.nvim",
   { "tpope/vim-sleuth", event = "BufReadPre" },
   { "danymat/neogen", opts = { snippet_engine = "luasnip" } },
-  { "windwp/nvim-ts-autotag", event = "InsertEnter" },
   {
     "nvim-treesitter/playground",
     cmd = { "TSPlaygroundToggle", "TSCaptureUnderCursor" },
@@ -27,26 +24,6 @@ return {
       vim.cmd [[ imap <silent><script><expr> <C-l> copilot#Accept("\<CR>") ]]
       vim.g.copilot_no_tab_map = true
     end,
-  },
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    event = "BufReadPost",
-    opts = {
-      buftype_exclude = { "terminal", "nofile" },
-      char = "│",
-      filetype_exclude = {
-        "lspinfo",
-        "help",
-        "checkhealth",
-        "dashboard",
-        "lazy",
-        "man",
-        "NvimTree",
-      },
-      show_current_context = true,
-      show_first_indent_level = false,
-      use_treesitter = true,
-    },
   },
   {
     "NvChad/nvim-colorizer.lua",
@@ -96,43 +73,6 @@ return {
           require("illuminate").goto_prev_reference(false)
         end,
         desc = "Prev Reference",
-      },
-    },
-  },
-
-  {
-    "kevinhwang91/nvim-ufo",
-    dependencies = {
-      "kevinhwang91/promise-async",
-    },
-    config = function()
-      vim.o.foldcolumn = "1" -- '0' is not bad
-      -- Using ufo provider need a large value, feel free to decrease the value
-      vim.o.foldlevel = 99
-      vim.o.foldlevelstart = 99
-      vim.o.foldenable = true
-
-      local ufo = require "ufo"
-      vim.keymap.set("n", "zR", ufo.openAllFolds)
-      vim.keymap.set("n", "zM", ufo.closeAllFolds)
-
-      ufo.setup()
-    end,
-  },
-  {
-    "kevinhwang91/nvim-bqf",
-    ft = "qf",
-    opts = {
-      auto_enable = true,
-      preview = {
-        auto_preview = false,
-        win_height = 12,
-        win_vheight = 12,
-        delay_syntax = 80,
-      },
-      func_map = {
-        prevfile = "<c-k",
-        nextfile = "<c-j",
       },
     },
   },

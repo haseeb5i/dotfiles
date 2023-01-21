@@ -10,7 +10,10 @@ local M = {
       "williamboman/mason-lspconfig.nvim",
       {
         "folke/neodev.nvim",
-        opts = { library = { plugins = false } },
+        opts = {
+          library = { plugins = false },
+          jsonls = false,
+        },
       },
       "b0o/SchemaStore.nvim",
       "jose-elias-alvarez/typescript.nvim",
@@ -72,16 +75,6 @@ local M = {
         },
       }
     end,
-  },
-  {
-    "j-hui/fidget.nvim",
-    event = "BufReadPre",
-    config = {
-      window = { blend = 0 },
-      sources = {
-        ["null-ls"] = { ignore = true },
-      },
-    },
   },
 }
 

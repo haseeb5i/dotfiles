@@ -38,9 +38,9 @@ M.config = function()
       ["<Tab>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_next_item()
+          -- don't want to expand on <Tab>
           -- elseif luasnip.expand_or_jumpable() then
           -- luasnip.expand_or_jump()
-          -- don't want to expant on <Tab>
         elseif luasnip.jumpable(1) then
           luasnip.jump(1)
         else
@@ -78,12 +78,10 @@ M.config = function()
     }),
     window = {
       completion = {
-        border = "rounded",
-        -- col_offset = -3,
-        -- side_padding = 1,
+        -- border = "rounded",
       },
       documentation = {
-        border = "rounded",
+        -- border = "rounded",
         max_width = 50,
       },
     },
