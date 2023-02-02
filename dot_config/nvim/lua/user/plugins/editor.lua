@@ -1,5 +1,72 @@
 return {
   {
+    "nvim-neo-tree/neo-tree.nvim",
+    cmd = { "Neotree" },
+    init = function()
+      vim.g.neo_tree_remove_legacy_commands = 1
+    end,
+    opts = {
+      hide_root_node = true,
+      default_component_configs = {
+        icon = {
+          folder_empty = "",
+        },
+        git_status = {
+          symbols = {
+            added = "",
+            modified = "",
+            ignored = "",
+          },
+        },
+      },
+      filesystem = {
+        filtered_items = {
+          visible = true,
+          hide_dotfiles = false,
+          never_show = { ".git" },
+        },
+        follow_current_file = true,
+        group_empty_dirs = true,
+        use_libuv_file_watcher = true,
+      },
+      window = {
+        width = 30,
+        mappings = {
+          ["l"] = "open",
+          ["h"] = "close_node",
+        },
+      },
+    },
+  },
+  {
+    "lewis6991/gitsigns.nvim",
+    event = "BufReadPost",
+    cond = function()
+      vim.fn.system("git -C " .. vim.fn.expand "%:p:h" .. " rev-parse")
+      return vim.v.shell_error == 0
+    end,
+    opts = {
+      signs = {
+        add = { text = "▎" },
+        change = { text = "▎" },
+        delete = { text = "契" },
+        topdelete = { text = "契" },
+      },
+      preview_config = { border = "rounded" },
+    },
+  },
+  {
+    "sindrets/diffview.nvim",
+    cmd = {
+      "DiffviewOpen",
+      "DiffviewClose",
+      "DiffviewToggleFiles",
+      "DiffviewFocusFiles",
+    },
+    config = true,
+  },
+  { "akinsho/git-conflict.nvim", config = true },
+  {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
     opts = {
@@ -12,9 +79,11 @@ return {
         highlight = "PmenuSel",
       },
     },
-    config = function()
-      local ts_utils = require "nvim-treesitter.ts_utils"
+    config = function(_, opts)
+      require("nvim-autopairs").setup(opts)
+
       local cmp_autopairs = require "nvim-autopairs.completion.cmp"
+      local ts_utils = require "nvim-treesitter.ts_utils"
 
       require("cmp").event:on("confirm_done", function(evt)
         local tsnode = ts_utils.get_node_at_cursor()
@@ -79,6 +148,7 @@ return {
         "lazy",
         "man",
         "NvimTree",
+        "neo-tree",
       },
       show_current_context = true,
       show_first_indent_level = false,
@@ -104,4 +174,28 @@ return {
       ufo.setup()
     end,
   },
+  {
+    "NvChad/nvim-colorizer.lua",
+    event = "VeryLazy",
+    opts = {
+      filetypes = { "*", "!lazy" },
+      buftype = { "*", "!prompt", "!nofile" },
+      user_default_options = {
+        names = false,
+        RRGGBBAA = true,
+        rgb_fn = true,
+        hsl_fn = true,
+        mode = "background",
+        virtualtext = "■",
+      },
+    },
+  },
+  {
+    "ggandor/leap.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("leap").add_default_mappings()
+    end,
+  },
+  { "sindrets/winshift.nvim", enabled = false },
 }

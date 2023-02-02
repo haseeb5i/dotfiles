@@ -69,22 +69,12 @@ M.statusline_separators = {
   },
 }
 
+-- eslint icon from nerd font
+
 M.devicons = {
-  default_icon = {
-    icon = "",
-    name = "Default",
-  },
   c = {
     icon = "",
     name = "c",
-  },
-  deb = {
-    icon = "",
-    name = "deb",
-  },
-  mp3 = {
-    icon = "",
-    name = "mp3",
   },
   mp4 = {
     icon = "",
@@ -101,10 +91,6 @@ M.devicons = {
   ttf = {
     icon = "",
     name = "TrueTypeFont",
-  },
-  rpm = {
-    icon = "",
-    name = "rpm",
   },
   woff = {
     icon = "",

@@ -77,7 +77,7 @@ wk.setup {
 
 wk.register({
   a = { "<cmd> Alpha <cr>", "Alpha" },
-  e = { "<cmd> NvimTreeFocus <cr>", "Focus NvimTree" },
+  e = { "<cmd> Neotree <cr>", "Open Explorer" },
   b = {
     "<cmd> Telescope buffers theme=dropdown previewer=false <cr>",
     "Buffers",

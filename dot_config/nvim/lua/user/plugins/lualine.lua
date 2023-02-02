@@ -135,7 +135,7 @@ M.opts = {
   winbar = {
     -- lualine_c = { symbols },
   },
-  extensions = { "nvim-tree", "toggleterm" },
+  extensions = { "neo-tree", "toggleterm" },
 }
 
 return M

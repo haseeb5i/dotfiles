@@ -1,15 +1,14 @@
 local M = {
   "nvim-treesitter/nvim-treesitter",
+  version = false, -- using latest version
   build = ":TSUpdate",
   event = "BufRead",
   dependencies = {
     "nvim-treesitter/nvim-treesitter-textobjects",
   },
-}
-
-M.config = function()
-
-  require("nvim-treesitter.configs").setup {
+  opts = {
+    highlight = { enable = true },
+    indent = { enable = true },
     ensure_installed = {
       "css",
       "help",
@@ -21,11 +20,6 @@ M.config = function()
       "tsx",
       "typescript",
     },
-    highlight = { enable = true },
-    indent = {
-      enable = true,
-      disable = { "yaml", "python" },
-    },
     incremental_selection = {
       enable = true,
       keymaps = {
@@ -35,7 +29,6 @@ M.config = function()
         scope_incremental = "<c-s>",
       },
     },
-    sync_install = false,
     -- for windwp/nvim-ts-autotag
     autotag = { enable = true },
     -- for JoosepAlviste/nvim-ts-context-commentstring
@@ -45,9 +38,7 @@ M.config = function()
     },
     -- for nvim-treesitter/nvim-treesitter-textobjects
     textobjects = {
-      move = {
-        enable = true,
-      },
+      move = { enable = true },
       select = {
         enable = true,
         keymaps = {
@@ -57,9 +48,7 @@ M.config = function()
           ["ic"] = "@class.inner",
         },
       },
-      swap = {
-        enable = false,
-      },
+      swap = { enable = false },
     },
     -- for nvim-treesitter/playground
     playground = {
@@ -67,7 +56,10 @@ M.config = function()
       disable = {},
       updatetime = 25,
     },
-  }
-end
+  },
+  config = function(_, opts)
+    require("nvim-treesitter.configs").setup(opts)
+  end,
+}
 
 return M

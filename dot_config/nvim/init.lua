@@ -1,6 +1,5 @@
 require "user.options"
 require "user.lazy"
-require "user.colors"
 
 vim.api.nvim_create_autocmd("User", {
   pattern = "VeryLazy",
@@ -9,4 +8,3 @@ vim.api.nvim_create_autocmd("User", {
     require "user.keymaps"
   end,
 })
-

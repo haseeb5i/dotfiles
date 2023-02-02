@@ -12,13 +12,11 @@ local options = {
   signcolumn = "yes", -- always show the sign column
   splitbelow = true, -- force all horizontal splits to go below current window
   splitright = true, -- force all vertical splits to go to the right of current window
-  -- title = true, -- show title in terminal based on open buffer
 
   -- editor
   clipboard = "unnamedplus", -- allows neovim to access the system clipboard
   ignorecase = true, -- ignore case in search patterns
-  mouse = "a", -- allow the mouse to be used in neovim
-  -- grepprg = "rg -S --vimgrep", -- use ripgrep for grepping in vim
+  grepprg = "rg -S --vimgrep", -- use ripgrep for grepping in vim
   smartcase = true, -- smart case
   swapfile = false, -- creates a swapfile
   timeoutlen = 500, -- time to wait for a mapped sequence to complete (1000ms default)
