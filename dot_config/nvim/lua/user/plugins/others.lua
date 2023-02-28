@@ -1,45 +1,19 @@
 return {
   { "nvim-lua/plenary.nvim" },
-  { "folke/which-key.nvim" }, -- move to editor
   { "tpope/vim-sleuth", event = "BufReadPre" },
   {
-    "nvim-treesitter/playground",
-    cmd = { "TSPlaygroundToggle", "TSCaptureUnderCursor" },
-  },
-  {
-    "RRethy/vim-illuminate", -- move to coding
-    enabled = false,
-    event = "BufReadPost",
+    "folke/which-key.nvim",
     opts = {
-      delay = 200,
-      filetypes_denylist = {
-        "alpha",
-        "NvimTree",
-        "lazy",
-        "mason",
-        "help",
-        "TelescopePrompt",
+      plugins = {
+        registers = true,
+        presets = {
+          operators = false,
+          nav = false,
+          windows = false,
+        },
       },
-    },
-    config = function(_, opts)
-      require("illuminate").configure(opts)
-      vim.cmd.highlight "IlluminatedWordText gui=none"
-    end,
-    keys = {
-      {
-        "]]",
-        function()
-          require("illuminate").goto_next_reference(false)
-        end,
-        desc = "Next Reference",
-      },
-      {
-        "[[",
-        function()
-          require("illuminate").goto_prev_reference(false)
-        end,
-        desc = "Prev Reference",
-      },
+      window = { border = "single" },
+      layout = { spacing = 4 },
     },
   },
   {
@@ -57,6 +31,7 @@ return {
         autosave_ignore_filetypes = {
           "alpha",
           "NvimTree",
+          "neo-tree",
           "gitcommit",
         },
       }

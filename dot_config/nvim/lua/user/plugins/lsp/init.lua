@@ -1,25 +1,32 @@
 local M = {
   {
+    "williamboman/mason.nvim",
+    opts = {
+      ui = {
+        border = "rounded",
+        icons = {
+          package_installed = "✓",
+          package_pending = "➜",
+          package_uninstalled = "✗",
+        },
+      },
+    },
+  },
+  {
+    "williamboman/mason-lspconfig.nvim",
+    opts = {
+      ensure_installed = {
+        "jsonls",
+        "tsserver",
+        "sumneko_lua",
+      },
+      automatic_installation = false,
+    },
+  },
+  {
     "neovim/nvim-lspconfig",
     event = "BufReadPre",
     dependencies = {
-      {
-        "williamboman/mason.nvim",
-        opts = {
-          ui = { border = "rounded" },
-        },
-      },
-      {
-        "williamboman/mason-lspconfig.nvim",
-        opts = {
-          ensure_installed = {
-            "jsonls",
-            "tsserver",
-            "sumneko_lua",
-          },
-          automatic_installation = false,
-        },
-      },
       {
         "folke/neodev.nvim",
         opts = {
@@ -42,10 +49,11 @@ local M = {
         handlers = custom.handlers,
       }
 
+      -- this loads mason-lspconfig which loads mason
       require("mason-lspconfig").setup_handlers {
         function(server_name)
           local merged_opts =
-            vim.tbl_extend("force", opts, settings[server_name] or {})
+          vim.tbl_extend("force", opts, settings[server_name] or {})
           require("lspconfig")[server_name].setup(merged_opts)
         end,
         tsserver = function()
@@ -58,23 +66,23 @@ local M = {
     "jose-elias-alvarez/null-ls.nvim",
     event = "BufRead",
     opts = function()
-      local s = require("null-ls").builtins
+      local nls = require("null-ls").builtins
 
       return {
         border = "rounded",
         sources = {
           -- ts/js
-          s.formatting.prettierd,
-          s.code_actions.eslint_d,
-          s.diagnostics.eslint_d.with {
+          nls.formatting.prettierd,
+          nls.code_actions.eslint_d,
+          nls.diagnostics.eslint_d.with {
             condition = function(utils)
               return utils.root_has_file_matches "^.eslintrc*"
             end,
           },
           -- python
-          s.formatting.black,
+          nls.formatting.black,
           -- lua
-          s.formatting.stylua,
+          nls.formatting.stylua,
         },
       }
     end,

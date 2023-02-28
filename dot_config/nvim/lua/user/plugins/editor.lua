@@ -67,34 +67,6 @@ return {
   },
   { "akinsho/git-conflict.nvim", config = true },
   {
-    "windwp/nvim-autopairs",
-    event = "InsertEnter",
-    opts = {
-      check_ts = true,
-      ts_config = {
-        lua = { "string" },
-      },
-      fast_wrap = {
-        map = "<M-e>",
-        highlight = "PmenuSel",
-      },
-    },
-    config = function(_, opts)
-      require("nvim-autopairs").setup(opts)
-
-      local cmp_autopairs = require "nvim-autopairs.completion.cmp"
-      local ts_utils = require "nvim-treesitter.ts_utils"
-
-      require("cmp").event:on("confirm_done", function(evt)
-        local tsnode = ts_utils.get_node_at_cursor()
-        if tsnode:type() ~= "named_imports" then
-          cmp_autopairs.on_confirm_done()(evt)
-        end
-      end)
-    end,
-  },
-  { "windwp/nvim-ts-autotag", event = "InsertEnter" },
-  {
     "numToStr/Comment.nvim",
     dependencies = {
       "JoosepAlviste/nvim-ts-context-commentstring",
@@ -135,6 +107,33 @@ return {
     },
   },
   {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    opts = {
+      check_ts = true,
+      ts_config = {
+        lua = { "string" },
+      },
+      fast_wrap = {
+        map = "<M-e>",
+        highlight = "PmenuSel",
+      },
+    },
+    config = function(_, opts)
+      require("nvim-autopairs").setup(opts)
+
+      local cmp_autopairs = require "nvim-autopairs.completion.cmp"
+      local ts_utils = require "nvim-treesitter.ts_utils"
+
+      require("cmp").event:on("confirm_done", function(evt)
+        local tsnode = ts_utils.get_node_at_cursor()
+        if tsnode:type() ~= "named_imports" then
+          cmp_autopairs.on_confirm_done()(evt)
+        end
+      end)
+    end,
+  },
+  {
     "lukas-reineke/indent-blankline.nvim",
     event = "BufReadPost",
     opts = {
@@ -160,6 +159,7 @@ return {
     dependencies = {
       "kevinhwang91/promise-async",
     },
+    enabled = false,
     config = function()
       vim.o.foldcolumn = "1" -- '0' is not bad
       -- Using ufo provider need a large value, feel free to decrease the value
@@ -177,6 +177,7 @@ return {
   {
     "NvChad/nvim-colorizer.lua",
     event = "VeryLazy",
+    enabled = false,
     opts = {
       filetypes = { "*", "!lazy" },
       buftype = { "*", "!prompt", "!nofile" },

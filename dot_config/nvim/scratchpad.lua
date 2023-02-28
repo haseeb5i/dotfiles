@@ -70,3 +70,12 @@ function SelectEnv()
     })
   end)
 end
+
+local x = { 1, 3, a = "b", c = "d" }
+
+vim.pretty_print(vim.tbl_values(x))
+vim.pretty_print(vim.tbl_keys(x))
+vim.pretty_print(vim.tbl_filter(function(k, v)
+  vim.pretty_print(k, v)
+  return true
+end, x))

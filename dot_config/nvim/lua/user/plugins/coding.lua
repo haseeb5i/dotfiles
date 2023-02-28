@@ -19,11 +19,9 @@ return {
       "hrsh7th/cmp-nvim-lsp",
       "saadparwaiz1/cmp_luasnip",
     },
-    -- opts = function() end,
     config = function()
-      local cmp = require "cmp"
-      local lspkind = require("user.icons").lspkind
-      local luasnip = require "luasnip"
+      local cmp, luasnip = require "cmp", require "luasnip"
+      local kind_icons = require("user.icons").lspkind
 
       cmp.setup {
         snippet = {
@@ -42,9 +40,9 @@ return {
           ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_next_item()
-            -- don't want to expand on <Tab>
-            -- elseif luasnip.expand_or_jumpable() then
-            -- luasnip.expand_or_jump()
+              -- disabling expand on <Tab> for luasnip
+              -- elseif luasnip.expand_or_jumpable() then
+              -- luasnip.expand_or_jump()
             elseif luasnip.jumpable(1) then
               luasnip.jump(1)
             else
@@ -62,9 +60,9 @@ return {
           end, { "i", "s" }),
         },
         formatting = {
-          fields = { "abbr", "kind", "menu" },
+          fields = { "abbr", "kind" },
           format = function(_, vim_item)
-            vim_item.kind = lspkind[vim_item.kind] .. vim_item.kind
+            vim_item.kind = kind_icons[vim_item.kind] .. vim_item.kind
             local maxwidth = 42
             local label = vim_item.abbr
             if #label > maxwidth then
@@ -86,7 +84,7 @@ return {
             border = "single",
           },
           documentation = {
-            -- border = "rounded",
+            border = "single",
             max_width = 50,
           },
         },
@@ -126,6 +124,29 @@ return {
       vim.g.copilot_no_tab_map = true
     end,
   },
-  { "danymat/neogen", opts = { snippet_engine = "luasnip" } },
+  {
+    "RRethy/vim-illuminate",
+    enabled = false,
+    event = "BufReadPost",
+    opts = {
+      delay = 200,
+      filetypes_denylist = {
+        "alpha",
+        "NvimTree",
+        "lazy",
+        "mason",
+        "help",
+        "TelescopePrompt",
+      },
+    },
+    config = function(_, opts)
+      require("illuminate").configure(opts)
+    end,
+  },
+  {
+    "danymat/neogen",
+    opts = { snippet_engine = "luasnip" },
+    enabled = false,
+  },
   { "michaelb/sniprun", build = "bash ./install.sh" },
 }

@@ -1,7 +1,10 @@
 local M = {}
 
-local format_whitelist = {
-  prismals = true,
+-- disable lsp formatting for these
+local format_blacklist = {
+  graphql = true,
+  pyright = true,
+  tsserver = true,
 }
 
 M.on_attach = function(client, bufnr)
@@ -35,10 +38,7 @@ M.on_attach = function(client, bufnr)
   --   map("n", "", "<cmd>TypescriptRenameFile<cr>", "Rename File")
   -- end
 
-  -- for now disabling this for all servers, should be per client
-
-  print(client.name, format_whitelist[client.name])
-  if not format_whitelist[client.name] then
+  if format_blacklist[client.name] then
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false
   end

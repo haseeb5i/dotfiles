@@ -81,6 +81,9 @@ return {
           win_options = {
             winblend = 0,
           },
+          mappings = {
+            q = "Close",
+          },
         },
         get_config = function(opts)
           if opts.kind == "codeaction" then

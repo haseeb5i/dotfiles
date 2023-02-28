@@ -14,12 +14,6 @@ autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
   command = "checktime",
 })
 
--- don't auto-comment newlines
-autocmd({ "BufWinEnter", "BufRead", "BufNewFile" }, {
-  pattern = "*",
-  command = "setlocal fo-=c fo-=r fo-=o",
-})
-
 -- enable spell check for some filetypes
 autocmd("FileType", {
   pattern = { "gitcommit", "markdown" },
@@ -28,10 +22,11 @@ autocmd("FileType", {
 
 -- highlight text on yank
 autocmd("TextYankPost", {
-  pattern = "*",
   callback = function()
     vim.highlight.on_yank { higroup = "Search", timeout = 200 }
   end,
+  group = augroup("_yank_highlight", { clear = true }),
+  pattern = "*",
 })
 
 -- make some windows close on <q>
@@ -48,13 +43,19 @@ autocmd("FileType", {
   command = "nnoremap <silent> <buffer> q :close<CR>",
 })
 
+autocmd("VimResized", {
+  pattern = "*",
+  command = "tabdo wincmd =",
+  group = augroup("_auto_resize", { clear = true }),
+})
+
 autocmd("ColorScheme", {
   pattern = "*",
   callback = function()
     vim.cmd [[
       hi! Pmenu guibg=none
 
-      " hi! IndentBlanklineChar guifg=#404040
+      hi! IndentBlanklineChar guifg=#404040
       " hi! IndentBlanklineContextChar guifg=#707070
 
       hi! CmpItemAbbrMatch guibg=none
@@ -73,12 +74,6 @@ autocmd("ColorScheme", {
       hi! link CmpItemKindUnit CmpItemKindKeyword
   ]]
   end,
-})
-
-autocmd("VimResized", {
-  pattern = "*",
-  command = "tabdo wincmd =",
-  group = augroup("_auto_resize", { clear = true }),
 })
 
 -- make neovim transparent

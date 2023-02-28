@@ -1,24 +1,27 @@
-vim.cmd "set background=dark"
+vim.cmd 'set background=dark'
 
 return {
   {
-    "Mofiqul/dracula.nvim",
+    'Mofiqul/dracula.nvim',
     lazy = false,
-    priority = 1000,
+    priority = 99,
     opts = {
       italic_comment = true,
       transparent = false,
     },
     config = function()
-      vim.cmd.colorscheme "dracula"
+      vim.cmd.colorscheme 'dracula'
     end,
   },
   {
-    "navarasu/onedark.nvim",
-    opts = { style = "darker" },
+    'navarasu/onedark.nvim',
+    opts = { style = 'darker' },
+    config = function()
+      require('onedark').load()
+    end,
   },
   {
-    "ellisonleao/gruvbox.nvim",
+    'ellisonleao/gruvbox.nvim',
     opts = {
       undercurl = true,
       underline = true,
@@ -28,7 +31,7 @@ return {
       invert_tabline = false,
     },
     config = function()
-      vim.cmd.colorscheme "gruvbox"
+      vim.cmd.colorscheme 'gruvbox'
     end,
   },
 }

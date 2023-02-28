@@ -70,7 +70,6 @@ M.statusline_separators = {
 }
 
 -- eslint icon from nerd font
-
 M.devicons = {
   c = {
     icon = "",
