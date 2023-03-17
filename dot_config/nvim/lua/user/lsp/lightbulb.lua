@@ -25,7 +25,6 @@ vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
     params.context = { diagnostics = diagnostics_info }
 
     vim.lsp.buf_request_all(0, "textDocument/codeAction", params, function(responses)
-
       local has_actions = false
       for _, resp in pairs(responses) do
         if resp.result and not vim.tbl_isempty(resp.result) then

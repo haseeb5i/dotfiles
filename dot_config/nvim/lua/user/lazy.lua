@@ -13,23 +13,18 @@ end
 
 vim.opt.runtimepath:prepend(lazypath)
 
-require("lazy").setup("user.plugins", {
+require("lazy").setup("plugins", {
   defaults = {
     lazy = true,
-    -- version = "*",
   },
   ui = {
-    size = { width = 0.7, height = 0.8 },
     border = "rounded",
   },
   performance = {
-    reset_packpath = true,
     rtp = {
       reset = true,
       disabled_plugins = {
         "gzip",
-        -- "matchit",
-        -- "matchparen",
         "netrwPlugin",
         "tarPlugin",
         "tohtml",

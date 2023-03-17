@@ -4,6 +4,7 @@ vim.g.maplocalleader = " "
 
 local options = {
   -- interface
+  cmdheight = 0, -- hide command line unless needed
   cursorline = true, -- highlight the current line
   confirm = true, -- confirm to save changes before exiting modified buffer
   hlsearch = false, -- highlight all matches on previous search pattern
@@ -43,14 +44,17 @@ for k, v in pairs(options) do
 end
 
 vim.opt.completeopt = "menu,menuone,noselect"
-vim.opt.fillchars:append "foldclose:+"
-vim.opt.shortmess:append "WIc"
+vim.opt.shortmess:append "sI"
 vim.opt.whichwrap:append "<,>,[,]"
+
+if vim.fn.has "nvim-0.9" == 1 then
+  splitkeep = "screen" -- maintain code view when splitting
+  vim.opt.diffopt:append "linematch:60" -- enable linematch diff algorithm
+end
 
 -- neovide configuration
 if vim.g.neovide then
-  -- CaskaydiaCove Nerd Font
-  vim.opt.guifont = "FiraCode Nerd Font:h11"
+  vim.opt.guifont = "FiraCode Nerd Font:h11" -- CaskaydiaCove Nerd Font
   vim.g.neovide_scroll_animation_length = 0.2
   vim.g.neovide_confirm_quit = true
   -- vim.g.neovide_transparency = 0.8
