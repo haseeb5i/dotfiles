@@ -19,7 +19,7 @@ autocmd("FileType", {
 autocmd("FileType", {
   desc = "Make q close help, man, quickfix, dap floats",
   group = augroup("q_close_windows", { clear = true }),
-  pattern = { "qf", "help", "man", "dap-float", "floaterm", "lspinfo", "null-ls-info" },
+  pattern = { "qf", "help", "man", "dap-float", "lspinfo", "null-ls-info" },
   callback = function(event)
     vim.keymap.set(
       "n",

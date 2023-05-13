@@ -25,9 +25,6 @@ return {
         },
       }
     end,
-    keys = {
-      { "<leader>r", "<cmd> SessionManager load_session<cr>", desc = "Load Session" },
-    },
   },
   -- {
   --   "github/copilot.vim",
@@ -40,7 +37,6 @@ return {
   --       typescript = true,
   --       typescriptreact = true,
   --     }
-
   --     vim.cmd [[ imap <silent><script><expr> <C-l> copilot#Accept("\<CR>") ]]
   --     vim.g.copilot_no_tab_map = true
   --   end,
@@ -49,29 +45,7 @@ return {
   --   "danymat/neogen",
   --   enabled = false,
   --   opts = { snippet_engine = "luasnip" },
-  --   keys = {
-  --     {
-  --       "<leader>cf",
-  --       "<cmd>lua require'neogen'.generate{type = 'func'}<cr>",
-  --       desc = "Function Annotation",
-  --     },
-  --     {
-  --       "<leader>cc",
-  --       "<cmd>lua require'neogen'.generate{type = 'class'}<cr>",
-  --       desc = "Class Annotation",
-  --     },
-  --     {
-  --       "<leader>ct",
-  --       "<cmd>lua require'neogen'.generate{type = 'type'}<cr>",
-  --       desc = "Type Annotation",
-  --     },
-  --     {
-  --       "<leader>cF",
-  --       "<cmd>lua require'neogen'.generate{type = 'file'}<cr>",
-  --       desc = "File Annotation",
-  --     },
-  --   },
-  -- },
+  -- {'simrat39/symbols-outline.nvim', config = true}
   -- { "michaelb/sniprun", build = "bash ./install.sh" },
   -- { "sindrets/winshift.nvim", enabled = false },
   -- { "NMAC427/guess-indent.nvim", config = require "plugins.configs.guess-indent" },

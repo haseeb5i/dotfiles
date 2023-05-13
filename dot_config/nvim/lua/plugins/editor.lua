@@ -98,22 +98,6 @@ return {
     config = function(_, opts)
       require("illuminate").configure(opts)
     end,
-    keys = {
-      {
-        "]]",
-        function()
-          require("illuminate").goto_next_reference(false)
-        end,
-        desc = "Next Reference",
-      },
-      {
-        "[[",
-        function()
-          require("illuminate").goto_prev_reference(false)
-        end,
-        desc = "Prev Reference",
-      },
-    },
   },
   {
     "kevinhwang91/nvim-ufo",
@@ -123,7 +107,7 @@ return {
     enabled = false,
     config = function()
       vim.o.foldcolumn = "1" -- '0' is not bad
-      -- Using ufo provider need a large value, feel free to decrease the value
+      -- Using ufo provider need a large value
       vim.o.foldlevel = 99
       vim.o.foldlevelstart = 99
       vim.o.foldenable = true
@@ -137,23 +121,16 @@ return {
   },
   {
     "NvChad/nvim-colorizer.lua",
-    event = "VeryLazy",
+    -- event = "VeryLazy",
     opts = {
-      filetypes = { "*", "!lazy" },
-      buftype = { "*", "!prompt", "!nofile" },
+      -- filetypes = { "*", "!lazy" },
+      -- buftype = { "*", "!prompt", "!nofile" },
       user_default_options = {
         rgb_fn = true,
         mode = "virtualtext", -- "background"
         virtualtext = "■",
       },
     },
-  },
-  {
-    "ggandor/leap.nvim",
-    -- event = "VeryLazy",
-    config = function()
-      require("leap").add_default_mappings()
-    end,
   },
   {
     "folke/which-key.nvim",
@@ -175,9 +152,7 @@ return {
 
       wk.setup(opts)
       wk.register({
-        c = { "<cmd> Bdelete <cr>", "Close Buffer" },
-        q = { "<cmd> q <cr>", "Quit Window" },
-        -- c = { name = "Code" },
+        c = { name = "Code" },
         d = { name = "DAP" },
         g = { name = "Git" },
         l = { name = "LSP" },

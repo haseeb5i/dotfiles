@@ -2,28 +2,12 @@ return {
   "akinsho/toggleterm.nvim",
   version = "*",
   event = "VeryLazy",
-  keys = {
-    { "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", desc = " Lazygit" },
-    { "<leader>tt", "<cmd>lua _BTOP_TOGGLE()<cr>", desc = "Btop" },
-    -- :TermExec cmd="echo /file/example" -- size and dir also supported
-    { "<leader>tf", "<cmd>ToggleTerm direction=float<cr>", desc = "Float" },
-    {
-      "<leader>th",
-      "<cmd>ToggleTerm size=10 direction=horizontal<cr>",
-      desc = "Horizontal",
-    },
-    {
-      "<leader>tv",
-      "<cmd>ToggleTerm size=80 direction=vertical<cr>",
-      desc = "Vertical",
-    },
-  },
   opts = {
     size = 10, -- 20 for float
     open_mapping = [[<C-\>]],
     -- on_create = fun(t: Terminal),
     shading_factor = 2,
-    persist_mode = false,
+    persist_mode = false, -- TODO: check docs
     direction = "horizontal", -- "float"
     float_opts = {
       border = "curved",
@@ -60,25 +44,29 @@ return {
         winblend = 0,
       },
       on_open = function(term)
+        vim.keymap.set("n", "q", "<cmd>close<CR>", { buffer = term.bufnr })
         -- remove mappings to escape to normal mode
         vim.api.nvim_buf_del_keymap(term.bufnr, "t", "<esc>")
         vim.api.nvim_buf_del_keymap(term.bufnr, "t", "jk")
-        vim.keymap.set(
-          "n",
-          "q",
-          "<cmd>close<CR>",
-          { buffer = term.bufnr, silent = true }
-        )
       end,
     }
     function _LAZYGIT_TOGGLE()
       lazygit:toggle()
     end
-
-    -- btop
-    local btop = Terminal:new { cmd = "btop", hidden = true }
-    function _BTOP_TOGGLE()
-      btop:toggle()
-    end
   end,
+  keys = {
+    { "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", desc = " Lazygit" },
+    -- :TermExec cmd="pipenv activate" -- size and dir also supported
+    { "<leader>tf", "<cmd>ToggleTerm direction=float<cr>", desc = "Float" },
+    {
+      "<leader>th",
+      "<cmd>ToggleTerm size=10 direction=horizontal<cr>",
+      desc = "Horizontal",
+    },
+    {
+      "<leader>tv",
+      "<cmd>ToggleTerm size=80 direction=vertical<cr>",
+      desc = "Vertical",
+    },
+  },
 }

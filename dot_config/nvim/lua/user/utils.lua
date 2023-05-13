@@ -1,37 +1,50 @@
 local M = {}
 
--- Get highlight properties for a given highlight name
--- @param name highlight group name
--- @return table of highlight group properties
-function M.get_hlgroup(name, fallback)
-  if vim.fn.hlexists(name) == 1 then
-    local hl = vim.api.nvim_get_hl_by_name(name, vim.o.termguicolors)
-    if not hl["foreground"] then
-      hl["foreground"] = "NONE"
+-- Set keymaps in one go, follows lazy.nvim LazyKey spec
+-- @param t LazyKey | LazyKey[]
+function M.map(t)
+  local function set(args)
+    local mode = args.mode or "n"
+
+    local opts = {}
+    for k, v in pairs(args) do
+      if type(k) ~= "number" and k ~= "mode" then
+        opts[k] = v
+      end
     end
-    if not hl["background"] then
-      hl["background"] = "NONE"
-    end
-    hl.fg, hl.bg, hl.sp = hl.foreground, hl.background, hl.special
-    hl.ctermfg, hl.ctermbg = hl.foreground, hl.background
-    return hl
+
+    vim.keymap.set(mode, args[1], args[2], opts)
   end
-  return fallback
+
+  if type(t[1]) == "table" then
+    for _, keymap in ipairs(t) do
+      set(keymap)
+    end
+  end
+
+  if type(t[1]) == "string" then
+    set(t)
+  end
 end
 
---- Open a URL under the cursor with the current operating system
--- @param path the path of the file to open with the system opener
--- function M.system_open(path)
---   local cmd
---   if vim.fn.has "win32" == 1 and vim.fn.executable "explorer" == 1 then
---     cmd = "explorer"
---   elseif vim.fn.has "unix" == 1 and vim.fn.executable "xdg-open" == 1 then
---     cmd = "xdg-open"
---   elseif (vim.fn.has "mac" == 1 or vim.fn.has "unix" == 1) and vim.fn.executable "open" == 1 then
---     cmd = "open"
---   end
---   if not cmd then M.notify("Available system opening tool not found!", "error") end
---   vim.fn.jobstart({ cmd, path or vim.fn.expand "<cfile>" }, { detach = true })
--- end
+-- Get highlight properties for a given highlight name
+---@param name string highlight group name
+---@return table highlight highlight group properties
+function M.get_hlgroup(name, fallback)
+  if vim.fn.hlexists(name) ~= 1 then
+    return fallback
+  end
+
+  local hl = vim.api.nvim_get_hl_by_name(name, vim.o.termguicolors)
+  if not hl["foreground"] then
+    hl["foreground"] = "NONE"
+  end
+  if not hl["background"] then
+    hl["background"] = "NONE"
+  end
+  hl.fg, hl.bg, hl.sp = hl.foreground, hl.background, hl.special
+  hl.ctermfg, hl.ctermbg = hl.foreground, hl.background
+  return hl
+end
 
 return M

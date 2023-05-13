@@ -1,5 +1,5 @@
 #
-# Executes commands at logout
+# Executes commands at logout.
 #
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>

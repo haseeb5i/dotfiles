@@ -24,24 +24,9 @@ return {
     end,
   },
   {
-    "navarasu/onedark.nvim",
-    opts = { style = "darker" },
+    "nyoom-engineering/oxocarbon.nvim",
     config = function()
-      require("onedark").load()
-    end,
-  },
-  {
-    "ellisonleao/gruvbox.nvim",
-    opts = {
-      undercurl = true,
-      underline = true,
-      bold = false,
-      italic = false,
-      invert_signs = false,
-      invert_tabline = false,
-    },
-    config = function()
-      vim.cmd.colorscheme "gruvbox"
+      vim.cmd.colorscheme "oxocarbon"
     end,
   },
 }

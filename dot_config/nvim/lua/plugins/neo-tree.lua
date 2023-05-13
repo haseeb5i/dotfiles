@@ -18,9 +18,7 @@ return {
     },
     default_component_configs = {
       indent = { padding = 0, indent_size = 1 },
-      icon = {
-        folder_empty = "",
-      },
+      icon = { folder_empty = "" },
       git_status = {
         symbols = {
           added = "",
@@ -48,8 +46,5 @@ return {
         h = "close_node",
       },
     },
-  },
-  keys = {
-    { "<leader>e", "<cmd>Neotree toggle<cr>", desc = "NeoTree" },
   },
 }

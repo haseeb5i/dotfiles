@@ -1,7 +1,11 @@
-# info => https://github.com/sorin-ionescu/prezto/blob/master/runcoms/zpreztorc
+
+# Color output (auto set to 'no' on dumb terminals).
 zstyle ':prezto:*:*' color 'yes'
 
-# prezto modules to load, load order matters
+# Set case-sensitivity for completion, history lookup, etc.
+# zstyle ':prezto:*:*' case-sensitive 'yes'
+
+# Set the Prezto modules to load, order matters.
 zstyle ':prezto:load' pmodule \
   'environment' \
   'terminal' \

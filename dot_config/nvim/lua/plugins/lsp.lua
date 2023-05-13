@@ -4,12 +4,11 @@ local M = {
     event = "BufReadPre",
     dependencies = {
       "b0o/SchemaStore.nvim",
-      "jose-elias-alvarez/typescript.nvim", -- should it be loaded with lsp?
+      "jose-elias-alvarez/typescript.nvim",
       {
         "folke/neodev.nvim",
         opts = {
           library = { plugins = false },
-          jsonls = false,
         },
       },
     },

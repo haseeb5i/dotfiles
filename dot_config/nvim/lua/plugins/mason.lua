@@ -6,8 +6,6 @@ return {
       "Mason",
       "MasonInstall",
       "MasonUninstall",
-      "MasonUninstallAll",
-      "MasonLog",
     },
     opts = {
       ui = {
@@ -23,7 +21,7 @@ return {
       { "<leader>m", "<cmd> Mason <cr>", desc = "Mason Info" },
     },
   },
-  -- called inside lsp, which loads this and mason 
+  -- called inside lsp, which loads this and this loads mason
   {
     "williamboman/mason-lspconfig.nvim",
     cmd = { "LspInstall", "LspUninstall" },

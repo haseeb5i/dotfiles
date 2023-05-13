@@ -33,37 +33,30 @@ return {
 
       require("alpha").setup(dashboard.opts)
     end,
-    keys = {
-      { "<leader>a", "<cmd> Alpha <cr>", desc = "Alpha" },
+  },
+  {
+    "stevearc/dressing.nvim",
+    event = "VeryLazy",
+    opts = {
+      select = {
+        backend = { "builtin", "nui" },
+        nui = {
+          win_options = { winblend = 3 },
+        },
+        builtin = {
+          win_options = { winblend = 0 },
+          mappings = { q = "Close" },
+        },
+        get_config = function(opts)
+          if opts.kind == "codeaction" then
+            return {
+              builtin = { relative = "cursor", min_height = 0 },
+            }
+          end
+        end,
+      },
     },
   },
-  -- {
-  --   "stevearc/dressing.nvim",
-  --   event = "VeryLazy",
-  --   opts = {
-  --     select = {
-  --       backend = { "builtin" },
-  --       builtin = {
-  --         win_options = {
-  --           winblend = 0,
-  --         },
-  --         mappings = {
-  --           q = "Close",
-  --         },
-  --       },
-  --       get_config = function(opts)
-  --         if opts.kind == "codeaction" then
-  --           return {
-  --             builtin = {
-  --               relative = "cursor",
-  --               min_height = 0,
-  --             },
-  --           }
-  --         end
-  --       end,
-  --     },
-  --   },
-  -- },
   {
     "kevinhwang91/nvim-bqf",
     ft = "qf",
@@ -81,17 +74,4 @@ return {
       },
     },
   },
-  -- {
-  --   'stevearc/aerial.nvim',
-  --   config = function() require('aerial').setup() end
-  -- }
-  -- {
-  --   "SmiteshP/nvim-navic",
-  --   enabled = false,
-  --   opts = {
-  --     separator = " ",
-  --     highlight = true,
-  --     depth_limit = 5,
-  --   },
-  -- },
 }

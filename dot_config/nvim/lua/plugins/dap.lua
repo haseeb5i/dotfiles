@@ -2,7 +2,7 @@ return {
   "mfussenegger/nvim-dap",
   dependencies = {
     "rcarriga/nvim-dap-ui",
-    -- "Pocco81/dap-buddy.nvim"
+    "Pocco81/dap-buddy.nvim",
   },
   config = function()
     local dap, dapui = require "dap", require "dapui"
@@ -50,23 +50,20 @@ return {
       numhl = "LspDiagnosticsSignInformation",
     })
   end,
-  --     -- vim.keymap.set('n', '<Leader>B', function() require('dap').set_breakpoint() end)
-  --     b = {
-  --       "<cmd>lua require'dap'.toggle_breakpoint()<cr>",
-  --       "Toggle Breakpoint",
-  --     },
-  --     c = { "<cmd>lua require'dap'.continue()<cr>", "Continue" },
-  --     o = { "<cmd>lua require'dap'.step_over()<cr>", "Step Over" },
-  --     i = { "<cmd>lua require'dap'.step_into()<cr>", "Step Into" },
-  --     O = { "<cmd>lua require'dap'.step_out()<cr>", "Step Out" },
-  --     r = { "<cmd>lua require'dap'.repl.toggle()<cr>", "Toggle REPL" },
-  --     l = { "<cmd>lua require'dap'.run_last()<cr>", "Run Last" },
-  --     t = { "<cmd>lua require'dap'.terminate()<cr>", "Terminate" },
-  --     u = { "<cmd>lua require'dapui'.toggle()<cr>", "Toggle DAP UI" },
-  --     h = { "<cmd>lua require'dap.ui.widgets'.hover()<cr>", "Hover" },
-  --     p = { "<cmd>lua require'dap.ui.widgets'.preview()<cr>", "Preview" },
-  --     -- require("dapui").float_element(<element ID>, <optional settings>)
-  --     -- require("dapui").eval(<expression>)
-  --     -- vnoremap <M-k> <Cmd>lua require("dapui").eval()<CR>
-  --   },
+  keys = {
+    { "<leader>db", "<cmd> DapToggleBreakpoint <cr>", desc = "Toggle Breakpoint" },
+    { "<leader>dc", "<cmd> DapContinue <cr>", desc = "Continue" },
+    { "<leader>do", "<cmd> DapStepOver <cr>", desc = "Step Over" },
+    { "<leader>di", "<cmd> DapStepInto <cr>", desc = "Step Into" },
+    { "<leader>dO", "<cmd> DapStepOut <cr>", desc = "Step Out" },
+    { "<leader>dr", "<cmd> DapToggleRepl <cr>", desc = "Toggle REPL" },
+    { "<leader>dl", "<cmd> DapRestartFrame <cr>", desc = "Run Last" },
+    { "<leader>dL", "<cmd> DapLoadLaunchJSON <cr>", desc = "Load Launch JSON" },
+    { "<leader>dt", "<cmd> DapTerminate <cr>", desc = "Terminate" },
+    -- { "<leader>dh", "<cmd>lua require'dap.ui.widgets'.hover()<cr>",   desc = "Hover" },
+    -- { "<leader>dp", "<cmd>lua require'dap.ui.widgets'.preview()<cr>", desc = "Preview" },
+    { "<leader>du", "<cmd>lua require'dapui'.toggle()<cr>", desc = "Toggle DAP UI" },
+    -- require("dapui").float_element(<element ID>, <optional settings>)
+    -- vnoremap <M-k> <Cmd>lua require("dapui").eval(<expression>)<CR>
+  },
 }

@@ -1,0 +1,27 @@
+[user]
+    email = haseeb.rehman@ideofuzion.com
+    name = Haseeb ul Rehman
+
+[core]
+    ; editor = nvr --remote-wait-silent
+    editor = nvim
+    pager = delta
+
+[init]
+    defaultBranch = master
+
+[pull]
+    rebase = false
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true
+    light = false
+
+[merge]
+    conflictstyle = diff3
+
+[diff]
+    colorMoved = default

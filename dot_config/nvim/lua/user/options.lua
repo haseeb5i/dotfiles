@@ -48,7 +48,7 @@ vim.opt.shortmess:append "sI"
 vim.opt.whichwrap:append "<,>,[,]"
 
 if vim.fn.has "nvim-0.9" == 1 then
-  splitkeep = "screen" -- maintain code view when splitting
+  vim.opt.splitkeep = "screen" -- maintain code view when splitting
   vim.opt.diffopt:append "linematch:60" -- enable linematch diff algorithm
 end
 

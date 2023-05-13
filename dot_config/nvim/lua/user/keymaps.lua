@@ -1,27 +1,4 @@
-local function map(t)
-  local function set(args)
-    local mode = args.mode or "n"
-
-    local opts = {}
-    for k, v in pairs(args) do
-      if type(k) ~= "number" and k ~= "mode" then
-        opts[k] = v
-      end
-    end
-
-    vim.keymap.set(mode, args[1], args[2], opts)
-  end
-
-  if type(t[1]) == "table" then
-    for _, keymap in ipairs(t) do
-      set(keymap)
-    end
-  end
-
-  if type(t[1]) == "string" then
-    set(t)
-  end
-end
+local map = require("user.utils").map
 
 -- save, close and quit
 map {
@@ -41,7 +18,7 @@ map {
   { "<S-h>", "<cmd> BufferLineCyclePrev <cr>", desc = "Prev Buffer" },
   { "<M-l>", "<cmd> BufferLineMoveNext <cr>", desc = "Move Buffer Right" },
   { "<M-h>", "<cmd> BufferLineMovePrev <cr>", desc = "Move Buffer Left" },
-  -- { "", "<cmd> BufferLinePick <cr>", desc = "Pick Buffer"},
+  -- { "<C-p>", "<cmd> BufferLinePick <cr>", desc = "Pick Buffer"},
 }
 
 -- switch between windows
@@ -77,11 +54,26 @@ map {
   -- { ">", ">gv", mode = "v", silent = true },
   {
     "gx",
-    '<cmd>call jobstart(["xdg-open", expand("<cfile>")], {"detach": v:true})<cr>',
+    function()
+      -- use 'explorer' for win and 'open' for mac
+      vim.fn.jobstart({ "xdg-open", vim.fn.expand "<cfile>" }, { detach = true })
+    end,
+    -- '<cmd>call jobstart(["xdg-open", expand("<cfile>")], {"detach": v:true})<cr>',
     desc = "Open link under cursor",
   },
+
   -- TODO: fix this
   -- vim.cmd [[ cnoremap <expr>  <C-j>  pumvisible() ? "<C-n>" : "<C-j>" ]]
+}
+
+map {
+
+  { "<leader>a", "<cmd> Alpha <cr>", desc = "Alpha" },
+  { "<leader>q", "<cmd> q <cr>", desc = "Quit Window" },
+  { "<leader>x", "<cmd> Bdelete <cr>", desc = "Close Buffer" },
+  { "<leader>e", "<cmd>Neotree toggle<cr>", desc = "Toggle NeoTree" },
+  { "<leader>E", "<cmd>Neotree focus<cr>", desc = "Focus NeoTree" },
+  { "<leader>r", "<cmd>SessionManager load_session<cr>", desc = "Load Session" },
 }
 
 -- plugin manager
@@ -91,4 +83,96 @@ map {
   { "<leader>ps", "<cmd> Lazy show <cr>", desc = "Status" },
   { "<leader>pS", "<cmd> Lazy sync <cr>", desc = "Sync" },
   { "<leader>pu", "<cmd> Lazy update <cr>", desc = "Update" },
+}
+
+-- git
+map {
+  { "<leader>gj", "<cmd> Gitsigns next_hunk <cr>", desc = "Next Hunk" },
+  { "<leader>gk", "<cmd> Gitsigns prev_hunk <cr>", desc = "Prev Hunk" },
+  { "<leader>gl", "<cmd> Gitsigns blame_line <cr>", desc = "Blame" },
+  { "<leader>gp", "<cmd> Gitsigns preview_hunk <cr>", desc = "Preview Hunk" },
+  { "<leader>gr", "<cmd> Gitsigns reset_hunk <cr>", desc = "Reset Hunk" },
+  { "<leader>gR", "<cmd> Gitsigns reset_buffer <cr>", desc = "Reset Buffer" },
+  { "<leader>gs", "<cmd> Gitsigns stage_hunk <cr>", desc = "Stage Hunk" },
+  { "<leader>gu", "<cmd> Gitsigns undo_stage_hunk <cr>", desc = "Undo Stage Hunk" },
+  { "<leader>gd", "<cmd> DiffviewOpen<cr> ", desc = "Open DiffView" },
+  { "<leader>gD", "<cmd> DiffviewClose<cr> ", desc = "Close DiffView" },
+}
+
+-- telescope
+map {
+  {
+    "<leader>b",
+    "<cmd> Telescope buffers theme=dropdown previewer=false <cr>",
+    desc = "Find Buffers",
+  },
+  {
+    "<leader>f",
+    "<cmd> Telescope find_files theme=dropdown previewer=false <cr>",
+    desc = "Find Files",
+  },
+  {
+    "<leader>F",
+    "<cmd> Telescope live_grep theme=ivy <CR>",
+    desc = "Live grep",
+  },
+  -- search
+  { "<leader>sc", "<cmd>Telescope colorscheme<cr>", desc = "Colorscheme" },
+  { "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "Find Help" },
+  { "<leader>sr", "<cmd>Telescope oldfiles<cr>", desc = "Open Recent File" },
+  { "<leader>sR", "<cmd>Telescope registers<cr>", desc = "Registers" },
+  { "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "Keymaps" },
+  { "<leader>sC", "<cmd>Telescope commands<cr>", desc = "Commands" },
+  { "<leader>sw", "<cmd>Telescope grep_string theme=ivy<cr>", desc = "Search Word" },
+  -- git
+  { "<leader>gf", "<cmd>Telescope git_files<cr>", desc = "Search git files" },
+  {
+    "<leader>go",
+    "<cmd>Telescope git_status<cr>",
+    desc = "Open changed files",
+  },
+  { "<leader>gb", "<cmd>Telescope git_branches<cr>", desc = "Checkout branch" },
+  { "<leader>gc", "<cmd>Telescope git_commits<cr>", desc = "Checkout commit" },
+}
+
+-- illuminate
+map {
+  {
+    "]]",
+    function()
+      require("illuminate").goto_next_reference(false)
+    end,
+    desc = "Next Reference",
+  },
+  {
+    "[[",
+    function()
+      require("illuminate").goto_prev_reference(false)
+    end,
+    desc = "Prev Reference",
+  },
+}
+
+-- neogen
+map {
+  {
+    "<leader>cf",
+    "<cmd>lua require'neogen'.generate{type = 'func'}<cr>",
+    desc = "Function Annotation",
+  },
+  {
+    "<leader>cc",
+    "<cmd>lua require'neogen'.generate{type = 'class'}<cr>",
+    desc = "Class Annotation",
+  },
+  {
+    "<leader>ct",
+    "<cmd>lua require'neogen'.generate{type = 'type'}<cr>",
+    desc = "Type Annotation",
+  },
+  {
+    "<leader>cF",
+    "<cmd>lua require'neogen'.generate{type = 'file'}<cr>",
+    desc = "File Annotation",
+  },
 }

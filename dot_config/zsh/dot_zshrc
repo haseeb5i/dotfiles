@@ -15,5 +15,5 @@ bindkey '^l' autosuggest-accept  # Ctrl-l to accept auto-suggestion
 
 # Development
 [ -x "$(command -v pyenv)" ] && eval "$(pyenv init -)"
-[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 

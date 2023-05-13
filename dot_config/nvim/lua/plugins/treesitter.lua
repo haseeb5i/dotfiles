@@ -1,7 +1,7 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    version = false,
+    version = false, -- using latest version
     build = ":TSUpdate",
     event = "BufRead", -- not triggered on empty buffer
     opts = {
@@ -60,6 +60,7 @@ return {
     end,
   },
   { "windwp/nvim-ts-autotag", event = "InsertEnter" },
+  -- NOTE: this loads ts if not loaded on 'BufRead' event
   {
     "nvim-treesitter/nvim-treesitter-textobjects",
     event = "VeryLazy",

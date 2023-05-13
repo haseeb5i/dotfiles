@@ -12,11 +12,15 @@ local mode = {
   fmt = function(str)
     return "-- " .. str .. " --"
   end,
+  color = { gui = "bold" },
 }
 
 local branch = {
   "b:gitsigns_head",
   icon = "",
+  on_click = function() -- recieves _clicks, _button, _modifier
+    require("telescope.builtin").git_branches()
+  end,
 }
 
 local diagnostics = {
@@ -154,7 +158,7 @@ return {
       winbar = {
         -- lualine_c = { symbols },
       },
-      extensions = { "neo-tree", "toggleterm" },
+      extensions = { "neo-tree", "lazy", "toggleterm" },
     },
   },
 }
