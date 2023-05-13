@@ -8,8 +8,14 @@ export XDG_STATE_HOME="$HOME/.local/state"
 
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
+# misc
+# export GNUPGHOME=
+# export GTK_RC_FILES=
+# export GTK2_RC_FILES=
+# export IPFS_PATH=
+# export WGETRC=
+
 # Ensure that a non-login, non-interactive shell has a defined environment.
 if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "$ZDOTDIR/.zprofile" ]]; then
   source "$ZDOTDIR/.zprofile"
 fi
-. "/home/raven/.local/cargo/env"
