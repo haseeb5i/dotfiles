@@ -10,7 +10,6 @@ return {
       incremental_selection = { enable = true },
       ensure_installed = {
         "css",
-        "help",
         "html",
         "javascript",
         "json",

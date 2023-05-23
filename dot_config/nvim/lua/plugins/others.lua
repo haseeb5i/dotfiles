@@ -1,7 +1,8 @@
 return {
   { "nvim-lua/plenary.nvim" },
-  { "tpope/vim-sleuth", event = "BufReadPre" },
-  { "famiu/bufdelete.nvim", cmd = { "Bdelete", "Bwipeout" } },
+  { "tpope/vim-sleuth",         event = "BufReadPre" },
+  { "moll/vim-bbye",     cmd = { "Bdelete", "Bwipeout" } },
+  { "ThePrimeagen/vim-be-good", cmd = "VimBeGood" },
   {
     "nvim-tree/nvim-web-devicons",
     opts = { override = require("user.icons").devicons },
