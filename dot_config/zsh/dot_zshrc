@@ -14,6 +14,5 @@ bindkey '^l' autosuggest-accept  # Ctrl-l to accept auto-suggestion
 [ -x "$(command -v starship)" ] && eval "$(starship init zsh)"
 
 # Development
-[ -x "$(command -v pyenv)" ] && eval "$(pyenv init -)"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-
+[ -x "$(command -v pyenv)" ] && eval "$(pyenv init -)"

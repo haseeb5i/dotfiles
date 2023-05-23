@@ -1,23 +1,15 @@
-# Ideofuzion account
 Host github.com
     User git
     HostName github.com
-    IdentityFile ~/.ssh/ideofuzion
+    IdentityFile ~/.ssh/personal
 
-Host bitbucket.org
-    User git
-    HostName bitbucket.org
-    IdentityFile ~/.ssh/ideofuzion
-
-# Marhaba
 Host github.com-marhaba
     User git
     HostName github.com
     IdentityFile ~/.ssh/marhaba
 
-# Personal account
-Host github.com-haseeb
+Host bitbucket.org
     User git
-    HostName github.com
+    HostName bitbucket.org
     IdentityFile ~/.ssh/personal
 
