@@ -4,7 +4,7 @@
 
 [core]
     ; editor = nvr --remote-wait-silent
-    editor = nvim
+    editor = nano 
     pager = delta
 
 [init]
@@ -25,3 +25,7 @@
 
 [diff]
     colorMoved = default
+
+[credential]
+    helper = cache --timeout=14400
+

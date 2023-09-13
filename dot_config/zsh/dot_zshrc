@@ -16,3 +16,11 @@ bindkey '^l' autosuggest-accept  # Ctrl-l to accept auto-suggestion
 # Development
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -x "$(command -v pyenv)" ] && eval "$(pyenv init -)"
+
+# pnpm
+export PNPM_HOME="/home/raven/.local/bin"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
