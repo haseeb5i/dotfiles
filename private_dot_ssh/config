@@ -3,11 +3,6 @@ Host github.com
     HostName github.com
     IdentityFile ~/.ssh/personal
 
-Host github.com-marhaba
-    User git
-    HostName github.com
-    IdentityFile ~/.ssh/marhaba
-
 Host bitbucket.org
     User git
     HostName bitbucket.org

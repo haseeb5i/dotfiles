@@ -21,8 +21,11 @@ return {
       icon = { folder_empty = "" },
       git_status = {
         symbols = {
-          added = "",
-          modified = "",
+          added = "+",
+          deleted   = "✘",
+          modified = "!",
+          renamed   = "»",
+          untracked = "?",
           ignored = "",
         },
       },

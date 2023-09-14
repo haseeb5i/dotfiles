@@ -14,11 +14,10 @@ symbol = " "
 symbol = " "
 
 [directory]
-read_only = " "
+read_only = " 󰌾"
 
 [docker_context]
 symbol = " "
-disabled = true
 
 [elixir]
 symbol = " "
@@ -26,17 +25,29 @@ symbol = " "
 [elm]
 symbol = " "
 
+[fossil_branch]
+symbol = " "
+
 [git_branch]
 symbol = " "
 
 [golang]
 symbol = " "
 
+[guix_shell]
+symbol = " "
+
 [haskell]
 symbol = " "
 
+[haxe]
+symbol = " "
+
 [hg_branch]
 symbol = " "
+
+[hostname]
+ssh_symbol = " "
 
 [java]
 symbol = " "
@@ -48,25 +59,47 @@ symbol = " "
 symbol = " "
 
 [memory_usage]
-symbol = " "
+symbol = "󰍛 "
+
+[meson]
+symbol = "󰔷 "
 
 [nim]
-symbol = " "
+symbol = "󰆥 "
 
 [nix_shell]
-symbol = " "
+symbol = " "
 
 [nodejs]
 symbol = " "
 
+[os.symbols]
+Debian = " "
+Fedora = " "
+Gentoo = " "
+Linux = " "
+Macos = " "
+Manjaro = " "
+Ubuntu = " "
+Windows = "󰍲 "
+
 [package]
-symbol = " "
+symbol = "󰏗 "
+
+[pijul_channel]
+symbol = " "
 
 [python]
 symbol = " "
 
-[spack]
-symbol = "🅢 "
+[rlang]
+symbol = "󰟔 "
+
+[ruby]
+symbol = " "
 
 [rust]
 symbol = " "
+
+[scala]
+symbol = " "
