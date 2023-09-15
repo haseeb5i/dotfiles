@@ -4,7 +4,7 @@
 
 [core]
     ; editor = nvr --remote-wait-silent
-    editor = nano 
+    editor = vi 
     pager = delta
 
 [init]
