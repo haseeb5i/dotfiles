@@ -1,91 +1,74 @@
 return {
   {
-    "numToStr/Comment.nvim",
-    dependencies = {
-      "JoosepAlviste/nvim-ts-context-commentstring",
-    },
-    opts = function()
-      local integration = require "ts_context_commentstring.integrations.comment_nvim"
-
-      return {
-        ignore = "^$",
-        toggler = {
-          line = "gcc",
-          block = "gbc",
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v3.x",
+    cmd = "Neotree",
+    dependencies = { "MunifTanjim/nui.nvim" },
+    deactivate = function()
+      vim.cmd "Neotree close"
+    end,
+    opts = {
+      close_if_last_window = true,
+      hide_root_node = false,
+      source_selector = {
+        winbar = true,
+      },
+      default_component_configs = {
+        indent = {
+          indent_size = 1,
+          padding = 0,
         },
-        pre_hook = integration.create_pre_hook(),
-      }
-    end,
+        icon = {
+          folder_empty = "",
+        },
+        git_status = {
+          symbols = {
+            modified = "󱈸",
+            deleted = "✘",
+            renamed = "»",
+            unstaged = "󰄱",
+            ignored = "",
+          },
+        },
+      },
+      filesystem = {
+        filtered_items = {
+          visible = true,
+          never_show = { ".git" }
+        },
+        group_empty_dirs = true,
+        follow_current_file = {
+          enabled = true,
+        },
+        use_libuv_file_watcher = true,
+      },
+      window = {
+        width = 30,
+        mappings = {
+          ["o"] = "open",
+          ["l"] = "open",
+          ["h"] = "close_node",
+        },
+      },
+    },
+  },
+  {
+    "echasnovski/mini.bufremove",
+    -- stylua: ignore
     keys = {
-      "gc",
-      "gb",
-      {
-        vim.g.neovide and "<C-/>" or "<C-_>",
-        function()
-          return vim.v.count == 0 and "<Plug>(comment_toggle_linewise_current)"
-            or "<Plug>(comment_toggle_linewise_count)"
-        end,
-        expr = true,
-      },
-      {
-        vim.g.neovide and "<C-/>" or "<C-_>",
-        "<Plug>(comment_toggle_linewise_visual)",
-        mode = "v",
-      },
-    },
-  },
-  {
-    "windwp/nvim-autopairs",
-    event = "InsertEnter",
-    opts = {
-      check_ts = true,
-      ts_config = {
-        lua = { "string" },
-      },
-      fast_wrap = {
-        map = "<M-e>",
-        highlight = "PmenuSel",
-      },
-    },
-    config = function(_, opts)
-      require("nvim-autopairs").setup(opts)
-
-      local ts_utils = require "nvim-treesitter.ts_utils"
-      local cmp_autopairs = require "nvim-autopairs.completion.cmp"
-
-      require("cmp").event:on("confirm_done", function(evt)
-        local tsnode = ts_utils.get_node_at_cursor()
-        if not tsnode or tsnode:type() ~= "named_imports" then
-          cmp_autopairs.on_confirm_done()(evt)
-        end
-      end)
-    end,
-  },
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    event = "BufReadPost",
-    opts = {
-      buftype_exclude = { "terminal", "nofile" },
-      char = "│",
-      filetype_exclude = {
-        "alpha",
-        "checkhealth",
-        "help",
-        "lspinfo",
-        "lazy",
-        "man",
-        "neo-tree",
-      },
-      show_current_context = true,
-      show_first_indent_level = false,
-      use_treesitter = true,
+      { "<leader>bd", function() require("mini.bufremove").delete(0, false) end, desc = "Delete Buffer" },
+      { "<leader>bD", function() require("mini.bufremove").delete(0, true) end,  desc = "Delete Buffer (Force)" },
     },
   },
   {
     "RRethy/vim-illuminate",
-    event = "BufReadPost",
+    event = { "BufReadPost", "BufNewFile" },
     opts = {
       delay = 200,
+      large_file_cutoff = 2000,
+      large_file_overrides = {
+        providers = { "lsp" },
+      },
       filetypes_denylist = {
         "alpha",
         "neo-tree",
@@ -162,5 +145,33 @@ return {
         w = { name = "Workspace" },
       }, { prefix = "<leader>" })
     end,
+  },
+  {
+    "folke/todo-comments.nvim",
+    cmd = { "TodoTrouble", "TodoTelescope" },
+    event = { "BufReadPost", "BufNewFile" },
+    config = true,
+    -- stylua: ignore
+    keys = {
+      { "]t", function() require("todo-comments").jump_next() end, desc = "Next todo comment" },
+      { "[t", function() require("todo-comments").jump_prev() end, desc = "Previous todo comment" },
+      { "<leader>xt", "<cmd>TodoTrouble<cr>", desc = "Todo (Trouble)" },
+      { "<leader>xT", "<cmd>TodoTrouble keywords=TODO,FIX,FIXME<cr>", desc = "Todo/Fix/Fixme (Trouble)" },
+      { "<leader>st", "<cmd>TodoTelescope<cr>", desc = "Todo" },
+      { "<leader>sT", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>", desc = "Todo/Fix/Fixme" },
+    },
+  },
+  {
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    opts = {},
+    -- stylua: ignore
+    keys = {
+      { "s", mode = { "n", "o", "x" }, function() require("flash").jump() end, desc = "Flash" },
+      { "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+      { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+      { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+      { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+    },
   },
 }

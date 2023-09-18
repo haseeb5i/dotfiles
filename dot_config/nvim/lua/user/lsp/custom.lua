@@ -5,6 +5,7 @@ local format_blacklist = {
   graphql = true,
   pyright = true,
   tsserver = true,
+  lua_ls = true,
 }
 
 M.on_attach = function(client, bufnr)
@@ -45,6 +46,7 @@ M.on_attach = function(client, bufnr)
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false
   end
+  require("nvim-navic").attach(client, bufnr)
 end
 
 M.capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -53,6 +55,12 @@ M.capabilities.textDocument.foldingRange = {
   dynamicRegistration = false,
   lineFoldingOnly = true,
 }
+
+-- can setup globally
+-- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+--   border = "rounded",
+--   relative = "cursor",
+-- })
 
 M.handlers = {
   ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {

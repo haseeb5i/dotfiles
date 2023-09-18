@@ -3,15 +3,19 @@ return {
     "nvim-treesitter/nvim-treesitter",
     version = false, -- using latest version
     build = ":TSUpdate",
-    event = "BufRead", -- not triggered on empty buffer
+    -- event = "BufRead", -- not triggered on empty buffer
+    event = { "BufReadPost", "BufNewFile" },
+    cmd = "TSUpdateSync",
     opts = {
       highlight = { enable = true },
       indent = { enable = true },
       incremental_selection = { enable = true },
       ensure_installed = {
+        "bash",
         "css",
         "html",
         "javascript",
+        "jsdoc",
         "json",
         "python",
         "scala",
@@ -37,7 +41,6 @@ return {
             ["ic"] = "@class.inner",
           },
         },
-        swap = { enable = false },
         lsp_interop = {
           enable = true,
           border = "rounded",
@@ -59,8 +62,8 @@ return {
     end,
   },
   { "windwp/nvim-ts-autotag", event = "InsertEnter" },
-  -- NOTE: this loads ts if not loaded on 'BufRead' event
   {
+    -- NOTE: this loads ts if not loaded on 'BufRead' event
     "nvim-treesitter/nvim-treesitter-textobjects",
     event = "VeryLazy",
   },

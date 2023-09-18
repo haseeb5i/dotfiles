@@ -1,6 +1,6 @@
 local M = {}
 
-M.sumneko_lua = {
+M.lua_ls = {
   settings = {
     Lua = {
       completion = {
@@ -31,6 +31,18 @@ M.pyright = {
         typeCheckingMode = "basic",
         useLibraryCodeForTypes = true,
       },
+    },
+  },
+}
+
+M.tsserver = {
+  keys = {
+    { "<leader>co", "<cmd>TypescriptOrganizeImports<CR>", desc = "Organize Imports" },
+    { "<leader>cR", "<cmd>TypescriptRenameFile<CR>",      desc = "Rename File" },
+  },
+  settings = {
+    completions = {
+      completeFunctionCalls = true,
     },
   },
 }

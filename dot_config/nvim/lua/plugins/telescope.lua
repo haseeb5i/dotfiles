@@ -1,8 +1,9 @@
+-- move to editor group
 return {
   "nvim-telescope/telescope.nvim",
-  -- tag = "0.1.1",
+  commit = vim.fn.has("nvim-0.9.0") == 0 and "057ee0f8783" or nil,
   version = false, -- using latest version
-  cmd = { "Telescope" },
+  cmd = "Telescope",
   dependencies = {
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
   },
@@ -12,7 +13,7 @@ return {
     return {
       defaults = {
         prompt_prefix = " ",
-        selection_caret = " ",
+        selection_caret = " ",
         path_display = { "absolute" },
         mappings = {
           i = {

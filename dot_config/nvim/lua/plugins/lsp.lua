@@ -1,7 +1,7 @@
 local M = {
   {
     "neovim/nvim-lspconfig",
-    event = "BufReadPre",
+    event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "b0o/SchemaStore.nvim",
       "jose-elias-alvarez/typescript.nvim",
@@ -12,6 +12,7 @@ local M = {
         },
       },
     },
+    opts = {},
     config = function()
       require("user.lsp.diagnostics").setup()
 
@@ -58,6 +59,37 @@ local M = {
         },
       }
     end,
+  },
+  {
+    "williamboman/mason.nvim",
+    cmd = "Mason",
+    build = ":MasonUpdate",
+    opts = {
+      ui = {
+        border = "rounded",
+        icons = {
+          package_installed = "✓",
+          package_uninstalled = "✗",
+          package_pending = "⟳",
+        },
+      },
+    },
+    keys = {
+      { "<leader>m", "<cmd> Mason <cr>", desc = "Mason Info" },
+    },
+  },
+  -- called inside lsp, which loads this and this loads mason
+  {
+    "williamboman/mason-lspconfig.nvim",
+    cmd = { "LspInstall", "LspUninstall" },
+    opts = {
+      ensure_installed = {
+        "jsonls",
+        "lua_ls",
+        "tsserver",
+      },
+      automatic_installation = false,
+    },
   },
   -- {
   --   "scalameta/nvim-metals",

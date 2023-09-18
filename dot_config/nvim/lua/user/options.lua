@@ -43,7 +43,6 @@ for k, v in pairs(options) do
   vim.opt[k] = v
 end
 
-vim.opt.completeopt = "menu,menuone,noselect"
 vim.opt.shortmess:append "sI"
 vim.opt.whichwrap:append "<,>,[,]"
 

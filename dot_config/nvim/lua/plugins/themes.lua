@@ -1,6 +1,7 @@
 vim.cmd "set background=dark"
 
 return {
+  { "ellisonleao/gruvbox.nvim" },
   {
     "folke/tokyonight.nvim",
     lazy = false,

@@ -1,12 +1,23 @@
 return {
   { "nvim-lua/plenary.nvim" },
-  { "tpope/vim-sleuth",         event = "BufReadPre" },
-  { "moll/vim-bbye",     cmd = { "Bdelete", "Bwipeout" } },
+  { "tpope/vim-sleuth",     event = "BufReadPre" },
+  -- { "moll/vim-bbye",        cmd = { "Bdelete", "Bwipeout" } },
   { "ThePrimeagen/vim-be-good", cmd = "VimBeGood" },
   {
     "nvim-tree/nvim-web-devicons",
     opts = { override = require("user.icons").devicons },
   },
+-- {
+--   "folke/persistence.nvim",
+--   event = "BufReadPre",
+--   opts = { options = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp" } },
+--   -- stylua: ignore
+--   keys = {
+--     { "<leader>qs", function() require("persistence").load() end, desc = "Restore Session" },
+--     { "<leader>ql", function() require("persistence").load({ last = true }) end, desc = "Restore Last Session" },
+--     { "<leader>qd", function() require("persistence").stop() end, desc = "Don't Save Current Session" },
+--   },
+-- },
   {
     "Shatur/neovim-session-manager",
     event = "BufWritePost",
