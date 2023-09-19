@@ -38,6 +38,12 @@ M.lspkind = {
   Variable = " ",
 }
 
+M.git = {
+  added = " ",
+  modified = " ",
+  removed = " ",
+}
+
 M.diagnostics = {
   Error = " ",
   Warn = " ",
@@ -45,33 +51,23 @@ M.diagnostics = {
   Hint = " ",
 }
 
-M.statusline_separators = {
-  default = {
-    left = "",
-    right = " ",
-  },
-
-  round = {
-    left = "",
-    right = "",
-  },
-
-  block = {
-    left = "█",
-    right = "█",
-  },
-
-  arrow = {
-    left = "",
-    right = "",
-  },
-}
+M.dap =     {
+      Stopped = { "󰁕 ", "DiagnosticWarn", "DapStoppedLine" },
+      Breakpoint = " ",
+      BreakpointCondition = " ",
+      BreakpointRejected = { " ", "DiagnosticError" },
+      LogPoint = ".>",
+    }
 
 -- eslint icon from nerd font
 M.devicons = {
   c = {
     icon = "",
     name = "c",
+  },
+  eslint = {
+    icon = "󰱺",
+    name = "eslint"
   },
   mp4 = {
     icon = "",

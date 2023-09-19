@@ -247,4 +247,11 @@ return {
       return vim.list_extend(mappings, keys)
     end,
   },
+  {
+    "danymat/neogen",
+    enabled = false,
+    opts = { snippet_engine = "luasnip" },
+  },
+  -- {'simrat39/symbols-outline.nvim', config = true}
+  -- { "michaelb/sniprun", build = "bash ./install.sh" },
 }

@@ -15,8 +15,8 @@ return {
       },
       default_component_configs = {
         indent = {
-          indent_size = 1,
-          padding = 0,
+          indent_size = 2,
+          with_expanders = false,
         },
         icon = {
           folder_empty = "",
@@ -26,7 +26,6 @@ return {
             modified = "󱈸",
             deleted = "✘",
             renamed = "»",
-            unstaged = "󰄱",
             ignored = "",
           },
         },
@@ -34,7 +33,8 @@ return {
       filesystem = {
         filtered_items = {
           visible = true,
-          never_show = { ".git" }
+          hide_dotfiles = false,
+          never_show = { ".git" },
         },
         group_empty_dirs = true,
         follow_current_file = {
@@ -43,7 +43,7 @@ return {
         use_libuv_file_watcher = true,
       },
       window = {
-        width = 30,
+        width = 34,
         mappings = {
           ["o"] = "open",
           ["l"] = "open",
@@ -165,6 +165,7 @@ return {
     "folke/flash.nvim",
     event = "VeryLazy",
     opts = {},
+    enabled = false,
     -- stylua: ignore
     keys = {
       { "s", mode = { "n", "o", "x" }, function() require("flash").jump() end, desc = "Flash" },
@@ -174,4 +175,44 @@ return {
       { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
     },
   },
+  {
+    "Shatur/neovim-session-manager",
+    event = "BufWritePost",
+    cmd = "SessionManager",
+    opts = function()
+      local session_conf = require "session_manager.config"
+      return {
+        autoload_mode = session_conf.AutoloadMode.Disabled,
+        autosave_last_session = true,
+        autosave_ignore_dirs = {
+          vim.env.HOME,
+        },
+        autosave_ignore_filetypes = {
+          "alpha",
+          "neo-tree",
+          "gitcommit",
+        },
+      }
+    end,
+  },
 }
+-- {
+--   "folke/persistence.nvim",
+--   event = "BufReadPre",
+--   opts = { options = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp" } },
+--   -- stylua: ignore
+--   keys = {
+--     { "<leader>qs", function() require("persistence").load() end, desc = "Restore Session" },
+--     { "<leader>ql", function() require("persistence").load({ last = true }) end, desc = "Restore Last Session" },
+--     { "<leader>qd", function() require("persistence").stop() end, desc = "Don't Save Current Session" },
+--   },
+-- },
+-- { "sindrets/winshift.nvim", enabled = false },
+-- { "s1n7ax/nvim-window-picker", opts = { use_winbar = "smart" } },
+-- {
+--   "mrjones2014/smart-splits.nvim",
+--   opts = {
+--     ignored_filetypes = { "nofile", "quickfix", "qf", "prompt" },
+--     ignored_buftypes = { "nofile" },
+--   },
+-- },

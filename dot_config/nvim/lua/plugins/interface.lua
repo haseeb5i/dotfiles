@@ -1,9 +1,13 @@
 return {
   {
+    "nvim-tree/nvim-web-devicons",
+    opts = { override = require("user.icons").devicons },
+  },
+  {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
     opts = function()
-      -- local icons = require "user.icons"
+      local icons = require "user.icons"
 
       local conditions = {
         buffer_not_empty = function()
@@ -18,7 +22,7 @@ return {
         options = {
           theme = "auto",
           globalstatus = true,
-          -- component_separators = { left = "", right = "" },
+          component_separators = { left = "", right = "" },
           section_separators = { left = "", right = "" },
           disabled_filetypes = {
             statusline = { "alpha" },
@@ -27,32 +31,38 @@ return {
         extensions = { "neo-tree", "lazy", "toggleterm" },
         sections = {
           lualine_a = { "mode" },
+          -- TODO: truncate long branch name
           lualine_b = { "branch" },
           lualine_c = {
             {
               "diagnostics",
               sections = { "error", "warn" },
-              symbols = { error = " ", warn = " " },
+              symbols = { error = icons.diagnostics.Error, warn = icons.diagnostics.Warn },
             },
             {
               "diff",
-              symbols = { added = "  ", modified = " ", removed = " " },
+              symbols = {
+                added = icons.git.added,
+                modified = icons.git.modified,
+                removed = icons.git.removed,
+              },
               cond = conditions.buffer_not_empty,
             },
           },
           lualine_x = {
+            { "filetype", icon_only = true, padding = { left = 1, right = 0 }, },
+            { "filename", path = 1, symbols = { modified = "  ", readonly = "", unnamed = "" }, },
             {
-            -- stylua: ignore
+              -- stylua: ignore
+              function() return "spaces: " .. vim.bo.shiftwidth end,
+              cond = conditions.hide_in_width,
+            },
+            {
               function() return "  " .. require("dap").status() end,
               cond = function()
                 return package.loaded["dap"] and require("dap").status() ~= ""
               end,
               -- color = Util.fg "Debug",
-            },
-            {
-              -- stylua: ignore
-              function() return "spaces: " .. vim.bo.shiftwidth end,
-              cond = conditions.hide_in_width,
             },
             {
               require("lazy.status").updates,
@@ -92,6 +102,7 @@ return {
             },
           },
           lualine_z = {
+            { "location", padding = 0 },
             {
               function()
                 local chars = {
@@ -112,7 +123,6 @@ return {
                 return chars[index]
               end,
             },
-            { "location", padding = 0 },
           },
         },
       }
