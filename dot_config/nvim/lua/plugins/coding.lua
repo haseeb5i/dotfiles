@@ -39,9 +39,8 @@ return {
           end,
         },
         mapping = cmp.mapping.preset.insert {
-          -- or C-p, C-n
-          ["<C-k>"] = cmp.mapping.select_prev_item(),
-          ["<C-j>"] = cmp.mapping.select_next_item(),
+          ["<C-k>"] = cmp.mapping.select_prev_item(), -- C-p
+          ["<C-j>"] = cmp.mapping.select_next_item(), -- C-n
           ["<C-f>"] = cmp.mapping.scroll_docs(4),
           ["<C-b>"] = cmp.mapping.scroll_docs(-4),
           ["<C-Space>"] = cmp.mapping.complete(),
@@ -53,10 +52,7 @@ return {
           ["<CR>"] = cmp.mapping.confirm { select = true },
           ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
-              -- vs-code like behavior cmp.confirm({ select = true })
-              cmp.select_next_item()
-              -- elseif luasnip.expand_or_jumpable() then
-              --   luasnip.expand_or_jump()
+              cmp.confirm { select = true }
             elseif luasnip.jumpable(1) then
               luasnip.jump(1)
             else
@@ -98,7 +94,6 @@ return {
           { name = "path" },
         }),
         window = {
-          -- completion = cmp.config.window.bordered(),
           completion = {
             border = "single",
           },
@@ -135,17 +130,19 @@ return {
       end)
     end,
   },
-  -- https://github.com/zbirenbaum/copilot.lua
   {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
+    event = "InsertEnter",
     opts = {
       suggestion = {
         auto_trigger = true,
+        keymaps = {
+          accept_word = false,
+        },
       },
       panel = { enabled = false },
       filetypes = {
-        help = false,
         markdown = false,
       },
     },
@@ -161,10 +158,6 @@ return {
 
       return {
         ignore = "^$",
-        toggler = {
-          line = "gcc",
-          block = "gbc",
-        },
         pre_hook = integration.create_pre_hook(),
       }
     end,
@@ -213,39 +206,18 @@ return {
   },
   {
     "echasnovski/mini.surround",
+    event = "VeryLazy",
     opts = {
       mappings = {
-        add = "gza", -- Add surrounding in Normal and Visual modes
-        delete = "gzd", -- Delete surrounding
-        find = "gzf", -- Find surrounding (to the right)
-        find_left = "gzF", -- Find surrounding (to the left)
-        highlight = "gzh", -- Highlight surrounding
-        replace = "gzr", -- Replace surrounding
-        update_n_lines = "gzn", -- Update `n_lines`
+        add = "gza",
+        delete = "gzd",
+        find = "gzf",
+        find_left = "gzF",
+        highlight = "gzh",
+        replace = "gzr",
+        update_n_lines = "gzn",
       },
     },
-    keys = function(_, keys)
-      -- Populate the keys based on the user's options
-      local plugin = require("lazy.core.config").spec.plugins["mini.surround"]
-      local opts = require("lazy.core.plugin").values(plugin, "opts", false)
-      local mappings = {
-        {
-          opts.mappings.add,
-          desc = "Add surrounding",
-          mode = { "n", "v" },
-        },
-        { opts.mappings.delete, desc = "Delete surrounding" },
-        { opts.mappings.find, desc = "Find right surrounding" },
-        { opts.mappings.find_left, desc = "Find left surrounding" },
-        { opts.mappings.highlight, desc = "Highlight surrounding" },
-        { opts.mappings.replace, desc = "Replace surrounding" },
-        { opts.mappings.update_n_lines, desc = "Update `MiniSurround.config.n_lines`" },
-      }
-      mappings = vim.tbl_filter(function(m)
-        return m[1] and #m[1] > 0
-      end, mappings)
-      return vim.list_extend(mappings, keys)
-    end,
   },
   {
     "danymat/neogen",
@@ -253,5 +225,4 @@ return {
     opts = { snippet_engine = "luasnip" },
   },
   -- {'simrat39/symbols-outline.nvim', config = true}
-  -- { "michaelb/sniprun", build = "bash ./install.sh" },
 }

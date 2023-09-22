@@ -1,12 +1,12 @@
 return {
+  { "echasnovski/mini.bufremove" },
+  { "tpope/vim-sleuth", event = "BufReadPre" },
+  { "ThePrimeagen/vim-be-good", cmd = "VimBeGood" },
   {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v3.x",
     cmd = "Neotree",
     dependencies = { "MunifTanjim/nui.nvim" },
-    deactivate = function()
-      vim.cmd "Neotree close"
-    end,
     opts = {
       close_if_last_window = true,
       hide_root_node = false,
@@ -53,14 +53,6 @@ return {
     },
   },
   {
-    "echasnovski/mini.bufremove",
-    -- stylua: ignore
-    keys = {
-      { "<leader>bd", function() require("mini.bufremove").delete(0, false) end, desc = "Delete Buffer" },
-      { "<leader>bD", function() require("mini.bufremove").delete(0, true) end,  desc = "Delete Buffer (Force)" },
-    },
-  },
-  {
     "RRethy/vim-illuminate",
     event = { "BufReadPost", "BufNewFile" },
     opts = {
@@ -104,13 +96,13 @@ return {
   },
   {
     "NvChad/nvim-colorizer.lua",
-    -- event = "VeryLazy",
+    event = "VeryLazy",
     opts = {
-      -- filetypes = { "*", "!lazy" },
-      -- buftype = { "*", "!prompt", "!nofile" },
+      filetypes = { "*", "!lazy" },
+      buftype = { "*", "!prompt", "!nofile" },
       user_default_options = {
         rgb_fn = true,
-        mode = "virtualtext", -- "background"
+        mode = "virtualtext",
         virtualtext = "■",
       },
     },
@@ -150,43 +142,24 @@ return {
     "folke/todo-comments.nvim",
     cmd = { "TodoTrouble", "TodoTelescope" },
     event = { "BufReadPost", "BufNewFile" },
-    config = true,
-    -- stylua: ignore
-    keys = {
-      { "]t", function() require("todo-comments").jump_next() end, desc = "Next todo comment" },
-      { "[t", function() require("todo-comments").jump_prev() end, desc = "Previous todo comment" },
-      { "<leader>xt", "<cmd>TodoTrouble<cr>", desc = "Todo (Trouble)" },
-      { "<leader>xT", "<cmd>TodoTrouble keywords=TODO,FIX,FIXME<cr>", desc = "Todo/Fix/Fixme (Trouble)" },
-      { "<leader>st", "<cmd>TodoTelescope<cr>", desc = "Todo" },
-      { "<leader>sT", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>", desc = "Todo/Fix/Fixme" },
-    },
+    opts = {},
   },
   {
     "folke/flash.nvim",
     event = "VeryLazy",
-    opts = {},
     enabled = false,
-    -- stylua: ignore
-    keys = {
-      { "s", mode = { "n", "o", "x" }, function() require("flash").jump() end, desc = "Flash" },
-      { "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
-      { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
-      { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-      { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
-    },
+    opts = {},
   },
   {
     "Shatur/neovim-session-manager",
-    event = "BufWritePost",
+    event = "BufReadPre",
     cmd = "SessionManager",
     opts = function()
       local session_conf = require "session_manager.config"
       return {
         autoload_mode = session_conf.AutoloadMode.Disabled,
         autosave_last_session = true,
-        autosave_ignore_dirs = {
-          vim.env.HOME,
-        },
+        autosave_ignore_dirs = { vim.env.HOME },
         autosave_ignore_filetypes = {
           "alpha",
           "neo-tree",
@@ -195,24 +168,13 @@ return {
       }
     end,
   },
+  -- { "sindrets/winshift.nvim", enabled = false },
+  -- { "s1n7ax/nvim-window-picker", opts = { use_winbar = "smart" } },
+  -- {
+  --   "mrjones2014/smart-splits.nvim",
+  --   opts = {
+  --     ignored_filetypes = { "nofile", "quickfix", "qf", "prompt" },
+  --     ignored_buftypes = { "nofile" },
+  --   },
+  -- },
 }
--- {
---   "folke/persistence.nvim",
---   event = "BufReadPre",
---   opts = { options = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp" } },
---   -- stylua: ignore
---   keys = {
---     { "<leader>qs", function() require("persistence").load() end, desc = "Restore Session" },
---     { "<leader>ql", function() require("persistence").load({ last = true }) end, desc = "Restore Last Session" },
---     { "<leader>qd", function() require("persistence").stop() end, desc = "Don't Save Current Session" },
---   },
--- },
--- { "sindrets/winshift.nvim", enabled = false },
--- { "s1n7ax/nvim-window-picker", opts = { use_winbar = "smart" } },
--- {
---   "mrjones2014/smart-splits.nvim",
---   opts = {
---     ignored_filetypes = { "nofile", "quickfix", "qf", "prompt" },
---     ignored_buftypes = { "nofile" },
---   },
--- },

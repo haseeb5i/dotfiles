@@ -10,6 +10,26 @@ map {
   { "jk", "<Esc>", mode = "i" },
 }
 
+-- TODO: merge these with lsp keymaps
+-- stylua: ignore
+map {
+  { "gl", vim.diagnostic.open_float, desc = "View Diagnostic" },
+  { "]d", vim.diagnostic.goto_next, desc = "Goto Next Diagnostic" },
+  { "[d", vim.diagnostic.goto_prev, desc = "Goto Prev Diagnostic" },
+  {
+    "]e",
+    function() vim.diagnostic.goto_next { severity = vim.diagnostic.severity.ERROR } end,
+    desc = "Goto Next Error",
+  },
+  {
+    "[e",
+    function() vim.diagnostic.goto_prev { severity = vim.diagnostic.severity.ERROR } end,
+    desc = "Goto Prev Error",
+  },
+  { "<leader>ld", vim.diagnostic.setloclist, desc = "Document Diagnostics" },
+  { "<leader>wd", vim.diagnostic.setqflist, desc = "Workspace Diagnostics" },
+}
+
 -- switch between buffers
 map {
   -- {"<S-l>", "<cmd> bnext <cr>", desc = "Next Buffer"},
@@ -88,7 +108,13 @@ map {
 
   { "<leader>a", "<cmd> Alpha <cr>", desc = "Alpha" },
   { "<leader>q", "<cmd> q <cr>", desc = "Quit Window" },
-  { "<leader>x", "<cmd> Bdelete <cr>", desc = "Close Buffer" },
+  {
+    "<leader>x",
+    function()
+      require("mini.bufremove").delete(0, false)
+    end,
+    desc = "Close Buffer",
+  },
   { "<leader>e", "<cmd>Neotree toggle<cr>", desc = "Toggle NeoTree" },
   { "<leader>E", "<cmd>Neotree focus<cr>", desc = "Focus NeoTree" },
   { "<leader>r", "<cmd>SessionManager load_session<cr>", desc = "Load Session" },
@@ -202,6 +228,33 @@ map {
     desc = "File Annotation",
   },
 }
+
+-- stylua: ignore
+map{
+  -- stylua: ignore
+  { "]t", function() require("todo-comments").jump_next() end, desc = "Next todo comment" },
+  { "[t", function() require("todo-comments").jump_prev() end, desc = "Previous todo comment" },
+  { "<leader>xt", "<cmd>TodoTrouble<cr>", desc = "Todo (Trouble)" },
+  { "<leader>xT", "<cmd>TodoTrouble keywords=TODO,FIX,FIXME<cr>", desc = "Todo/Fix/Fixme (Trouble)" },
+  { "<leader>st", "<cmd>TodoTelescope<cr>", desc = "Todo" },
+  { "<leader>sT", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>", desc = "Todo/Fix/Fixme" },
+}
+
+-- stylua: ignore
+map {
+  { "<leader>qs", function() require("persistence").load() end, desc = "Restore Session" },
+  { "<leader>ql", function() require("persistence").load({ last = true }) end, desc = "Restore Last Session" },
+  { "<leader>qd", function() require("persistence").stop() end, desc = "Don't Save Current Session" },
+}
+
+-- map {
+
+-- { "s", mode = { "n", "o", "x" }, function() require("flash").jump() end, desc = "Flash" },
+-- { "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+-- { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+-- { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+-- { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+-- }
 --  { "<leader>,", "<cmd>Telescope buffers show_all_buffers=true<cr>", desc = "Switch Buffer" },
 --     { "<leader>/", Util.telescope("live_grep"), desc = "Grep (root dir)" },
 --     { "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },

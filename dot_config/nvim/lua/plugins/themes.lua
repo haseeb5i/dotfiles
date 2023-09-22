@@ -7,7 +7,7 @@ return {
     lazy = false,
     priority = 99,
     opts = {
-      style = "storm",
+      style = "night",
       transparent = false,
     },
     config = function()

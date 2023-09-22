@@ -8,9 +8,9 @@ return {
         change = { text = "▎" },
         delete = { text = "" },
         topdelete = { text = "" },
-        untracked = { text = "▎" },
+        untracked = { text = "┆" },
       },
-      preview_config = { border = "rounded" },
+      preview_config = { border = "single" },
       on_attach = function(buffer)
         local gs = package.loaded.gitsigns
 

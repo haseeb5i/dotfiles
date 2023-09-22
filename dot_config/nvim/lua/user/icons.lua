@@ -51,13 +51,13 @@ M.diagnostics = {
   Hint = " ",
 }
 
-M.dap =     {
-      Stopped = { "󰁕 ", "DiagnosticWarn", "DapStoppedLine" },
-      Breakpoint = " ",
-      BreakpointCondition = " ",
-      BreakpointRejected = { " ", "DiagnosticError" },
-      LogPoint = ".>",
-    }
+M.dap = {
+  Stopped = { "󰁕 ", "DiagnosticWarn", "DapStoppedLine" },
+  Breakpoint = " ",
+  BreakpointCondition = " ",
+  BreakpointRejected = { " ", "DiagnosticError" },
+  LogPoint = ".>",
+}
 
 -- eslint icon from nerd font
 M.devicons = {
@@ -67,7 +67,7 @@ M.devicons = {
   },
   eslint = {
     icon = "󰱺",
-    name = "eslint"
+    name = "eslint",
   },
   mp4 = {
     icon = "",

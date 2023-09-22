@@ -1,4 +1,5 @@
 return {
+  { "nvim-lua/plenary.nvim" },
   {
     "nvim-tree/nvim-web-devicons",
     opts = { override = require("user.icons").devicons },
@@ -50,15 +51,21 @@ return {
             },
           },
           lualine_x = {
-            { "filetype", icon_only = true, padding = { left = 1, right = 0 }, },
-            { "filename", path = 1, symbols = { modified = "  ", readonly = "", unnamed = "" }, },
+            { "filetype", icon_only = true, padding = { left = 1, right = 0 } },
+            {
+              "filename",
+              path = 1,
+              symbols = { modified = "  ", readonly = "", unnamed = "" },
+            },
             {
               -- stylua: ignore
               function() return "spaces: " .. vim.bo.shiftwidth end,
               cond = conditions.hide_in_width,
             },
             {
-              function() return "  " .. require("dap").status() end,
+              function()
+                return "  " .. require("dap").status()
+              end,
               cond = function()
                 return package.loaded["dap"] and require("dap").status() ~= ""
               end,
@@ -91,12 +98,10 @@ return {
               color = { fg = "#ffffff", gui = "bold" },
             },
             {
-              -- stylua: ignore
-              function() return " " end,
-              cond = function()
+              function()
                 local ok, clients =
                   pcall(vim.lsp.get_active_clients, { name = "copilot", bufnr = 0 })
-                return ok and #clients > 0
+                return (ok and #clients > 0) and " " or " "
               end,
               color = { fg = "#ffffff", gui = "bold" },
             },

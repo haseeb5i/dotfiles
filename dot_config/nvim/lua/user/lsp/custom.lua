@@ -33,14 +33,10 @@ M.on_attach = function(client, bufnr)
   map("n", "<leader>ls", "<cmd>Telescope lsp_document_symbol<cr>")
   map("n", "<leader>ws", "<cmd>Telescope lsp_workspace_symbol<cr>")
 
-  -- vim.api.nvim_buf_set_option(buf, "formatexpr", "v:lua.vim.lsp.formatexpr()")
-  -- vim.api.nvim_buf_set_option(buf, "omnifunc", "v:lua.vim.lsp.omnifunc")
-  -- vim.api.nvim_buf_set_option(buf, "tagfunc", "v:lua.vim.lsp.tagfunc")
-  -- add client specific maapings
-  -- if client.name == "tsserver" then
-  --   map("n", "", "<cmd>TypescriptOrganizeImports<cr>", "Organize Imports")
-  --   map("n", "", "<cmd>TypescriptRenameFile<cr>", "Rename File")
-  -- end
+  if client.name == "tsserver" then
+    map("n", "<leader>co", "<cmd>TypescriptOrganizeImports<cr>", "Organize Imports")
+    map("n", "<leader>cR", "<cmd>TypescriptRenameFile<cr>", "Rename File")
+  end
 
   if format_blacklist[client.name] then
     client.server_capabilities.documentFormattingProvider = false

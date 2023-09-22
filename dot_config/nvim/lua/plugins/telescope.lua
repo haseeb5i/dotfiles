@@ -1,7 +1,7 @@
 -- move to editor group
 return {
   "nvim-telescope/telescope.nvim",
-  commit = vim.fn.has("nvim-0.9.0") == 0 and "057ee0f8783" or nil,
+  commit = vim.fn.has "nvim-0.9.0" == 0 and "057ee0f8783" or nil,
   version = false, -- using latest version
   cmd = "Telescope",
   dependencies = {
@@ -38,24 +38,15 @@ return {
       -- :help telescope.builtin
       pickers = {
         find_files = {
-          find_command = {
-            "rg",
-            "--files",
-            "--color",
-            "never",
-            "--glob",
-            "!**/.git/*",
-          },
-          hidden = true, -- injected to the find_command
+          hidden = true,
         },
+        -- grep_string = {},
         -- live_grep = {
         --   glob_pattern = "!**/.git/*",
         --   additional_args = { "--hidden" },
         -- },
-        -- grep_string = {},
       },
       extensions = {
-        -- TODO: check if these are default
         fzf = {
           case_mode = "smart_case",
           fuzzy = true,

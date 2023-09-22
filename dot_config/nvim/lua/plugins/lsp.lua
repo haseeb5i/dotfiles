@@ -11,14 +11,47 @@ local M = {
           library = { plugins = false },
         },
       },
+      "williamboman/mason.nvim",
+      "williamboman/mason-lspconfig.nvim",
     },
-    opts = {},
-    config = function()
-      require("user.lsp.diagnostics").setup()
+    opts = {
+      diagnostics = {
+        severity_sort = true,
+        underline = true,
+        virtual_text = false,
+        float = {
+          show_header = true,
+          source = "always",
+          border = "single",
+          focusable = false,
+        },
+      },
+      inlay_hints = {
+        enabled = false,
+      },
+    },
+    config = function(_, opts)
+      -- diagnostics
+      local signs = require("user.icons").diagnostics
+      for name, icon in pairs(signs) do
+        local hl = "DiagnosticSign" .. name
+        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+      end
+
+      vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
+
+      -- local inlay_hint = vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint
+      -- if inlay_hint then
+      --   Util.on_attach(function(client, buffer)
+      --     if client.supports_method "textDocument/inlayHint" then
+      --       inlay_hint(buffer, true)
+      --     end
+      --   end)
+      -- end
 
       local custom = require "user.lsp.custom"
       local settings = require "user.lsp.settings"
-      local opts = {
+      local server_opts = {
         on_attach = custom.on_attach,
         capabilities = custom.capabilities,
         handlers = custom.handlers,
@@ -26,11 +59,11 @@ local M = {
 
       require("mason-lspconfig").setup_handlers {
         function(server_name)
-          local merged_opts = vim.tbl_extend("force", opts, settings[server_name] or {})
+          local merged_opts = vim.tbl_extend("force", server_opts, settings[server_name] or {})
           require("lspconfig")[server_name].setup(merged_opts)
         end,
         tsserver = function()
-          require("typescript").setup { server = opts }
+          require("typescript").setup { server = server_opts }
         end,
       }
     end,
@@ -78,7 +111,6 @@ local M = {
       { "<leader>m", "<cmd> Mason <cr>", desc = "Mason Info" },
     },
   },
-  -- called inside lsp, which loads this and this loads mason
   {
     "williamboman/mason-lspconfig.nvim",
     cmd = { "LspInstall", "LspUninstall" },
