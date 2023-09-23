@@ -40,10 +40,32 @@ autocmd("TextYankPost", {
 })
 
 -- autocmd("ColorScheme", {
---   desc = "Load custom highlights from user configuration",
+--   desc = "Load custom highlights here",
 --   group = augroup("_highlights"),
 --   callback = function()
---     vim.cmd [[ ]]
+--     vim.cmd [[ 
+  -- hi! Pmenu guibg=none
+
+  -- " hi! IndentBlanklineChar guifg=#404040 
+  -- " hi! IndentBlanklineContextChar guifg=#707070
+
+  -- hi link FidgetTask Comment
+
+  -- hi! CmpItemAbbrMatch guibg=none
+  -- hi! link CmpItemAbbrMatchFuzzy CmpItemAbbrMatch
+  -- hi! CmpItemAbbrDeprecated gui=strikethrough guifg=#808080
+
+  -- hi! CmpItemKindVariable guibg=none guifg=#9CDCFE
+  -- hi! link CmpItemKindInterface CmpItemKindVariable
+  -- hi! link CmpItemKindText CmpItemKindVariable
+
+  -- hi! CmpItemKindFunction guibg=none guifg=#C586C0
+  -- hi! link CmpItemKindMethod CmpItemKindFunction
+
+  -- hi! CmpItemKindKeyword guibg=none guifg=#D4D4D4
+  -- hi! link CmpItemKindProperty CmpItemKindKeyword
+  -- hi! link CmpItemKindUnit CmpItemKindKeyword
+--     ]]
 --   end
 -- })
 

@@ -8,7 +8,8 @@ if [[ -s "$ZDOTDIR/.zprezto/init.zsh" ]]; then
 fi
 
 # Set keymappings
-bindkey '^l' autosuggest-accept  # Ctrl-l to accept auto-suggestion
+bindkey '^[l' autosuggest-accept  # Alt-l to accept auto-suggestion
+# bindkey '^n'   # Ctrl-n to do something
 
 # Load starship prompt
 [ -x "$(command -v starship)" ] && eval "$(starship init zsh)"
@@ -17,10 +18,3 @@ bindkey '^l' autosuggest-accept  # Ctrl-l to accept auto-suggestion
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -x "$(command -v pyenv)" ] && eval "$(pyenv init -)"
 
-# pnpm
-export PNPM_HOME="/home/raven/.local/bin"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end

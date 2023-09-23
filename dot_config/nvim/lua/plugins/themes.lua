@@ -10,7 +10,8 @@ return {
       style = "night",
       transparent = false,
     },
-    config = function()
+    config = function(_, opts)
+      require("tokyonight").setup(opts)
       vim.cmd.colorscheme "tokyonight"
     end,
   },

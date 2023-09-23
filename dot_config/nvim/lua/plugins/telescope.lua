@@ -21,8 +21,6 @@ return {
             ["<C-j>"] = actions.move_selection_next,
             ["<C-k>"] = actions.move_selection_previous,
             -- causes problems with tab completion in cmdline
-            -- ["<Tab>"] = actions.move_selection_next,
-            -- ["<S-Tab>"] = actions.move_selection_previous,
             ["<Tab>"] = false,
             ["<S-Tab>"] = false,
             ["<Down>"] = actions.cycle_history_next,
@@ -35,16 +33,15 @@ return {
           },
         },
       },
-      -- :help telescope.builtin
       pickers = {
         find_files = {
-          hidden = true,
+          hidden = false,
         },
-        -- grep_string = {},
-        -- live_grep = {
-        --   glob_pattern = "!**/.git/*",
-        --   additional_args = { "--hidden" },
-        -- },
+        grep_string = {},
+        live_grep = {
+          glob_pattern = "!**/.git/*",
+          additional_args = { "--hidden" },
+        },
       },
       extensions = {
         fzf = {

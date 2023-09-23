@@ -13,6 +13,7 @@ M.on_attach = function(client, bufnr)
     vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = desc })
   end
 
+  -- TODO: bring diagnostic keymaps here too
   map("n", "gd", vim.lsp.buf.definition, "Goto Definition")
   map("n", "gD", vim.lsp.buf.declaration, "Goto Declaration")
   map("n", "gi", vim.lsp.buf.implementation, "Got Implementation")
@@ -52,12 +53,7 @@ M.capabilities.textDocument.foldingRange = {
   lineFoldingOnly = true,
 }
 
--- can setup globally
--- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
---   border = "rounded",
---   relative = "cursor",
--- })
-
+-- TODO: handle this globally
 M.handlers = {
   ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
     border = "rounded",

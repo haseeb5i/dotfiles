@@ -25,8 +25,8 @@ return {
           symbols = {
             modified = "󱈸",
             deleted = "✘",
-            renamed = "»",
             ignored = "",
+            unstaged = "",
           },
         },
       },
