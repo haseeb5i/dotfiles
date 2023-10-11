@@ -12,9 +12,11 @@ return {
       opts.mapping = vim.tbl_extend("force", opts.mapping, {
         ["<Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
+            -- cmp.select_next_item()
             cmp.confirm({ select = true })
-          elseif luasnip.jumpable() then
-            luasnip.jump()
+            -- luasnip.expand_or_locally_jumpable()
+          elseif luasnip.jumpable(1) then
+            luasnip.jump(1)
           else
             fallback()
           end
@@ -37,28 +39,26 @@ return {
           item.kind = kind_icons[item.kind] .. item.kind
           local maxwidth = 42
           local label = item.abbr
-          if #label > maxwidth then
-            item.abbr = string.sub(label, 1, maxwidth) .. "..."
-          end
+          if #label > maxwidth then item.abbr = string.sub(label, 1, maxwidth) .. "..." end
           return item
         end,
       })
-
     end,
   },
   {
-    "zbirenbaum/copilot.lua",
+    "echasnovski/mini.comment",
     opts = {
-      filetypes = {
-        markdown = false,
+      options = {
+        ignore_blank_line = true,
       },
     },
   },
+  { import = "lazyvim.plugins.extras.coding.codeium" },
   {
     "simrat39/symbols-outline.nvim",
     cmd = "SymbolsOutline",
     keys = {
-      { "<leader>cs", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" },
+      { "<leader>co", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" },
     },
     config = true,
   },

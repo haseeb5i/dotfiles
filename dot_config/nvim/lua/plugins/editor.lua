@@ -1,31 +1,34 @@
 return {
-  { "tpope/vim-sleuth", event = "BufReadPre" },
-  { "ThePrimeagen/vim-be-good", cmd = "VimBeGood" },
-  { "windwp/nvim-ts-autotag", event = "InsertEnter" },
+  { "tpope/vim-sleuth", event = "BufReadPre" }, -- maybe use builtin editorconfig
   {
-    "telescope.nvim",
-    dependencies = {
-      "nvim-telescope/telescope-fzf-native.nvim",
-      build = "make",
-      config = function()
-        require("telescope").load_extension("fzf")
-      end,
+    "nvim-telescope/telescope.nvim",
+    keys = {
+      {
+        "<leader>/",
+        "<cmd>Telescope find_files theme=dropdown previewer=false<cr>",
+        desc = "Find Files",
+      },
+--   {
+--     "<leader>b",
+--     "<cmd> Telescope buffers theme=dropdown previewer=false <cr>",
+--     desc = "Find Buffers",
+--   },
     },
-    -- opts = {
-    --   pickers = {
-    --     find_files = { hidden = false },
-    --     live_grep = {
-    --       glob_pattern = "!**/.git/*",
-    --       additional_args = { "--hidden" },
-    --     },
-    --     grep_string = {},
-    --   },
-    -- },
+    opts = function(_, opts)
+      local actions = require("telescope.actions")
+      opts.defaults = vim.tbl_deep_extend("force", opts.defaults or {}, {
+        mappings = {
+          i = {
+            ["<esc>"] = actions.close,
+          },
+        },
+      })
+    end,
   },
   {
     "nvim-neo-tree/neo-tree.nvim",
     opts = {
-          close_if_last_window = true,
+      close_if_last_window = true,
       hide_root_node = false,
       filesystem = {
         filtered_items = {
@@ -49,6 +52,11 @@ return {
     },
   },
   {
+    "windwp/nvim-ts-autotag",
+    event = "InsertEnter",
+    config = true,
+  },
+  {
     "sindrets/diffview.nvim",
     cmd = {
       "DiffviewOpen",
@@ -61,4 +69,5 @@ return {
     config = true,
     enabled = false,
   },
+  { "ThePrimeagen/vim-be-good", cmd = "VimBeGood" },
 }

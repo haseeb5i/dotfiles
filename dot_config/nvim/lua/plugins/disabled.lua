@@ -5,9 +5,9 @@ return {
   { "nvim-pack/nvim-spectre", enabled = false },
   { "folke/flash.nvim", enabled = false },
   { "folke/trouble.nvim", enabled = false },
+  { "folke/todo-comments.nvim", enabled = false },
   -- lsp
-  { "folke/neoconf.nvim", enabled = false },
-  { "nvimtools/none-ls.nvim", enabled = false },
+  -- { "folke/neoconf.nvim", enabled = false },
   -- interface
   { "folke/noice.nvim", enabled = false },
   { "rcarriga/nvim-notify", enabled = false },

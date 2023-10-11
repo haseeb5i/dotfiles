@@ -1,13 +1,4 @@
 return {
-  { "ellisonleao/gruvbox.nvim" },
-  { "nyoom-engineering/oxocarbon.nvim" },
-  {
-    "Mofiqul/dracula.nvim",
-    opts = {
-      italic_comment = true,
-      transparent = false,
-    },
-  },
   {
     "RRethy/vim-illuminate",
     opts = {
@@ -22,7 +13,7 @@ return {
     },
   },
   {
-    "akinsho/nvim-bufferline.lua",
+    "akinsho/bufferline.nvim",
     opts = {
       options = {
         offsets = {
@@ -42,31 +33,41 @@ return {
     opts = function(_, opts)
       -- remove navic from statusline
       table.remove(opts.sections.lualine_c)
-      -- remove filename from statusline
-      -- table.remove(opts.sections.lualine_c)
 
-      -- opts.winbar = {
-      --   lualine_c = {
-      --     {
-      --       "filename",
-      --       path = 1,
-      --       symbols = {
-      --         modified = "  ",
-      --         readonly = "",
-      --         unnamed = "",
-      --       },
-      --     },
-      --     {
-      --       "navic",
-      --       color_correction = nil,
-      --       navic_opts = nil,
-      --     },
-      --   },
-      -- }
-      --
-      -- opts.disabled_filetypes = {
-      --   winbar = { "neo-tree" },
-      -- }
+      opts.sections.lualine_y = {
+        {
+          function()
+            local msg = "no active lsp"
+            local clients = vim.lsp.get_active_clients() -- pass bufnr
+            if not next(clients) then return msg end
+            local buf_ft = vim.bo.filetype
+            for _, client in ipairs(clients) do
+              local filetypes = client.config.filetypes
+              -- stylua: ignore
+              if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
+                return client.name
+              end
+            end
+            return msg
+          end,
+          icon = " ",
+          color = { fg = "#ffffff", gui = "bold" },
+        },
+      }
+
+      opts.sections.lualine_z = {
+        { "location", padding = 0, separator = "" },
+        {
+          function()
+            local chars = { "__", "▁▁", "▂▂", "▃▃", "▄▄", "▅▅", "▆▆", "▇▇", "██" }
+            local curr_line = vim.api.nvim_win_get_cursor(0)[1]
+            local total_lines = vim.api.nvim_buf_line_count(0)
+            local line_ratio = curr_line / total_lines
+            local index = math.ceil(line_ratio * #chars)
+            return chars[index]
+          end,
+        },
+      }
     end,
   },
   {
