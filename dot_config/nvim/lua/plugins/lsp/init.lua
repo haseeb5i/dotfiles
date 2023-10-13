@@ -1,8 +1,10 @@
 return {
   {
     "neovim/nvim-lspconfig",
+    dependencies = {
+      "scalameta/nvim-metals",
+    },
     opts = {
-      autoformat = false,
       diagnostics = {
         virtual_text = false,
         float = {
@@ -16,51 +18,46 @@ return {
         enabled = false,
       },
       servers = require("plugins.lsp.servers"),
-      setup = {},
+      setup = {
+        metals = function(_, opts)
+          local metals_config = require("metals").bare_config()
+          metals_config.init_options.statusBarProvider = "on"
+          metals_config.capabilities = opts.capabilities
+          metals_config.settings = opts.settings.metals
+          -- TODO: add debug config for scala
+          -- metals_config.on_attach = function(_, bufnr)
+          --   require("metals").setup_dap()
+          -- end
+
+          local nvim_metals_group =
+            vim.api.nvim_create_augroup("nvim-metals", { clear = true })
+          vim.api.nvim_create_autocmd("FileType", {
+            pattern = { "scala", "sbt", "java" },
+            callback = function()
+              require("metals").initialize_or_attach(metals_config)
+            end,
+            group = nvim_metals_group,
+          })
+        end,
+      },
     },
   },
   {
-    "nvimtools/none-ls.nvim",
-    opts = function(_, opts)
-      local nls = require("null-ls")
-      vim.list_extend(opts.sources, {
-        nls.builtins.code_actions.eslint_d,
-        nls.builtins.formatting.prettierd,
-        nls.builtins.diagnostics.eslint_d,
-      })
-    end,
+    "stevearc/conform.nvim",
+    opts = {
+      formatters_by_ft = {
+        python = { "isort", "black" },
+      },
+    },
   },
-  { import = "lazyvim.plugins.extras.lang.json" },
-  { import = "lazyvim.plugins.extras.lang.typescript" },
-  { import = "lazyvim.plugins.extras.lang.go" },
-  { import = "lazyvim.plugins.extras.lang.python" },
   {
-    "scalameta/nvim-metals",
-    ft = { "scala", "sbt", "java" },
-    config = function()
-      local metals_lsp = require("metals")
-
-      local metals_config = metals_lsp.bare_config()
-      metals_config.settings = {
-        excludedPackages = {
-          "akka.actor.typed.javadsl",
-          "com.github.swagger.akka.javadsl",
-        },
-        showImplicitArguments = true,
-      }
-      metals_config.init_options.statusBarProvider = "on"
-      metals_config.capabilities = require("cmp_nvim_lsp").default_capabilities()
-      metals_config.on_attach = function(_, bufnr)
-        vim.keymap.set(
-          "n",
-          "<leader>cs",
-          function() require("metals").hover_worksheet() end,
-          { buffer = bufnr, desc = "Hover Worksheet" }
-        )
-        metals_lsp.setup_dap()
-      end
-
-      metals_lsp.initialize_or_attach(metals_config)
-    end,
+    "mfussenegger/nvim-lint",
+    opts = {
+      linters_by_ft = {
+        typescript = { "eslint_d" },
+        typescriptreact = { "eslint_d" },
+        graphql = { "eslint_d" },
+      },
+    },
   },
 }

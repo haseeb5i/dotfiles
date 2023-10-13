@@ -1,5 +1,6 @@
 return {
   { "tpope/vim-sleuth", event = "BufReadPre" }, -- maybe use builtin editorconfig
+  { "ThePrimeagen/vim-be-good", cmd = "VimBeGood" },
   {
     "nvim-telescope/telescope.nvim",
     keys = {
@@ -8,18 +9,23 @@ return {
         "<cmd>Telescope find_files theme=dropdown previewer=false<cr>",
         desc = "Find Files",
       },
---   {
---     "<leader>b",
---     "<cmd> Telescope buffers theme=dropdown previewer=false <cr>",
---     desc = "Find Buffers",
---   },
+      {
+        "<leader>b",
+        "<cmd> Telescope buffers theme=dropdown previewer=false <cr>",
+        desc = "Find Buffers",
+      },
     },
     opts = function(_, opts)
       local actions = require("telescope.actions")
+
       opts.defaults = vim.tbl_deep_extend("force", opts.defaults or {}, {
         mappings = {
           i = {
             ["<esc>"] = actions.close,
+            ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
+          },
+          n = {
+            ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
           },
         },
       })
@@ -52,11 +58,6 @@ return {
     },
   },
   {
-    "windwp/nvim-ts-autotag",
-    event = "InsertEnter",
-    config = true,
-  },
-  {
     "sindrets/diffview.nvim",
     cmd = {
       "DiffviewOpen",
@@ -69,5 +70,4 @@ return {
     config = true,
     enabled = false,
   },
-  { "ThePrimeagen/vim-be-good", cmd = "VimBeGood" },
 }

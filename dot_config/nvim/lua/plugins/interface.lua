@@ -29,11 +29,7 @@ return {
   },
   {
     "nvim-lualine/lualine.nvim",
-    event = "VeryLazy",
     opts = function(_, opts)
-      -- remove navic from statusline
-      table.remove(opts.sections.lualine_c)
-
       opts.sections.lualine_y = {
         {
           function()
@@ -59,7 +55,17 @@ return {
         { "location", padding = 0, separator = "" },
         {
           function()
-            local chars = { "__", "▁▁", "▂▂", "▃▃", "▄▄", "▅▅", "▆▆", "▇▇", "██" }
+            local chars = {
+              "__",
+              "▁▁",
+              "▂▂",
+              "▃▃",
+              "▄▄",
+              "▅▅",
+              "▆▆",
+              "▇▇",
+              "██",
+            }
             local curr_line = vim.api.nvim_win_get_cursor(0)[1]
             local total_lines = vim.api.nvim_buf_line_count(0)
             local line_ratio = curr_line / total_lines
@@ -69,6 +75,14 @@ return {
         },
       }
     end,
+  },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    opts = {
+      indent = {
+        char = "▏",
+      },
+    },
   },
   {
     "stevearc/dressing.nvim",

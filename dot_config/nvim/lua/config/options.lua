@@ -3,9 +3,11 @@
 -- Add any additional options here
 
 vim.opt.cmdheight = 0 -- hide command line unless needed
--- vim.opt.hlsearch = false -- highlight all matches on previous search pattern
+vim.opt.hlsearch = false -- highlight all matches on previous search pattern
 vim.opt.numberwidth = 3 -- set number column width (default 4)
 vim.opt.list = false -- Show some invisible characters (tabs...
+
+vim.g.autoformat = false
 
 -- neovide configuration
 if vim.g.neovide then
