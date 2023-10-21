@@ -3,7 +3,7 @@ return {
     "RRethy/vim-illuminate",
     opts = {
       filetypes_denylist = {
-        "alpha",
+        "dashboard",
         "neo-tree",
         "lazy",
         "mason",
@@ -30,59 +30,30 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     opts = function(_, opts)
-      opts.sections.lualine_y = {
-        {
-          function()
-            local msg = "no active lsp"
-            local clients = vim.lsp.get_active_clients() -- pass bufnr
-            if not next(clients) then return msg end
-            local buf_ft = vim.bo.filetype
-            for _, client in ipairs(clients) do
-              local filetypes = client.config.filetypes
-              -- stylua: ignore
-              if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-                return client.name
-              end
-            end
-            return msg
-          end,
-          icon = " ",
-          color = { fg = "#ffffff", gui = "bold" },
-        },
-      }
+      table.remove(opts.sections.lualine_y, 1)
 
+      local progress = function()
+        local chars = {
+          "__",
+          "▁▁",
+          "▂▂",
+          "▃▃",
+          "▄▄",
+          "▅▅",
+          "▆▆",
+          "▇▇",
+          "██",
+        }
+        local curr_line = vim.api.nvim_win_get_cursor(0)[1]
+        local total_lines = vim.api.nvim_buf_line_count(0)
+        local line_ratio = curr_line / total_lines
+        local index = math.ceil(line_ratio * #chars)
+        return chars[index]
+      end
       opts.sections.lualine_z = {
-        { "location", padding = 0, separator = "" },
-        {
-          function()
-            local chars = {
-              "__",
-              "▁▁",
-              "▂▂",
-              "▃▃",
-              "▄▄",
-              "▅▅",
-              "▆▆",
-              "▇▇",
-              "██",
-            }
-            local curr_line = vim.api.nvim_win_get_cursor(0)[1]
-            local total_lines = vim.api.nvim_buf_line_count(0)
-            local line_ratio = curr_line / total_lines
-            local index = math.ceil(line_ratio * #chars)
-            return chars[index]
-          end,
-        },
+        { progress },
       }
     end,
-  },
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    opts = {
-      indent = {
-        char = "▏",
-      },
-    },
   },
   {
     "stevearc/dressing.nvim",

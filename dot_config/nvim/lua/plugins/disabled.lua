@@ -1,7 +1,8 @@
 return {
   -- coding
+  { "echasnovski/mini.comment", enabled = false },
   -- editor
-  { "nvim-pack/nvim-spectre", enabled = false },
+  -- { "nvim-pack/nvim-spectre", enabled = false },
   { "folke/flash.nvim", enabled = false },
   { "folke/trouble.nvim", enabled = false },
   { "folke/todo-comments.nvim", enabled = false },
@@ -12,5 +13,5 @@ return {
   { "folke/noice.nvim", enabled = false },
   { "rcarriga/nvim-notify", enabled = false },
   -- treesitter
-  { "nvim-treesitter/nvim-treesitter-context", enabled = false },
+  -- { "nvim-treesitter/nvim-treesitter-context", enabled = false },
 }

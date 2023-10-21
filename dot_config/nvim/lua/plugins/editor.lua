@@ -1,17 +1,19 @@
 return {
+  -- require("lazyvim.util").telescope("")
   { "tpope/vim-sleuth", event = "BufReadPre" }, -- maybe use builtin editorconfig
   { "ThePrimeagen/vim-be-good", cmd = "VimBeGood" },
   {
     "nvim-telescope/telescope.nvim",
     keys = {
+      { "<leader><space>", false },
       {
         "<leader>/",
         "<cmd>Telescope find_files theme=dropdown previewer=false<cr>",
-        desc = "Find Files",
+        desc = "Find Files (root dir)",
       },
       {
-        "<leader>b",
-        "<cmd> Telescope buffers theme=dropdown previewer=false <cr>",
+        "<leader>,",
+        "<cmd>Telescope buffers theme=dropdown previewer=false<cr>",
         desc = "Find Buffers",
       },
     },
@@ -21,6 +23,8 @@ return {
       opts.defaults = vim.tbl_deep_extend("force", opts.defaults or {}, {
         mappings = {
           i = {
+            ["<C-j>"] = actions.move_selection_next,
+            ["<C-k>"] = actions.move_selection_previous,
             ["<esc>"] = actions.close,
             ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
           },
@@ -35,11 +39,18 @@ return {
     "nvim-neo-tree/neo-tree.nvim",
     opts = {
       close_if_last_window = true,
-      hide_root_node = false,
+      default_component_configs = {
+        git_status = {
+          symbols = {
+            ignored = "",
+            unstaged = "",
+          },
+        },
+      },
       filesystem = {
         filtered_items = {
           visible = true,
-          hide_dotfiles = false,
+          -- hide_dotfiles = false,
           never_show = { ".git" },
         },
         group_empty_dirs = true,

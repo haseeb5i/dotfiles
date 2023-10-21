@@ -65,13 +65,4 @@ return {
       }
     end,
   },
-  {
-    "echasnovski/mini.comment",
-    enabled = false,
-    opts = {
-      options = {
-        ignore_blank_line = true,
-      },
-    },
-  },
 }

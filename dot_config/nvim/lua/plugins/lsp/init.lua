@@ -24,6 +24,12 @@ return {
           metals_config.init_options.statusBarProvider = "on"
           metals_config.capabilities = opts.capabilities
           metals_config.settings = opts.settings.metals
+          metals_config.handlers = {
+            ["textDocument/hover"] = vim.lsp.with(
+              vim.lsp.handlers.hover,
+              { focusable = false }
+            ),
+          }
           -- TODO: add debug config for scala
           -- metals_config.on_attach = function(_, bufnr)
           --   require("metals").setup_dap()
@@ -53,11 +59,7 @@ return {
   {
     "mfussenegger/nvim-lint",
     opts = {
-      linters_by_ft = {
-        typescript = { "eslint_d" },
-        typescriptreact = { "eslint_d" },
-        graphql = { "eslint_d" },
-      },
+      linters_by_ft = {},
     },
   },
 }
