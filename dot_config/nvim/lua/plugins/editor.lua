@@ -5,9 +5,8 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     keys = {
-      { "<leader><space>", false },
       {
-        "<leader>/",
+        "<leader><space>",
         "<cmd>Telescope find_files theme=dropdown previewer=false<cr>",
         desc = "Find Files (root dir)",
       },
@@ -50,7 +49,7 @@ return {
       filesystem = {
         filtered_items = {
           visible = true,
-          -- hide_dotfiles = false,
+          hide_dotfiles = false,
           never_show = { ".git" },
         },
         group_empty_dirs = true,
