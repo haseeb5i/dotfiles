@@ -14,23 +14,29 @@ vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
 require("lazy").setup({
   spec = {
-    { "LazyVim/LazyVim", import = "lazyvim.plugins" },
+    {
+      "LazyVim/LazyVim",
+      import = "lazyvim.plugins",
+      opts = {
+        colorscheme = "dracula",
+      },
+    },
     { import = "plugins" },
   },
   defaults = {
     lazy = true,
     version = false,
   },
-  install = { colorscheme = { "tokyonight", "habamax" } },
+  install = { colorscheme = { "dracula", "habamax" } },
   checker = { enabled = false },
   performance = {
     rtp = {
       -- disable some rtp plugins
       disabled_plugins = {
         "gzip",
-        -- "matchit",
+        "matchit",
         -- "matchparen",
-        -- "netrwPlugin",
+        "netrwPlugin",
         "tarPlugin",
         "tohtml",
         "tutor",

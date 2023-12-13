@@ -18,7 +18,7 @@ return {
       options = {
         offsets = {
           {
-            filetype = "neo-tree",
+             filetype = "neo-tree",
             text = "Explorer",
             highlight = "Directory",
             padding = 1,

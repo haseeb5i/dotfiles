@@ -3,38 +3,6 @@ return {
   { "tpope/vim-sleuth", event = "BufReadPre" }, -- maybe use builtin editorconfig
   { "ThePrimeagen/vim-be-good", cmd = "VimBeGood" },
   {
-    "nvim-telescope/telescope.nvim",
-    keys = {
-      {
-        "<leader><space>",
-        "<cmd>Telescope find_files theme=dropdown previewer=false<cr>",
-        desc = "Find Files (root dir)",
-      },
-      {
-        "<leader>,",
-        "<cmd>Telescope buffers theme=dropdown previewer=false<cr>",
-        desc = "Find Buffers",
-      },
-    },
-    opts = function(_, opts)
-      local actions = require("telescope.actions")
-
-      opts.defaults = vim.tbl_deep_extend("force", opts.defaults or {}, {
-        mappings = {
-          i = {
-            ["<C-j>"] = actions.move_selection_next,
-            ["<C-k>"] = actions.move_selection_previous,
-            ["<esc>"] = actions.close,
-            ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
-          },
-          n = {
-            ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
-          },
-        },
-      })
-    end,
-  },
-  {
     "nvim-neo-tree/neo-tree.nvim",
     opts = {
       close_if_last_window = true,
@@ -66,6 +34,38 @@ return {
         width = 34,
       },
     },
+  },
+  {
+    "nvim-telescope/telescope.nvim",
+    keys = {
+      {
+        "<leader><space>",
+        "<cmd>Telescope find_files theme=dropdown previewer=false<cr>",
+        desc = "Find Files (root dir)",
+      },
+      {
+        "<leader>,",
+        "<cmd>Telescope buffers theme=dropdown previewer=false<cr>",
+        desc = "Find Buffers",
+      },
+    },
+    opts = function(_, opts)
+      local actions = require("telescope.actions")
+
+      opts.defaults = vim.tbl_deep_extend("force", opts.defaults or {}, {
+        mappings = {
+          i = {
+            ["<C-j>"] = actions.move_selection_next,
+            ["<C-k>"] = actions.move_selection_previous,
+            ["<esc>"] = actions.close,
+            ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
+          },
+          n = {
+            ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
+          },
+        },
+      })
+    end,
   },
   {
     "sindrets/diffview.nvim",

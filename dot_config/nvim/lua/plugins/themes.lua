@@ -1,19 +1,24 @@
 return {
   {
     "folke/tokyonight.nvim",
+    lazy = false,
     opts = {
       style = "night",
-      on_highlights = function(hl, c)
-        -- hl.IblIndent = { fg = "#404040" }
-      end,
     },
   },
   {
     "Mofiqul/dracula.nvim",
-    event = "VeryLazy",
+    lazy = false,
     opts = {
-      italic_comment = true,
-      transparent = false,
+      overrides = function(colors)
+        return {
+          Special = {
+            fg = colors.green,
+            italic = false,
+            nocombine = true,
+          },
+        }
+      end,
     },
   },
   { "nyoom-engineering/oxocarbon.nvim" },

@@ -1,6 +1,6 @@
 return {
   -- coding
-  { "echasnovski/mini.comment", enabled = false },
+  { "zbirenbaum/copilot-cmp", enabled = false },
   -- editor
   { "folke/flash.nvim", enabled = false },
   { "folke/trouble.nvim", enabled = false },

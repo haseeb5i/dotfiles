@@ -12,9 +12,9 @@ bindkey '^[l' autosuggest-accept  # Alt-l to accept auto-suggestion
 # bindkey '^n'   # Ctrl-n to do something
 
 # Load starship prompt
-[ -x "$(command -v starship)" ] && eval "$(starship init zsh)"
+(( $+commands[starship] )) && eval "$(starship init zsh)"
 
 # Development
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -x "$(command -v pyenv)" ] && eval "$(pyenv init -)"
+(( $+commands[pyenv] )) && eval "$(pyenv init -)"
 

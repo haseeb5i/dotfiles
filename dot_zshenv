@@ -20,7 +20,6 @@ export FFMPEG_DATADIR="$XDG_CONFIG_HOME"/ffmpeg
 export WGETRC="$XDG_CONFIG_HOME/wgetrc"
 alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
 
-
 # Ensure that a non-login, non-interactive shell has a defined environment.
 if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "$ZDOTDIR/.zprofile" ]]; then
   source "$ZDOTDIR/.zprofile"
