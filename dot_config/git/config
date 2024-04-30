@@ -8,10 +8,10 @@
     pager = delta
 
 [init]
-    defaultBranch = master
+    defaultBranch = main
 
 [pull]
-    rebase = false
+    rebase = true 
 
 [interactive]
     diffFilter = delta --color-only
