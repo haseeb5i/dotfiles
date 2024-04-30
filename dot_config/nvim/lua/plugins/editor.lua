@@ -1,5 +1,4 @@
 return {
-  -- require("lazyvim.util").telescope("")
   { "tpope/vim-sleuth", event = "BufReadPre" }, -- maybe use builtin editorconfig
   { "ThePrimeagen/vim-be-good", cmd = "VimBeGood" },
   {
@@ -8,10 +7,7 @@ return {
       close_if_last_window = true,
       default_component_configs = {
         git_status = {
-          symbols = {
-            ignored = "",
-            unstaged = "",
-          },
+          symbols = { ignored = "", unstaged = "" },
         },
       },
       filesystem = {
@@ -26,12 +22,12 @@ return {
         winbar = false,
       },
       window = {
+        width = 34,
         mappings = {
           ["o"] = "open",
           ["l"] = "open",
           ["h"] = "close_node",
         },
-        width = 34,
       },
     },
   },
@@ -43,11 +39,6 @@ return {
         "<cmd>Telescope find_files theme=dropdown previewer=false<cr>",
         desc = "Find Files (root dir)",
       },
-      {
-        "<leader>,",
-        "<cmd>Telescope buffers theme=dropdown previewer=false<cr>",
-        desc = "Find Buffers",
-      },
     },
     opts = function(_, opts)
       local actions = require("telescope.actions")
@@ -57,14 +48,22 @@ return {
           i = {
             ["<C-j>"] = actions.move_selection_next,
             ["<C-k>"] = actions.move_selection_previous,
-            ["<esc>"] = actions.close,
             ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
+            ["<C-p>"] = require("telescope.actions.layout").toggle_preview,
+            ["<esc>"] = actions.close,
           },
           n = {
             ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
           },
         },
       })
+
+      opts.pickers = {
+        buffers = {
+          theme = "dropdown",
+          previewer = false,
+        },
+      }
     end,
   },
   {
@@ -73,11 +72,6 @@ return {
       "DiffviewOpen",
       "DiffviewFileHistory",
     },
-    config = true,
-  },
-  {
-    "akinsho/git-conflict.nvim",
-    config = true,
-    enabled = false,
+    opts = {},
   },
 }

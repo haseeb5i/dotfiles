@@ -6,6 +6,7 @@ local map = vim.keymap.set
 map("i", "jk", "<Esc>", { desc = "Exit insert mode" })
 map("i", "<C-b>", "<ESC>^i", { desc = "Go to start of line" })
 map("i", "<C-e>", "<End>", { desc = "Go to end of line" })
+
 map("n", "gl", vim.diagnostic.open_float, { desc = "Show [l]ine Diagnostics" })
 
 -- bufferline
@@ -14,15 +15,17 @@ map("n", "<A-h>", "<cmd>BufferLineMovePrev<cr>", { desc = "Move buffer to previo
 map("n", "<A-p>", "<cmd>BufferLinePick<cr>", { desc = "Pick a buffer" })
 
 -- floating terminal
+vim.keymap.del("t", "<c-/>")
+vim.keymap.del("t", "<c-_>")
 local lazyutil = require("lazyvim.util")
-map({ "n", "t" }, "<c-\\>", function()
+map("n", "<c-\\>", function()
   lazyutil.terminal(nil, { cwd = lazyutil.root() })
 end, { desc = "Terminal (root dir)" })
+map("t", "<c-\\>", "<cmd>close<cr>", { desc = "Hide Terminal" })
 
 -- comments
 local toggle_comment = function()
-  return vim.v.count == 0 and "<Plug>(comment_toggle_linewise_current)"
-    or "<Plug>(comment_toggle_linewise_count)"
+  return vim.v.count == 0 and "<Plug>(comment_toggle_linewise_current)" or "<Plug>(comment_toggle_linewise_count)"
 end
 map("n", "<c-/>", toggle_comment, { expr = true, desc = "Toggle linewise comment" })
 map("n", "<c-_>", toggle_comment, { expr = true, desc = "which_key_ignore" })

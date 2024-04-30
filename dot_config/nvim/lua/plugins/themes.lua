@@ -1,12 +1,5 @@
 return {
   {
-    "folke/tokyonight.nvim",
-    lazy = false,
-    opts = {
-      style = "night",
-    },
-  },
-  {
     "Mofiqul/dracula.nvim",
     lazy = false,
     opts = {
@@ -21,6 +14,17 @@ return {
       end,
     },
   },
-  { "nyoom-engineering/oxocarbon.nvim" },
-  { "ellisonleao/gruvbox.nvim" },
+  {
+    "LazyVim/LazyVim",
+    opts = {
+      colorscheme = "dracula",
+    },
+  },
+  {
+    "folke/tokyonight.nvim",
+    lazy = false,
+    opts = {
+      style = "night",
+    },
+  },
 }
