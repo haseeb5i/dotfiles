@@ -1,7 +1,3 @@
-[".config/zsh/.zprezto"]
-    type = "git-repo"
-    url = "https://github.com/sorin-ionescu/prezto.git"
-    clone.args = ["--recursive"]
 [".local/share/fonts/caskaydia-cove-nf"]
     type = "archive"
     url = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/CascadiaCode.tar.xz"

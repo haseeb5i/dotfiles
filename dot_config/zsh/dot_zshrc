@@ -1,20 +1,52 @@
-#
-# Executes commands at the start of an interactive session
-#
-
-# Source Prezto
-if [[ -s "$ZDOTDIR/.zprezto/init.zsh" ]]; then
-  source "$ZDOTDIR/.zprezto/init.zsh"
+# Download zinit, if it's not here yet
+ZINIT_HOME="${XDG_DATA_HOME}/zinit/zinit.git"
+if [ ! -d $ZINIT_HOME ]; then 
+    mkdir -p "$(dirname $ZINIT_HOME)"
+    git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 fi
 
-# Set keymappings
-bindkey '^[l' autosuggest-accept  # Alt-l to accept auto-suggestion
-# bindkey '^n'   # Ctrl-n to do something
+# Source zinit
+source "${ZINIT_HOME}/zinit.zsh"
+
+# Add some plugins
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+
+zinit wait lucid light-mode for \
+  blockf atpull'zinit creinstall -q .' \
+    zsh-users/zsh-completions \
+  atload"_zsh_autosuggest_start; bindkey '^[l' autosuggest-accept" \
+    zsh-users/zsh-autosuggestions \
+  atload'zstyle ":history-search-multi-word" page-size "7"' \
+    zdharma-continuum/history-search-multi-word \
+  atinit"zicompinit; zicdreplay" \
+    zdharma-continuum/fast-syntax-highlighting
+
+# Plugins from Oh-my-Zsh or Prezto
+zinit snippet PZTM::history
+zinit wait lucid for \
+    OMZL::git.zsh \
+    OMZP::git \
+  atload'zstyle ":omz:plugins:nvm" lazy yes' \
+    OMZP::nvm
+
+# keybindings
+bindkey -v 
+bindkey '^p' history-search-backward 
+bindkey '^n' history-search-forward
 
 # Load starship prompt
-(( $+commands[starship] )) && eval "$(starship init zsh)"
+zinit ice as"command" from"gh-r" \
+    atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship" \
+    atpull"%atclone" src"init.zsh"
+zinit light starship/starship
+
+# zi cdreplay -q
 
 # Development
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 (( $+commands[pyenv] )) && eval "$(pyenv init -)"
 
+# Aliases
+alias ls='ls --color'
+
+# Shell integrations
+# source <(fzf --zsh)
