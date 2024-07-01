@@ -8,26 +8,55 @@ fi
 # Source zinit
 source "${ZINIT_HOME}/zinit.zsh"
 
-# Add some plugins
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-
-zinit wait lucid light-mode for \
-  blockf atpull'zinit creinstall -q .' \
-    zsh-users/zsh-completions \
-  atload"_zsh_autosuggest_start; bindkey '^[l' autosuggest-accept" \
-    zsh-users/zsh-autosuggestions \
-  atload'zstyle ":history-search-multi-word" page-size "7"' \
-    zdharma-continuum/history-search-multi-word \
-  atinit"zicompinit; zicdreplay" \
-    zdharma-continuum/fast-syntax-highlighting
+# Better completion
+setopt AUTO_LIST            # Automatically list choices on ambiguous completion.
+setopt AUTO_PARAM_SLASH     # If completed parameter is a directory, add a trailing slash.
 
 # Plugins from Oh-my-Zsh or Prezto
-zinit snippet PZTM::history
+zinit lucid for \
+    atinit"HISTFILE=${ZDOTDIR}/.zsh_history" \
+  OMZL::history.zsh \
+
 zinit wait lucid for \
-    OMZL::git.zsh \
-    OMZP::git \
-  atload'zstyle ":omz:plugins:nvm" lazy yes' \
-    OMZP::nvm
+  OMZL::completion.zsh \
+  OMZL::directories.zsh \
+  OMZL::git.zsh \
+  OMZL::spectrum.zsh \
+  OMZP::git \
+    atload"zstyle ':omz:plugins:nvm' lazy yes" \
+  OMZP::nvm
+
+# Add some plugins
+zinit light-mode wait lucid for \
+    atinit"
+      zstyle ':completion:*:default' list-prompt '%S%M matches%s'
+      zstyle ':completion::complete:*' use-cache on
+      zstyle ':completion::complete:*' cache-path "${XDG_CACHE_HOME}/zsh/zcompcache"
+      zstyle ':completion:*:matches' group 'yes'
+      zstyle ':completion:*:options' description 'yes'
+      zstyle ':completion:*:descriptions' format ' %F{yellow}-- %d --%f'
+      zstyle ':completion:*:warnings' format ' %F{red}-- no matches found --%f'
+      zstyle ':completion:*' group-name ''
+      zstyle ':completion:*' verbose yes
+      zstyle ':completion:*' completer _complete _match _approximate
+      zstyle ':completion:*:match:*' original only
+      zstyle ':completion:*:approximate:*' max-errors 1 numeric" \
+    blockf atpull'zinit creinstall -q .' \
+  zsh-users/zsh-completions \
+    atinit"zicompinit; zicdreplay" \
+    atload"_zsh_autosuggest_start; bindkey '^[l' autosuggest-accept" \
+  zsh-users/zsh-autosuggestions \
+  zdharma-continuum/fast-syntax-highlighting \
+    atinit"
+      zstyle :history-search-multi-word page-size 10
+      zstyle :history-search-multi-word highlight-color fg=red,bold
+      zstyle :plugin:history-search-multi-word reset-prompt-protect 1" \
+    bindmap"^R -> ^H" \
+  zdharma-continuum/history-search-multi-word \
+    atclone"dircolors -b LS_COLORS > clrs.zsh" \
+    atload'zstyle ":completion:*:default" list-colors ${(s.:.)LS_COLORS}' \
+    atpull'%atclone' pick"clrs.zsh" nocompile'!' \
+  trapd00r/LS_COLORS
 
 # keybindings
 bindkey -v 
@@ -50,3 +79,4 @@ alias ls='ls --color'
 
 # Shell integrations
 # source <(fzf --zsh)
+
