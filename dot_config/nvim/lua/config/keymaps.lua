@@ -24,13 +24,10 @@ end, { desc = "Terminal (root dir)" })
 map("t", "<c-\\>", "<cmd>close<cr>", { desc = "Hide Terminal" })
 
 -- comments
-local toggle_comment = function()
-  return vim.v.count == 0 and "<Plug>(comment_toggle_linewise_current)" or "<Plug>(comment_toggle_linewise_count)"
-end
-map("n", "<c-/>", toggle_comment, { expr = true, desc = "Toggle linewise comment" })
-map("n", "<c-_>", toggle_comment, { expr = true, desc = "which_key_ignore" })
-map("x", "<c-/>", "<Plug>(comment_toggle_linewise_visual)")
-map("x", "<c-_>", "<Plug>(comment_toggle_linewise_visual)")
+map("n", "<c-/>", "<cmd>normal gcc<cr>")
+map("n", "<c-_>", "<cmd>normal gcc<cr>")
+map("x", "<c-/>", "<cmd>normal gc<cr>")
+map("x", "<c-_>", "<cmd>normal gc<cr>")
 
 -- miscellaneous maps
 -- Don't copy the replaced text after pasting in visual mode

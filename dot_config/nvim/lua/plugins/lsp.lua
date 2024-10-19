@@ -5,6 +5,12 @@ return {
       diagnostics = {
         underline = true,
       },
+      codelens = {
+        enabled = false,
+      },
+      inlay_hints = {
+        enabled = false,
+      },
       servers = {},
       setup = {},
     },

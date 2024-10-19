@@ -10,50 +10,55 @@ source "${ZINIT_HOME}/zinit.zsh"
 
 # Add some plugins
 zinit for \
-  PZTM::environment \
   PZTM::history \
+  OMZL::completion.zsh \
   OMZP::vi-mode
 
+  # comes after highlight, not working with remap
+  #   atload"!_zsh_autosuggest_start" \
+  # zsh-users/zsh-autosuggestions \
 zinit wait lucid light-mode for \
     atinit"zicompinit; zicdreplay" \
   zdharma-continuum/fast-syntax-highlighting \
     atinit"
       zstyle ':completion:*:git-checkout:*' sort false
       zstyle ':completion:*:descriptions' format '[%d]'
+      zstyle ':completion:*:warnings' format '%F{red}-- no matches found --%f'
       zstyle ':completion:*' menu no" \
     blockf atpull'zinit creinstall -q .' \
   zsh-users/zsh-completions \
     atinit" zstyle :history-search-multi-word page-size 10" \
-    trackbinds bindmap"^R -> ^G" \
   zdharma-continuum/history-search-multi-word \
     atclone"dircolors -b LS_COLORS > clrs.zsh" \
     atload'zstyle ":completion:*:default" list-colors ${(s.:.)LS_COLORS}' \
     atpull'%atclone' pick"clrs.zsh" nocompile'!' \
   trapd00r/LS_COLORS \
   wfxr/forgit \
+  urbainvaes/fzf-marks \
   hlissner/zsh-autopair
 
 zinit wait="1" lucid light-mode for \
   PZTM::directory \
-  OMZL::completion.zsh \
-  OMZL::clipboard.zsh \
+  PZTM::terminal \
+  PZTM::spectrum \
+  OMZL::functions.zsh \
   OMZL::git.zsh \
   OMZP::git \
-  PZTM::spectrum \
     atinit"zstyle ':omz:plugins:nvm' lazy yes" \
   OMZP::nvm
 
+# Add some bins
+zinit wait"2" lucid light-mode from"gh-r" as"command" for \
+  junegunn/fzf \
+    mv"bat* -> bat" pick"bat/bat" \
+  @sharkdp/bat \
+    mv"fd* -> fd" pick"fd/fd" \
+  @sharkdp/fd 
+
+# Load without wait
 zinit light-mode for \
   zsh-users/zsh-autosuggestions \
   Aloxaf/fzf-tab 
-
-# Add some bins
-zinit wait"2" lucid light-mode from"gh-r" as"program" for \
-  junegunn/fzf-bin \
-    mv"fd* -> fd" pick"fd/fd" \
-  @sharkdp/fd \
-    mv"bat* -> bat" pick"bat/bat" \
-  @sharkdp/bat
 
 # keybindings
 bindkey '^[l' autosuggest-accept; 

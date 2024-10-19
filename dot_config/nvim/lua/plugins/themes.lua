@@ -1,23 +1,14 @@
 return {
   {
-    "Mofiqul/dracula.nvim",
-    lazy = false,
+    "LazyVim/LazyVim",
     opts = {
-      overrides = function(colors)
-        return {
-          Special = {
-            fg = colors.green,
-            italic = false,
-            nocombine = true,
-          },
-        }
-      end,
+      colorscheme = "tokyonight",
     },
   },
   {
-    "LazyVim/LazyVim",
+    "Mofiqul/dracula.nvim",
     opts = {
-      colorscheme = "dracula",
+      overrides = function() end,
     },
   },
   {
@@ -25,6 +16,9 @@ return {
     lazy = false,
     opts = {
       style = "night",
+      on_colors = function(colors)
+        colors.fg_gutter = "#2E3249"
+      end,
     },
   },
 }

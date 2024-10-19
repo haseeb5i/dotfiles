@@ -1,18 +1,5 @@
 return {
   {
-    "RRethy/vim-illuminate",
-    opts = {
-      filetypes_denylist = {
-        "dashboard",
-        "neo-tree",
-        "lazy",
-        "mason",
-        "help",
-        "TelescopePrompt",
-      },
-    },
-  },
-  {
     "akinsho/bufferline.nvim",
     opts = {
       options = {
@@ -29,6 +16,7 @@ return {
   },
   {
     "nvim-lualine/lualine.nvim",
+    event = "VeryLazy",
     opts = function(_, opts)
       local progress = function()
         local chars = {
@@ -53,6 +41,8 @@ return {
       opts.sections.lualine_z = {
         { progress },
       }
+
+      table.insert(opts.sections.lualine_x, 2, LazyVim.lualine.cmp_source("codeium"))
     end,
   },
   {

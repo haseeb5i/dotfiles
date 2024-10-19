@@ -5,9 +5,14 @@
 vim.opt.cmdheight = 0 -- hide command line unless needed
 vim.opt.hlsearch = false -- highlight all matches on previous search pattern
 -- vim.opt.numberwidth = 3 -- set number column width (default 4)
-vim.opt.list = false -- Show some invisible characters (tabs...
+vim.opt.list = false -- Show some invisible characters (tabs...)
 
+-- lazyvim configuration
 vim.g.autoformat = false
+vim.g.cmp_widths = {
+  abbr = 40,
+}
+vim.g.lazyvim_picker = "fzf" -- or telescope
 
 -- neovide configuration
 if vim.g.neovide then
