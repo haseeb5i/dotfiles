@@ -14,10 +14,10 @@ zinit for \
   OMZL::completion.zsh \
   OMZP::vi-mode
 
-  # comes after highlight, not working with remap
-  #   atload"!_zsh_autosuggest_start" \
-  # zsh-users/zsh-autosuggestions \
 zinit wait lucid light-mode for \
+  Aloxaf/fzf-tab \
+     atload'_zsh_autosuggest_start; bindkey "^[l" autosuggest-accept' \
+  zsh-users/zsh-autosuggestions \
     atinit"zicompinit; zicdreplay" \
   zdharma-continuum/fast-syntax-highlighting \
     atinit"
@@ -27,15 +27,15 @@ zinit wait lucid light-mode for \
       zstyle ':completion:*' menu no" \
     blockf atpull'zinit creinstall -q .' \
   zsh-users/zsh-completions \
-    atinit" zstyle :history-search-multi-word page-size 10" \
+    atinit'zstyle :history-search-multi-word page-size 10' \
   zdharma-continuum/history-search-multi-word \
     atclone"dircolors -b LS_COLORS > clrs.zsh" \
     atload'zstyle ":completion:*:default" list-colors ${(s.:.)LS_COLORS}' \
-    atpull'%atclone' pick"clrs.zsh" nocompile'!' \
+    atpull"%atclone" pick"clrs.zsh" nocompile'!' \
   trapd00r/LS_COLORS \
   wfxr/forgit \
-  urbainvaes/fzf-marks \
-  hlissner/zsh-autopair
+  hlissner/zsh-autopair \
+  urbainvaes/fzf-marks
 
 zinit wait="1" lucid light-mode for \
   PZTM::directory \
@@ -53,15 +53,10 @@ zinit wait"2" lucid light-mode from"gh-r" as"command" for \
     mv"bat* -> bat" pick"bat/bat" \
   @sharkdp/bat \
     mv"fd* -> fd" pick"fd/fd" \
-  @sharkdp/fd 
+  @sharkdp/fd
 
-# Load without wait
-zinit light-mode for \
-  zsh-users/zsh-autosuggestions \
-  Aloxaf/fzf-tab 
 
 # keybindings
-bindkey '^[l' autosuggest-accept; 
 bindkey '^p' history-search-backward 
 bindkey '^n' history-search-forward
 
@@ -76,4 +71,5 @@ zinit light starship/starship
 
 # Aliases
 alias ls='ls --color'
+alias kssh="kitten ssh"
 
