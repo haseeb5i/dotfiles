@@ -1,0 +1,63 @@
+// Zed keymap
+//
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: open default keymap`
+// from the command palette.
+[
+  {
+    "context": "VimControl && !menu",
+    "bindings": {
+      "alt-j": "editor::MoveLineDown",
+      "alt-k": "editor::MoveLineUp",
+
+      "space b d": "pane::CloseActiveItem",
+      "space b p": "pane::TogglePinTab",
+      "space b P": ["pane::CloseAllItems", { "close_pinned": false }],
+      // "shift-h": "editor::TabPrev",
+      // "shift-l": "editor::TabNext",
+      "alt-h": "pane::SwapItemLeft",
+      "alt-l": "pane::SwapItemRight",
+
+      // "space e": "project_panel::ToggleFocus",
+      "space space": "file_finder::Toggle",
+      "space ,": "tab_switcher::Toggle",
+
+      "space g b": "editor::ToggleGitBlame",
+      "space g x": "branches::OpenRecent",
+
+      "g r": "editor::FindAllReferences",
+      "g k": "editor::ShowSignatureHelp",
+      "space c f": "editor::Format",
+      "space c r": "editor::Rename",
+
+      "space |": "pane::SplitDown",
+      "space -": "pane::SplitRight"
+    }
+  },
+  {
+    "context": "vim_mode == insert",
+    "bindings": {
+      "ctrl-e": "vim::EndOfLine",
+      "ctrl-b": "vim::StartOfLine"
+    }
+  },
+  {
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "r": "project_panel::Rename",
+      "ctrl-d": "project_panel::Duplicate",
+      "y": "project_panel::CopyPath",
+      "shift-y": "project_panel::CopyRelativePath"
+    }
+  },
+  {
+    "context": "Editor || Terminal",
+    "bindings": {
+      "ctrl-\\": "workspace::ToggleBottomDock",
+      "ctrl-|": "terminal_panel::ToggleFocus",
+      "ctrl-shift-t": "workspace::NewTerminal"
+    }
+  }
+]
