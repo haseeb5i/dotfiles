@@ -14,20 +14,19 @@ map("n", "<A-l>", "<cmd>BufferLineMoveNext<cr>", { desc = "Move buffer to next" 
 map("n", "<A-h>", "<cmd>BufferLineMovePrev<cr>", { desc = "Move buffer to previous" })
 map("n", "<A-p>", "<cmd>BufferLinePick<cr>", { desc = "Pick a buffer" })
 
--- floating terminal
-vim.keymap.del("t", "<c-/>")
-vim.keymap.del("t", "<c-_>")
-local lazyutil = require("lazyvim.util")
-map("n", "<c-\\>", function()
-  lazyutil.terminal(nil, { cwd = lazyutil.root() })
-end, { desc = "Terminal (root dir)" })
-map("t", "<c-\\>", "<cmd>close<cr>", { desc = "Hide Terminal" })
-
 -- comments
 map("n", "<c-/>", "<cmd>normal gcc<cr>")
 map("n", "<c-_>", "<cmd>normal gcc<cr>")
 map("x", "<c-/>", "<cmd>normal gc<cr>")
 map("x", "<c-_>", "<cmd>normal gc<cr>")
+
+-- floating terminal
+map("n", "<c-\\>", function()
+  Snacks.terminal(nil, { cwd = LazyVim.root() })
+end, { desc = "Terminal (Root Dir)" })
+vim.keymap.del("t", "<c-/>")
+vim.keymap.del("t", "<c-_>")
+map("t", "<c-\\>", "<cmd>close<cr>", { desc = "Hide Terminal" })
 
 -- miscellaneous maps
 -- Don't copy the replaced text after pasting in visual mode

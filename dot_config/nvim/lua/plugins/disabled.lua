@@ -5,5 +5,4 @@ return {
   { "folke/todo-comments.nvim", enabled = false },
   -- interface
   { "folke/noice.nvim", enabled = false },
-  { "rcarriga/nvim-notify", enabled = false },
 }

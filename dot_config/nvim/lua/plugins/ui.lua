@@ -1,18 +1,7 @@
 return {
   {
     "akinsho/bufferline.nvim",
-    opts = {
-      options = {
-        offsets = {
-          {
-            filetype = "neo-tree",
-            text = "Explorer",
-            highlight = "Directory",
-            padding = 1,
-          },
-        },
-      },
-    },
+    opts = { },
   },
   {
     "nvim-lualine/lualine.nvim",
@@ -44,28 +33,6 @@ return {
 
       table.insert(opts.sections.lualine_x, 2, LazyVim.lualine.cmp_source("codeium"))
     end,
-  },
-  {
-    "stevearc/dressing.nvim",
-    opts = {
-      select = {
-        builtin = {
-          mappings = { q = "Close" },
-          win_options = { winblend = 10 },
-        },
-        get_config = function(opts)
-          if opts.kind == "codeaction" then
-            return {
-              backend = "builtin",
-              builtin = {
-                relative = "cursor",
-                min_height = 0,
-              },
-            }
-          end
-        end,
-      },
-    },
   },
   {
     "kevinhwang91/nvim-bqf",

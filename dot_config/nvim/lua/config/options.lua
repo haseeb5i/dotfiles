@@ -12,7 +12,7 @@ vim.g.autoformat = false
 vim.g.cmp_widths = {
   abbr = 40,
 }
-vim.g.lazyvim_picker = "fzf" -- or telescope
+vim.g.ai_cmp = true
 
 -- neovide configuration
 if vim.g.neovide then
