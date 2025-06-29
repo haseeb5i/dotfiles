@@ -2,6 +2,12 @@ return {
   { "tpope/vim-sleuth", event = "BufReadPre" }, -- maybe use builtin editorconfig
   { "ThePrimeagen/vim-be-good", cmd = "VimBeGood" },
   {
+    "m4xshen/hardtime.nvim",
+    lazy = false,
+    dependencies = { "MunifTanjim/nui.nvim" },
+    opts = {},
+  },
+  {
     "nvim-neo-tree/neo-tree.nvim",
     opts = {
       close_if_last_window = true,

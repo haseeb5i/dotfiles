@@ -1,0 +1,3 @@
+dot_config/zsh/*
+!dot_config/zsh/dot_zprofile
+!dot_config/zsh/dot_zshrc

@@ -22,6 +22,7 @@
 
 [merge]
     conflictstyle = diff3
+    guitool = kdiff3
 
 [diff]
     colorMoved = default

@@ -1,10 +1,11 @@
-[".local/share/fonts/caskaydia-cove-nf"]
-    type = "archive"
-    url = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/CascadiaCode.tar.xz"
-    exact = true
-    include = ["CaskaydiaCoveNerdFont-*.ttf"]
 [".local/share/fonts/fira-code-nf"]
     type = "archive"
     url = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraCode.tar.xz"
     exact = true
     include = ["FiraCodeNerdFont-*.ttf"]
+
+[".local/share/fonts/caskaydia-cove-nf"]
+    type = "archive"
+    url = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/CascadiaCode.tar.xz"
+    exact = true
+    include = ["CaskaydiaCoveNerdFont-*.ttf"]

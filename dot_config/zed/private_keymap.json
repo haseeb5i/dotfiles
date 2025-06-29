@@ -1,0 +1,82 @@
+// Zed keymap
+//
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: open default keymap`
+// from the command palette.
+[
+  {
+    "context": "Editor && VimControl && !menu",
+    "bindings": {
+      "p": ["vim::Paste", { "preserve_clipboard": true }],
+      "alt-j": "editor::MoveLineDown",
+      "alt-k": "editor::MoveLineUp",
+      "shift-h": "pane::ActivatePreviousItem",
+      "shift-l": "pane::ActivateNextItem",
+      "alt-h": "pane::SwapItemLeft",
+      "alt-l": "pane::SwapItemRight",
+      "shift-q": "pane::CloseActiveItem",
+      "space b d": "pane::CloseActiveItem",
+      "space b D": "pane::CloseInactiveItems",
+      "space b p": "pane::TogglePinTab",
+      "space b o": ["pane::CloseAllItems", { "close_pinned": false }],
+
+      "space e": "workspace::ToggleLeftDock", // find better context?
+      "space space": "file_finder::Toggle",
+      "space /": "pane::DeploySearch",
+      "space ,": "tab_switcher::ToggleAll",
+      "space x x": "diagnostics::Deploy",
+
+      "space g g": ["task::Spawn", { "task_name": "Lazygit" }],
+      "space g x": "git::Branch",
+      "space g b": "git::Blame",
+
+      "g r": "editor::FindAllReferences",
+      "g k": "editor::ShowSignatureHelp",
+      "space c f": "editor::Format",
+      "space c r": "editor::Rename",
+
+      "space |": "pane::SplitDown",
+      "space -": "pane::SplitRight"
+    }
+  },
+  {
+    "context": "vim_mode == insert",
+    "bindings": {
+      "ctrl-e": "vim::EndOfLine",
+      "ctrl-b": "vim::StartOfLine"
+    }
+  },
+  {
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "a": "project_panel::NewFile",
+      "shift-a": "project_panel::NewDirectory",
+      "r": "project_panel::Rename",
+      "d": "project_panel::Delete",
+      "y": "workspace::CopyPath",
+      "shift-y": "workspace::CopyRelativePath",
+      "q": "workspace::ToggleLeftDock",
+      "space e": "workspace::ToggleLeftDock", // find better context
+      "ctrl-d": "project_panel::Duplicate"
+    }
+  },
+  {
+    "context": "Workspace || Editor || Terminal",
+    "bindings": {
+      "ctrl-\\": "workspace::ToggleBottomDock",
+      "ctrl-|": "terminal_panel::ToggleFocus",
+      "ctrl-shift-t": "workspace::NewTerminal",
+      "ctrl-tab": "pane::ActivateNextItem",
+      "ctrl-shift-tab": "pane::ActivatePreviousItem"
+    }
+  },
+  {
+    "context": "EmptyPane || SharedScreen",
+    "bindings": {
+      "space space": "file_finder::Toggle",
+      "space f p": "projects::OpenRecent"
+    }
+  }
+]

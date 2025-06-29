@@ -1,7 +1,13 @@
 return {
   {
+    "snacks.nvim",
+    opts = {
+      scroll = { enabled = false },
+    },
+  },
+  {
     "akinsho/bufferline.nvim",
-    opts = { },
+    opts = {},
   },
   {
     "nvim-lualine/lualine.nvim",

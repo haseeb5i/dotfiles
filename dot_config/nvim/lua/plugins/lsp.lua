@@ -2,10 +2,8 @@ return {
   {
     "neovim/nvim-lspconfig",
     opts = {
-      codelens = { enabled = false },
-      diagnostics = { underline = true },
-      servers = {},
-      setup = {},
+      inlay_hints = { enabled = false },
+      diagnostics = { underline = false },
     },
   },
   {
