@@ -76,9 +76,6 @@ alias ls='ls --color'
 alias kssh="kitten ssh"
 
 
-export PATH=$PATH:$XDG_DATA_HOME/android-studio/bin
-export ANDROID_HOME=$HOME/Android/Sdk
-export PATH=$PATH:$ANDROID_HOME/emulator
-export PATH=$PATH:$ANDROID_HOME/platform-tools
 
-
+# bun completions
+[ -s "/home/raven/.bun/_bun" ] && source "/home/raven/.bun/_bun"
