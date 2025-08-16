@@ -1,12 +1,12 @@
 return {
   { "tpope/vim-sleuth", event = "BufReadPre" }, -- maybe use builtin editorconfig
   { "ThePrimeagen/vim-be-good", cmd = "VimBeGood" },
-  {
-    "m4xshen/hardtime.nvim",
-    lazy = false,
-    dependencies = { "MunifTanjim/nui.nvim" },
-    opts = {},
-  },
+  -- {
+  --   "m4xshen/hardtime.nvim",
+  --   lazy = false,
+  --   dependencies = { "MunifTanjim/nui.nvim" },
+  --   opts = {},
+  -- },
   {
     "nvim-neo-tree/neo-tree.nvim",
     opts = {
@@ -36,13 +36,5 @@ return {
   {
     "ibhagwan/fzf-lua",
     opts = function(_, opts) end,
-  },
-  {
-    "sindrets/diffview.nvim",
-    cmd = {
-      "DiffviewOpen",
-      "DiffviewFileHistory",
-    },
-    opts = {},
   },
 }

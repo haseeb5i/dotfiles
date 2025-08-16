@@ -6,8 +6,7 @@
 {
   "agent": {
     "model_parameters": [],
-    "always_allow_tool_actions": true,
-    "version": "2"
+    "always_allow_tool_actions": true
   },
   "auto_install_extensions": {
     "html": true,
@@ -32,10 +31,9 @@
   },
   "theme": {
     "mode": "system",
-    "light": "One Light",
+    "light": "Ayu Dark",
     "dark": "Ayu Dark"
   },
-  "icon_theme": "VSCode Icons (Dark)",
   "telemetry": { "metrics": false },
   "edit_predictions": {
     "mode": "subtle",

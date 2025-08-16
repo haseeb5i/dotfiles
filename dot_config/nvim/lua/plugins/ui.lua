@@ -1,8 +1,30 @@
 return {
   {
     "snacks.nvim",
+    ---@module 'snacks'
+    ---@type snacks.Config
     opts = {
       scroll = { enabled = false },
+      picker = {
+        win = {
+          input = {
+            keys = {
+              ["<Esc>"] = { "close", mode = { "n", "i" } },
+            },
+          },
+        },
+        sources = {
+          explorer = {
+            win = {
+              input = {
+                keys = {
+                  -- ["<Esc>"] = { "toggle_focus", mode = { "n", "i" } },
+                },
+              },
+            },
+          },
+        },
+      },
     },
   },
   {

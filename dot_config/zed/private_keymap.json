@@ -27,6 +27,8 @@
       "space /": "pane::DeploySearch",
       "space ,": "tab_switcher::ToggleAll",
       "space x x": "diagnostics::Deploy",
+      "] e": ["editor::GoToDiagnostic", { "severity": "error" }],
+      "[ e": ["editor::GoToPreviousDiagnostic", { "severity": "error" }],
 
       "space g g": ["task::Spawn", { "task_name": "Lazygit" }],
       "space g x": "git::Branch",
@@ -44,6 +46,7 @@
   {
     "context": "vim_mode == insert",
     "bindings": {
+      "ctrl-s": "workspace::Save",
       "ctrl-e": "vim::EndOfLine",
       "ctrl-b": "vim::StartOfLine"
     }

@@ -42,7 +42,8 @@ fi
 # Development
 # Node
 export NODE_OPTIONS="--max-old-space-size=4096"
-export NVM_DIR=$XDG_DATA_HOME/nvm
+export NVM_DIR=$XDG_CONFIG_HOME/nvm
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
 export NODE_REPL_HISTORY=$XDG_DATA_HOME/node_repl_history
 export PNPM_HOME=$XDG_DATA_HOME/pnpm
@@ -65,6 +66,8 @@ export RUFF_CACHE_DIR=$XDG_CACHE_HOME/ruff
 # Scala
 export PATH=$PATH:$XDG_DATA_HOME/coursier/bin
 alias sbt='sbt -ivy "$XDG_DATA_HOME"/ivy2 -sbt-dir "$XDG_DATA_HOME"/sbt'
+# export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
+export GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
 
 # Rust
 export CARGO_HOME=$XDG_DATA_HOME/cargo
@@ -77,8 +80,13 @@ export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 export GOMODCACHE=$XDG_CACHE_HOME/go/mod
 
 # Misc
-export PATH=$PATH:$XDG_DATA_HOME/android-studio/bin
-export ANDROID_HOME=$HOME/Android/Sdk
+export ANDROID_HOME=$XDG_DATA_HOME/android-sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/platform-tools
+export ANDROID_USER_HOME=$HOME/.android
+export PATH=$PATH:$XDG_DATA_HOME/flutter/bin
+export BUNDLE_USER_CACHE=$XDG_CACHE_HOME/bundle
+export BUNDLE_USER_CONFIG=$XDG_CONFIG_HOME/bundle/config
+export BUNDLE_USER_PLUGIN=$XDG_DATA_HOME/bundle
+export DOTNET_CLI_HOME="$XDG_DATA_HOME"/dotnet
 
