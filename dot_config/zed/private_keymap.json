@@ -18,7 +18,7 @@
       "alt-l": "pane::SwapItemRight",
       "shift-q": "pane::CloseActiveItem",
       "space b d": "pane::CloseActiveItem",
-      "space b D": "pane::CloseInactiveItems",
+      "space b D": "pane::CloseOtherItems",
       "space b p": "pane::TogglePinTab",
       "space b o": ["pane::CloseAllItems", { "close_pinned": false }],
 
@@ -30,17 +30,17 @@
       "] e": ["editor::GoToDiagnostic", { "severity": "error" }],
       "[ e": ["editor::GoToPreviousDiagnostic", { "severity": "error" }],
 
-      "space g g": ["task::Spawn", { "task_name": "Lazygit" }],
-      "space g x": "git::Branch",
-      "space g b": "git::Blame",
-
       "g r": "editor::FindAllReferences",
       "g k": "editor::ShowSignatureHelp",
       "space c f": "editor::Format",
       "space c r": "editor::Rename",
 
-      "space |": "pane::SplitDown",
-      "space -": "pane::SplitRight"
+      "space g g": ["task::Spawn", { "task_name": "Lazygit" }],
+      "space g x": "git::Branch",
+      "space g b": "git::Blame",
+
+      "space |": "pane::SplitRight",
+      "space -": "pane::SplitDown"
     }
   },
   {
@@ -73,6 +73,12 @@
       "ctrl-shift-t": "workspace::NewTerminal",
       "ctrl-tab": "pane::ActivateNextItem",
       "ctrl-shift-tab": "pane::ActivatePreviousItem"
+    }
+  },
+  {
+    "context": "Picker > Editor",
+    "bindings": {
+      "ctrl-p": "menu::SelectPrevious"
     }
   },
   {
