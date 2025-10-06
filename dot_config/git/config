@@ -1,9 +1,8 @@
 [user]
-    email = haseeb.rehman@ideofuzion.com
-    name = Haseeb ul Rehman
+    email = haseeb.ul-rehman@n3o.ltd
+    name = Haseeb ur Rehman
 
 [core]
-    ; editor = nvr --remote-wait-silent
     editor = vi 
     pager = delta
 
@@ -22,7 +21,7 @@
 
 [merge]
     conflictstyle = diff3
-    guitool = kdiff3
+    ; guitool = kdiff3
 
 [diff]
     colorMoved = default
