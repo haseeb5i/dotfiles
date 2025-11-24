@@ -56,7 +56,7 @@ path=(
 )
 alias yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config"'
 
-# Golang
+# Go
 export GOPATH=$XDG_DATA_HOME/go
 export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 export GOMODCACHE=$XDG_CACHE_HOME/go/mod
@@ -94,7 +94,7 @@ path=(
   $path
 )
 
-# ruby
+# ruby (only for fastlane)
 export RBENV_ROOT="$XDG_DATA_HOME"/rbenv
 (( $+commands[rbenv] )) && eval "$(rbenv init - --no-rehash zsh)"
 export BUNDLE_USER_CACHE=$XDG_CACHE_HOME/bundle
