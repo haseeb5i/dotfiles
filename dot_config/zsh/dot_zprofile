@@ -68,31 +68,37 @@ export PYENV_ROOT=$XDG_DATA_HOME/pyenv
 export PYTHON_HISTORY=$XDG_STATE_HOME/python_history
 export RUFF_CACHE_DIR=$XDG_CACHE_HOME/ruff
 export MYPY_CACHE_DIR=$XDG_CACHE_HOME/mypy
+export WORKON_HOME="$XDG_DATA_HOME/virtualenvs"
 
 # Rust
 export CARGO_HOME=$XDG_DATA_HOME/cargo
 export RUSTUP_HOME=$XDG_DATA_HOME/rustup
 [ -f "$CARGO_HOME/env" ] && \. "$CARGO_HOME/env"
 
-export ANDROID_HOME=$XDG_DATA_HOME/android-sdk
-export ANDROID_USER_HOME=$HOME/.android
-export GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
-path=(
-  $ANDROID_HOME/emulator
-  $ANDROID_HOME/platform-tools
-  $XDG_DATA_HOME/flutter/bin
-  $path
-)
+# C#
 export DOTNET_CLI_HOME="$XDG_DATA_HOME"/dotnet # some libs still use $HOME
 export PATH=$PATH:$DOTNET_CLI_HOME/.dotnet/tools
 export NUGET_PACKAGES="$XDG_CACHE_HOME"/NuGetPackages
 export OMNISHARPHOME="$XDG_CONFIG_HOME"/omnisharp
 
+# android
+export ANDROID_HOME=$XDG_DATA_HOME/android-sdk
+if [[ "$OSTYPE" == darwin* ]]; then
+  export ANDROID_HOME="$HOME/Library/Android/sdk"
+fi
+export ANDROID_USER_HOME=$HOME/.android
+export GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
+path=(
+  $ANDROID_HOME/emulator
+  $ANDROID_HOME/platform-tools
+  $path
+)
+
+# ruby
 export RBENV_ROOT="$XDG_DATA_HOME"/rbenv
 (( $+commands[rbenv] )) && eval "$(rbenv init - --no-rehash zsh)"
 export BUNDLE_USER_CACHE=$XDG_CACHE_HOME/bundle
 export BUNDLE_USER_CONFIG=$XDG_CONFIG_HOME/bundle/config
 export BUNDLE_USER_PLUGIN=$XDG_DATA_HOME/bundle
 
-export MIX_XDG="true"
-
+export MIX_XDG="true" # elixir

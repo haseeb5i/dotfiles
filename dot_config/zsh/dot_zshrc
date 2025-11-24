@@ -68,6 +68,7 @@ zinit light starship/starship
 
 # Development
 (( $+commands[pyenv] )) && eval "$(pyenv virtualenv-init -)"
+#(( $+commands[kubectl] )) && source <(kubectl completion zsh)
 
 # Aliases
 alias ls='ls --color'
