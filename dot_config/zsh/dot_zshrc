@@ -1,4 +1,4 @@
-# Download zinit, if it's not here yet
+
 ZINIT_HOME="${XDG_DATA_HOME}/zinit/zinit.git"
 if [ ! -d $ZINIT_HOME ]; then 
     mkdir -p "$(dirname $ZINIT_HOME)"
@@ -6,36 +6,62 @@ if [ ! -d $ZINIT_HOME ]; then
 fi
 source "${ZINIT_HOME}/zinit.zsh"
 
-# Core configuration
-zstyle ':completion:*:git-checkout:*' sort false
-zstyle ':completion:*:descriptions' format '[%d]'
-zstyle ':completion:*:warnings' format '%F{red}-- no matches found --%f'
-zstyle ':completion:*' menu no
-zstyle :history-search-multi-word page-size 10
+_fix-omz-plugin() {
+    [[ -f ./._zinit/teleid ]] || return 1
+    local teleid="$(<./._zinit/teleid)"
+    local pluginid
+    for pluginid (${teleid#OMZ::plugins/} ${teleid#OMZP::}) {
+        [[ $pluginid != $teleid ]] && break
+    }
+    (($?)) && return 1
+    print "Fixing $teleid..."
+    git clone --quiet --no-checkout --depth=1 --filter=tree:0 https://github.com/ohmyzsh/ohmyzsh
+    cd ./ohmyzsh
+    git sparse-checkout set --no-cone /plugins/$pluginid
+    git checkout --quiet
+    cd ..
+    local file
+    for file (./ohmyzsh/plugins/$pluginid/*~(.gitignore|*.plugin.zsh)(D)) {
+        print "Copying ${file:t}..."
+        cp -R $file ./${file:t}
+    }
+    rm -rf ./ohmyzsh
+}
 
-# Add some plugins
-zinit for \
-  PZTM::history \
-  OMZL::functions.zsh \
-  OMZP::vi-mode
+### begin configuration ###
 
+# zsh/plugin settings
+VI_MODE_SET_CURSOR=true
+VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
+zstyle ":history-search-multi-word" page-size "11"
+
+# https://github.com/ohmyzsh/ohmyzsh/tree/master/lib
 zinit wait lucid for \
   OMZL::completion.zsh \
-  PZTM::directory \
+  OMZL::functions.zsh \
   OMZL::git.zsh \
-  OMZP::git \
-  PZTM::terminal \
-  PZTM::spectrum \
-    atinit"zstyle ':omz:plugins:nvm' lazy yes" \
-  OMZP::nvm
+  OMZL::history.zsh \
+  OMZL::spectrum.zsh \
+  OMZL::termsupport.zsh
+
+# https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins
+zinit wait lucid for \
+  OMZP::command-not-found \
+  OMZP::nvm \
+  OMZP::pyenv \
+  OMZP::vi-mode
+zinit wait lucid atpull"%atclone" atclone"_fix-omz-plugin" for \
+  OMZ::plugins/gitfast 
+
 
 zinit wait lucid light-mode for \
   Aloxaf/fzf-tab \
-    blockf atpull'zinit creinstall -q .' \
-  zsh-users/zsh-completions \
-     atload'_zsh_autosuggest_start; bindkey "^[l" autosuggest-accept' \
-  zsh-users/zsh-autosuggestions \
-  zdharma-continuum/history-search-multi-word \
+  atinit"zicompinit; zicdreplay" \
+      zdharma-continuum/fast-syntax-highlighting \
+  atload'_zsh_autosuggest_start; bindkey "^[l" autosuggest-accept' \
+      zsh-users/zsh-autosuggestions \
+  blockf atpull'zinit creinstall -q .' \
+      zsh-users/zsh-completions \
     atclone"dircolors -b LS_COLORS > clrs.zsh" \
     atload'zstyle ":completion:*:default" list-colors ${(s.:.)LS_COLORS}' \
     atpull"%atclone" pick"clrs.zsh" nocompile'!' \
@@ -44,36 +70,31 @@ zinit wait lucid light-mode for \
   hlissner/zsh-autopair \
   urbainvaes/fzf-marks
 
-zinit wait lucid atinit"zicompinit; zicdreplay" for \
-  zdharma-continuum/fast-syntax-highlighting
+zinit wait"1" lucid light-mode for \
+  zdharma-continuum/history-search-multi-word \
+  psprint/zsh-navigation-tools
 
-
-# Add some bins
-zinit wait"1" lucid light-mode from"gh-r" as"program" for \
+zinit wait"1" lucid light-mode from"gh-r" as"command" for \
   junegunn/fzf \
     mv"bat* -> bat" pick"bat/bat" \
   @sharkdp/bat \
     mv"fd* -> fd" pick"fd/fd" \
   @sharkdp/fd \
-  eza-community/eza
+  eza-community/eza \
+    mv"direnv* -> direnv" \
+    atclone'./direnv hook zsh > zhook.zsh' atpull'%atclone' \
+    pick"direnv" src="zhook.zsh" \
+  direnv/direnv
 
-
-# Load starship prompt
-zinit ice as"command" from"gh-r" \
+# starship prompt
+zinit from"gh-r" as"command"  \
     atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship" \
-    atpull"%atclone" src"init.zsh"
-zinit light starship/starship
+    atpull"%atclone" src"init.zsh" for \
+  starship/starship
 
+# aliases
 
 # keybindings
 bindkey '^p' history-search-backward 
 bindkey '^n' history-search-forward
-
-# Development
-(( $+commands[pyenv] )) && eval "$(pyenv virtualenv-init -)"
-#(( $+commands[kubectl] )) && source <(kubectl completion zsh)
-
-# Aliases
-alias ls='ls --color'
-alias kssh="kitten ssh"
 
