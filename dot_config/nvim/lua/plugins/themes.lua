@@ -16,6 +16,7 @@ return {
     lazy = false,
     opts = {
       style = "night",
+      transparent = false,
       on_colors = function(colors)
         colors.fg_gutter = "#2E3249"
       end,

@@ -47,12 +47,16 @@ zinit wait lucid light-mode for \
 zinit wait lucid atinit"zicompinit; zicdreplay" for \
   zdharma-continuum/fast-syntax-highlighting
 
+
 # Add some bins
 zinit wait"1" lucid light-mode from"gh-r" as"program" for \
   junegunn/fzf \
+    mv"bat* -> bat" pick"bat/bat" \
   @sharkdp/bat \
+    mv"fd* -> fd" pick"fd/fd" \
   @sharkdp/fd \
   eza-community/eza
+
 
 # Load starship prompt
 zinit ice as"command" from"gh-r" \

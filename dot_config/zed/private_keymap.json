@@ -14,13 +14,15 @@
       "alt-k": "editor::MoveLineUp",
       "shift-h": "pane::ActivatePreviousItem",
       "shift-l": "pane::ActivateNextItem",
+      "[ b": "pane::ActivatePreviousItem",
+      "] b": "pane::ActivateNextItem",
       "alt-h": "pane::SwapItemLeft",
       "alt-l": "pane::SwapItemRight",
       "shift-q": "pane::CloseActiveItem",
       "space b d": "pane::CloseActiveItem",
-      "space b D": "pane::CloseOtherItems",
+      "space b o": "pane::CloseOtherItems",
       "space b p": "pane::TogglePinTab",
-      "space b o": ["pane::CloseAllItems", { "close_pinned": false }],
+      "space b shift-p": ["pane::CloseAllItems", { "close_pinned": false }],
 
       "space e": "workspace::ToggleLeftDock", // find better context?
       "space space": "file_finder::Toggle",
@@ -29,26 +31,27 @@
       "space x x": "diagnostics::Deploy",
       "] e": ["editor::GoToDiagnostic", { "severity": "error" }],
       "[ e": ["editor::GoToPreviousDiagnostic", { "severity": "error" }],
+      "] w": ["editor::GoToDiagnostic", { "severity": "warning" }],
+      "[ w": ["editor::GoToPreviousDiagnostic", { "severity": "warning" }],
 
+      // lsp
       "g r": "editor::FindAllReferences",
-      "g k": "editor::ShowSignatureHelp",
-      "space c f": "editor::Format",
-      "space c r": "editor::Rename",
+      "g shift-k": "editor::ShowSignatureHelp",
+      "space c f": "editor::Format", // from lazy, move to gf?
 
-      "space g g": ["task::Spawn", { "task_name": "Lazygit" }],
+      // git
       "space g x": "git::Branch",
-      "space g b": "git::Blame",
-
-      "space |": "pane::SplitRight",
-      "space -": "pane::SplitDown"
+      "space g b": "git::Blame"
     }
   },
   {
     "context": "vim_mode == insert",
     "bindings": {
+      "ctrl-space": "editor::ShowCompletions",
       "ctrl-s": "workspace::Save",
       "ctrl-e": "vim::EndOfLine",
-      "ctrl-b": "vim::StartOfLine"
+      "ctrl-b": "vim::StartOfLine",
+      "ctrl-k": "editor::ShowSignatureHelp"
     }
   },
   {
@@ -73,12 +76,6 @@
       "ctrl-shift-t": "workspace::NewTerminal",
       "ctrl-tab": "pane::ActivateNextItem",
       "ctrl-shift-tab": "pane::ActivatePreviousItem"
-    }
-  },
-  {
-    "context": "Picker > Editor",
-    "bindings": {
-      "ctrl-p": "menu::SelectPrevious"
     }
   },
   {

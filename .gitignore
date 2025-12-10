@@ -1,3 +1,6 @@
 dot_config/zsh/*
 !dot_config/zsh/dot_zprofile
 !dot_config/zsh/dot_zshrc
+
+dot_config/zed/conversations/*
+dot_config/zed/prompts/*

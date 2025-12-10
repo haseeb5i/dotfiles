@@ -7,25 +7,19 @@ map("i", "jk", "<Esc>", { desc = "Exit insert mode" })
 map("i", "<C-b>", "<ESC>^i", { desc = "Go to start of line" })
 map("i", "<C-e>", "<End>", { desc = "Go to end of line" })
 
-map("n", "gl", vim.diagnostic.open_float, { desc = "Show [l]ine Diagnostics" })
+-- map("n", "gl", vim.diagnostic.open_float, { desc = "Show [l]ine Diagnostics" })
 
 -- bufferline
 map("n", "<A-l>", "<cmd>BufferLineMoveNext<cr>", { desc = "Move buffer to next" })
 map("n", "<A-h>", "<cmd>BufferLineMovePrev<cr>", { desc = "Move buffer to previous" })
 map("n", "<A-p>", "<cmd>BufferLinePick<cr>", { desc = "Pick a buffer" })
 
--- comments
-map("n", "<c-/>", "<cmd>normal gcc<cr>")
-map("n", "<c-_>", "<cmd>normal gcc<cr>")
-map("x", "<c-/>", "<cmd>normal gc<cr>")
-map("x", "<c-_>", "<cmd>normal gc<cr>")
-
 -- floating terminal
+vim.keymap.del("n", "<c-/>")
+vim.keymap.del("n", "<c-_>")
 map("n", "<c-\\>", function()
   Snacks.terminal(nil, { cwd = LazyVim.root() })
 end, { desc = "Terminal (Root Dir)" })
-vim.keymap.del("t", "<c-/>")
-vim.keymap.del("t", "<c-_>")
 map("t", "<c-\\>", "<cmd>close<cr>", { desc = "Hide Terminal" })
 
 -- miscellaneous maps
@@ -36,6 +30,8 @@ map("x", "p", 'p:let @+=@0<CR>:let @"=@0<CR>', { silent = true })
 map("n", "gx", function()
   vim.fn.jobstart({ "xdg-open", vim.fn.expand("<cfile>") }, { detach = true })
 end, { desc = "Open link under cursor" })
--- seems not to be working
-vim.cmd([[ cnoremap <expr>  <C-j>  pumvisible() ? "<C-n>" : "<C-j>" ]])
-vim.cmd([[ cnoremap <expr>  <C-k>  pumvisible() ? "<C-p>" : "<C-k>" ]])
+
+-- macos specific
+map("i", "<D-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
+map("n", "<D-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
+map("x", "<D-s>", "<cmd>w<cr><esc>", { desc = "Save File" })

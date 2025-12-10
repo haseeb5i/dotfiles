@@ -13,6 +13,7 @@ vim.g.cmp_widths = {
   abbr = 40,
 }
 vim.g.ai_cmp = true
+vim.g.lazyvim_picker = "snacks" -- or "fzf"
 
 -- neovide configuration
 if vim.g.neovide then

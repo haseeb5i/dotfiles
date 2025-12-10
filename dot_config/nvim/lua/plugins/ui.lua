@@ -18,7 +18,7 @@ return {
             win = {
               input = {
                 keys = {
-                  -- ["<Esc>"] = { "toggle_focus", mode = { "n", "i" } },
+                  ["<Esc>"] = { "toggle_focus", mode = { "n", "i" } },
                 },
               },
             },
