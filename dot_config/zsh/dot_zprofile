@@ -93,12 +93,4 @@ path=(
   $ANDROID_HOME/platform-tools
   $path
 )
-
-# ruby (only for fastlane)
-export RBENV_ROOT="$XDG_DATA_HOME"/rbenv
-(( $+commands[rbenv] )) && eval "$(rbenv init - --no-rehash zsh)"
-export BUNDLE_USER_CACHE=$XDG_CACHE_HOME/bundle
-export BUNDLE_USER_CONFIG=$XDG_CONFIG_HOME/bundle/config
-export BUNDLE_USER_PLUGIN=$XDG_DATA_HOME/bundle
-
 export MIX_XDG="true" # elixir

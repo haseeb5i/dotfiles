@@ -4,15 +4,6 @@
 // documentation: https://zed.dev/docs/configuring-zed
 //
 {
-  "context_servers": {
-    "ESLint": {
-      "enabled": true,
-      "command": "npx",
-      "args": [
-        "@eslint/mcp@latest"
-      ]
-    }
-  },
   "features": {
     "edit_prediction_provider": "zed"
   },
