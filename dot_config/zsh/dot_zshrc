@@ -28,23 +28,25 @@ _fix-omz-plugin() {
     rm -rf ./ohmyzsh
 }
 
-### begin configuration ###
+### Begin Configuration ###
 
 # zsh/plugin settings
 VI_MODE_SET_CURSOR=true
 VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
 zstyle ":history-search-multi-word" page-size "11"
 
-# https://github.com/ohmyzsh/ohmyzsh/tree/master/lib
-zinit wait lucid for \
+#typeset -ga zle_highlight
+#zle_highlight+=(paste:none)
+
+# https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins
+zinit for \
   OMZL::completion.zsh \
   OMZL::functions.zsh \
   OMZL::git.zsh \
-  OMZL::history.zsh \
+  PZTM::history \
   OMZL::spectrum.zsh \
   OMZL::termsupport.zsh
 
-# https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins
 zinit wait lucid for \
   OMZP::command-not-found \
   OMZP::nvm \
