@@ -1,53 +1,105 @@
-// Zed settings
-//
-// For information on how to configure Zed, see the Zed
-// documentation: https://zed.dev/docs/configuring-zed
-//
 {
-  "features": {
-    "edit_prediction_provider": "zed"
-  },
-  "agent": {
-    "default_model": {
-      "provider": "copilot_chat",
-      "model": "gpt-4.1"
+    "cli_default_open_behavior": "existing_window",
+    "project_panel": {
+        "dock": "left"
     },
-    "inline_assistant_model": {
-      "provider": "copilot_chat",
-      "model": "gpt-4.1"
+    "outline_panel": {
+        "dock": "left"
     },
-    "model_parameters": [],
-    "always_allow_tool_actions": true
-  },
-  "auto_install_extensions": {
-    "html": true,
-    "graphql": true,
-    "sql": true,
-    "prisma": true
-  },
-  "buffer_font_family": "FiraCode Nerd Font",
-  "git": {
-    "inline_blame": { "enabled": false }
-  },
-  "scrollbar": { "show": "never" },
-  "toolbar": {
-    "quick_actions": false
-  },
-  "format_on_save": "off",
-  "inlay_hints": { "enabled": false },
-  "use_smartcase_search": true,
-  "vim_mode": true,
-  "vim": {
-    "toggle_relative_line_numbers": true
-  },
-  "theme": {
-    "mode": "system",
-    "light": "Gruvbox Light",
-    "dark": "Ayu Dark"
-  },
-  "telemetry": { "metrics": false },
-  "edit_predictions": {
-    "mode": "subtle",
-    "enabled_in_text_threads": false
-  }
+    "collaboration_panel": {
+        "dock": "left"
+    },
+    "git_panel": {
+        "dock": "left"
+    },
+    "diff_view_style": "unified",
+    "lsp": {
+        "vtsls": {
+            "settings": {
+                "typescript": {
+                    "updateImportsOnFileMove": {
+                        "enabled": "always"
+                    }
+                },
+                "javascript": {
+                    "updateImportsOnFileMove": {
+                        "enabled": "always"
+                    }
+                }
+            },
+            "enable_lsp_tasks": true
+        }
+    },
+    "agent_servers": {
+        "claude-acp": {
+            "default_config_options": {
+                "model": "default"
+            },
+            "type": "registry"
+        }
+    },
+    "context_servers": {
+        "prisma-mcp": {
+            "enabled": true,
+            "remote": false,
+            "settings": {}
+        },
+        "shadcn-mcp-server": {
+            "enabled": true,
+            "remote": false,
+            "settings": {}
+        }
+    },
+    "agent": {
+        "sidebar_side": "right",
+        "dock": "right",
+        "default_model": {
+            "enable_thinking": false,
+            "provider": "copilot_chat",
+            "model": "gpt-4.1"
+        },
+        "inline_assistant_model": {
+            "provider": "copilot_chat",
+            "model": "gpt-4o"
+        }
+    },
+    "auto_install_extensions": {
+        "html": true,
+        "sql": true,
+        "prisma": true
+    },
+    "buffer_font_family": "FiraCode Nerd Font",
+    "git": {
+        "inline_blame": {
+            "enabled": false
+        }
+    },
+    "scrollbar": {
+        "show": "never"
+    },
+    "toolbar": {
+        "quick_actions": false
+    },
+    "format_on_save": "off",
+    "inlay_hints": {
+        "enabled": false
+    },
+    "use_smartcase_search": true,
+    "vim_mode": true,
+    "vim": {
+        "toggle_relative_line_numbers": true
+    },
+    "theme": {
+        "mode": "system",
+        "light": "Gruvbox Light",
+        "dark": "Ayu Dark"
+    },
+    "telemetry": {
+        "metrics": false
+    },
+    "edit_predictions": {
+        "provider": "zed",
+        "mode": "subtle",
+        "enabled_in_text_threads": false
+    }
 }

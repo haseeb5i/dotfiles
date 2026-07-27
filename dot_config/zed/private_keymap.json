@@ -7,52 +7,133 @@
 // from the command palette.
 [
   {
-    "context": "Editor && VimControl && !menu",
+    "context": "Editor && vim_mode == normal && !VimWaiting && !menu",
     "bindings": {
-      "p": ["vim::Paste", { "preserve_clipboard": true }],
-      "alt-j": "editor::MoveLineDown",
-      "alt-k": "editor::MoveLineUp",
+      // put key-bindings here if you want them to work only in normal mode
+      // Window movement
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-l": "workspace::ActivatePaneRight",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-j": "workspace::ActivatePaneDown",
+
+      // Genearl
+      "ctrl-s": "workspace::Save",
+      "space space": "file_finder::Toggle",
+      "space f f": "file_finder::Toggle",
+      "space f r": "projects::OpenRecent",
+      // <leader>fp	Projects	n
+      "space e": "pane::RevealInProjectPanel",
+      "space /": "pane::DeploySearch",
+      "space s g": "pane::DeploySearch",
+      // <leader>fn	New File
+      // <leader>s"	Registers	n
+      // <leader>sm	Marks	n
+
+      // Buffers / Tabs
       "shift-h": "pane::ActivatePreviousItem",
       "shift-l": "pane::ActivateNextItem",
-      "[ b": "pane::ActivatePreviousItem",
-      "] b": "pane::ActivateNextItem",
-      "alt-h": "pane::SwapItemLeft",
-      "alt-l": "pane::SwapItemRight",
       "shift-q": "pane::CloseActiveItem",
+      "space b b": "tab_switcher::Toggle",
+      "space ,": "tab_switcher::Toggle",
       "space b d": "pane::CloseActiveItem",
       "space b o": "pane::CloseOtherItems",
       "space b p": "pane::TogglePinTab",
       "space b shift-p": ["pane::CloseAllItems", { "close_pinned": false }],
 
-      "space e": "workspace::ToggleLeftDock", // find better context?
-      "space space": "file_finder::Toggle",
-      "space /": "pane::DeploySearch",
-      "space ,": "tab_switcher::ToggleAll",
+      // Standard LSP
+      "g r": "editor::FindAllReferences",
+      "g shift-k": "editor::ShowSignatureHelp",
       "space x x": "diagnostics::Deploy",
+      "space c f": "editor::Format",
+      // <leader>cl	Lsp Info
+      // <leader>ca	Code Action	n, x
+      // <leader>cc	Run Codelens	n, x
+      // <leader>cr	Rename
+      // <leader>ss	LSP Symbols	n
+      // <leader>sS	LSP Workspace Symbols	n
+
+      // Diagnostics Navigation
       "] e": ["editor::GoToDiagnostic", { "severity": "error" }],
       "[ e": ["editor::GoToPreviousDiagnostic", { "severity": "error" }],
       "] w": ["editor::GoToDiagnostic", { "severity": "warning" }],
       "[ w": ["editor::GoToPreviousDiagnostic", { "severity": "warning" }],
+      // <leader>xx	Diagnostics (Trouble)
+      //
+      // gsa	Add Surrounding	n, x
+      // gsd	Delete Surrounding	n
+      // gsf	Find Right Surrounding	n
+      // gsF	Find Left Surrounding	n
+      // gsh	Highlight Surrounding	n
+      // gsn	Update MiniSurround.config.n_lines	n
+      // gsr	Replace Surrounding	n
 
-      // lsp
-      "g r": "editor::FindAllReferences",
-      "g shift-k": "editor::ShowSignatureHelp",
-      "space c f": "editor::Format", // from lazy, move to gf?
-
-      // git
+      // Git
       "space g x": "git::Branch",
-      "space g b": "git::Blame"
-    }
+      "space g b": "git::Blame",
+      "space g g": "git_panel::ToggleFocus",
+      // space g h  r(eset) R s(tage S) u(undo)
+
+      // Toggles
+      // <leader>uf	Toggle Auto Format (Global)	n
+      "space u w": "editor::ToggleSoftWrap",
+      // <leader>ul	Toggle Line Numbers
+      // <leader>uh	Toggle Inlay Hints
+      //
+      // <leader>ft	Terminal (Root Dir)	n
+      // <c-/>	Terminal (Root Dir)	n, t
+      // <leader>-	Split Window Below	n
+      // <leader>|	Split Window Right
+    },
   },
   {
-    "context": "vim_mode == insert",
+    "context": "Editor && (vim_mode == normal || vim_mode == visual) && !VimWaiting && !menu",
+    // put key-bindings here if you want them to work in normal & visual mode
     "bindings": {
+      // Agent
+      "space a c": "agent::ToggleFocus",
+
+
+      // Markdown
+      "space m p": "markdown::OpenPreview",
+      "space m P": "markdown::OpenPreviewToTheSide",
+
+      // Toggles
+      "space c z": "workspace::ToggleCenteredLayout",
+
+      // Others
+      "g f": "editor::OpenExcerpts",
+    },
+  },
+  {
+    "context": "Editor && VimControl && !menu",
+    "bindings": {
+      "p": ["vim::Paste", { "preserve_clipboard": true }],
+
+      "alt-j": "editor::MoveLineDown",
+      "alt-k": "editor::MoveLineUp",
+      "alt-h": "pane::SwapItemLeft",
+      "alt-l": "pane::SwapItemRight",
+
+      "space e": "workspace::ToggleLeftDock", // find better context?
+    },
+  },
+  {
+    "context": "Editor && vim_mode == insert && !menu",
+    "bindings": {
+      "j k": "vim::NormalBefore",
       "ctrl-space": "editor::ShowCompletions",
       "ctrl-s": "workspace::Save",
       "ctrl-e": "vim::EndOfLine",
       "ctrl-b": "vim::StartOfLine",
-      "ctrl-k": "editor::ShowSignatureHelp"
-    }
+      "ctrl-k": "editor::ShowSignatureHelp",
+    },
+  },
+  {
+    "context": "Editor && vim_mode == visual && !VimWaiting && !menu",
+    "bindings": {
+      // visual, visual line & visual block modes
+      "g c": "editor::ToggleComments",
+    },
   },
   {
     "context": "ProjectPanel && not_editing",
@@ -61,12 +142,19 @@
       "shift-a": "project_panel::NewDirectory",
       "r": "project_panel::Rename",
       "d": "project_panel::Delete",
+      "x": "project_panel::Cut",
+      "c": "project_panel::Copy",
+      "p": "project_panel::Paste",
       "y": "workspace::CopyPath",
       "shift-y": "workspace::CopyRelativePath",
       "q": "workspace::ToggleLeftDock",
-      "space e": "workspace::ToggleLeftDock", // find better context
-      "ctrl-d": "project_panel::Duplicate"
-    }
+      "space e": "project_panel::ToggleFocus",
+      "ctrl-d": "project_panel::Duplicate",
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-l": "workspace::ActivatePaneRight",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-j": "workspace::ActivatePaneDown",
+    },
   },
   {
     "context": "Workspace || Editor || Terminal",
@@ -75,14 +163,24 @@
       "ctrl-|": "terminal_panel::ToggleFocus",
       "ctrl-shift-t": "workspace::NewTerminal",
       "ctrl-tab": "pane::ActivateNextItem",
-      "ctrl-shift-tab": "pane::ActivatePreviousItem"
-    }
+      "ctrl-shift-tab": "pane::ActivatePreviousItem",
+    },
   },
   {
     "context": "EmptyPane || SharedScreen",
+    // Empty pane, set of keybindings that are available when there is no active editor
     "bindings": {
       "space space": "file_finder::Toggle",
-      "space f p": "projects::OpenRecent"
-    }
-  }
+      "space f r": "projects::OpenRecent",
+    },
+  },
+  {
+    "context": "Dock",
+    "bindings": {
+      "ctrl-w h": "workspace::ActivatePaneLeft",
+      "ctrl-w l": "workspace::ActivatePaneRight",
+      "ctrl-w k": "workspace::ActivatePaneUp",
+      "ctrl-w j": "workspace::ActivatePaneDown",
+    },
+  },
 ]
