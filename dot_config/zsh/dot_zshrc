@@ -82,11 +82,7 @@ zinit wait"1" lucid light-mode from"gh-r" as"command" for \
   @sharkdp/bat \
     mv"fd* -> fd" pick"fd/fd" \
   @sharkdp/fd \
-  eza-community/eza \
-    mv"direnv* -> direnv" \
-    atclone'./direnv hook zsh > zhook.zsh' atpull'%atclone' \
-    pick"direnv" src="zhook.zsh" \
-  direnv/direnv
+  eza-community/eza
 
 # starship prompt
 zinit from"gh-r" as"command"  \
@@ -100,3 +96,4 @@ zinit from"gh-r" as"command"  \
 bindkey '^p' history-search-backward 
 bindkey '^n' history-search-forward
 
+(( $+commands[mise] )) && eval "$(mise activate zsh)"
