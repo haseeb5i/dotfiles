@@ -22,7 +22,6 @@ export ICEAUTHORITY="$XDG_CACHE_HOME/ICEauthority"
 export IONIC_CONFIG_DIRECTORY="$XDG_CONFIG_HOME/ionic"
 export IPFS_PATH="$XDG_DATA_HOME/ipfs"
 export KSCRIPT_CACHE_DIR="$XDG_CACHE_HOME"/kscript
-export RIPGREP_CONFIG_PATH=$XDG_CONFIG_HOME/ripgrep/config
 export SCREENRC="$XDG_CONFIG_HOME"/screen/screenrc
 export SCREENDIR="${XDG_RUNTIME_DIR}/screen"
 export TLDR_CACHE_DIR="$XDG_CACHE_HOME"/tldr

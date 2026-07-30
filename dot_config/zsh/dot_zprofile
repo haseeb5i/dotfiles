@@ -40,21 +40,12 @@ if [[ -z "$LESS" ]]; then
 fi
 
 # Development
+
 # Node
 export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
 export NODE_REPL_HISTORY=$XDG_DATA_HOME/node_repl_history
-export PNPM_HOME=$XDG_DATA_HOME/pnpm
-export BUN_INSTALL=$XDG_DATA_HOME/bun
-path=(
-  $PNPM_HOME/bin
-  $XDG_DATA_HOME/npm/bin
-  $BUN_INSTALL/bin
-  $path
-)
 
 # Go
-export GOPATH=$XDG_DATA_HOME/go
-export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 export GOMODCACHE=$XDG_CACHE_HOME/go/mod
 
 # Python
@@ -69,13 +60,11 @@ export RUSTUP_HOME=$XDG_DATA_HOME/rustup
 [ -f "$CARGO_HOME/env" ] && \. "$CARGO_HOME/env"
 
 # C#
-export DOTNET_CLI_HOME="$XDG_DATA_HOME"/dotnet # some libs still use $HOME
-export PATH=$PATH:$DOTNET_CLI_HOME/.dotnet/tools
 export NUGET_PACKAGES="$XDG_CACHE_HOME"/NuGetPackages
 export OMNISHARPHOME="$XDG_CONFIG_HOME"/omnisharp
 
 # android
-export ANDROID_HOME=$XDG_DATA_HOME/android-sdk
+export ANDROID_HOME="$HOME/Android/Sdk"
 if [[ "$OSTYPE" == darwin* ]]; then
   export ANDROID_HOME="$HOME/Library/Android/sdk"
 fi

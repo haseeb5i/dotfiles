@@ -1,99 +1,71 @@
-
-ZINIT_HOME="${XDG_DATA_HOME}/zinit/zinit.git"
-if [ ! -d $ZINIT_HOME ]; then 
-    mkdir -p "$(dirname $ZINIT_HOME)"
-    git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+### zinit bootstrap ###
+ZINIT_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/zinit/zinit.git"
+if [[ ! -d $ZINIT_HOME ]]; then
+  mkdir -p "$(dirname "$ZINIT_HOME")"
+  git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 fi
-source "${ZINIT_HOME}/zinit.zsh"
+source "$ZINIT_HOME/zinit.zsh"
 
-_fix-omz-plugin() {
-    [[ -f ./._zinit/teleid ]] || return 1
-    local teleid="$(<./._zinit/teleid)"
-    local pluginid
-    for pluginid (${teleid#OMZ::plugins/} ${teleid#OMZP::}) {
-        [[ $pluginid != $teleid ]] && break
-    }
-    (($?)) && return 1
-    print "Fixing $teleid..."
-    git clone --quiet --no-checkout --depth=1 --filter=tree:0 https://github.com/ohmyzsh/ohmyzsh
-    cd ./ohmyzsh
-    git sparse-checkout set --no-cone /plugins/$pluginid
-    git checkout --quiet
-    cd ..
-    local file
-    for file (./ohmyzsh/plugins/$pluginid/*~(.gitignore|*.plugin.zsh)(D)) {
-        print "Copying ${file:t}..."
-        cp -R $file ./${file:t}
-    }
-    rm -rf ./ohmyzsh
-}
+### mise: owns CLI binaries + language runtimes ###
+fpath+=("$XDG_DATA_HOME/mise-completions/zsh")
+(( $+commands[mise] )) && eval "$(mise activate zsh)"
 
-### Begin Configuration ###
+### core (synchronous) ###
+ZVM_INIT_MODE=sourcing
+zinit light-mode for \
+    OMZL::completion.zsh \
+    OMZL::functions.zsh \
+    OMZL::termsupport.zsh \
+    PZTM::history \
+    OMZP::command-not-found \
+  depth=1 \
+    jeffreytse/zsh-vi-mode
 
-# zsh/plugin settings
-VI_MODE_SET_CURSOR=true
-VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
-zstyle ":history-search-multi-word" page-size "11"
+zstyle ':completion:*:git-checkout:*' sort false
+zstyle ':completion:*:descriptions' format '[%d]'
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' menu no
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
+zstyle ':fzf-tab:*' fzf-flags --color=fg:1,fg+:2 --bind=tab:accept
+zstyle ':fzf-tab:*' use-fzf-default-opts yes
+zstyle ':fzf-tab:*' switch-group '<' '>'
 
-#typeset -ga zle_highlight
-#zle_highlight+=(paste:none)
-
-# https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins
-zinit for \
-  OMZL::completion.zsh \
-  OMZL::functions.zsh \
-  OMZL::git.zsh \
-  PZTM::history \
-  OMZL::spectrum.zsh \
-  OMZL::termsupport.zsh
-
-zinit wait lucid for \
-  OMZP::command-not-found \
-  OMZP::nvm \
-  OMZP::pyenv \
-  OMZP::vi-mode
-zinit wait lucid atpull"%atclone" atclone"_fix-omz-plugin" for \
-  OMZ::plugins/gitfast 
-
-
+### completions / highlighting / suggestions (order matters) ###
 zinit wait lucid light-mode for \
-  Aloxaf/fzf-tab \
-  atinit"zicompinit; zicdreplay" \
-      zdharma-continuum/fast-syntax-highlighting \
-  atload'_zsh_autosuggest_start; bindkey "^[l" autosuggest-accept' \
-      zsh-users/zsh-autosuggestions \
   blockf atpull'zinit creinstall -q .' \
-      zsh-users/zsh-completions \
-    atclone"dircolors -b LS_COLORS > clrs.zsh" \
-    atload'zstyle ":completion:*:default" list-colors ${(s.:.)LS_COLORS}' \
-    atpull"%atclone" pick"clrs.zsh" nocompile'!' \
-  trapd00r/LS_COLORS \
-  wfxr/forgit \
-  hlissner/zsh-autopair \
-  urbainvaes/fzf-marks
+    zsh-users/zsh-completions \
+  blockf atinit"zicompinit; zicdreplay" \
+    Aloxaf/fzf-tab \
+    zdharma-continuum/fast-syntax-highlighting \
+  atload'_zsh_autosuggest_start; bindkey "^[l" autosuggest-accept' \
+    zsh-users/zsh-autosuggestions \
+  atclone"dircolors -b LS_COLORS > clrs.zsh" \
+  atpull"%atclone" pick"clrs.zsh" nocompile'!' \
+    trapd00r/LS_COLORS \
+  src="etc/git-extras-completion.zsh" \
+    tj/git-extras
 
+### extras ###
 zinit wait"1" lucid light-mode for \
-  zdharma-continuum/history-search-multi-word \
-  psprint/zsh-navigation-tools
+    wfxr/forgit \
+    hlissner/zsh-autopair \
+    urbainvaes/fzf-marks
 
-zinit wait"1" lucid light-mode from"gh-r" as"command" for \
-  junegunn/fzf \
-    mv"bat* -> bat" pick"bat/bat" \
-  @sharkdp/bat \
-    mv"fd* -> fd" pick"fd/fd" \
-  @sharkdp/fd \
-  eza-community/eza
+### aliases ###
+alias ..='cd ..'
+alias ...='cd ../..'
+alias grep='grep --color=auto'
+alias cat='bat --paging=never'
+alias ls='eza --icons'
+alias ll='eza -lah --icons --git'
+alias tree='eza --tree --icons'
 
-# starship prompt
-zinit from"gh-r" as"command"  \
-    atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship" \
-    atpull"%atclone" src"init.zsh" for \
-  starship/starship
-
-# aliases
-
-# keybindings
-bindkey '^p' history-search-backward 
+### keybindings ###
+bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
 
-(( $+commands[mise] )) && eval "$(mise activate zsh)"
+### tool shell integrations ###
+(( $+commands[starship] )) && eval "$(starship init zsh)"
+(( $+commands[fzf] ))      && eval "$(fzf --zsh)"
+(( $+commands[zoxide] ))   && eval "$(zoxide init zsh)"
+

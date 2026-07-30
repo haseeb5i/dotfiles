@@ -1,0 +1,28 @@
+[tools]
+node = "lts"
+bun = "latest"
+pnpm = "latest"
+go = "latest"
+python = "latest"
+uv = "latest"
+ruby = "3.3"
+dotnet = "latest"
+
+bat = "latest"
+eza = "latest"
+fzf = "latest"
+fd = "latest"
+starship = "latest"
+ripgrep = "latest"
+zoxide = "latest"
+usage = "latest"
+"github:alltuner/mise-completions-sync" = "latest"
+
+[hooks]
+postinstall = "misecompsync --shell zsh"
+
+[settings]
+idiomatic_version_file_enable_tools = ["node"]
+
+[settings.ruby]
+compile = false
