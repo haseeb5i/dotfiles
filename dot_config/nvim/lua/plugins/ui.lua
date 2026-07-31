@@ -31,7 +31,6 @@ return {
         { progress },
       }
 
-      table.insert(opts.sections.lualine_x, 2, LazyVim.lualine.cmp_source("codeium"))
     end,
   },
   {
@@ -46,8 +45,8 @@ return {
         delay_syntax = 80,
       },
       func_map = {
-        prevfile = "<c-p",
-        nextfile = "<c-n",
+        prevfile = "<c-p>",
+        nextfile = "<c-n>",
       },
     },
   },

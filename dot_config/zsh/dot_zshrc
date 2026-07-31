@@ -10,7 +10,6 @@ source "$ZINIT_HOME/zinit.zsh"
 fpath+=("$XDG_DATA_HOME/mise-completions/zsh")
 (( $+commands[mise] )) && eval "$(mise activate zsh)"
 
-### core (synchronous) ###
 ZVM_INIT_MODE=sourcing
 zinit light-mode for \
     OMZL::completion.zsh \
@@ -23,40 +22,34 @@ zinit light-mode for \
 
 zstyle ':completion:*:git-checkout:*' sort false
 zstyle ':completion:*:descriptions' format '[%d]'
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-zstyle ':completion:*' menu no
+zstyle ':completion:*:*:*:*:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
-zstyle ':fzf-tab:*' fzf-flags --color=fg:1,fg+:2 --bind=tab:accept
 zstyle ':fzf-tab:*' use-fzf-default-opts yes
 zstyle ':fzf-tab:*' switch-group '<' '>'
 
-### completions / highlighting / suggestions (order matters) ###
 zinit wait lucid light-mode for \
   blockf atpull'zinit creinstall -q .' \
     zsh-users/zsh-completions \
   blockf atinit"zicompinit; zicdreplay" \
     Aloxaf/fzf-tab \
-    zdharma-continuum/fast-syntax-highlighting \
+    hlissner/zsh-autopair \
   atload'_zsh_autosuggest_start; bindkey "^[l" autosuggest-accept' \
     zsh-users/zsh-autosuggestions \
   atclone"dircolors -b LS_COLORS > clrs.zsh" \
   atpull"%atclone" pick"clrs.zsh" nocompile'!' \
+  atload'zstyle ":completion:*" list-colors ${(s.:.)LS_COLORS}' \
     trapd00r/LS_COLORS \
   src="etc/git-extras-completion.zsh" \
-    tj/git-extras
-
-### extras ###
-zinit wait"1" lucid light-mode for \
+    tj/git-extras \
     wfxr/forgit \
-    hlissner/zsh-autopair \
-    urbainvaes/fzf-marks
+    zdharma-continuum/fast-syntax-highlighting
 
 ### aliases ###
 alias ..='cd ..'
 alias ...='cd ../..'
 alias grep='grep --color=auto'
 alias cat='bat --paging=never'
-alias ls='eza --icons'
+alias ls='eza --icons=auto'
 alias ll='eza -lah --icons --git'
 alias tree='eza --tree --icons'
 
@@ -66,6 +59,4 @@ bindkey '^n' history-search-forward
 
 ### tool shell integrations ###
 (( $+commands[starship] )) && eval "$(starship init zsh)"
-(( $+commands[fzf] ))      && eval "$(fzf --zsh)"
-(( $+commands[zoxide] ))   && eval "$(zoxide init zsh)"
 
