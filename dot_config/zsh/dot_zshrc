@@ -1,50 +1,61 @@
-### zinit bootstrap ###
-ZINIT_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/zinit/zinit.git"
-if [[ ! -d $ZINIT_HOME ]]; then
-  mkdir -p "$(dirname "$ZINIT_HOME")"
-  git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+# Keep the pre-zim history file
+HISTFILE=${ZDOTDIR:-${HOME}}/.zsh_history
+
+# Keep completion state out of the config dir. Must be set before zim's
+# completion module runs compinit.
+zstyle ':zim:completion' dumpfile "${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump"
+zstyle ':completion::complete:*' cache-path "${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompcache"
+
+fpath+=("${XDG_DATA_HOME:-$HOME/.local/share}/mise-completions/zsh")
+(( ${+commands[mise]} )) && eval "$(mise activate zsh)"
+
+setopt HIST_IGNORE_ALL_DUPS
+
+bindkey -v
+# Without this, ESC waits 400ms before vicmd engages.
+KEYTIMEOUT=1
+
+WORDCHARS=${WORDCHARS//[\/]}
+
+# Disable automatic widget re-binding on each precmd. This can be set when
+# zsh-users/zsh-autosuggestions is the last module in your ~/.zimrc.
+ZSH_AUTOSUGGEST_MANUAL_REBIND=1
+
+ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
+if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
+  if (( ${+commands[curl]} )); then
+    curl -fsSL --create-dirs -o ${ZIM_HOME}/zimfw.zsh \
+        https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
+  else
+    mkdir -p ${ZIM_HOME} && wget -nv -O ${ZIM_HOME}/zimfw.zsh \
+        https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
+  fi
 fi
-source "$ZINIT_HOME/zinit.zsh"
+if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZIM_CONFIG_FILE:-${ZDOTDIR:-${HOME}}/.zimrc} ]]; then
+  source ${ZIM_HOME}/zimfw.zsh init
+fi
+source ${ZIM_HOME}/init.zsh
 
-### mise: owns CLI binaries + language runtimes ###
-fpath+=("$XDG_DATA_HOME/mise-completions/zsh")
-(( $+commands[mise] )) && eval "$(mise activate zsh)"
-
-ZVM_INIT_MODE=sourcing
-zinit light-mode for \
-    OMZL::completion.zsh \
-    OMZL::functions.zsh \
-    OMZL::termsupport.zsh \
-    PZTM::history \
-    OMZP::command-not-found \
-  depth=1 \
-    jeffreytse/zsh-vi-mode
-
+# Completion styles (after zim's completion module so these win).
 zstyle ':completion:*:git-checkout:*' sort false
 zstyle ':completion:*:descriptions' format '[%d]'
 zstyle ':completion:*:*:*:*:*' menu no
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 zstyle ':fzf-tab:*' use-fzf-default-opts yes
 zstyle ':fzf-tab:*' switch-group '<' '>'
 
-zinit wait lucid light-mode for \
-  blockf atpull'zinit creinstall -q .' \
-    zsh-users/zsh-completions \
-  blockf atinit"zicompinit; zicdreplay" \
-    Aloxaf/fzf-tab \
-    hlissner/zsh-autopair \
-  atload'_zsh_autosuggest_start; bindkey "^[l" autosuggest-accept' \
-    zsh-users/zsh-autosuggestions \
-  atclone"dircolors -b LS_COLORS > clrs.zsh" \
-  atpull"%atclone" pick"clrs.zsh" nocompile'!' \
-  atload'zstyle ":completion:*" list-colors ${(s.:.)LS_COLORS}' \
-    trapd00r/LS_COLORS \
-  src="etc/git-extras-completion.zsh" \
-    tj/git-extras \
-    wfxr/forgit \
-    zdharma-continuum/fast-syntax-highlighting
+if [[ -x /usr/libexec/pk-command-not-found ]]; then
+  command_not_found_handler() {
+    if [[ -S /run/dbus/system_bus_socket && -x /usr/libexec/packagekitd ]]; then
+      /usr/libexec/pk-command-not-found "$@"
+      return $?
+    fi
+    print -u2 "zsh: command not found: $1"
+    return 127
+  }
+fi
 
-### aliases ###
 alias ..='cd ..'
 alias ...='cd ../..'
 alias grep='grep --color=auto'
@@ -52,11 +63,27 @@ alias cat='bat --paging=never'
 alias ls='eza --icons=auto'
 alias ll='eza -lah --icons --git'
 alias tree='eza --tree --icons'
+alias lg='lazygit'
 
-### keybindings ###
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
+bindkey '^[l' autosuggest-accept
 
-### tool shell integrations ###
-(( $+commands[starship] )) && eval "$(starship init zsh)"
+# fzf: Ctrl-R history, Ctrl-T files, Alt-C cd. Binds viins/vicmd too, so this is
+# correct under `bindkey -v`. Independent of fzf-tab.
+if (( ${+commands[fzf]} )); then
+  export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'
+  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+  export FZF_ALT_C_COMMAND='fd --type d --hidden --exclude .git'
+  export FZF_CTRL_T_OPTS="--preview 'bat --color=always --style=numbers --line-range=:200 {}'"
+  source <(fzf --zsh)
+  # fzf --zsh rebinds Tab to its own fzf-completion, shadowing fzf-tab. fzf-tab is
+  # the better one here (context-aware, and the fzf-preview zstyles above target it).
+  (( ${+functions[fzf-tab-complete]} )) && bindkey '^I' fzf-tab-complete
+fi
 
+(( ${+commands[zoxide]} )) && eval "$(zoxide init zsh)"
+
+(( ${+commands[starship]} )) && eval "$(starship init zsh)"
+
+[[ -r ${ZDOTDIR}/secrets.sh ]] && source ${ZDOTDIR}/secrets.sh

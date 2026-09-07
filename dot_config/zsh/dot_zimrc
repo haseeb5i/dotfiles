@@ -1,0 +1,20 @@
+zmodule environment
+zmodule git
+zmodule input
+zmodule termtitle
+zmodule utility
+
+zmodule hlissner/zsh-autopair
+
+zmodule zsh-users/zsh-completions --fpath src
+# Enables and configures smart and extensive tab completion, must be sourced
+# after all modules that add completion definitions.
+zmodule completion
+# fzf-driven completion menu, must be sourced after compinit.
+zmodule Aloxaf/fzf-tab
+
+zmodule trapd00r/LS_COLORS --cmd 'eval "$(dircolors -b {}/LS_COLORS)"'
+
+# Syntax highlighting, must be sourced after completion.
+zmodule zdharma-continuum/fast-syntax-highlighting
+zmodule zsh-users/zsh-autosuggestions

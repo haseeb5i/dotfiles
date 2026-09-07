@@ -1,7 +1,3 @@
-#
-# Executes commands at login; pre-zshrc
-#
-
 # Browser
 if [[ -z "$BROWSER" && "$OSTYPE" == darwin* ]]; then
   export BROWSER='open'
@@ -20,12 +16,6 @@ fi
 # Ensure path arrays do not contain duplicates.
 typeset -gU cdpath fpath mailpath path
 
-# Set the list of directories that cd searches.
-# cdpath=(
-#   $cdpath
-# )
-
-# Set the list of directories that Zsh searches for programs.
 path=(
   /usr/local/{,s}bin(N)
   $HOME/.local/{,s}bin(N)
@@ -39,13 +29,43 @@ if [[ -z "$LESS" ]]; then
   export LESS='-g -i -M -R -S -w -X -z-4'
 fi
 
-# Development
+# Application directories
+export ACKRC="$XDG_CONFIG_HOME/ack/ackrc"
+export AWS_SHARED_CREDENTIALS_FILE="$XDG_CONFIG_HOME/aws/credentials"
+export AWS_CONFIG_FILE="$XDG_CONFIG_HOME/aws/config"
+export AZURE_CONFIG_DIR="$XDG_CONFIG_HOME/azure"
+export AZURE_DEVOPS_EXT_CONFIG_DIR="$XDG_CONFIG_HOME/azure-devops"
+export AZURE_DEVOPS_CACHE_DIR="$XDG_CACHE_HOME/azure-devops"
+export AZCOPY_LOG_LOCATION="$XDG_STATE_HOME/azcopy"
+export AZCOPY_JOB_PLAN_LOCATION="$XDG_STATE_HOME/azcopy/plans"
+export BITWARDEN_SSH_AUTH_SOCK="$XDG_RUNTIME_DIR"
+export CUDA_CACHE_PATH="$XDG_CACHE_HOME/nv"
+export CLAUDE_MEM_DATA_DIR="$XDG_DATA_HOME/claude-mem"
+export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
+export FZF_MARKS_FILE="$XDG_CONFIG_HOME/fzf-marks"
+export GNUPGHOME="$XDG_DATA_HOME/gnupg"
+export GTK_RC_FILES="$XDG_CONFIG_HOME/gtk-1.0/gtkrc"
+export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
+export HERMES_HOME="$XDG_DATA_HOME/hermes"
+export ICEAUTHORITY="$XDG_CACHE_HOME/ICEauthority"
+export IONIC_CONFIG_DIRECTORY="$XDG_CONFIG_HOME/ionic"
+export IPFS_PATH="$XDG_DATA_HOME/ipfs"
+export KSCRIPT_CACHE_DIR="$XDG_CACHE_HOME/kscript"
+export MACHINE_STORAGE_PATH="$XDG_DATA_HOME/docker-machine"
+export SCREENRC="$XDG_CONFIG_HOME/screen/screenrc"
+export SCREENDIR="$XDG_RUNTIME_DIR/screen"
+export TLDR_CACHE_DIR="$XDG_CACHE_HOME/tldr"
 
 # Node
-export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
+export NPM_CONFIG_CACHE="$XDG_CACHE_HOME/npm"
+export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 export NODE_REPL_HISTORY=$XDG_DATA_HOME/node_repl_history
 
 # Go
+# GOROOT/GOBIN are set by mise; GOPATH is not (go.set_gopath=false), so setting it
+# here is safe. Without it Go defaults GOPATH to ~/go and recreates ~/go/pkg/sumdb
+# on every build that verifies a module -- GOMODCACHE does not cover sumdb state.
+export GOPATH=$XDG_DATA_HOME/go
 export GOMODCACHE=$XDG_CACHE_HOME/go/mod
 
 # Python
