@@ -38,7 +38,6 @@ export AZURE_DEVOPS_EXT_CONFIG_DIR="$XDG_CONFIG_HOME/azure-devops"
 export AZURE_DEVOPS_CACHE_DIR="$XDG_CACHE_HOME/azure-devops"
 export AZCOPY_LOG_LOCATION="$XDG_STATE_HOME/azcopy"
 export AZCOPY_JOB_PLAN_LOCATION="$XDG_STATE_HOME/azcopy/plans"
-export BITWARDEN_SSH_AUTH_SOCK="$XDG_RUNTIME_DIR"
 export CUDA_CACHE_PATH="$XDG_CACHE_HOME/nv"
 export CLAUDE_MEM_DATA_DIR="$XDG_DATA_HOME/claude-mem"
 export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
@@ -91,8 +90,8 @@ fi
 export ANDROID_USER_HOME=$HOME/.android
 export GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
 path=(
-  $ANDROID_HOME/emulator
-  $ANDROID_HOME/platform-tools
+  $ANDROID_HOME/emulator(N)
+  $ANDROID_HOME/platform-tools(N)
   $path
 )
 
