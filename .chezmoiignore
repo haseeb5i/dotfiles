@@ -10,3 +10,8 @@ README.md
 !.config/zsh/.zshrc
 !.config/zsh/.zimrc
 
+{{ if ne .chezmoi.os "linux" }}
+.config/fusuma
+.config/voxtype
+{{ end }}
+

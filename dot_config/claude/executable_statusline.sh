@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env zsh
 # Claude Code status line: project / branch · model (used tokens) · rate limits.
 # Colours follow the active Ghostty theme.
 # Reads Claude Code's status JSON on stdin.
@@ -19,8 +19,8 @@ ghostty_theme_file() {
   line=$(sed -n 's/^[[:space:]]*theme[[:space:]]*=[[:space:]]*//p' "$cfg" | tail -1)
   [ -n "$line" ] || return 1
   if [ "${line#*:}" != "$line" ]; then          # `dark:A,light:B`
-    case $(gsettings get org.gnome.desktop.interface color-scheme 2>/dev/null) in
-      *prefer-dark*) mode=dark ;;
+    case $({ gsettings get org.gnome.desktop.interface color-scheme || defaults read -g AppleInterfaceStyle; } 2>/dev/null) in
+      *prefer-dark*|Dark) mode=dark ;;
       *) mode=light ;;
     esac
     name=$(printf '%s' "$line" | tr ',' '\n' | sed -n "s/^[[:space:]]*$mode://p" | head -1)
@@ -39,12 +39,14 @@ HOT='38;2;166;0;0'        # nearly out
 PURPLE='38;2;83;26;182'   # branch marker
 
 tf=$(ghostty_theme_file) && [ -r "$tf" ] && eval "$(awk -F' *= *' '
+  # POSIX awk only: macOS awk has no strtonum or match() capture groups
+  function hex(s,  i, n) { s = tolower(s); for (i = 1; i <= length(s); i++) n = n*16 + index("0123456789abcdef", substr(s,i,1)) - 1; return n }
   function sgr(h) { return sprintf("38;2;%d;%d;%d",
-      strtonum("0x" substr(h,2,2)), strtonum("0x" substr(h,4,2)), strtonum("0x" substr(h,6,2))) }
-  function lum(h) { return 0.2126*strtonum("0x" substr(h,2,2)) \
-                         + 0.7152*strtonum("0x" substr(h,4,2)) \
-                         + 0.0722*strtonum("0x" substr(h,6,2)) }
-  /^ *palette *=/ { if (match($0, /= *([0-9]+) *= *(#[0-9a-fA-F]{6})/, m)) p[m[1]] = m[2] }
+      hex(substr(h,2,2)), hex(substr(h,4,2)), hex(substr(h,6,2))) }
+  function lum(h) { return 0.2126*hex(substr(h,2,2)) \
+                         + 0.7152*hex(substr(h,4,2)) \
+                         + 0.0722*hex(substr(h,6,2)) }
+  /^ *palette *=/ { if ($3 ~ /^#[0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F]/) p[$2+0] = $3 }
   $1 == "foreground" { fg = $2 }
   $1 == "background" { bg = $2 }
   END {

@@ -4,7 +4,7 @@ zmodule utility
 
 zmodule hlissner/zsh-autopair
 zmodule zsh-users/zsh-completions --fpath src
-zmodule trapd00r/LS_COLORS --cmd 'eval "$(dircolors -b {}/LS_COLORS)"'
+zmodule trapd00r/LS_COLORS --source lscolors.sh
 zmodule ohmyzsh/ohmyzsh --root plugins/command-not-found
 # zmodule sorin-ionescu/prezto --root modules/gnu-utility
 
