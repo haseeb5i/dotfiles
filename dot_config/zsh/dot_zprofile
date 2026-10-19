@@ -16,8 +16,9 @@ fi
 # Ensure path arrays do not contain duplicates.
 typeset -gU cdpath fpath mailpath path
 
-# Homebrew (macOS); the installer's ~/.zprofile line is skipped because of ZDOTDIR.
-[[ -x /opt/homebrew/bin/brew ]] && eval "$(/opt/homebrew/bin/brew shellenv zsh)"
+if [[ -x /opt/homebrew/bin/brew ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv zsh)"
+fi
 
 path=(
   /usr/local/{,s}bin(N)
