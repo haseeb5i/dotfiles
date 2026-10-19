@@ -16,9 +16,7 @@ fi
 # Ensure path arrays do not contain duplicates.
 typeset -gU cdpath fpath mailpath path
 
-if [[ -x /opt/homebrew/bin/brew ]]; then
-  eval "$(/opt/homebrew/bin/brew shellenv zsh)"
-fi
+(( ${+commands[brew]} )) && eval "$(brew shellenv zsh)"
 
 path=(
   /usr/local/{,s}bin(N)
