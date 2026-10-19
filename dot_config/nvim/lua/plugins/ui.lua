@@ -1,7 +1,6 @@
 return {
   {
     "akinsho/bufferline.nvim",
-    opts = {},
   },
   {
     "nvim-lualine/lualine.nvim",
@@ -26,7 +25,9 @@ return {
         return chars[index]
       end
 
-      table.remove(opts.sections.lualine_y, 1)
+      opts.sections.lualine_y = {
+        { "location", padding = { left = 0, right = 1 } },
+      }
       opts.sections.lualine_z = {
         { progress },
       }

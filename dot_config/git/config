@@ -1,10 +1,9 @@
 [user]
-    email = haseeb.ul-rehman@n3o.ltd
+    email = 24607693+haseeb5i@users.noreply.github.com
     name = Haseeb ur Rehman
 
 [core]
-    editor = vi 
-    pager = delta
+    editor = vi
 
 [init]
     defaultBranch = main
@@ -12,16 +11,8 @@
 [pull]
     rebase = true 
 
-[interactive]
-    diffFilter = delta --color-only
-
-[delta]
-    navigate = true
-    light = false
-
 [merge]
     conflictstyle = diff3
-    ; guitool = kdiff3
 
 [diff]
     colorMoved = default
@@ -29,3 +20,7 @@
 [credential]
     helper = cache --timeout=14400
 
+[alias]
+    dlog = -c diff.external=difft log --ext-diff
+    dshow = -c diff.external=difft show --ext-diff
+    ddiff = -c diff.external=difft diff

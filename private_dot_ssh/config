@@ -8,3 +8,6 @@ Host bitbucket.org
     HostName bitbucket.org
     IdentityFile ~/.ssh/personal
 
+Host mini
+    HostName n3os-mac-mini
+    User raven

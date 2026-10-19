@@ -1,138 +1,130 @@
-// Zed keymap
-//
-// For information on binding keys, see the Zed
-// documentation: https://zed.dev/docs/key-bindings
-//
-// To see the default key bindings run `zed: open default keymap`
-// from the command palette.
 [
   {
-    "context": "Editor && vim_mode == normal && !VimWaiting && !menu",
+    // Leader keys: normal/visual in editors, plus panels and empty panes
+    "context": "(Editor && (vim_mode == normal || vim_mode == visual) && !menu) || (!Editor && !Terminal)",
     "bindings": {
-      // put key-bindings here if you want them to work only in normal mode
-      // Window movement
-      "ctrl-h": "workspace::ActivatePaneLeft",
-      "ctrl-l": "workspace::ActivatePaneRight",
-      "ctrl-k": "workspace::ActivatePaneUp",
-      "ctrl-j": "workspace::ActivatePaneDown",
-
-      // Genearl
-      "ctrl-s": "workspace::Save",
       "space space": "file_finder::Toggle",
-      "space f f": "file_finder::Toggle",
-      "space f r": "projects::OpenRecent",
-      // <leader>fp	Projects	n
-      "space e": "pane::RevealInProjectPanel",
-      "space /": "pane::DeploySearch",
-      "space s g": "pane::DeploySearch",
-      // <leader>fn	New File
-      // <leader>s"	Registers	n
-      // <leader>sm	Marks	n
-
-      // Buffers / Tabs
-      "shift-h": "pane::ActivatePreviousItem",
-      "shift-l": "pane::ActivateNextItem",
-      "shift-q": "pane::CloseActiveItem",
-      "space b b": "tab_switcher::Toggle",
       "space ,": "tab_switcher::Toggle",
+      "space /": "pane::DeploySearch",
+      "space `": "pane::AlternateFile",
+      "space e": "project_panel::Toggle",
+
+      // Splits, Windows & Docks
+      "space -": "pane::SplitDown",
+      "space |": "pane::SplitRight",
+      "space w m": "workspace::ToggleZoom",
+      "space w h": "workspace::ToggleLeftDock",
+      "space w l": "workspace::ToggleRightDock",
+      "space w j": "workspace::ToggleBottomDock",
+
+      // File Operations
+      "space f p": "projects::OpenRecent",
+      "space f e": "pane::RevealInProjectPanel",
+      "space f n": "workspace::NewFile",
+      "space f t": "workspace::NewTerminal",
+
+      // Search
+      "space s k": "zed::OpenKeymap",
+      "space s r": ["pane::DeploySearch", { "replace_enabled": true }],
+      "space s s": "outline::Toggle",
+      "space s shift-s": "project_symbols::Toggle",
+      "space s shift-r": "workspace::ReopenLastPicker",
+
+      // Buffers & Tabs
       "space b d": "pane::CloseActiveItem",
       "space b o": "pane::CloseOtherItems",
       "space b p": "pane::TogglePinTab",
       "space b shift-p": ["pane::CloseAllItems", { "close_pinned": false }],
 
-      // Standard LSP
-      "g r": "editor::FindAllReferences",
-      "g shift-k": "editor::ShowSignatureHelp",
-      "space x x": "diagnostics::Deploy",
+      // Code
       "space c f": "editor::Format",
-      // <leader>cl	Lsp Info
-      // <leader>ca	Code Action	n, x
-      // <leader>cc	Run Codelens	n, x
-      // <leader>cr	Rename
-      // <leader>ss	LSP Symbols	n
-      // <leader>sS	LSP Workspace Symbols	n
+      "space c s": "outline_panel::Toggle",
+      "space c o": "editor::OrganizeImports",
+      "space x x": "diagnostics::Deploy",
+
+      // Git
+      "space g x": "git::Branch",
+      "space g b": "editor::BlameHover",
+      "space g g": "git_panel::Toggle",
+      "space g d": "git::Diff",
+      "space g f": "git::FileHistory",
+      "space g shift-b": "editor::OpenPermalinkToLine",
+      "space g shift-y": "editor::CopyPermalinkToLine",
+      "space g h shift-b": "git::Blame",
+      "space g h shift-r": "git::RestoreFile",
+      "space g h shift-s": "git::StageFile",
+
+      // UI Toggles
+      "space u w": "editor::ToggleSoftWrap",
+      "space u h": "editor::ToggleInlayHints",
+      "space u b": "theme::ToggleMode",
+      "space u z": "workspace::ToggleCenteredLayout",
+      "space u d": "editor::ToggleDiagnostics",
+
+      // Misc
+      "space a c": "agent::Toggle",
+      "space m p": "markdown::OpenPreview",
+      "space m shift-p": "markdown::OpenPreviewToTheSide",
+    },
+  },
+  {
+    "context": "Editor && vim_mode == normal && !menu",
+    "bindings": {
+      // Buffers & Tabs
+      "shift-h": "pane::ActivatePreviousItem",
+      "shift-l": "pane::ActivateNextItem",
+      "alt-h": "pane::SwapItemLeft",
+      "alt-l": "pane::SwapItemRight",
+
+      // LSP Verbs
+      "g shift-k": "editor::ShowSignatureHelp",
 
       // Diagnostics Navigation
       "] e": ["editor::GoToDiagnostic", { "severity": "error" }],
       "[ e": ["editor::GoToPreviousDiagnostic", { "severity": "error" }],
       "] w": ["editor::GoToDiagnostic", { "severity": "warning" }],
       "[ w": ["editor::GoToPreviousDiagnostic", { "severity": "warning" }],
-      // <leader>xx	Diagnostics (Trouble)
-      //
-      // gsa	Add Surrounding	n, x
-      // gsd	Delete Surrounding	n
-      // gsf	Find Right Surrounding	n
-      // gsF	Find Left Surrounding	n
-      // gsh	Highlight Surrounding	n
-      // gsn	Update MiniSurround.config.n_lines	n
-      // gsr	Replace Surrounding	n
-
-      // Git
-      "space g x": "git::Branch",
-      "space g b": "git::Blame",
-      "space g g": "git_panel::ToggleFocus",
-      // space g h  r(eset) R s(tage S) u(undo)
-
-      // Toggles
-      // <leader>uf	Toggle Auto Format (Global)	n
-      "space u w": "editor::ToggleSoftWrap",
-      // <leader>ul	Toggle Line Numbers
-      // <leader>uh	Toggle Inlay Hints
-      //
-      // <leader>ft	Terminal (Root Dir)	n
-      // <c-/>	Terminal (Root Dir)	n, t
-      // <leader>-	Split Window Below	n
-      // <leader>|	Split Window Right
-    },
-  },
-  {
-    "context": "Editor && (vim_mode == normal || vim_mode == visual) && !VimWaiting && !menu",
-    // put key-bindings here if you want them to work in normal & visual mode
-    "bindings": {
-      // Agent
-      "space a c": "agent::ToggleFocus",
-
-
-      // Markdown
-      "space m p": "markdown::OpenPreview",
-      "space m P": "markdown::OpenPreviewToTheSide",
-
-      // Toggles
-      "space c z": "workspace::ToggleCenteredLayout",
-
-      // Others
-      "g f": "editor::OpenExcerpts",
     },
   },
   {
     "context": "Editor && VimControl && !menu",
     "bindings": {
-      "p": ["vim::Paste", { "preserve_clipboard": true }],
+      "] f": "vim::NextMethodStart",
+      "[ f": "vim::PreviousMethodStart",
+      "] shift-f": "vim::NextMethodEnd",
+      "[ shift-f": "vim::PreviousMethodEnd",
 
+      "p": ["vim::Paste", { "preserve_clipboard": true }],
+    },
+  },
+  {
+    "context": "Editor && (VimControl || vim_mode == insert) && !menu",
+    "bindings": {
       "alt-j": "editor::MoveLineDown",
       "alt-k": "editor::MoveLineUp",
-      "alt-h": "pane::SwapItemLeft",
-      "alt-l": "pane::SwapItemRight",
-
-      "space e": "workspace::ToggleLeftDock", // find better context?
     },
   },
   {
     "context": "Editor && vim_mode == insert && !menu",
     "bindings": {
       "j k": "vim::NormalBefore",
-      "ctrl-space": "editor::ShowCompletions",
-      "ctrl-s": "workspace::Save",
       "ctrl-e": "vim::EndOfLine",
       "ctrl-b": "vim::StartOfLine",
       "ctrl-k": "editor::ShowSignatureHelp",
     },
   },
   {
-    "context": "Editor && vim_mode == visual && !VimWaiting && !menu",
+    "context": "Editor && showing_completions",
     "bindings": {
-      // visual, visual line & visual block modes
-      "g c": "editor::ToggleComments",
+      "ctrl-e": "editor::Cancel",
+      "ctrl-y": "editor::ConfirmCompletion",
+    },
+  },
+  {
+    "context": "vim_operator == a || vim_operator == i || vim_operator == cs",
+    "bindings": {
+      "b": "vim::MiniBrackets",
+      "g": "vim::EntireFile",
     },
   },
   {
@@ -145,11 +137,16 @@
       "x": "project_panel::Cut",
       "c": "project_panel::Copy",
       "p": "project_panel::Paste",
+      "o": "workspace::OpenWithSystem",
+      "backspace": "project_panel::SelectParent",
       "y": "workspace::CopyPath",
       "shift-y": "workspace::CopyRelativePath",
-      "q": "workspace::ToggleLeftDock",
-      "space e": "project_panel::ToggleFocus",
-      "ctrl-d": "project_panel::Duplicate",
+    },
+  },
+  {
+    // Move between splits, docks and the terminal
+    "context": "(Editor && vim_mode == normal && !menu) || Terminal || Dock",
+    "bindings": {
       "ctrl-h": "workspace::ActivatePaneLeft",
       "ctrl-l": "workspace::ActivatePaneRight",
       "ctrl-k": "workspace::ActivatePaneUp",
@@ -159,28 +156,16 @@
   {
     "context": "Workspace || Editor || Terminal",
     "bindings": {
-      "ctrl-\\": "workspace::ToggleBottomDock",
-      "ctrl-|": "terminal_panel::ToggleFocus",
-      "ctrl-shift-t": "workspace::NewTerminal",
-      "ctrl-tab": "pane::ActivateNextItem",
-      "ctrl-shift-tab": "pane::ActivatePreviousItem",
+      "ctrl-\\": "terminal_panel::Toggle",
     },
   },
   {
-    "context": "EmptyPane || SharedScreen",
-    // Empty pane, set of keybindings that are available when there is no active editor
+    // Give shell history/fzf keys back to the terminal (Zed's workspace defaults take them)
+    "context": "Terminal",
     "bindings": {
-      "space space": "file_finder::Toggle",
-      "space f r": "projects::OpenRecent",
-    },
-  },
-  {
-    "context": "Dock",
-    "bindings": {
-      "ctrl-w h": "workspace::ActivatePaneLeft",
-      "ctrl-w l": "workspace::ActivatePaneRight",
-      "ctrl-w k": "workspace::ActivatePaneUp",
-      "ctrl-w j": "workspace::ActivatePaneDown",
+      "ctrl-p": ["terminal::SendKeystroke", "ctrl-p"],
+      "ctrl-n": ["terminal::SendKeystroke", "ctrl-n"],
+      "ctrl-t": ["terminal::SendKeystroke", "ctrl-t"],
     },
   },
 ]

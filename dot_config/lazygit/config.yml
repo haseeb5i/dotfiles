@@ -6,3 +6,9 @@ gui:
 quitOnTopLevelReturn: false
 reporting: "off"
 startupPopupVersion: 1
+
+git:
+  paging:
+    colorArg: always
+    pager: /usr/bin/delta --paging=never
+    externalDiffCommand: difft --color=always

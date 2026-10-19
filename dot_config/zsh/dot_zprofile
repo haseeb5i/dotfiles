@@ -39,13 +39,11 @@ export AZURE_DEVOPS_CACHE_DIR="$XDG_CACHE_HOME/azure-devops"
 export AZCOPY_LOG_LOCATION="$XDG_STATE_HOME/azcopy"
 export AZCOPY_JOB_PLAN_LOCATION="$XDG_STATE_HOME/azcopy/plans"
 export CUDA_CACHE_PATH="$XDG_CACHE_HOME/nv"
-export CLAUDE_MEM_DATA_DIR="$XDG_DATA_HOME/claude-mem"
 export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
 export FZF_MARKS_FILE="$XDG_CONFIG_HOME/fzf-marks"
 export GNUPGHOME="$XDG_DATA_HOME/gnupg"
 export GTK_RC_FILES="$XDG_CONFIG_HOME/gtk-1.0/gtkrc"
 export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
-export HERMES_HOME="$XDG_DATA_HOME/hermes"
 export ICEAUTHORITY="$XDG_CACHE_HOME/ICEauthority"
 export IONIC_CONFIG_DIRECTORY="$XDG_CONFIG_HOME/ionic"
 export IPFS_PATH="$XDG_DATA_HOME/ipfs"
@@ -53,17 +51,31 @@ export KSCRIPT_CACHE_DIR="$XDG_CACHE_HOME/kscript"
 export MACHINE_STORAGE_PATH="$XDG_DATA_HOME/docker-machine"
 export SCREENRC="$XDG_CONFIG_HOME/screen/screenrc"
 export SCREENDIR="$XDG_RUNTIME_DIR/screen"
+export SQLITE_HISTORY="$XDG_CACHE_HOME/sqlite_history"
 export TLDR_CACHE_DIR="$XDG_CACHE_HOME/tldr"
+export WGETRC="$XDG_CONFIG_HOME/wgetrc"
+
+# AI
+export AIDER_CONFIG="$XDG_CONFIG_HOME/aider/aider.conf.yml"
+export CLAUDE_CONFIG_DIR="$XDG_CONFIG_HOME/claude"
+export CLAUDE_MEM_DATA_DIR="$XDG_DATA_HOME/claude-mem"
+export CODEX_HOME="$XDG_DATA_HOME/codex"
+export HERMES_HOME="$XDG_DATA_HOME/hermes"
+export PI_CODING_AGENT_DIR="$XDG_DATA_HOME/pi"
 
 # Node
 export NPM_CONFIG_CACHE="$XDG_CACHE_HOME/npm"
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 export NODE_REPL_HISTORY=$XDG_DATA_HOME/node_repl_history
+export BUN_INSTALL="$XDG_DATA_HOME/bun"
+export PNPM_HOME="$XDG_DATA_HOME/pnpm"
+path=(
+  $PNPM_HOME/bin(N)
+  $BUN_INSTALL/bin(N)
+  $path
+)
 
 # Go
-# GOROOT/GOBIN are set by mise; GOPATH is not (go.set_gopath=false), so setting it
-# here is safe. Without it Go defaults GOPATH to ~/go and recreates ~/go/pkg/sumdb
-# on every build that verifies a module -- GOMODCACHE does not cover sumdb state.
 export GOPATH=$XDG_DATA_HOME/go
 export GOMODCACHE=$XDG_CACHE_HOME/go/mod
 
@@ -79,15 +91,20 @@ export RUSTUP_HOME=$XDG_DATA_HOME/rustup
 [ -f "$CARGO_HOME/env" ] && \. "$CARGO_HOME/env"
 
 # C#
+export DOTNET_CLI_HOME="$XDG_DATA_HOME/dotnet"
 export NUGET_PACKAGES="$XDG_CACHE_HOME"/NuGetPackages
 export OMNISHARPHOME="$XDG_CONFIG_HOME"/omnisharp
+path=(
+  $DOTNET_CLI_HOME/.dotnet/tools(N)
+  $path
+)
 
 # android
 export ANDROID_HOME="$HOME/Android/Sdk"
 if [[ "$OSTYPE" == darwin* ]]; then
   export ANDROID_HOME="$HOME/Library/Android/sdk"
 fi
-export ANDROID_USER_HOME=$HOME/.android
+export ANDROID_USER_HOME="$XDG_DATA_HOME/android"
 export GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
 path=(
   $ANDROID_HOME/emulator(N)

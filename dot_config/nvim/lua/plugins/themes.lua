@@ -2,13 +2,16 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "tokyonight",
+      colorscheme = "flexoki",
     },
   },
   {
-    "Mofiqul/dracula.nvim",
+    "nuvic/flexoki-nvim",
+    name = "flexoki",
+    lazy = false,
+    priority = 1000,
     opts = {
-      overrides = function() end,
+      variant = "auto",
     },
   },
   {
@@ -20,6 +23,12 @@ return {
       on_colors = function(colors)
         colors.fg_gutter = "#2E3249"
       end,
+    },
+  },
+  {
+    "Mofiqul/dracula.nvim",
+    opts = {
+      overrides = function() end,
     },
   },
 }

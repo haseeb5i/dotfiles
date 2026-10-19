@@ -2,14 +2,6 @@
 //
 [
   {
-    "label": "Lazygit",
-    "command": "lazygit",
-    "working_directory": "${ZED_WORKTREE_ROOT}",
-    "hide": "on_success",
-    "use_new_terminal": true,
-    "reveal_target": "center"
-  },
-  {
     "label": "Example task",
     "command": "for i in {1..5}; do echo \"Hello $i/5\"; sleep 1; done",
     //"args": [],

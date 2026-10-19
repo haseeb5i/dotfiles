@@ -1,105 +1,102 @@
 {
-    "cli_default_open_behavior": "existing_window",
-    "project_panel": {
-        "dock": "left"
-    },
-    "outline_panel": {
-        "dock": "left"
-    },
-    "collaboration_panel": {
-        "dock": "left"
-    },
-    "git_panel": {
-        "dock": "left"
-    },
-    "diff_view_style": "unified",
-    "lsp": {
-        "vtsls": {
-            "settings": {
-                "typescript": {
-                    "updateImportsOnFileMove": {
-                        "enabled": "always"
-                    }
-                },
-                "javascript": {
-                    "updateImportsOnFileMove": {
-                        "enabled": "always"
-                    }
-                }
-            },
-            "enable_lsp_tasks": true
-        }
-    },
-    "agent_servers": {
-        "claude-acp": {
-            "default_config_options": {
-                "model": "default"
-            },
-            "type": "registry"
-        }
-    },
-    "context_servers": {
-        "prisma-mcp": {
-            "enabled": true,
-            "remote": false,
-            "settings": {}
+  // Appearance
+  "buffer_font_family": "FiraCode Nerd Font",
+  "agent_buffer_font_size": 15.0,
+  "buffer_font_size": 17.0,
+  "git_commit_buffer_font_size": 15.0,
+  "ui_font_size": 18.0,
+  "cli_default_open_behavior": "new_window",
+  "theme": {
+    "light": "Flexoki Light",
+    "dark": "Gruvbox Dark",
+  },
+
+  // Editor
+  "format_on_save": "off",
+  "scrollbar": { "show": "never" },
+  "toolbar": {
+    "quick_actions": false,
+  },
+  "use_smartcase_search": true,
+
+  // Panels
+  "project_panel": { "dock": "left" },
+  "outline_panel": { "dock": "left" },
+  "collaboration_panel": { "dock": "left" },
+  "git_panel": { "dock": "left" },
+
+  // Vim
+  "vim_mode": true,
+  "vim": {
+    "toggle_relative_line_numbers": true,
+  },
+  "vertical_scroll_margin": 4,
+  "tab_size": 2,
+  "which_key": {
+    "enabled": true,
+    "delay_ms": 250,
+  },
+
+  // Git
+  "git": {
+    "inline_blame": { "enabled": false },
+  },
+
+  // Terminal
+  "terminal": { "line_height": "comfortable" },
+
+  // Language servers
+  "lsp": {
+    "vtsls": {
+      "settings": {
+        "typescript": {
+          "updateImportsOnFileMove": { "enabled": "always" },
         },
-        "shadcn-mcp-server": {
-            "enabled": true,
-            "remote": false,
-            "settings": {}
-        }
-    },
-    "agent": {
-        "sidebar_side": "right",
-        "dock": "right",
-        "default_model": {
-            "enable_thinking": false,
-            "provider": "copilot_chat",
-            "model": "gpt-4.1"
+        "javascript": {
+          "updateImportsOnFileMove": { "enabled": "always" },
         },
-        "inline_assistant_model": {
-            "provider": "copilot_chat",
-            "model": "gpt-4o"
-        }
+      },
+      "enable_lsp_tasks": true,
     },
-    "auto_install_extensions": {
-        "html": true,
-        "sql": true,
-        "prisma": true
+  },
+
+  // Extensions
+  "auto_install_extensions": {
+    "html": true,
+    "prisma": true,
+    "sql": true,
+  },
+
+  // AI: agent panel
+  "disable_ai": true,
+  "agent": {
+    "dock": "right",
+    "threads_sidebar": { "position": "right" },
+    "expand_edit_card": false,
+    "expand_terminal_card": false,
+    "default_model": {
+      "effort": "low",
+      "enable_thinking": true,
+      "provider": "openai-subscribed",
+      "model": "gpt-6.1-sol",
     },
-    "buffer_font_family": "FiraCode Nerd Font",
-    "git": {
-        "inline_blame": {
-            "enabled": false
-        }
+    "inline_assistant_model": {
+      "provider": "openai-subscribed",
+      "model": "gpt-6.1-sol",
     },
-    "scrollbar": {
-        "show": "never"
+    "sandbox_permissions": {
+      "allow_unsandboxed": true,
     },
-    "toolbar": {
-        "quick_actions": false
-    },
-    "format_on_save": "off",
-    "inlay_hints": {
-        "enabled": false
-    },
-    "use_smartcase_search": true,
-    "vim_mode": true,
-    "vim": {
-        "toggle_relative_line_numbers": true
-    },
-    "theme": {
-        "mode": "system",
-        "light": "Gruvbox Light",
-        "dark": "Ayu Dark"
-    },
-    "telemetry": {
-        "metrics": false
-    },
-    "edit_predictions": {
-        "provider": "zed",
-        "mode": "subtle",
-        "enabled_in_text_threads": false
-    }
+  },
+  "agent_servers": {
+    "claude-acp": { "type": "registry" },
+  },
+  "context_servers": {},
+  "edit_predictions": {
+    "mode": "subtle",
+  },
+  "language_models": {},
+
+  // Telemetry
+  "telemetry": { "metrics": false },
 }

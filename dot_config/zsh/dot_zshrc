@@ -1,25 +1,20 @@
 HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
 
-# Keep completion state out of the config dir. Must be set before zim's
-# completion module runs compinit.
-zstyle ':zim:completion' dumpfile "${XDG_CACHE_HOME}/zsh/zcompdump"
-zstyle ':completion::complete:*' cache-path "${XDG_CACHE_HOME}/zsh/zcompcache"
-
 fpath=(
-  $XDG_DATA_HOME/{zsh/site-functions,mise-completions/zsh}(N)
+  $XDG_DATA_HOME/mise-completions/zsh(N)
   $fpath
 )
 
-bindkey -v
-WORDCHARS=${WORDCHARS//[\/]}
-KEYTIMEOUT=10
-
-# Disable automatic widget re-binding on each precmd. This can be set when
-# zsh-users/zsh-autosuggestions is the last module in your ~/.zimrc.
-ZSH_AUTOSUGGEST_MANUAL_REBIND=1
-
+zstyle ':zim:completion' dumpfile "${XDG_CACHE_HOME}/zsh/zcompdump"
+zstyle ':completion::complete:*' cache-path "${XDG_CACHE_HOME}/zsh/zcompcache"
 zstyle ':zim:input' double-dot-expand yes
 
+bindkey -v
+KEYTIMEOUT=10
+WORDCHARS=${WORDCHARS//[\/]}
+ZSH_AUTOSUGGEST_MANUAL_REBIND=1
+
+# Setup zimfw
 ZIM_HOME=${ZDOTDIR}/.zim
 if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
   curl -fsSL --create-dirs -o ${ZIM_HOME}/zimfw.zsh \
@@ -41,22 +36,20 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 zstyle ':fzf-tab:*' switch-group '<' '>'
 
-alias ..='cd ..'
-alias ...='cd ../..'
-alias grep='grep --color=auto'
 alias cat='bat --paging=never'
+alias grep='grep --color=auto'
+alias lg='lazygit'
 alias ls='eza --icons=auto'
 alias lx='eza -lah --icons --git --sort=extension'
 alias tree='eza --tree --icons'
-alias lg='lazygit'
 
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
 bindkey '^[l' autosuggest-accept
 bindkey '^[f' forward-word
 
-# fzf: Ctrl-R history, Ctrl-T files, Alt-C cd. Binds viins/vicmd too, so this is
-# correct under `bindkey -v`. Independent of fzf-tab.
+(( ${+commands[mise]} )) && eval "$(mise activate zsh)"
+
 if (( ${+commands[fzf]} )); then
   export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'
   export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
@@ -66,10 +59,9 @@ if (( ${+commands[fzf]} )); then
   source <(fzf --zsh)
 fi
 
-(( ${+commands[mise]} )) && eval "$(mise activate zsh)"
-
 (( ${+commands[zoxide]} )) && eval "$(zoxide init --cmd cd zsh)"
 
 (( ${+commands[starship]} )) && eval "$(starship init zsh)"
 
 [[ -r ${ZDOTDIR}/secrets.sh ]] && source ${ZDOTDIR}/secrets.sh
+

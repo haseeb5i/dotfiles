@@ -18,6 +18,12 @@ zoxide = "latest"
 usage = "latest"
 "github:alltuner/mise-completions-sync" = "latest"
 
+# harness CLIs; claude, claude-mem, opencode and plannotator stay on their own installers (self-updating)
+"npm:@colbymchenry/codegraph" = "latest"
+rtk = "latest"
+herdr = "latest"
+"github:perplexityai/perplexity-cli" = { version = "latest", bin = "pplx" }
+
 [hooks]
 postinstall = "misecompsync --shell zsh"
 

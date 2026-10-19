@@ -1,0 +1,15 @@
+{
+  "plugins": [
+    "./herdr-opencode"
+  ],
+  "theme": {
+    "name": "system"
+  },
+  "animations": true,
+  "session": {
+    "permissions": "autoaccept"
+  },
+  "tabs": {
+    "mode": "off"
+  }
+}

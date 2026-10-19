@@ -7,11 +7,10 @@ return {
       servers = {
         ["*"] = {
           keys = {
-            -- from zed
-            { "gh", vim.lsp.buf.hover, desc = "Hover" },
             { "cd", vim.lsp.buf.rename, desc = "Rename", has = "rename" },
             { "g.", vim.lsp.buf.code_action, desc = "Code Action", has = "codeAction" },
-            -- "g B": "editor::BlameHover",
+            { "gr", false },
+            { "gh", vim.lsp.buf.hover, desc = "Hover" },
           },
         },
       },
