@@ -1,0 +1,20 @@
+Host github.com
+    User git
+    HostName github.com
+    IdentityFile ~/.ssh/github
+
+Host laptop
+    HostName fedora-2.tail211f3.ts.net
+    User raven
+
+Host pc
+    HostName fedora-pc.tail211f3.ts.net
+    User raven
+
+Host mini
+    HostName n3os-mac-mini.tail211f3.ts.net
+    User raven
+
+Host laptop pc mini
+    IdentityFile ~/.ssh/machines
+    IdentitiesOnly yes
