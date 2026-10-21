@@ -44,6 +44,7 @@ export CUDA_CACHE_PATH="$XDG_CACHE_HOME/nv"
 export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
 export FZF_MARKS_FILE="$XDG_CONFIG_HOME/fzf-marks"
 export GNUPGHOME="$XDG_DATA_HOME/gnupg"
+[[ -d $GNUPGHOME ]] || mkdir -m 700 -p "$GNUPGHOME"  # gpg only auto-creates ~/.gnupg
 export GTK_RC_FILES="$XDG_CONFIG_HOME/gtk-1.0/gtkrc"
 export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
 export ICEAUTHORITY="$XDG_CACHE_HOME/ICEauthority"
