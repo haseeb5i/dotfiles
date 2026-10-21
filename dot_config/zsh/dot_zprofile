@@ -101,7 +101,7 @@ path=(
 )
 
 # android
-export ANDROID_HOME="$HOME/Android/Sdk"
+export ANDROID_HOME="$XDG_DATA_HOME/android-sdk"
 if [[ "$OSTYPE" == darwin* ]]; then
   export ANDROID_HOME="$HOME/Library/Android/sdk"
 fi
