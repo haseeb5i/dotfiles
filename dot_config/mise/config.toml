@@ -17,6 +17,7 @@ ripgrep = { version = "latest", os = ["macos"] }
 zoxide = { version = "latest", os = ["macos"] }
 
 starship = "latest"
+lazygit = "latest"
 usage = "latest"
 "github:alltuner/mise-completions-sync" = "latest"
 
