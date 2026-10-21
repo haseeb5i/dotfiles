@@ -12,6 +12,7 @@ README.md
 
 {{ if ne .chezmoi.os "linux" }}
 .config/fusuma
+.config/environment.d
 .config/voxtype
 {{ end }}
 

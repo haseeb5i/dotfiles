@@ -8,7 +8,7 @@ export XDG_STATE_HOME="$HOME/.local/state"
 
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
-export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/podman/podman.sock"
+[[ "$OSTYPE" == linux* ]] && export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/podman/podman.sock"
 
 # Ensure the first non-login shell has the same environment as a login shell.
 if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "$ZDOTDIR/.zprofile" ]]; then
