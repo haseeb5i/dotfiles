@@ -7,6 +7,15 @@ python = "latest"
 uv = "latest"
 ruby = "3.3"
 dotnet = "latest"
+
+# Fedora installs these with dnf
+bat = { version = "latest", os = ["macos"] }
+eza = { version = "latest", os = ["macos"] }
+fzf = { version = "latest", os = ["macos"] }
+fd = { version = "latest", os = ["macos"] }
+ripgrep = { version = "latest", os = ["macos"] }
+zoxide = { version = "latest", os = ["macos"] }
+
 starship = "latest"
 usage = "latest"
 "github:alltuner/mise-completions-sync" = "latest"
