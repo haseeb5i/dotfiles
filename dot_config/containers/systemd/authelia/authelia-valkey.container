@@ -1,0 +1,15 @@
+[Container]
+ContainerName=authelia-valkey
+Image=docker.io/valkey/valkey:9
+Network=skynet.network
+Volume=%h/.local/share/authelia-valkey:/data:Z
+Secret=authelia_valkey,type=env,target=VALKEY_PASSWORD
+# save to disk every minute if anything changed, so logins survive restarts
+Exec=sh -c 'exec valkey-server --requirepass "$VALKEY_PASSWORD" --save 60 1 --dir /data'
+AutoUpdate=registry
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=default.target

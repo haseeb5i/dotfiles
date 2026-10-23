@@ -1,0 +1,19 @@
+pages:
+  - name: Home
+    columns:
+      - size: small
+        widgets:
+          - type: clock
+          - type: calendar
+      - size: full
+        widgets:
+          - type: search
+          - type: monitor
+            title: Services
+            sites:
+              - title: Glance
+                url: https://glance.haseeb5i.duckdns.org
+                check-url: http://localhost:8080
+              - title: Authelia
+                url: https://auth.haseeb5i.duckdns.org
+                check-url: http://authelia:9091/api/health

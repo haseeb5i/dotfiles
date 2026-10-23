@@ -1,0 +1,14 @@
+[Container]
+ContainerName=adventurelog-db
+Image=docker.io/postgis/postgis:16-3.5
+Network=skynet.network
+Volume=%h/.local/share/adventurelog/postgres:/var/lib/postgresql/data:Z
+Environment=POSTGRES_DB=database POSTGRES_USER=adventure
+Secret=adventurelog_db_password,type=env,target=POSTGRES_PASSWORD
+AutoUpdate=registry
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,20 @@
+[Unit]
+Requires=blinko-postgres.service
+After=blinko-postgres.service
+
+[Container]
+ContainerName=blinko
+Image=docker.io/blinkospace/blinko:latest
+Network=skynet.network
+Volume=%h/.local/share/blinko/uploads:/app/.blinko:Z
+Environment=NODE_ENV=production NEXTAUTH_URL=https://notes.haseeb5i.duckdns.org NEXT_PUBLIC_BASE_URL=https://notes.haseeb5i.duckdns.org
+Secret=blinko_db_url,type=env,target=DATABASE_URL
+Secret=blinko_secret,type=env,target=JWT_SECRET
+AutoUpdate=registry
+
+[Service]
+Restart=always
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target

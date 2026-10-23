@@ -1,0 +1,15 @@
+[Container]
+ContainerName=freshrss
+Image=docker.io/freshrss/freshrss:latest
+Network=skynet.network
+Volume=%h/.local/share/freshrss/data:/var/www/FreshRSS/data:Z
+Volume=%h/.local/share/freshrss/extensions:/var/www/FreshRSS/extensions:Z
+# refresh feeds at minute 3 and 33 of every hour
+Environment=TZ=Asia/Karachi CRON_MIN=3,33
+AutoUpdate=registry
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=default.target

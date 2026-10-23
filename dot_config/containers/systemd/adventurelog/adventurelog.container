@@ -1,0 +1,23 @@
+[Unit]
+Requires=adventurelog-db.service
+After=adventurelog-db.service
+
+[Container]
+ContainerName=adventurelog
+Image=ghcr.io/seanmorley15/adventurelog:latest
+Network=skynet.network
+Volume=%h/.local/share/adventurelog/media:/code/media:Z
+Environment=SITE_URL=https://trips.haseeb5i.duckdns.org PORT=3000
+Environment=PGHOST=adventurelog-db POSTGRES_DB=database POSTGRES_USER=adventure
+Environment=DISABLE_REGISTRATION=True DJANGO_ADMIN_USERNAME=haseeb5i DJANGO_ADMIN_EMAIL=haseeb5i@localhost
+Secret=adventurelog_db_password,type=env,target=POSTGRES_PASSWORD
+# fixed key, otherwise a new one is generated on every start and everyone is logged out
+Secret=adventurelog_secret_key,type=env,target=SECRET_KEY
+AutoUpdate=registry
+
+[Service]
+Restart=always
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target

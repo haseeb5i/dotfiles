@@ -1,0 +1,19 @@
+[Container]
+ContainerName=activepieces
+Image=ghcr.io/activepieces/activepieces:latest
+Network=skynet.network
+Volume=%h/.local/share/activepieces/data:/data:Z
+Volume=%h/.local/share/activepieces/cache:/usr/src/app/cache:Z
+# embedded db and in-memory queue, so no postgres or redis containers
+Environment=AP_DB_TYPE=PGLITE AP_REDIS_TYPE=MEMORY AP_CONFIG_PATH=/data
+Environment=AP_FRONTEND_URL=https://flows.haseeb5i.duckdns.org AP_ENVIRONMENT=prod AP_EXECUTION_MODE=UNSANDBOXED AP_TELEMETRY_ENABLED=false
+Secret=ap_encryption_key,type=env,target=AP_ENCRYPTION_KEY
+Secret=ap_jwt_secret,type=env,target=AP_JWT_SECRET
+AutoUpdate=registry
+
+[Service]
+Restart=always
+TimeoutStartSec=600
+
+[Install]
+WantedBy=default.target

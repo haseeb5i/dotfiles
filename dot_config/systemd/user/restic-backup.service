@@ -1,0 +1,6 @@
+[Unit]
+Description=Back up homelab data to backblaze b2
+
+[Service]
+Type=oneshot
+ExecStart=%h/.config/restic/backup.sh

@@ -1,0 +1,24 @@
+theme: auto
+server:
+  address: tcp://:9091
+authentication_backend:
+  file:
+    path: /config/users.yml
+access_control:
+  default_policy: two_factor
+session:
+  cookies:
+    - domain: haseeb5i.duckdns.org
+      authelia_url: https://auth.haseeb5i.duckdns.org
+      default_redirection_url: https://glance.haseeb5i.duckdns.org
+  redis:
+    host: authelia-valkey
+    port: 6379
+storage:
+  local:
+    path: /data/db.sqlite3
+notifier:
+  filesystem:
+    filename: /data/notification.txt
+totp:
+  issuer: haseeb5i.duckdns.org

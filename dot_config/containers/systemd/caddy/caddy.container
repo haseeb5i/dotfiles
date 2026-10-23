@@ -1,0 +1,14 @@
+[Container]
+ContainerName=caddy
+Image=localhost/caddy-duckdns
+Network=skynet.network
+PublishPort=100.119.71.101:8443:443
+Volume=%h/.config/caddy/Caddyfile:/etc/caddy/Caddyfile:Z
+Volume=%h/.local/share/caddy:/data:Z
+Secret=duckdns_token,type=env,target=DUCKDNS_TOKEN
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=default.target

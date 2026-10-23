@@ -1,0 +1,14 @@
+[Container]
+ContainerName=mealie
+Image=ghcr.io/mealie-recipes/mealie:latest
+Network=skynet.network
+Volume=%h/.local/share/mealie:/app/data:Z
+Environment=BASE_URL=https://mealie.haseeb5i.duckdns.org TZ=Asia/Karachi ALLOW_SIGNUP=false
+AutoUpdate=registry
+
+[Service]
+Restart=always
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target

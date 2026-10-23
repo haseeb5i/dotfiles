@@ -16,3 +16,12 @@ README.md
 .config/voxtype
 {{ end }}
 
+# homelab, only on the pc
+{{ if ne .chezmoi.hostname "fedora-pc" }}
+.config/containers/systemd
+.config/glance
+.config/caddy
+.config/authelia
+.config/restic
+.config/systemd/user/restic-backup.*
+{{ end }}

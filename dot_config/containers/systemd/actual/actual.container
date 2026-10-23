@@ -1,0 +1,13 @@
+[Container]
+ContainerName=actual
+Image=docker.io/actualbudget/actual-server:latest
+Network=skynet.network
+Volume=%h/.local/share/actual:/data:Z
+AutoUpdate=registry
+
+[Service]
+Restart=always
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target

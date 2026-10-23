@@ -1,0 +1,79 @@
+{
+	acme_dns duckdns {env.DUCKDNS_TOKEN}
+}
+
+*.haseeb5i.duckdns.org {
+	@auth host auth.haseeb5i.duckdns.org
+	handle @auth {
+		reverse_proxy authelia:9091
+	}
+
+	@glance host glance.haseeb5i.duckdns.org
+	handle @glance {
+		forward_auth authelia:9091 {
+			uri /api/authz/forward-auth
+			copy_headers Remote-User Remote-Groups Remote-Email Remote-Name
+		}
+		reverse_proxy glance:8080
+	}
+
+	@budget host budget.haseeb5i.duckdns.org
+	handle @budget {
+		forward_auth authelia:9091 {
+			uri /api/authz/forward-auth
+			copy_headers Remote-User Remote-Groups Remote-Email Remote-Name
+		}
+		reverse_proxy actual:5006
+	}
+
+	@mealie host mealie.haseeb5i.duckdns.org
+	handle @mealie {
+		forward_auth authelia:9091 {
+			uri /api/authz/forward-auth
+			copy_headers Remote-User Remote-Groups Remote-Email Remote-Name
+		}
+		reverse_proxy mealie:9000
+	}
+	@rss host rss.haseeb5i.duckdns.org
+	handle @rss {
+		# rss apps sync through the api with freshrss's own api password, they cannot pass authelia
+		@rssapi path /api/*
+		handle @rssapi {
+			reverse_proxy freshrss:80
+		}
+		handle {
+			forward_auth authelia:9091 {
+				uri /api/authz/forward-auth
+				copy_headers Remote-User Remote-Groups Remote-Email Remote-Name
+			}
+			reverse_proxy freshrss:80
+		}
+	}
+	@notes host notes.haseeb5i.duckdns.org
+	handle @notes {
+		forward_auth authelia:9091 {
+			uri /api/authz/forward-auth
+			copy_headers Remote-User Remote-Groups Remote-Email Remote-Name
+		}
+		reverse_proxy blinko:1111
+	}
+	@trips host trips.haseeb5i.duckdns.org
+	handle @trips {
+		forward_auth authelia:9091 {
+			uri /api/authz/forward-auth
+			copy_headers Remote-User Remote-Groups Remote-Email Remote-Name
+		}
+		reverse_proxy adventurelog:80
+	}
+	@flows host flows.haseeb5i.duckdns.org
+	handle @flows {
+		forward_auth authelia:9091 {
+			uri /api/authz/forward-auth
+			copy_headers Remote-User Remote-Groups Remote-Email Remote-Name
+		}
+		reverse_proxy activepieces:80
+	}
+	handle {
+		abort
+	}
+}

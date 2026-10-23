@@ -1,0 +1,12 @@
+[Container]
+ContainerName=glance
+Image=docker.io/glanceapp/glance:latest
+Network=skynet.network
+Volume=%h/.config/glance:/app/config:Z
+AutoUpdate=registry
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=default.target
