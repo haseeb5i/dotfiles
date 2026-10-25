@@ -49,7 +49,7 @@
 	@flows host flows.haseeb5i.duckdns.org
 	# activepieces uses only its own login (its sso is paid); authelia still guards sign-up so nobody else can make an account
 	handle @flows {
-		@flowssignup path /sign-up* /api/v1/authentication/sign-up*
+		@flowssignup path /sign-up* /api/v1/authentication/sign-up* /api/v1/authentication/complete-sign-up*
 		handle @flowssignup {
 			forward_auth authelia:9091 {
 				uri /api/authz/forward-auth
