@@ -33,3 +33,6 @@ podman unshare restic forget --quiet --keep-daily 7 --keep-weekly 4 --keep-month
 if [ "$(date +%u)" = 7 ]; then
   podman unshare restic check --read-data-subset=5%
 fi
+
+# tell gatus the backup worked; no report within 25h raises an ntfy alert
+podman exec caddy wget -qO /dev/null --header "Authorization: Bearer $(secret gatus_push_token)" --post-data "" "http://gatus:8080/api/v1/endpoints/backups_nightly-backup/external?success=true" || echo "could not report to gatus"

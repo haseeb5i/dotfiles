@@ -1,0 +1,16 @@
+[Container]
+ContainerName=gatus
+Image=docker.io/twinproduction/gatus:latest
+Network=skynet.network
+Volume=%h/.config/gatus:/config:Z
+Volume=%h/.local/share/gatus:/data:Z
+Environment=GATUS_CONFIG_PATH=/config/config.yaml
+Secret=gatus_ntfy_topic,type=env,target=NTFY_TOPIC
+Secret=gatus_push_token,type=env,target=PUSH_TOKEN
+AutoUpdate=registry
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=default.target

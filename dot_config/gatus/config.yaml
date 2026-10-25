@@ -1,0 +1,67 @@
+# checks every service from inside the skynet network; alerts go to ntfy.sh (the topic name is the secret)
+storage:
+  type: sqlite
+  path: /data/data.db
+
+ui:
+  title: homelab status
+  header: homelab
+
+alerting:
+  ntfy:
+    topic: "${NTFY_TOPIC}"
+    priority: 4
+    default-alert:
+      failure-threshold: 3
+      success-threshold: 2
+      send-on-resolved: true
+
+x-alert: &alert
+  alerts:
+    - type: ntfy
+
+endpoints:
+  # caddy, the wildcard cert and authelia, through the same path the browser takes
+  - name: caddy + certificate
+    group: core
+    url: https://auth.haseeb5i.duckdns.org/api/health
+    conditions: ["[STATUS] == 200", "[CERTIFICATE_EXPIRATION] > 336h"]
+    <<: *alert
+  - name: duckdns record
+    group: core
+    url: 1.1.1.1
+    interval: 10m
+    dns:
+      query-name: haseeb5i.duckdns.org
+      query-type: A
+    conditions: ["[DNS_RCODE] == NOERROR", "[BODY] == 100.119.71.101"]
+    <<: *alert
+  - {name: authelia, group: core, url: "http://authelia:9091/api/health", conditions: ["[STATUS] == 200"], <<: *alert}
+  - {name: glance, group: apps, url: "http://glance:8080/", conditions: ["[STATUS] == 200"], <<: *alert}
+  - {name: actual, group: apps, url: "http://actual:5006/health", conditions: ["[STATUS] == 200"], <<: *alert}
+  - {name: mealie, group: apps, url: "http://mealie:9000/api/app/about", conditions: ["[STATUS] == 200"], <<: *alert}
+  - {name: freshrss, group: apps, url: "http://freshrss:80/api/greader.php", conditions: ["[STATUS] == 200"], <<: *alert}
+  - {name: blinko, group: apps, url: "http://blinko:1111/", conditions: ["[STATUS] == 200"], <<: *alert}
+  - {name: adventurelog, group: apps, url: "http://adventurelog:80/health", conditions: ["[STATUS] == 200"], <<: *alert}
+  - {name: activepieces, group: apps, url: "http://activepieces:80/api/v1/flags", conditions: ["[STATUS] == 200"], <<: *alert}
+  - {name: immich, group: apps, url: "http://immich-server:2283/api/server/ping", conditions: ["[STATUS] == 200"], <<: *alert}
+  - {name: immich ml, group: apps, url: "http://immich-ml:3003/ping", conditions: ["[STATUS] == 200"], <<: *alert}
+  - {name: deeptutor, group: apps, url: "http://deeptutor:8001/health/ready", conditions: ["[STATUS] == 200"], <<: *alert}
+  - {name: hindsight, group: apps, url: "http://hindsight:8888/health", conditions: ["[STATUS] == 200"], <<: *alert}
+  - {name: blinko-postgres, group: databases, url: "tcp://blinko-postgres:5432", conditions: ["[CONNECTED] == true"], <<: *alert}
+  - {name: adventurelog-db, group: databases, url: "tcp://adventurelog-db:5432", conditions: ["[CONNECTED] == true"], <<: *alert}
+  - {name: immich-postgres, group: databases, url: "tcp://immich-postgres:5432", conditions: ["[CONNECTED] == true"], <<: *alert}
+  - {name: hindsight-postgres, group: databases, url: "tcp://hindsight-postgres:5432", conditions: ["[CONNECTED] == true"], <<: *alert}
+  - {name: activepieces-postgres, group: databases, url: "tcp://activepieces-postgres:5432", conditions: ["[CONNECTED] == true"], <<: *alert}
+  - {name: authelia-valkey, group: databases, url: "tcp://authelia-valkey:6379", conditions: ["[CONNECTED] == true"], <<: *alert}
+  - {name: immich-redis, group: databases, url: "tcp://immich-redis:6379", conditions: ["[CONNECTED] == true"], <<: *alert}
+  - {name: activepieces-redis, group: databases, url: "tcp://activepieces-redis:6379", conditions: ["[CONNECTED] == true"], <<: *alert}
+
+# backup.sh reports here after each successful run; no report within 25h means the backup failed or didn't run
+external-endpoints:
+  - name: nightly backup
+    group: backups
+    token: "${PUSH_TOKEN}"
+    heartbeat:
+      interval: 25h
+    <<: *alert

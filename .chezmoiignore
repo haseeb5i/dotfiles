@@ -20,6 +20,7 @@ README.md
 {{ if ne .chezmoi.hostname "fedora-pc" }}
 .config/containers/systemd
 .config/glance
+.config/gatus
 .config/caddy
 .config/authelia
 .config/restic

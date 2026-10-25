@@ -87,6 +87,14 @@
 	handle @photos {
 		reverse_proxy immich-server:2283
 	}
+	@status host status.haseeb5i.duckdns.org
+	handle @status {
+		forward_auth authelia:9091 {
+			uri /api/authz/forward-auth
+			copy_headers Remote-User Remote-Groups Remote-Email Remote-Name
+		}
+		reverse_proxy gatus:8080
+	}
 	handle {
 		abort
 	}
