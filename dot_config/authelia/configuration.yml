@@ -81,7 +81,8 @@ identity_providers:
         redirect_uris:
           - https://notes.haseeb5i.duckdns.org/api/auth/callback/authelia
         scopes: [openid, profile, email]
-        token_endpoint_auth_method: client_secret_basic
+        # blinko sends its secret in the request body
+        token_endpoint_auth_method: client_secret_post
       - client_id: adventurelog
         client_name: AdventureLog
         client_secret: '{{ secret "/run/secrets/oidc_adventurelog_digest" }}'
