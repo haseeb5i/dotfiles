@@ -1,6 +1,7 @@
 [Container]
 ContainerName=activepieces
-Image=ghcr.io/activepieces/activepieces:latest
+# pinned: upstream stopped moving the latest tag at 0.82.0; bump by hand after reading the release notes (take a backup first, migrations change the embedded db)
+Image=ghcr.io/activepieces/activepieces:0.82.0
 Network=skynet.network
 Volume=%h/.local/share/activepieces/data:/data:Z
 Volume=%h/.local/share/activepieces/cache:/usr/src/app/cache:Z
@@ -12,7 +13,6 @@ Secret=ap_jwt_secret,type=env,target=AP_JWT_SECRET
 # upstream entrypoint runs pm2-runtime without exec, so the shell as pid 1 ignores SIGTERM and every stop ends in SIGKILL
 Entrypoint=/bin/sh
 Exec=-c 'eval "$(sed "s/^pm2-runtime/exec &/" ./docker-entrypoint.sh)"'
-AutoUpdate=registry
 
 [Service]
 Restart=always
