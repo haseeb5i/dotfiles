@@ -29,6 +29,9 @@ herdr = "latest"
 worktrunk = "latest"
 oxker = "latest"
 llmfit = "latest"
+bitwarden = "latest"
+bitwarden-secrets-manager = "latest"
+1password-cli = "latest"
 
 [hooks]
 postinstall = "misecompsync --shell zsh"

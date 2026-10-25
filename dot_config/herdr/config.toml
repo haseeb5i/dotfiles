@@ -1,10 +1,11 @@
 onboarding = false
 
 [theme]
-auto_switch = true
+auto_switch = false
 dark_name = "dracula"
 light_name = "rose-pine-dawn"
 
+name = "rose-pine-dawn"
 [ui]
 status_indicators = "symbols"
 

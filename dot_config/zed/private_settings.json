@@ -68,22 +68,12 @@
   },
 
   // AI: agent panel
-  "disable_ai": true,
+  "disable_ai": false,
   "agent": {
     "dock": "right",
     "threads_sidebar": { "position": "right" },
     "expand_edit_card": false,
     "expand_terminal_card": false,
-    "default_model": {
-      "effort": "low",
-      "enable_thinking": true,
-      "provider": "openai-subscribed",
-      "model": "gpt-6.1-sol",
-    },
-    "inline_assistant_model": {
-      "provider": "openai-subscribed",
-      "model": "gpt-6.1-sol",
-    },
     "sandbox_permissions": {
       "allow_unsandboxed": true,
     },
