@@ -47,12 +47,19 @@
 		reverse_proxy adventurelog:80
 	}
 	@flows host flows.haseeb5i.duckdns.org
+	# activepieces uses only its own login (its sso is paid); authelia still guards sign-up so nobody else can make an account
 	handle @flows {
-		forward_auth authelia:9091 {
-			uri /api/authz/forward-auth
-			copy_headers Remote-User Remote-Groups Remote-Email Remote-Name
+		@flowssignup path /sign-up* /api/v1/authentication/sign-up*
+		handle @flowssignup {
+			forward_auth authelia:9091 {
+				uri /api/authz/forward-auth
+				copy_headers Remote-User Remote-Groups Remote-Email Remote-Name
+			}
+			reverse_proxy activepieces:80
 		}
-		reverse_proxy activepieces:80
+		handle {
+			reverse_proxy activepieces:80
+		}
 	}
 	@tutor host tutor.haseeb5i.duckdns.org
 	handle @tutor {
