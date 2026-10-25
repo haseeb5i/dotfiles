@@ -8,6 +8,7 @@ Image=ghcr.io/seanmorley15/adventurelog:latest
 Network=skynet.network
 Volume=%h/.local/share/adventurelog/media:/code/media:Z
 Environment=SITE_URL=https://trips.haseeb5i.duckdns.org PORT=3000
+Environment=ENABLE_RATE_LIMITS=true
 Environment=PGHOST=adventurelog-db POSTGRES_DB=database POSTGRES_USER=adventure
 Environment=DISABLE_REGISTRATION=True SOCIALACCOUNT_EMAIL_AUTHENTICATION_AUTO_CONNECT=True FORCE_SOCIALACCOUNT_LOGIN=True DJANGO_ADMIN_USERNAME=haseeb5i DJANGO_ADMIN_EMAIL=haseeb5i@localhost
 Secret=adventurelog_db_password,type=env,target=POSTGRES_PASSWORD

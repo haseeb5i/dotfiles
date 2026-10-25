@@ -4,7 +4,8 @@ After=hindsight-postgres.service
 
 [Container]
 ContainerName=hindsight
-Image=ghcr.io/vectorize-io/hindsight:1.1
+# pinned: bump by hand after reading the release notes
+Image=ghcr.io/vectorize-io/hindsight:1.1.0
 Network=skynet.network
 Environment=HINDSIGHT_API_LLM_PROVIDER=anthropic HINDSIGHT_API_LLM_MODEL=claude-haiku-5-5
 # every api and mcp request needs "Authorization: Bearer <hindsight_api_key>", the ui sends it too
@@ -13,7 +14,6 @@ Secret=hindsight_api_key,type=env,target=HINDSIGHT_API_TENANT_API_KEY
 Secret=hindsight_api_key,type=env,target=HINDSIGHT_CP_DATAPLANE_API_KEY
 Secret=hindsight_db_url,type=env,target=HINDSIGHT_API_DATABASE_URL
 Secret=anthropic_api_key,type=env,target=HINDSIGHT_API_LLM_API_KEY
-AutoUpdate=registry
 
 [Service]
 Restart=always

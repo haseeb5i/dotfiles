@@ -3,6 +3,8 @@ ContainerName=immich-ml
 Image=ghcr.io/immich-app/immich-machine-learning:v3-openvino
 Network=skynet.network
 AddDevice=/dev/dri/renderD128
+# the re-exported, faster models; fixes wrong openvino outputs (v3.3.0 release notes)
+Environment=MACHINE_LEARNING_MODEL_REVISION=v2
 Volume=%h/.local/share/immich/model-cache:/cache:Z
 AutoUpdate=registry
 

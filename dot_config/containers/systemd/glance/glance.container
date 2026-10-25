@@ -3,6 +3,7 @@ ContainerName=glance
 Image=docker.io/glanceapp/glance:latest
 Network=skynet.network
 Volume=%h/.config/glance:/app/config:Z
+Volume=/etc/localtime:/etc/localtime:ro
 AutoUpdate=registry
 
 [Service]
