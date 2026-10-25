@@ -73,6 +73,11 @@
 		}
 		reverse_proxy activepieces:80
 	}
+	# no forward_auth: the immich apps log in with immich's own account
+	@photos host photos.haseeb5i.duckdns.org
+	handle @photos {
+		reverse_proxy immich-server:2283
+	}
 	handle {
 		abort
 	}

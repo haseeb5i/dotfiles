@@ -10,6 +10,7 @@ S=$HOME/.local/share
 mkdir -p -m 700 $S/backup-dumps
 podman exec blinko-postgres pg_dumpall -U postgres > $S/backup-dumps/blinko.sql
 podman exec adventurelog-db pg_dumpall -U adventure > $S/backup-dumps/adventurelog.sql
+podman exec immich-postgres pg_dumpall -U postgres > $S/backup-dumps/immich.sql
 
 # sqlite and pglite apps are stopped while restic reads them, so their files are consistent
 STOP="authelia actual mealie freshrss activepieces"
@@ -18,10 +19,15 @@ systemctl --user stop $STOP
 # configs live in chezmoi; users.yml stays here because it holds the password hash
 # unshare runs restic as the container users, so it can read files they own
 podman unshare restic backup --quiet \
-  --exclude "$S/*/postgres" --exclude "$S/activepieces/cache" \
-  $S/{backup-dumps,authelia,authelia-valkey,caddy,actual,mealie,freshrss,blinko,adventurelog,activepieces} \
+  --exclude "$S/*/postgres" --exclude "$S/activepieces/cache" --exclude "$S/immich/model-cache" \
+  $S/{backup-dumps,authelia,authelia-valkey,caddy,actual,mealie,freshrss,blinko,adventurelog,activepieces,immich} \
   $HOME/.config/authelia/users.yml
 systemctl --user start $STOP
 trap - EXIT
 
 podman unshare restic forget --quiet --keep-daily 7 --keep-weekly 4 --keep-monthly 6 --prune
+
+# on sundays also re-read a random 5% of the stored data, so a damaged repo shows up before a restore needs it
+if [ "$(date +%u)" = 7 ]; then
+  podman unshare restic check --read-data-subset=5%
+fi

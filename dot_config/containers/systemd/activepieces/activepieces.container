@@ -9,11 +9,15 @@ Environment=AP_DB_TYPE=PGLITE AP_REDIS_TYPE=MEMORY AP_CONFIG_PATH=/data
 Environment=AP_FRONTEND_URL=https://flows.haseeb5i.duckdns.org AP_ENVIRONMENT=prod AP_EXECUTION_MODE=UNSANDBOXED AP_TELEMETRY_ENABLED=false
 Secret=ap_encryption_key,type=env,target=AP_ENCRYPTION_KEY
 Secret=ap_jwt_secret,type=env,target=AP_JWT_SECRET
+# upstream entrypoint runs pm2-runtime without exec, so the shell as pid 1 ignores SIGTERM and every stop ends in SIGKILL
+Entrypoint=/bin/sh
+Exec=-c 'eval "$(sed "s/^pm2-runtime/exec &/" ./docker-entrypoint.sh)"'
 AutoUpdate=registry
 
 [Service]
 Restart=always
 TimeoutStartSec=600
+SuccessExitStatus=143
 
 [Install]
 WantedBy=default.target

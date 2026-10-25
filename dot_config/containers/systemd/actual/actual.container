@@ -8,6 +8,8 @@ AutoUpdate=registry
 [Service]
 Restart=always
 TimeoutStartSec=300
+# node exits 143 on SIGTERM, which the nightly backup sends
+SuccessExitStatus=143
 
 [Install]
 WantedBy=default.target

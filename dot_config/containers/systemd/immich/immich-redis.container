@@ -1,0 +1,10 @@
+[Container]
+ContainerName=immich-redis
+Image=docker.io/valkey/valkey:9
+Network=skynet.network
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=default.target

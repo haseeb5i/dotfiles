@@ -1,0 +1,22 @@
+[Unit]
+Requires=immich-postgres.service immich-redis.service
+After=immich-postgres.service immich-redis.service
+
+[Container]
+ContainerName=immich-server
+Image=ghcr.io/immich-app/immich-server:v3
+Network=skynet.network
+AddDevice=/dev/dri/renderD128
+Volume=%h/.local/share/immich/library:/data:Z
+Volume=/etc/localtime:/etc/localtime:ro
+Environment=DB_HOSTNAME=immich-postgres DB_USERNAME=postgres DB_DATABASE_NAME=immich
+Environment=REDIS_HOSTNAME=immich-redis IMMICH_MACHINE_LEARNING_URL=http://immich-ml:3003
+Secret=immich_db_password,type=env,target=DB_PASSWORD
+AutoUpdate=registry
+
+[Service]
+Restart=always
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target

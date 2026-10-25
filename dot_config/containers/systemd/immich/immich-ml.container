@@ -1,0 +1,13 @@
+[Container]
+ContainerName=immich-ml
+Image=ghcr.io/immich-app/immich-machine-learning:v3-openvino
+Network=skynet.network
+AddDevice=/dev/dri/renderD128
+Volume=%h/.local/share/immich/model-cache:/cache:Z
+AutoUpdate=registry
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=default.target
