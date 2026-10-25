@@ -18,7 +18,7 @@ README.md
 
 # homelab, only on the pc
 {{ if ne .chezmoi.hostname "fedora-pc" }}
-.config/containers/systemd
+.config/containers
 .config/glance
 .config/gatus
 .config/caddy
