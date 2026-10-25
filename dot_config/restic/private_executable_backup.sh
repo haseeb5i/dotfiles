@@ -12,9 +12,10 @@ podman exec blinko-postgres pg_dumpall -U postgres > $S/backup-dumps/blinko.sql
 podman exec adventurelog-db pg_dumpall -U adventure > $S/backup-dumps/adventurelog.sql
 podman exec immich-postgres pg_dumpall -U postgres > $S/backup-dumps/immich.sql
 podman exec hindsight-postgres pg_dumpall -U hindsight > $S/backup-dumps/hindsight.sql
+podman exec activepieces-postgres pg_dumpall -U activepieces > $S/backup-dumps/activepieces.sql
 
-# sqlite and pglite apps are stopped while restic reads them, so their files are consistent
-STOP="authelia actual mealie freshrss activepieces deeptutor"
+# sqlite apps are stopped while restic reads them, so their files are consistent
+STOP="authelia actual mealie freshrss deeptutor"
 trap 'systemctl --user start $STOP' EXIT
 systemctl --user stop $STOP
 # configs live in chezmoi; users.yml and the podman secrets stay here because they hold passwords and keys

@@ -1,0 +1,13 @@
+[Container]
+ContainerName=activepieces-postgres
+Image=docker.io/pgvector/pgvector:pg17
+Network=skynet.network
+Volume=%h/.local/share/activepieces/postgres:/var/lib/postgresql/data:Z
+Environment=POSTGRES_DB=activepieces POSTGRES_USER=activepieces
+Secret=ap_db_password,type=env,target=POSTGRES_PASSWORD
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=default.target

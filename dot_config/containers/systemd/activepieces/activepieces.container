@@ -1,23 +1,27 @@
+[Unit]
+Requires=activepieces-postgres.service activepieces-redis.service
+After=activepieces-postgres.service activepieces-redis.service
+
 [Container]
 ContainerName=activepieces
-# pinned: upstream stopped moving the latest tag at 0.82.0; bump by hand after reading the release notes (take a backup first, migrations change the embedded db)
-Image=ghcr.io/activepieces/activepieces:0.82.0
+# pinned: bump by hand after reading the release notes, migrations change the db
+Image=ghcr.io/activepieces/activepieces:0.92.3-hotfix.1
 Network=skynet.network
-Volume=%h/.local/share/activepieces/data:/data:Z
 Volume=%h/.local/share/activepieces/cache:/usr/src/app/cache:Z
-# embedded db and in-memory queue, so no postgres or redis containers
-Environment=AP_DB_TYPE=PGLITE AP_REDIS_TYPE=MEMORY AP_CONFIG_PATH=/data
+# app and worker in one container (the image default); a separate worker would reach the app through caddy
+Environment=AP_POSTGRES_HOST=activepieces-postgres AP_POSTGRES_PORT=5432 AP_POSTGRES_DATABASE=activepieces AP_POSTGRES_USERNAME=activepieces
+Environment=AP_REDIS_HOST=activepieces-redis AP_REDIS_PORT=6379
 Environment=AP_FRONTEND_URL=https://flows.haseeb5i.duckdns.org AP_ENVIRONMENT=prod AP_EXECUTION_MODE=UNSANDBOXED AP_TELEMETRY_ENABLED=false
+Secret=ap_db_password,type=env,target=AP_POSTGRES_PASSWORD
+Secret=ap_redis_password,type=env,target=AP_REDIS_PASSWORD
 Secret=ap_encryption_key,type=env,target=AP_ENCRYPTION_KEY
 Secret=ap_jwt_secret,type=env,target=AP_JWT_SECRET
-# upstream entrypoint runs pm2-runtime without exec, so the shell as pid 1 ignores SIGTERM and every stop ends in SIGKILL
-Entrypoint=/bin/sh
-Exec=-c 'eval "$(sed "s/^pm2-runtime/exec &/" ./docker-entrypoint.sh)"'
 
 [Service]
 Restart=always
 TimeoutStartSec=600
-SuccessExitStatus=143
+# the entrypoint exits 1 after it stops the app and worker on SIGTERM
+SuccessExitStatus=1
 
 [Install]
 WantedBy=default.target

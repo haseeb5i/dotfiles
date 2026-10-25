@@ -1,0 +1,15 @@
+[Container]
+ContainerName=activepieces-redis
+Image=docker.io/library/redis:7
+Network=skynet.network
+Volume=%h/.local/share/activepieces/redis:/data:Z
+Secret=ap_redis_password,type=env,target=REDIS_PASSWORD
+# the queue holds waiting and delayed runs, so write every change to disk
+Exec=sh -c 'exec redis-server --requirepass "$REDIS_PASSWORD" --appendonly yes --dir /data'
+AutoUpdate=registry
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=default.target
