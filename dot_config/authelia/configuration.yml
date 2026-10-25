@@ -17,9 +17,12 @@ session:
 storage:
   local:
     path: /data/db.sqlite3
+# emails go out through resend; until a domain is verified there, it only delivers to the resend account's own address
 notifier:
-  filesystem:
-    filename: /data/notification.txt
+  smtp:
+    address: submissions://smtp.resend.com:465
+    username: resend
+    sender: "Authelia <onboarding@resend.dev>"
 totp:
   issuer: haseeb5i.duckdns.org
 

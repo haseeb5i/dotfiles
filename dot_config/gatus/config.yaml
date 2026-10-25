@@ -1,4 +1,4 @@
-# checks every service from inside the skynet network; alerts go to ntfy.sh (the topic name is the secret)
+# checks every service from inside the skynet network; alerts go to ntfy.sh (the topic name is the secret) and email through resend
 storage:
   type: sqlite
   path: /data/data.db
@@ -15,10 +15,23 @@ alerting:
       failure-threshold: 3
       success-threshold: 2
       send-on-resolved: true
+  # resend only delivers to the resend account's own address until a domain is verified there
+  email:
+    from: "homelab <onboarding@resend.dev>"
+    username: resend
+    password: "${RESEND_API_KEY}"
+    host: smtp.resend.com
+    port: 465
+    to: "${ALERT_EMAIL}"
+    default-alert:
+      failure-threshold: 3
+      success-threshold: 2
+      send-on-resolved: true
 
 x-alert: &alert
   alerts:
     - type: ntfy
+    - type: email
 
 endpoints:
   # caddy, the wildcard cert and authelia, through the same path the browser takes

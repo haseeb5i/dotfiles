@@ -7,6 +7,9 @@ Volume=%h/.local/share/gatus:/data:Z
 Environment=GATUS_CONFIG_PATH=/config/config.yaml
 Secret=gatus_ntfy_topic,type=env,target=NTFY_TOPIC
 Secret=gatus_push_token,type=env,target=PUSH_TOKEN
+Secret=resend_api_key,type=env,target=RESEND_API_KEY
+# in a secret only to keep the address out of the public dotfiles repo
+Secret=alert_email,type=env,target=ALERT_EMAIL
 AutoUpdate=registry
 
 [Service]
