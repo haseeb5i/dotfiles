@@ -4,7 +4,7 @@ Image=localhost/caddy-duckdns
 Network=skynet.network
 # containers reach authelia by its public name for oidc; the 443 port forward only applies to outside traffic
 NetworkAlias=auth.haseeb5i.duckdns.org
-PublishPort=100.119.71.101:8443:443
+PublishPort=100.119.71.101:443:443
 # the whole folder, not the file: chezmoi replaces the file on apply and a file mount would keep the old one
 Volume=%h/.config/caddy:/etc/caddy:ro,Z
 Volume=%h/.local/share/caddy:/data:Z
