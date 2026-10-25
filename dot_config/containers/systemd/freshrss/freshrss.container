@@ -6,6 +6,11 @@ Volume=%h/.local/share/freshrss/data:/var/www/FreshRSS/data:Z
 Volume=%h/.local/share/freshrss/extensions:/var/www/FreshRSS/extensions:Z
 # refresh feeds at minute 3 and 33 of every hour
 Environment=TZ=Asia/Karachi CRON_MIN=3,33
+# sso through authelia for the web ui (/i/); /api/ keeps the api password for rss apps
+Environment=OIDC_ENABLED=1 OIDC_PROVIDER_METADATA_URL=https://auth.haseeb5i.duckdns.org/.well-known/openid-configuration OIDC_CLIENT_ID=freshrss
+Environment=OIDC_REMOTE_USER_CLAIM=preferred_username "OIDC_SCOPES=openid groups email profile" "OIDC_X_FORWARDED_HEADERS=X-Forwarded-Host X-Forwarded-Proto"
+Secret=oidc_freshrss,type=env,target=OIDC_CLIENT_SECRET
+Secret=freshrss_oidc_crypto,type=env,target=OIDC_CLIENT_CRYPTO_KEY
 AutoUpdate=registry
 
 [Service]

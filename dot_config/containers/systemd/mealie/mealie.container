@@ -4,6 +4,10 @@ Image=ghcr.io/mealie-recipes/mealie:latest
 Network=skynet.network
 Volume=%h/.local/share/mealie:/app/data:Z
 Environment=BASE_URL=https://mealie.haseeb5i.duckdns.org TZ=Asia/Karachi ALLOW_SIGNUP=false
+# sso through authelia; accounts match on username because the emails differ
+Environment=OIDC_AUTH_ENABLED=true OIDC_SIGNUP_ENABLED=false OIDC_AUTO_REDIRECT=true OIDC_REMEMBER_ME=true OIDC_PROVIDER_NAME=Authelia
+Environment=OIDC_CONFIGURATION_URL=https://auth.haseeb5i.duckdns.org/.well-known/openid-configuration OIDC_CLIENT_ID=mealie OIDC_USER_CLAIM=preferred_username
+Secret=oidc_mealie,type=env,target=OIDC_CLIENT_SECRET
 AutoUpdate=registry
 
 [Service]

@@ -17,12 +17,12 @@ podman exec hindsight-postgres pg_dumpall -U hindsight > $S/backup-dumps/hindsig
 STOP="authelia actual mealie freshrss activepieces deeptutor"
 trap 'systemctl --user start $STOP' EXIT
 systemctl --user stop $STOP
-# configs live in chezmoi; users.yml stays here because it holds the password hash
+# configs live in chezmoi; users.yml and the podman secrets stay here because they hold passwords and keys
 # unshare runs restic as the container users, so it can read files they own
 podman unshare restic backup --quiet \
   --exclude "$S/*/postgres" --exclude "$S/activepieces/cache" --exclude "$S/immich/model-cache" \
   $S/{backup-dumps,authelia,authelia-valkey,caddy,actual,mealie,freshrss,blinko,adventurelog,activepieces,immich,deeptutor,hindsight} \
-  $HOME/.config/authelia/users.yml
+  $HOME/.config/authelia/users.yml $HOME/.local/share/containers/storage/secrets
 systemctl --user start $STOP
 trap - EXIT
 

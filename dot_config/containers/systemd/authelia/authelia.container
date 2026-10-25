@@ -12,6 +12,17 @@ Secret=authelia_jwt
 Secret=authelia_session
 Secret=authelia_storage
 Secret=authelia_valkey
+Secret=authelia_oidc_hmac
+Secret=authelia_oidc_jwk
+Secret=oidc_actual_digest
+Secret=oidc_mealie_digest
+Secret=oidc_freshrss_digest
+Secret=oidc_immich_digest
+Secret=oidc_blinko_digest
+Secret=oidc_adventurelog_digest
+# lets configuration.yml read the oidc key and client hashes from the secrets above
+Environment=X_AUTHELIA_CONFIG_FILTERS=template
+Environment=AUTHELIA_IDENTITY_PROVIDERS_OIDC_HMAC_SECRET_FILE=/run/secrets/authelia_oidc_hmac
 Environment=AUTHELIA_IDENTITY_VALIDATION_RESET_PASSWORD_JWT_SECRET_FILE=/run/secrets/authelia_jwt
 Environment=AUTHELIA_SESSION_SECRET_FILE=/run/secrets/authelia_session
 Environment=AUTHELIA_STORAGE_ENCRYPTION_KEY_FILE=/run/secrets/authelia_storage

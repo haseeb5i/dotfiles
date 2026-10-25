@@ -22,3 +22,74 @@ notifier:
     filename: /data/notification.txt
 totp:
   issuer: haseeb5i.duckdns.org
+
+# sso for the apps; secrets come from podman secrets through the template filter, so this file stays safe to publish
+identity_providers:
+  oidc:
+    jwks:
+      - key: {{ secret "/run/secrets/authelia_oidc_jwk" | mindent 10 "|" | msquote }}
+    clients:
+      - client_id: actual
+        client_name: Actual Budget
+        client_secret: '{{ secret "/run/secrets/oidc_actual_digest" }}'
+        authorization_policy: two_factor
+        consent_mode: implicit
+        redirect_uris:
+          - https://budget.haseeb5i.duckdns.org/openid/callback
+        scopes: [openid, profile, groups, email]
+        token_endpoint_auth_method: client_secret_basic
+      - client_id: mealie
+        client_name: Mealie
+        client_secret: '{{ secret "/run/secrets/oidc_mealie_digest" }}'
+        authorization_policy: two_factor
+        consent_mode: implicit
+        require_pkce: true
+        pkce_challenge_method: S256
+        redirect_uris:
+          - https://mealie.haseeb5i.duckdns.org/login
+        scopes: [openid, email, profile, groups]
+        token_endpoint_auth_method: client_secret_basic
+      - client_id: freshrss
+        client_name: FreshRSS
+        client_secret: '{{ secret "/run/secrets/oidc_freshrss_digest" }}'
+        authorization_policy: two_factor
+        consent_mode: implicit
+        # freshrss sometimes sends the port in the redirect uri
+        redirect_uris:
+          - https://rss.haseeb5i.duckdns.org/i/oidc/
+          - https://rss.haseeb5i.duckdns.org:443/i/oidc/
+        scopes: [openid, groups, email, profile]
+        token_endpoint_auth_method: client_secret_basic
+      - client_id: immich
+        client_name: Immich
+        client_secret: '{{ secret "/run/secrets/oidc_immich_digest" }}'
+        authorization_policy: two_factor
+        consent_mode: implicit
+        require_pkce: true
+        pkce_challenge_method: S256
+        redirect_uris:
+          - https://photos.haseeb5i.duckdns.org/auth/login
+          - https://photos.haseeb5i.duckdns.org/user-settings
+          - app.immich:///oauth-callback
+        scopes: [openid, profile, email]
+        token_endpoint_auth_method: client_secret_basic
+      - client_id: blinko
+        client_name: Blinko
+        client_secret: '{{ secret "/run/secrets/oidc_blinko_digest" }}'
+        authorization_policy: two_factor
+        consent_mode: implicit
+        redirect_uris:
+          - https://notes.haseeb5i.duckdns.org/api/auth/callback/authelia
+        scopes: [openid, profile, email]
+        token_endpoint_auth_method: client_secret_basic
+      - client_id: adventurelog
+        client_name: AdventureLog
+        client_secret: '{{ secret "/run/secrets/oidc_adventurelog_digest" }}'
+        authorization_policy: two_factor
+        consent_mode: implicit
+        # the second uri works around an adventurelog bug that uses the client id as the provider id
+        redirect_uris:
+          - https://trips.haseeb5i.duckdns.org/accounts/oidc/authelia/login/callback/
+          - https://trips.haseeb5i.duckdns.org/accounts/oidc/adventurelog/login/callback/
+        scopes: [openid, email, profile]
+        token_endpoint_auth_method: client_secret_basic
