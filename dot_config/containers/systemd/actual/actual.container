@@ -5,7 +5,7 @@ Network=skynet.network
 Volume=%h/.local/share/actual:/data:Z
 # sso through authelia, switched on once with: podman exec actual node /app/scripts/enable-openid.js
 Environment=ACTUAL_OPENID_DISCOVERY_URL=https://auth.haseeb5i.duckdns.org/.well-known/openid-configuration ACTUAL_OPENID_CLIENT_ID=actual
-Environment=ACTUAL_OPENID_SERVER_HOSTNAME=https://budget.haseeb5i.duckdns.org ACTUAL_OPENID_AUTH_METHOD=openid ACTUAL_OPENID_PROVIDER_NAME=Authelia
+Environment=ACTUAL_OPENID_SERVER_HOSTNAME=https://budget.haseeb5i.duckdns.org ACTUAL_OPENID_AUTH_METHOD=openid ACTUAL_OPENID_PROVIDER_NAME=Authelia ACTUAL_OPENID_ENFORCE=true ACTUAL_ALLOWED_LOGIN_METHODS=openid
 Secret=oidc_actual,type=env,target=ACTUAL_OPENID_CLIENT_SECRET
 AutoUpdate=registry
 

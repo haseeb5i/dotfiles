@@ -18,36 +18,20 @@
 	}
 
 	@budget host budget.haseeb5i.duckdns.org
+	# no forward_auth: the app logs in through authelia sso itself
 	handle @budget {
-		forward_auth authelia:9091 {
-			uri /api/authz/forward-auth
-			copy_headers Remote-User Remote-Groups Remote-Email Remote-Name
-		}
 		reverse_proxy actual:5006
 	}
 
 	@mealie host mealie.haseeb5i.duckdns.org
+	# no forward_auth: the app logs in through authelia sso itself
 	handle @mealie {
-		forward_auth authelia:9091 {
-			uri /api/authz/forward-auth
-			copy_headers Remote-User Remote-Groups Remote-Email Remote-Name
-		}
 		reverse_proxy mealie:9000
 	}
 	@rss host rss.haseeb5i.duckdns.org
+	# no forward_auth: the web ui logs in through authelia sso, /api/ uses the freshrss api password
 	handle @rss {
-		# rss apps sync through the api with freshrss's own api password, they cannot pass authelia
-		@rssapi path /api/*
-		handle @rssapi {
-			reverse_proxy freshrss:80
-		}
-		handle {
-			forward_auth authelia:9091 {
-				uri /api/authz/forward-auth
-				copy_headers Remote-User Remote-Groups Remote-Email Remote-Name
-			}
-			reverse_proxy freshrss:80
-		}
+		reverse_proxy freshrss:80
 	}
 	@notes host notes.haseeb5i.duckdns.org
 	handle @notes {
@@ -58,11 +42,8 @@
 		reverse_proxy blinko:1111
 	}
 	@trips host trips.haseeb5i.duckdns.org
+	# no forward_auth: the app logs in through authelia sso itself
 	handle @trips {
-		forward_auth authelia:9091 {
-			uri /api/authz/forward-auth
-			copy_headers Remote-User Remote-Groups Remote-Email Remote-Name
-		}
 		reverse_proxy adventurelog:80
 	}
 	@flows host flows.haseeb5i.duckdns.org
