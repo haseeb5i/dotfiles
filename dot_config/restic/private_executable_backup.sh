@@ -13,14 +13,14 @@ podman exec adventurelog-db pg_dumpall -U adventure > $S/backup-dumps/adventurel
 podman exec immich-postgres pg_dumpall -U postgres > $S/backup-dumps/immich.sql
 
 # sqlite and pglite apps are stopped while restic reads them, so their files are consistent
-STOP="authelia actual mealie freshrss activepieces"
+STOP="authelia actual mealie freshrss activepieces deeptutor"
 trap 'systemctl --user start $STOP' EXIT
 systemctl --user stop $STOP
 # configs live in chezmoi; users.yml stays here because it holds the password hash
 # unshare runs restic as the container users, so it can read files they own
 podman unshare restic backup --quiet \
   --exclude "$S/*/postgres" --exclude "$S/activepieces/cache" --exclude "$S/immich/model-cache" \
-  $S/{backup-dumps,authelia,authelia-valkey,caddy,actual,mealie,freshrss,blinko,adventurelog,activepieces,immich} \
+  $S/{backup-dumps,authelia,authelia-valkey,caddy,actual,mealie,freshrss,blinko,adventurelog,activepieces,immich,deeptutor} \
   $HOME/.config/authelia/users.yml
 systemctl --user start $STOP
 trap - EXIT

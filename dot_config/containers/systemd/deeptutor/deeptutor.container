@@ -1,0 +1,13 @@
+[Container]
+ContainerName=deeptutor
+# pinned: releases often break things, bump by hand after reading the release notes
+Image=ghcr.io/hkuds/deeptutor:1.6.14
+Network=skynet.network
+Volume=%h/.local/share/deeptutor:/app/data:Z
+
+[Service]
+Restart=always
+TimeoutStartSec=600
+
+[Install]
+WantedBy=default.target
