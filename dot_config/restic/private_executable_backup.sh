@@ -11,6 +11,7 @@ mkdir -p -m 700 $S/backup-dumps
 podman exec blinko-postgres pg_dumpall -U postgres > $S/backup-dumps/blinko.sql
 podman exec adventurelog-db pg_dumpall -U adventure > $S/backup-dumps/adventurelog.sql
 podman exec immich-postgres pg_dumpall -U postgres > $S/backup-dumps/immich.sql
+podman exec hindsight-postgres pg_dumpall -U hindsight > $S/backup-dumps/hindsight.sql
 
 # sqlite and pglite apps are stopped while restic reads them, so their files are consistent
 STOP="authelia actual mealie freshrss activepieces deeptutor"
@@ -20,7 +21,7 @@ systemctl --user stop $STOP
 # unshare runs restic as the container users, so it can read files they own
 podman unshare restic backup --quiet \
   --exclude "$S/*/postgres" --exclude "$S/activepieces/cache" --exclude "$S/immich/model-cache" \
-  $S/{backup-dumps,authelia,authelia-valkey,caddy,actual,mealie,freshrss,blinko,adventurelog,activepieces,immich,deeptutor} \
+  $S/{backup-dumps,authelia,authelia-valkey,caddy,actual,mealie,freshrss,blinko,adventurelog,activepieces,immich,deeptutor,hindsight} \
   $HOME/.config/authelia/users.yml
 systemctl --user start $STOP
 trap - EXIT

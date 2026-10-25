@@ -81,6 +81,19 @@
 		}
 		reverse_proxy deeptutor:3782
 	}
+	# no forward_auth: agents call the api and mcp with hindsight's own api key
+	@memory host memory.haseeb5i.duckdns.org
+	handle @memory {
+		reverse_proxy hindsight:8888
+	}
+	@hindsight host hindsight.haseeb5i.duckdns.org
+	handle @hindsight {
+		forward_auth authelia:9091 {
+			uri /api/authz/forward-auth
+			copy_headers Remote-User Remote-Groups Remote-Email Remote-Name
+		}
+		reverse_proxy hindsight:9999
+	}
 	# no forward_auth: the immich apps log in with immich's own account
 	@photos host photos.haseeb5i.duckdns.org
 	handle @photos {

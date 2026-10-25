@@ -1,0 +1,14 @@
+[Container]
+ContainerName=hindsight-postgres
+Image=docker.io/pgvector/pgvector:pg18
+Network=skynet.network
+# postgres 18 keeps its data in /var/lib/postgresql/18/docker
+Volume=%h/.local/share/hindsight/postgres:/var/lib/postgresql:Z
+Environment=POSTGRES_DB=hindsight POSTGRES_USER=hindsight
+Secret=hindsight_db_password,type=env,target=POSTGRES_PASSWORD
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=default.target
