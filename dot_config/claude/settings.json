@@ -10,7 +10,7 @@
     ],
     "defaultMode": "auto"
   },
-  "model": "opus",
+  "model": "claude-sonnet-5-5",
   "hooks": {
     "PreToolUse": [
       {
@@ -29,7 +29,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash '/home/raven/.config/claude/hooks/herdr-agent-state.sh' session",
+            "command": "bash \"$HOME/.config/claude/hooks/herdr-agent-state.sh\" session",
             "timeout": 10
           }
         ]
@@ -38,7 +38,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node \"/home/raven/.hindsight/coding-agents/dist/claude-sessionstart-hook.js\"",
+            "command": "node \"$HOME/.hindsight/coding-agents/dist/claude-sessionstart-hook.js\"",
             "timeout": 30
           }
         ]
@@ -57,7 +57,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node \"/home/raven/.hindsight/coding-agents/dist/claude-hook.js\"",
+            "command": "node \"$HOME/.hindsight/coding-agents/dist/claude-hook.js\"",
             "timeout": 30
           }
         ]
@@ -68,7 +68,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node \"/home/raven/.hindsight/coding-agents/dist/claude-stop-hook.js\"",
+            "command": "node \"$HOME/.hindsight/coding-agents/dist/claude-stop-hook.js\"",
             "timeout": 60
           }
         ]
@@ -77,7 +77,7 @@
   },
   "statusLine": {
     "type": "command",
-    "command": "/home/raven/.config/claude/statusline.sh",
+    "command": "$HOME/.config/claude/statusline.sh",
     "refreshInterval": 1
   },
   "enabledPlugins": {
@@ -129,5 +129,16 @@
   "skipWorkflowUsageWarning": true,
   "theme": "auto",
   "editorMode": "vim",
-  "autoMode": {}
+  "autoMode": {
+    "environment": [
+      "### Org-wide",
+      "**Organization**: N3O",
+      "**Cloud provider(s)**: Azure",
+      "**Repository visibility**: assume private unless the remote host and repo name indicate otherwise, or a visibility check in the transcript shows public",
+      "**Internal sharing / snippet hosting**: None configured — treat public paste/gist services as outside the trust boundary",
+      "**Internal package registry**: npm.pkg.github.com (GitHub Packages npm registry, seen in repo config)",
+      "**Sensitive remote targets**: any namespace, host, or container whose name carries `prod` or `production` as a whole word or name segment (hyphen/underscore/dot-delimited — e.g. matches `prod-db`, not `producer`)",
+      "**Protected IaC scopes**: IAM, RBAC, networking, quota, and node-pool resources; anything whose name or tag carries `prod` or `production` as a whole word or name segment"
+    ]
+  }
 }
