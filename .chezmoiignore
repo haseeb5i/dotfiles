@@ -10,6 +10,11 @@ README.md
 !.config/zsh/.zshrc
 !.config/zsh/.zimrc
 
+# opencode
+.config/opencode/skills
+.config/opencode/antigravity-accounts.json
+.config/opencode/service.json
+
 {{ if ne .chezmoi.os "linux" }}
 .config/fusuma
 .config/environment.d

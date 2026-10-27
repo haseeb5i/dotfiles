@@ -1,6 +1,11 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "plugins": ["@dietrichgebert/ponytail", "@plannotator/opencode"],
+  "plugins": [
+    "@dietrichgebert/ponytail",
+    "@plannotator/opencode",
+    "cc-safety-net@latest",
+    "opencode-antigravity-auth@latest"
+  ],
   "instructions": ["~/.config/claude/instructions/code-standards.md"],
   "mcp": {
     "servers": {
@@ -26,10 +31,14 @@
           "Authorization": "Bearer {env:CONTEXT7_API_KEY}",
         },
       },
-      "playwright": {
-        "type": "local",
+      "logseq": {
+        "type": "remote",
+        "url": "http://127.0.0.1:12315/mcp",
+        "oauth": false,
         "disabled": true,
-        "command": ["npx", "-y", "@playwright/mcp@latest"],
+        "headers": {
+          "Authorization": "Bearer {env:LOGSEQ_MCP_TOKEN}",
+        },
       },
     },
   },
