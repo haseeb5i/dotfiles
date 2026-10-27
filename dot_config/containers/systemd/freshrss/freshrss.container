@@ -1,3 +1,6 @@
+[Unit]
+After=authelia.service caddy.service
+
 [Container]
 ContainerName=freshrss
 Image=docker.io/freshrss/freshrss:latest

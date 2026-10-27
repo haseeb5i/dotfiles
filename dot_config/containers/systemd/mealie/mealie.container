@@ -1,3 +1,6 @@
+[Unit]
+After=authelia.service caddy.service
+
 [Container]
 ContainerName=mealie
 Image=ghcr.io/mealie-recipes/mealie:latest

@@ -29,6 +29,9 @@ Environment=AUTHELIA_IDENTITY_VALIDATION_RESET_PASSWORD_JWT_SECRET_FILE=/run/sec
 Environment=AUTHELIA_SESSION_SECRET_FILE=/run/secrets/authelia_session
 Environment=AUTHELIA_STORAGE_ENCRYPTION_KEY_FILE=/run/secrets/authelia_storage
 Environment=AUTHELIA_SESSION_REDIS_PASSWORD_FILE=/run/secrets/authelia_valkey
+HealthCmd=/app/healthcheck.sh
+HealthInterval=5s
+Notify=healthy
 AutoUpdate=registry
 
 [Service]
