@@ -11,9 +11,9 @@ README.md
 !.config/zsh/.zimrc
 
 # opencode
-.config/opencode/skills
-.config/opencode/antigravity-accounts.json
-.config/opencode/service.json
+.config/opencode/*
+!.config/opencode/cli.json
+!.config/opencode/opencode.json*
 
 {{ if ne .chezmoi.os "linux" }}
 .config/fusuma
