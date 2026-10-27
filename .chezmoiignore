@@ -15,6 +15,13 @@ README.md
 !.config/opencode/cli.json
 !.config/opencode/opencode.json*
 
+# claude
+.config/claude/*
+!.config/claude/settings.json
+!.config/claude/statusline.sh
+!.config/claude/instructions
+!.config/claude/instructions/**
+
 {{ if ne .chezmoi.os "linux" }}
 .config/fusuma
 .config/environment.d
