@@ -4,8 +4,7 @@
     "@dietrichgebert/ponytail",
     "@plannotator/opencode",
     "cc-safety-net@latest",
-    "opencode-antigravity-auth@latest",
-    "{{ .chezmoi.homeDir }}/.hindsight/coding-agents"
+    "opencode-antigravity-auth@latest"
   ],
   "instructions": ["~/.config/claude/instructions/code-standards.md"],
   "mcp": {

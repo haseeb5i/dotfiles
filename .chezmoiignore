@@ -14,6 +14,9 @@ README.md
 .config/opencode/*
 !.config/opencode/cli.json
 !.config/opencode/opencode.json*
+!.config/opencode/plugins
+.config/opencode/plugins/*
+!.config/opencode/plugins/hindsight
 
 # claude
 .config/claude/*
