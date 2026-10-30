@@ -10,3 +10,12 @@
     url = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/CascadiaCode.tar.xz"
     exact = true
     include = ["CaskaydiaCoveNerdFont-*.ttf"]
+
+{{ if eq .chezmoi.os "linux" -}}
+[".local/share/icons/Papirus"]
+    type = "archive"
+    url = "https://github.com/PapirusDevelopmentTeam/papirus-icon-theme/archive/refs/tags/{{ (gitHubLatestRelease "PapirusDevelopmentTeam/papirus-icon-theme").TagName }}.tar.gz"
+    exact = true
+    stripComponents = 2
+    include = ["*/Papirus/**"]
+{{ end -}}
