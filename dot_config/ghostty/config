@@ -6,7 +6,7 @@ adjust-cell-height = 15%
 # dark -> Dracula, TokyoNight, Gruvbox Dark, Flexoki Dark
 theme = dark:Dracula,light:Rose Pine Dawn
 
-background-opacity = 1
+background-opacity = 0.85
 background-blur = true
 
 keybind = ctrl+enter=unbind
