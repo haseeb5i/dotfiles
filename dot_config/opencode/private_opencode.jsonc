@@ -10,6 +10,13 @@
     "opencode-antigravity-auth@latest"
   ],
   "instructions": ["~/.config/claude/instructions/code-standards.md", "~/.config/claude/instructions/machines.md"],
+   "providers": {
+    "amazon-bedrock": {
+      "settings": {
+        "region": "us-east-1",
+      },
+    },
+  },
   "mcp": {
     "servers": {
       "n3o": {
