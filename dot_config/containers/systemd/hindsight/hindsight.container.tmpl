@@ -7,6 +7,11 @@ ContainerName=hindsight
 # pinned: bump by hand after reading the release notes
 Image=ghcr.io/vectorize-io/hindsight:1.1.0
 Network=skynet.network
+{{- if eq (get . "homelab") "hindsight" }}
+# no caddy on this host: the api for all agents on the tailscale ip only, the ui on the host itself (authelia isn't in front of it)
+PublishPort={{ .hindsight_bind }}:8888:8888
+PublishPort=127.0.0.1:9999:9999
+{{- end }}
 Environment=HINDSIGHT_API_LLM_PROVIDER=anthropic HINDSIGHT_API_LLM_MODEL=claude-haiku-5-5
 # every api and mcp request needs "Authorization: Bearer <hindsight_api_key>", the ui sends it too
 Environment=HINDSIGHT_API_TENANT_EXTENSION=hindsight_api.extensions.builtin.tenant:ApiKeyTenantExtension
