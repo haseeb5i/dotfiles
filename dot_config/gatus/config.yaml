@@ -47,7 +47,7 @@ endpoints:
     dns:
       query-name: haseeb5i.duckdns.org
       query-type: A
-    conditions: ["[DNS_RCODE] == NOERROR", "[BODY] == 100.119.71.101"]
+    conditions: ["[DNS_RCODE] == NOERROR", "[BODY] == 100.67.166.24"]
     <<: *alert
   - {name: authelia, group: core, url: "http://authelia:9091/api/health", conditions: ["[STATUS] == 200"], <<: *alert}
   - {name: glance, group: apps, url: "http://glance:8080/", conditions: ["[STATUS] == 200"], <<: *alert}
