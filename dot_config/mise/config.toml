@@ -33,7 +33,8 @@ bitwarden = "latest"
 bitwarden-secrets-manager = "latest"
 1password-cli = "latest"
 rust = "latest"
-azure-cli = { version = "latest", dependency_prereleases = "allow", with = ["pip"] }
+# python pinned: azure-cli's macOS dep pymsalruntime has no cp315 wheels yet
+azure-cli = { version = "latest", python = "3.14", dependency_prereleases = "allow", with = ["pip"] }
 
 [hooks]
 postinstall = "misecompsync --shell zsh"
