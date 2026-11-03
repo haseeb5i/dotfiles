@@ -33,6 +33,7 @@ bitwarden = "latest"
 bitwarden-secrets-manager = "latest"
 1password-cli = "latest"
 rust = "latest"
+azure-cli = { version = "latest", dependency_prereleases = "allow", with = ["pip"] }
 
 [hooks]
 postinstall = "misecompsync --shell zsh"
