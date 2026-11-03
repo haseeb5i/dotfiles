@@ -4,7 +4,8 @@ Run `hostname` to see which of these machines you are on; reach the others with 
 
 | Alias | Hostname | Notes |
 |---|---|---|
-| `pc` | `fedora-pc` | Fedora desktop, hosts the homelab |
+| `wsl` | `fedora-pc` | Fedora 44 in WSL on the Windows desktop (`n3o-pc1`); hosts the homelab and the dev setup. Use this one |
+| `pc` | `n3o-pc1` | Windows 11 host of `wsl`. Rarely used; don't SSH here, use `wsl` |
 | `laptop` | `fedora` | Fedora laptop |
 | `mini` | `n3o-macmini.local` | Mac mini (macOS) |
 

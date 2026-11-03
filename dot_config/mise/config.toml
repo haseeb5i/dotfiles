@@ -32,6 +32,7 @@ llmfit = "latest"
 bitwarden = "latest"
 bitwarden-secrets-manager = "latest"
 1password-cli = "latest"
+rust = "latest"
 
 [hooks]
 postinstall = "misecompsync --shell zsh"

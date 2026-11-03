@@ -10,7 +10,7 @@
     ],
     "defaultMode": "auto"
   },
-  "model": "sonnet",
+  "model": "opus",
   "hooks": {
     "PreToolUse": [
       {
@@ -90,7 +90,8 @@
     "frontend-design@claude-plugins-official": true,
     "cc-plugin-you-should-know@builtin": true,
     "egm@egm": true,
-    "cc-safety-net@cc-marketplace": true
+    "cc-safety-net@cc-marketplace": true,
+    "slack@anthropic-plugin-directory": true
   },
   "extraKnownMarketplaces": {
     "plannotator": {
