@@ -1,3 +1,6 @@
+# machine-local hosts (e.g. azure) live in ~/.ssh/config.local, kept out of this public repo
+Include config.local
+
 Host github.com
     User git
     HostName github.com
@@ -8,13 +11,18 @@ Host laptop
     User raven
 
 Host pc
-    HostName fedora-pc.tail211f3.ts.net
-    User raven
+    HostName n3o-pc1.tail211f3.ts.net
+    User haseeb
 
 Host mini
     HostName n3os-mac-mini.tail211f3.ts.net
     User raven
 
-Host laptop pc mini
+Host wsl
+    HostName n3o-pc1
+    Port 2222
+    User raven
+
+Host laptop pc mini wsl
     IdentityFile ~/.ssh/machines
     IdentitiesOnly yes
