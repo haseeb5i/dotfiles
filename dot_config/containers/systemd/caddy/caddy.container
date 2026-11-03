@@ -4,7 +4,8 @@ Image=localhost/caddy-duckdns
 Network=skynet.network
 # containers reach authelia by its public name for oidc; the published port only applies to outside traffic
 NetworkAlias=auth.haseeb5i.duckdns.org
-PublishPort=100.67.166.24:443:443
+# windows portproxy forwards 100.67.166.24:443 here (mirrored wsl only sees ports linux listens on, so no nft redirect)
+PublishPort=127.0.0.1:8443:443
 # the whole folder, not the file: chezmoi replaces the file on apply and a file mount would keep the old one
 Volume=%h/.config/caddy:/etc/caddy:ro,Z
 Volume=%h/.local/share/caddy:/data:Z
