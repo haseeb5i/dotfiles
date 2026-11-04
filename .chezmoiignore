@@ -28,7 +28,6 @@ README.md
 {{ if ne .chezmoi.os "linux" }}
 .config/fusuma
 .config/environment.d
-.config/voxtype
 {{ end }}
 
 # homelab, only on the pc
@@ -40,4 +39,9 @@ README.md
 .config/authelia
 .config/restic
 .config/systemd/user/restic-backup.*
+{{ end }}
+
+# voxtype reads its config from Library on macOS; symlink it to ~/.config
+{{ if ne .chezmoi.os "darwin" }}
+Library
 {{ end }}
