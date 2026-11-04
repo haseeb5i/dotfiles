@@ -59,7 +59,6 @@ endpoints:
   - {name: activepieces, group: apps, url: "http://activepieces:80/api/v1/flags", conditions: ["[STATUS] == 200"], <<: *alert}
   - {name: immich, group: apps, url: "http://immich-server:2283/api/server/ping", conditions: ["[STATUS] == 200"], <<: *alert}
   - {name: immich ml, group: apps, url: "http://immich-ml:3003/ping", conditions: ["[STATUS] == 200"], <<: *alert}
-  - {name: deeptutor, group: apps, url: "http://deeptutor:8001/health/ready", conditions: ["[STATUS] == 200"], <<: *alert}
   - {name: hindsight, group: apps, url: "http://hindsight:8888/health", conditions: ["[STATUS] == 200"], <<: *alert}
   - {name: blinko-postgres, group: databases, url: "tcp://blinko-postgres:5432", conditions: ["[CONNECTED] == true"], <<: *alert}
   - {name: adventurelog-db, group: databases, url: "tcp://adventurelog-db:5432", conditions: ["[CONNECTED] == true"], <<: *alert}

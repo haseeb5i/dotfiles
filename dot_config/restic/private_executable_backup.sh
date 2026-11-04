@@ -15,14 +15,14 @@ podman exec hindsight-postgres pg_dumpall -U hindsight > $S/backup-dumps/hindsig
 podman exec activepieces-postgres pg_dumpall -U activepieces > $S/backup-dumps/activepieces.sql
 
 # sqlite apps are stopped while restic reads them, so their files are consistent
-STOP="authelia actual mealie freshrss deeptutor"
+STOP="authelia actual mealie freshrss"
 trap 'systemctl --user start $STOP' EXIT
 systemctl --user stop $STOP
 # configs live in chezmoi; users.yml and the podman secrets stay here because they hold passwords and keys
 # unshare runs restic as the container users, so it can read files they own
 podman unshare restic backup --quiet \
   --exclude "$S/*/postgres" --exclude "$S/activepieces/cache" --exclude "$S/immich/model-cache" \
-  $S/{backup-dumps,authelia,authelia-valkey,caddy,actual,mealie,freshrss,blinko,adventurelog,activepieces,immich,deeptutor,hindsight} \
+  $S/{backup-dumps,authelia,authelia-valkey,caddy,actual,mealie,freshrss,blinko,adventurelog,activepieces,immich,hindsight} \
   $HOME/.config/authelia/users.yml $HOME/.local/share/containers/storage/secrets
 systemctl --user start $STOP
 trap - EXIT
