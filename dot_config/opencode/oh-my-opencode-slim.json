@@ -1,0 +1,78 @@
+{
+  "$schema": "https://unpkg.com/oh-my-opencode-slim@latest/oh-my-opencode-slim.schema.json",
+  "preset": "antigravity",
+  "presets": {
+    "antigravity": {
+      "orchestrator": { "model": "google/antigravity-claude-opus-5-5-high", "skills": ["*"] },
+      "oracle": { "model": "google/antigravity-gemini-4-argon-high", "skills": ["simplify"] },
+      "explorer": { "model": "google/antigravity-gemini-3.8-flash-low", "skills": [] },
+      "designer": { "model": "google/antigravity-gemini-4-argon-medium", "skills": [] },
+      "fixer": { "model": "google/antigravity-claude-sonnet-5-5-medium", "skills": [] }
+    },
+    "openai": {
+      "orchestrator": {
+        "model": "openai/gpt-6.1-sol",
+        "variant": "medium",
+        "skills": [
+          "*"
+        ]
+      },
+      "oracle": {
+        "model": "openai/gpt-6.1-sol",
+        "variant": "high",
+        "skills": [
+          "simplify"
+        ]
+      },
+      "explorer": {
+        "model": "openai/gpt-6-luna",
+        "variant": "low",
+        "skills": []
+      },
+      "designer": {
+        "model": "openai/gpt-6-luna",
+        "variant": "medium",
+        "skills": []
+      },
+      "fixer": {
+        "model": "openai/gpt-6.1-sol",
+        "variant": "low",
+        "skills": []
+      }
+    },
+    "opencode-go": {
+      "orchestrator": {
+        "model": "opencode-go/minimax-m3",
+        "variant": "thinking",
+        "skills": [
+          "*"
+        ]
+      },
+      "oracle": {
+        "model": "opencode-go/qwen3.7-max",
+        "variant": "max",
+        "skills": [
+          "simplify"
+        ]
+      },
+      "explorer": {
+        "model": "opencode-go/deepseek-v4-flash",
+        "variant": "high",
+        "skills": []
+      },
+      "designer": {
+        "model": "opencode-go/kimi-k2.7-code",
+        "skills": []
+      },
+      "fixer": {
+        "model": "opencode-go/deepseek-v4-flash",
+        "variant": "high",
+        "skills": []
+      },
+      "observer": {
+        "model": "opencode-go/mimo-v2.5",
+        "skills": []
+      }
+    }
+  }
+}

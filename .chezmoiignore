@@ -14,6 +14,7 @@ README.md
 .config/opencode/*
 !.config/opencode/cli.json
 !.config/opencode/opencode.json*
+!.config/opencode/oh-my-opencode-slim.json
 !.config/opencode/plugins
 .config/opencode/plugins/*
 !.config/opencode/plugins/hindsight
