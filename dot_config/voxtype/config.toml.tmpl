@@ -12,6 +12,9 @@ model = "{{ if eq .chezmoi.os "darwin" }}large-v3-turbo{{ else }}small.en{{ end 
 
 [output]
 mode = "type"
+
+[output.notification]
+on_no_speech = false
 {{- if eq .chezmoi.os "linux" }}
 
 [osd]
