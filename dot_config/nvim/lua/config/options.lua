@@ -7,12 +7,6 @@ vim.opt.hlsearch = false -- highlight all matches on previous search pattern
 -- vim.opt.numberwidth = 3 -- set number column width (default 4)
 vim.opt.list = false -- Show some invisible characters (tabs...)
 
--- follow desktop theme (headless herdr sidebar skips terminal detection)
-if vim.fn.executable("gsettings") == 1 then
-  local scheme = vim.fn.system({ "gsettings", "get", "org.gnome.desktop.interface", "color-scheme" })
-  vim.o.background = scheme:find("dark") and "dark" or "light"
-end
-
 -- lazyvim configuration
 vim.g.ai_cmp = true
 vim.g.autoformat = false

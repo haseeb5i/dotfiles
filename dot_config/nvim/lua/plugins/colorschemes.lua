@@ -2,7 +2,9 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "rose-pine",
+      colorscheme = function()
+        vim.cmd.colorscheme(vim.o.background == "light" and "rose-pine" or "dracula")
+      end,
     },
   },
   { "rose-pine/neovim", name = "rose-pine" },

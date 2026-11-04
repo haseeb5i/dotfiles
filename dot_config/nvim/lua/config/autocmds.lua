@@ -27,3 +27,12 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+vim.api.nvim_create_autocmd("OptionSet", {
+  pattern = "background",
+  callback = vim.schedule_wrap(function()
+    local want = vim.o.background == "light" and "rose-pine" or "dracula"
+    if vim.g.colors_name ~= want then
+      vim.cmd.colorscheme(want)
+    end
+  end),
+})
