@@ -1,0 +1,17 @@
+[Container]
+ContainerName=logseq-sync
+Image=ghcr.io/yshalsager/logseq-selfhost-sync:latest
+PublishPort=8787:8787
+Volume=%h/.local/share/logseq-sync:/app/data:Z,U
+Environment=DB_SYNC_BASE_URL=http://100.67.166.24:8787
+Environment=COGNITO_ISSUER=https://cognito-idp.us-east-1.amazonaws.com/us-east-1_dtagLnju8
+Environment=COGNITO_CLIENT_ID=69cs1lgme7p8kbgld8n5kseii6
+Environment=COGNITO_JWKS_URL=https://cognito-idp.us-east-1.amazonaws.com/us-east-1_dtagLnju8/.well-known/jwks.json
+Secret=logseq_asset_link_secret,type=env,target=ASSET_LINK_SECRET
+AutoUpdate=registry
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=default.target
