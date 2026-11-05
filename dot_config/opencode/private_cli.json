@@ -1,8 +1,5 @@
 {
-  "plugins": [
-    "./herdr-opencode",
-    "opencode-vim@latest"
-  ],
+  "plugins": ["opencode-vim@latest", "./herdr-opencode"],
   "theme": {
     "name": "system"
   },

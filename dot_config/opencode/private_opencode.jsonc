@@ -1,23 +1,26 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "policies": [
-    { "action": "provider.use", "resource": "perplexity*", "effect": "deny" }
-  ],
+  "policies": [{ "action": "provider.use", "resource": "perplexity*", "effect": "deny" }],
   "plugins": [
     "@dietrichgebert/ponytail",
     "@plannotator/opencode",
     "cc-safety-net@latest",
     "opencode-antigravity-auth@latest",
-    "oh-my-opencode-slim"
+    "oh-my-opencode-slim",
   ],
-  "instructions": ["~/.config/claude/instructions/code-standards.md", "~/.config/claude/instructions/machines.md"],
-   "providers": {
+  "instructions": [
+    "~/.config/claude/instructions/code-standards.md",
+    "~/.config/claude/instructions/machines.md",
+  ],
+  "providers": {
     "amazon-bedrock": {
       "settings": {
         "region": "us-east-1",
       },
     },
   },
+  "lsp": true,
+  "websearch": { "provider": "exa" },
   "mcp": {
     "servers": {
       "n3o": {
@@ -26,13 +29,9 @@
       },
       "codegraph": {
         "type": "local",
-        "command": [
-          "codegraph",
-          "serve",
-          "--mcp"
-        ],
+        "command": ["codegraph", "serve", "--mcp"],
         "disabled": false,
-        "codemode": false
+        "codemode": false,
       },
       "context7": {
         "type": "remote",
@@ -53,6 +52,4 @@
       },
     },
   },
-  "lsp": true,
-  "websearch": { "provider": "exa" }
 }
