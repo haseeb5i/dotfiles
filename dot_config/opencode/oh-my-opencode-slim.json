@@ -1,77 +1,45 @@
 {
   "$schema": "https://unpkg.com/oh-my-opencode-slim@latest/oh-my-opencode-slim.schema.json",
-  "preset": "antigravity",
+  "preset": "custom",
   "presets": {
-    "antigravity": {
-      "orchestrator": { "model": "google/antigravity-claude-opus-5-5-high", "skills": ["*"] },
-      "oracle": { "model": "google/antigravity-gemini-4-argon-high", "skills": ["simplify"] },
-      "explorer": { "model": "google/antigravity-gemini-3.8-flash-low", "skills": [] },
-      "designer": { "model": "google/antigravity-gemini-4-argon-medium", "skills": [] },
-      "fixer": { "model": "google/antigravity-claude-sonnet-5-5-medium", "skills": [] }
-    },
-    "openai": {
+    "custom": {
       "orchestrator": {
         "model": "openai/gpt-6.1-sol",
         "variant": "medium",
-        "skills": [
-          "*"
-        ]
+        "skills": ["*"],
+        "mcps": ["*"]
       },
       "oracle": {
-        "model": "openai/gpt-6.1-sol",
+        "model": "openai/gpt-6-astra",
         "variant": "high",
-        "skills": [
-          "simplify"
-        ]
+        "skills": ["simplify"],
+        "mcps": []
       },
       "explorer": {
-        "model": "openai/gpt-6-luna",
-        "variant": "low",
-        "skills": []
+        "model": "google/antigravity-gemini-3.8-flash-high",
+        "skills": [],
+        "mcps": ["context7", "codegraph"]
       },
-      "designer": {
-        "model": "openai/gpt-6-luna",
-        "variant": "medium",
-        "skills": []
-      },
-      "fixer": {
-        "model": "openai/gpt-6.1-sol",
-        "variant": "low",
-        "skills": []
-      }
-    },
-    "opencode-go": {
-      "orchestrator": {
-        "model": "opencode-go/minimax-m3",
-        "variant": "thinking",
-        "skills": [
-          "*"
-        ]
-      },
-      "oracle": {
-        "model": "opencode-go/qwen3.7-max",
-        "variant": "max",
-        "skills": [
-          "simplify"
-        ]
-      },
-      "explorer": {
-        "model": "opencode-go/deepseek-v4-flash",
-        "variant": "high",
-        "skills": []
-      },
-      "designer": {
-        "model": "opencode-go/kimi-k2.7-code",
-        "skills": []
-      },
-      "fixer": {
-        "model": "opencode-go/deepseek-v4-flash",
-        "variant": "high",
-        "skills": []
-      },
-      "observer": {
-        "model": "opencode-go/mimo-v2.5",
-        "skills": []
+      "designer": { "model": "google/antigravity-claude-opus-5-5-high", "skills": [], "mcps": [] },
+      "fixer": { "model": "google/antigravity-claude-sonnet-5-5-high", "skills": [], "mcps": [] },
+      "council": { "model": "openai/gpt-6.1-sol", "variant": "high", "skills": [], "mcps": [] }
+    }
+  },
+  "agents": {
+    "fast-generic": {
+      "model": "google/antigravity-gemini-3.8-flash-low",
+      "prompt": "You are a fast generic execution agent for routine mechanical command work. Run requested shell commands, inspect results, and report concise outcomes. For git commits or pushes, inspect git status, git diff, and recent log first; stage only intended files; avoid secrets; preserve repository commit-message style; never amend, rebase, reset --hard, clean, force-push, delete branches, or perform destructive history operations unless the user explicitly requested that exact operation. Do not edit code or make architecture/design decisions.",
+      "orchestratorPrompt": "Delegate to @fast-generic for routine mechanical command work: git status/diff/log reconnaissance, normal commit preparation, creating commits, pushing commits, and no-edit command validation such as lint, typecheck, static verification, tests, builds, or package-manager equivalents. Ask it to inspect diffs before committing, stage only intended files, avoid secrets, preserve repository commit-message style, and report final commit hashes or push results. Do not use it for code edits, design work, architecture, debugging strategy, docs research, or destructive git history operations such as amend, rebase, reset --hard, clean, force-push, or deleting branches unless the user explicitly requested that exact operation.",
+      "skills": [],
+      "mcps": []
+    }
+  },
+  "council": {
+    "default_preset": "custom",
+    "presets": {
+      "custom": {
+        "alpha": { "model": "openai/gpt-6-astra", "variant": "high" },
+        "beta": { "model": "anthropic/claude-opus-5-5", "variant": "high" }
       }
     }
   }

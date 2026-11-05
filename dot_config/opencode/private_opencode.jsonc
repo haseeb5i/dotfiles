@@ -12,13 +12,6 @@
     "~/.config/claude/instructions/code-standards.md",
     "~/.config/claude/instructions/machines.md",
   ],
-  "providers": {
-    "amazon-bedrock": {
-      "settings": {
-        "region": "us-east-1",
-      },
-    },
-  },
   "lsp": true,
   "websearch": { "provider": "exa" },
   "mcp": {
