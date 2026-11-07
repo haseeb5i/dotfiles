@@ -2,6 +2,8 @@
 ContainerName=hindsight-postgres
 Image=docker.io/pgvector/pgvector:pg18
 Network=skynet.network
+# parallel queries (bank clone) need more than the 64m default
+ShmSize=1g
 Volume=%h/.local/share/hindsight/postgres:/var/lib/postgresql:Z
 Environment=POSTGRES_DB=hindsight POSTGRES_USER=hindsight
 Secret=hindsight_db_password,type=env,target=POSTGRES_PASSWORD
