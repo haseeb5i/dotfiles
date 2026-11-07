@@ -1,6 +1,3 @@
-# machine-local hosts (e.g. azure) live in ~/.ssh/config.local, kept out of this public repo
-Include config.local
-
 Host github.com
     User git
     HostName github.com
