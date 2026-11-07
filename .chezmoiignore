@@ -42,7 +42,3 @@ README.md
 .config/systemd/user/restic-backup.*
 {{ end }}
 
-# voxtype reads its config from Library on macOS; symlink it to ~/.config
-{{ if ne .chezmoi.os "darwin" }}
-Library
-{{ end }}
