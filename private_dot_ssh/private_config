@@ -4,7 +4,7 @@ Host github.com
     IdentityFile ~/.ssh/github
 
 Host laptop
-    HostName fedora-2.tail211f3.ts.net
+    HostName n3o-lap1
     User raven
 
 Host pc
