@@ -4,7 +4,7 @@ Host github.com
     IdentityFile ~/.ssh/github
 
 Host laptop
-    HostName n3o-lap1
+    HostName n3o-lap1.tail211f3.ts.net
     User raven
 
 Host pc
