@@ -1,0 +1,7 @@
+#!/bin/sh
+# reruns whenever the Brewfile changes: {{ include "dot_config/homebrew/Brewfile" | sha256sum }}
+set -e
+for b in brew /opt/homebrew/bin/brew /home/linuxbrew/.linuxbrew/bin/brew; do
+  command -v "$b" >/dev/null 2>&1 && exec "$b" bundle --file="$HOME/.config/homebrew/Brewfile"
+done
+echo "brew not found, skipping Brewfile"
