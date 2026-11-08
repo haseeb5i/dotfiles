@@ -31,10 +31,6 @@ README.md
 .config/environment.d
 {{ end }}
 
-{{ if ne .chezmoi.os "darwin" }}
-.config/homebrew
-{{ end }}
-
 # homelab, only on the pc
 {{ if ne .chezmoi.hostname "fedora-pc" }}
 .config/containers
