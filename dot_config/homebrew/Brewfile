@@ -14,3 +14,8 @@ if OS.mac?
   brew "ffmpeg"
   brew "podman"
 end
+
+# clang; macOS already has it from the Xcode command line tools
+if OS.linux?
+  brew "llvm"
+end
