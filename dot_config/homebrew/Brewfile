@@ -1,16 +1,13 @@
+# macOS only (Linux gets these from dnf or Aurora's aurora-cli bundle)
 # install with: brew bundle --file ~/.config/homebrew/Brewfile
-# (WSL has no brew; it gets these from dnf)
 brew "bat"
 brew "eza"
 brew "fd"
+brew "ffmpeg"
 brew "fzf"
 brew "gh"
 brew "neovim"
+brew "podman"
 brew "ripgrep"
+brew "starship"
 brew "zoxide"
-
-if OS.mac?
-  brew "ffmpeg"
-  brew "podman"
-  brew "starship"
-end

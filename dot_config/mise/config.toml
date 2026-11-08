@@ -8,7 +8,7 @@ uv = "latest"
 ruby = "3.3"
 dotnet = "latest"
 
-# bat, eza, fd, fzf, ripgrep, zoxide: brew via ~/.config/homebrew/Brewfile (dnf on WSL)
+# bat, eza, fd, fzf, ripgrep, zoxide, starship: brew on macOS (~/.config/homebrew/Brewfile), system packages on Linux
 lazygit = "latest"
 usage = "latest"
 "github:alltuner/mise-completions-sync" = "latest"
