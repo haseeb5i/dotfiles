@@ -16,7 +16,7 @@ fd = { version = "latest", os = ["macos"] }
 ripgrep = { version = "latest", os = ["macos"] }
 zoxide = { version = "latest", os = ["macos"] }
 
-starship = "latest"
+starship = { version = "latest", os = ["macos"] }
 lazygit = "latest"
 usage = "latest"
 "github:alltuner/mise-completions-sync" = "latest"
