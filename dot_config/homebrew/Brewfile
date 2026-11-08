@@ -1,4 +1,4 @@
-# installed by .chezmoiscripts/run_onchange_after_brew-bundle.sh on every machine with brew
+# install with: brew bundle --file ~/.config/homebrew/Brewfile
 # (WSL has no brew; it gets these from dnf)
 brew "bat"
 brew "eza"
