@@ -1,14 +1,14 @@
 [tools]
-node = "lts"
 bun = "latest"
-pnpm = "latest"
+dotnet = "latest"
 go = "latest"
+node = "lts"
+pnpm = "latest"
 python = "latest"
 uv = "latest"
 ruby = "3.3"
-dotnet = "latest"
+rust = "latest"
 
-# bat, eza, fd, fzf, ripgrep, zoxide, starship: brew via ~/.config/homebrew/Brewfile (dnf on WSL)
 lazygit = "latest"
 usage = "latest"
 "github:alltuner/mise-completions-sync" = "latest"
@@ -24,7 +24,6 @@ llmfit = "latest"
 bitwarden = "latest"
 bitwarden-secrets-manager = "latest"
 1password-cli = "latest"
-rust = "latest"
 # python pinned: azure-cli's macOS dep pymsalruntime has no cp315 wheels yet
 azure-cli = { version = "latest", python = "3.14", dependency_prereleases = "allow", with = ["pip"] }
 

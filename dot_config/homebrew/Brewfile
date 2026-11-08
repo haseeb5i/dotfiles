@@ -1,5 +1,4 @@
 # install with: brew bundle --file ~/.config/homebrew/Brewfile
-# already-installed formulae (e.g. from Aurora's aurora-cli bundle) are skipped; WSL has no brew and uses dnf
 brew "bat"
 brew "difftastic"
 brew "eza"
@@ -9,10 +8,9 @@ brew "gh"
 brew "neovim"
 brew "ripgrep"
 brew "zoxide"
+brew "starship"
 
-# Aurora ships its own podman; a brew copy would shadow it
 if OS.mac?
   brew "ffmpeg"
   brew "podman"
-  brew "starship"
 end
