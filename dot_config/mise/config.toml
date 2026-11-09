@@ -9,7 +9,6 @@ uv = "latest"
 ruby = "3.3"
 rust = "latest"
 
-lazygit = "latest"
 usage = "latest"
 "github:alltuner/mise-completions-sync" = "latest"
 
