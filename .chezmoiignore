@@ -39,6 +39,8 @@ README.md
 .config/caddy
 .config/authelia
 .config/restic
+.config/lific
+.config/systemd/user/lific.service
 .config/systemd/user/restic-backup.*
 {{ end }}
 

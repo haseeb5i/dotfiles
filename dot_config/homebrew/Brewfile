@@ -9,6 +9,7 @@ brew "neovim"
 brew "ripgrep"
 brew "zoxide"
 brew "starship"
+brew "yt-dlp"
 
 if OS.mac?
   brew "ffmpeg"
