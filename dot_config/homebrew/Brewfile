@@ -19,4 +19,5 @@ end
 
 if OS.linux?
   brew "llvm"
+  brew "voidnullable/tap/lific"
 end
