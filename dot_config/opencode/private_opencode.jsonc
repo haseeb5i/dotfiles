@@ -34,15 +34,6 @@
           "Authorization": "Bearer {env:CONTEXT7_API_KEY}",
         },
       },
-      "logseq": {
-        "type": "remote",
-        "url": "http://127.0.0.1:12315/mcp",
-        "oauth": false,
-        "disabled": true,
-        "headers": {
-          "Authorization": "Bearer {env:LOGSEQ_MCP_TOKEN}",
-        },
-      },
     },
   },
 }
