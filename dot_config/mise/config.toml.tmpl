@@ -17,7 +17,9 @@ usage = "latest"
 rtk = "latest"
 herdr = "latest"
 "github:perplexityai/perplexity-cli" = { version = "latest", bin = "pplx" }
+{{ if eq .chezmoi.os "linux" }}
 "github:VoidNullable/lific" = "latest"
+{{ end }}
 worktrunk = { version = "latest", workflow = "release.yaml" }
 oxker = "latest"
 llmfit = "latest"
