@@ -3,26 +3,18 @@
   "preset": "custom",
   "presets": {
     "custom": {
-      "orchestrator": {
-        "model": "openai/gpt-6.1-sol",
-        "variant": "medium",
-        "skills": ["*"],
-        "mcps": ["*"]
-      },
-      "oracle": {
-        "model": "openai/gpt-6-astra",
-        "variant": "high",
-        "skills": ["simplify"],
-        "mcps": []
-      },
-      "explorer": {
-        "model": "google/antigravity-gemini-3.8-flash-high",
-        "skills": [],
-        "mcps": ["context7", "codegraph"]
-      },
+      "orchestrator": { "model": "openai/gpt-6.1-sol", "variant": "medium", "skills": ["*"], "mcps": ["*"] },
+      "oracle": { "model": "openai/gpt-6-astra", "variant": "high", "skills": ["simplify"], "mcps": [] },
+      "explorer": { "model": "openai/gpt-6-luna", "skills": [], "mcps": ["context7", "codegraph"] },
       "designer": { "model": "google/antigravity-claude-opus-5-5-high", "skills": [], "mcps": [] },
-      "fixer": { "model": "google/antigravity-claude-sonnet-5-5-high", "skills": [], "mcps": [] },
-      "council": { "model": "openai/gpt-6.1-sol", "variant": "high", "skills": [], "mcps": [] }
+      "fixer": { "model": "google/antigravity-gemini-4-argon-high", "skills": [], "mcps": [] },
+    },
+    "anthropic": {
+      "orchestrator": { "model": "anthropic/sonnet-5-5", "variant": "medium", "skills": ["*"], "mcps": ["*"] },
+      "oracle": { "model": "openai/opus-5-5", "variant": "high", "skills": ["simplify"], "mcps": [] },
+      "explorer": { "model": "google/haiku-5.5", "skills": [], "mcps": ["context7", "codegraph"] },
+      "designer": { "model": "anthropic/opus-5.5", "skills": [], "mcps": [] },
+      "fixer": { "model": "anthropic/sonnet-5.5", "variant": "high", "skills": [], "mcps": [] },
     }
   },
   "agents": {

@@ -23,7 +23,6 @@ path=(
   $HOME/.local/{,s}bin(N)
   $path
 )
-(( ${+commands[brew]} )) && eval "$(brew shellenv zsh)"
 
 # Less
 export PAGER='less'

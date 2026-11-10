@@ -1,5 +1,7 @@
 HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
 
+(( ${+commands[brew]} )) && eval "$(brew shellenv zsh)"
+
 fpath=(
   $XDG_DATA_HOME/mise-completions/zsh(N)
   $fpath
@@ -67,4 +69,3 @@ fi
 (( ${+commands[starship]} )) && eval "$(starship init zsh)"
 
 [[ -r ${ZDOTDIR}/secrets.sh ]] && source ${ZDOTDIR}/secrets.sh
-
