@@ -8,6 +8,7 @@ brew "gh"
 brew "lazygit"
 brew "neovim"
 brew "ripgrep"
+brew "rtk"
 brew "zoxide"
 brew "starship"
 brew "yt-dlp"
@@ -19,5 +20,4 @@ end
 
 if OS.linux?
   brew "llvm"
-  brew "voidnullable/tap/lific"
 end
