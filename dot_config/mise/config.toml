@@ -12,7 +12,10 @@ rust = "latest"
 usage = "latest"
 "github:alltuner/mise-completions-sync" = "latest"
 
-# harness CLIs; claude, claude-mem, opencode and plannotator stay on their own installers (self-updating)
+# harness CLIs; claude, claude-mem and plannotator stay on their own installers (self-updating)
+opencode = "latest"
+lazygit = "latest"
+rtk = "latest"
 "npm:@colbymchenry/codegraph" = "latest"
 herdr = "latest"
 "github:perplexityai/perplexity-cli" = { version = "latest", bin = "pplx" }

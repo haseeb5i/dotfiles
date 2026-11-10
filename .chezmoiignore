@@ -42,9 +42,3 @@ README.md
 .config/systemd/user/restic-backup.*
 {{ end }}
 
-
-# no mise on the pc
-{{ if eq .chezmoi.hostname "n3o-pc1" }}
-.config/mise
-.config/environment.d/10-dotnet.conf
-{{ end }}
