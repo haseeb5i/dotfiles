@@ -1,5 +1,6 @@
 # install with: brew bundle --file ~/.config/homebrew/Brewfile
 brew "bat"
+brew "direnv"
 brew "difftastic"
 brew "eza"
 brew "fd"
@@ -10,6 +11,7 @@ brew "ripgrep"
 brew "zoxide"
 brew "starship"
 brew "yt-dlp"
+brew "yq"
 
 if OS.mac?
   brew "ffmpeg"
