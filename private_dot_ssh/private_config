@@ -1,6 +1,7 @@
 Host github.com
     User git
     HostName github.com
+    ServerAliveInterval 30
     IdentityFile ~/.ssh/github
 
 Host pc
