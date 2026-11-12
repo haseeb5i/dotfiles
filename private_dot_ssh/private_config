@@ -3,23 +3,23 @@ Host github.com
     HostName github.com
     IdentityFile ~/.ssh/github
 
-Host laptop
-    HostName n3o-lap1.tail211f3.ts.net
-    User raven
-
 Host pc
     HostName n3o-pc1.tail211f3.ts.net
     User haseeb
+
+Host wsl
+    HostName n3o-pc1.tail211f3.ts.net
+    Port 2222
+    User raven
+
+Host macbook
+    HostName haseebs-macbook-pro.tail211f3.ts.net
+    User raven
 
 Host mini
     HostName n3os-mac-mini.tail211f3.ts.net
     User raven
 
-Host wsl
-    HostName n3o-pc1
-    Port 2222
-    User raven
-
-Host laptop pc mini wsl
+Host macbook mini pc wsl
     IdentityFile ~/.ssh/machines
     IdentitiesOnly yes
