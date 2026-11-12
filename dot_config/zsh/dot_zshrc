@@ -1,6 +1,11 @@
 HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
 
-(( ${+commands[brew]} )) && eval "$(brew shellenv zsh)"
+for brew_bin in /opt/homebrew/bin/brew /home/linuxbrew/.linuxbrew/bin/brew /usr/local/bin/brew; do
+  [[ -x $brew_bin ]] || continue
+  eval "$("$brew_bin" shellenv zsh)"
+  break
+done
+unset brew_bin
 
 fpath=(
   $XDG_DATA_HOME/mise-completions/zsh(N)
