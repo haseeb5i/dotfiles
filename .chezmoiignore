@@ -32,7 +32,7 @@ README.md
 {{ end }}
 
 # homelab, only on the pc
-{{ if ne .chezmoi.hostname "n3o-pc1" }}
+{{ if ne .chezmoi.hostname "fedora-pc" }}
 .config/containers
 .config/glance
 .config/gatus

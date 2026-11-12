@@ -4,7 +4,7 @@ Run `hostname` to see which machine you are on; reach the others with `ssh <alia
 
 | Alias | Hostname | Notes |
 |---|---|---|
-| `wsl` | `n3o-pc1` | Fedora 44 in WSL on the Windows desktop; hosts the homelab and the dev setup |
+| `wsl` | `fedora-pc` | Fedora 44 in WSL on the Windows desktop; hosts the homelab and the dev setup |
 | `macbook` | `n3o-lap2.local` | MacBook Pro (Apple Silicon, macOS) |
 | `mini` | `n3o-macmini.local` | Mac mini (macOS) |
 
