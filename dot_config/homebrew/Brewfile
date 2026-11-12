@@ -15,6 +15,7 @@ brew "yq"
 
 if OS.mac?
   brew "ffmpeg"
+  brew "cloudflared"
   brew "podman"
   cask "maccy"
 end
