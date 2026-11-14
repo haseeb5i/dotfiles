@@ -1,13 +1,13 @@
 {
   "$schema": "https://unpkg.com/oh-my-opencode-slim@latest/oh-my-opencode-slim.schema.json",
-  "preset": "custom",
+  "preset": "openai",
   "presets": {
-    "custom": {
+    "openai": {
       "orchestrator": { "model": "openai/gpt-6.1-sol", "variant": "medium", "skills": ["*"], "mcps": ["*"] },
       "oracle": { "model": "openai/gpt-6-astra", "variant": "high", "skills": ["simplify"], "mcps": [] },
       "explorer": { "model": "openai/gpt-6-luna", "skills": [], "mcps": ["context7", "codegraph"] },
-      "designer": { "model": "google/antigravity-claude-opus-5-5-high", "skills": [], "mcps": [] },
-      "fixer": { "model": "google/antigravity-gemini-4-argon-high", "skills": [], "mcps": [] },
+      "designer": { "model": "openai/gpt-6.1-sol", "skills": [], "mcps": [] },
+      "fixer": { "model": "openai/gpt-6-luna", "skills": [], "mcps": [] },
     },
     "anthropic": {
       "orchestrator": { "model": "anthropic/sonnet-5-5", "variant": "medium", "skills": ["*"], "mcps": ["*"] },
@@ -19,7 +19,7 @@
   },
   "agents": {
     "worker": {
-      "model": "google/antigravity-gemini-4-argon-high",
+      "model": "openai/gpt-6-luna",
       "prompt": "You are a fast generic execution agent for routine mechanical command work. Run requested shell commands, inspect results, and report concise outcomes. For git commits or pushes, inspect git status, git diff, and recent log first; stage only intended files; avoid secrets; preserve repository commit-message style; never amend, rebase, reset --hard, clean, force-push, delete branches, or perform destructive history operations unless the user explicitly requested that exact operation. Do not edit code or make architecture/design decisions.",
       "orchestratorPrompt": "Delegate to @worker for routine mechanical command work: git status/diff/log reconnaissance, normal commit preparation, creating commits, pushing commits, and no-edit command validation such as lint, typecheck, static verification, tests, builds, or package-manager equivalents. Ask it to inspect diffs before committing, stage only intended files, avoid secrets, preserve repository commit-message style, and report final commit hashes or push results. Do not use it for code edits, design work, architecture, debugging strategy, docs research, or destructive git history operations such as amend, rebase, reset --hard, clean, force-push, or deleting branches unless the user explicitly requested that exact operation.",
       "skills": [],
@@ -27,9 +27,9 @@
     }
   },
   "council": {
-    "default_preset": "custom",
+    "default_preset": "openai",
     "presets": {
-      "custom": {
+      "openai": {
         "alpha": { "model": "openai/gpt-6-astra", "variant": "high" },
         "beta": { "model": "anthropic/claude-opus-5-5", "variant": "high" }
       }

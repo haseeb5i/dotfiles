@@ -5,7 +5,6 @@
     "@dietrichgebert/ponytail",
     "@plannotator/opencode",
     "cc-safety-net@latest",
-    "opencode-antigravity-auth@latest",
     "oh-my-opencode-slim",
   ],
   "instructions": [
