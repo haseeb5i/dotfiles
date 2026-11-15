@@ -1,0 +1,53 @@
+storage:
+  type: sqlite
+  path: /data/data.db
+
+ui:
+  title: homelab status
+  header: homelab
+
+alerting:
+  ntfy:
+    topic: "${NTFY_TOPIC}"
+    priority: 4
+    default-alert:
+      failure-threshold: 3
+      success-threshold: 2
+      send-on-resolved: true
+
+x-alert: &alert
+  alerts:
+    - type: ntfy
+
+endpoints:
+  - name: hindsight
+    group: apps
+    url: http://hindsight:8888/health
+    conditions: ["[STATUS] == 200"]
+    <<: *alert
+  - name: logseq sync
+    group: apps
+    url: https://logseq.ravennest.link/health
+    conditions: ["[STATUS] == 200"]
+    <<: *alert
+  - name: activepieces
+    group: apps
+    url: https://flows.ravennest.link/
+    conditions: ["[STATUS] == 200"]
+    <<: *alert
+  - name: glance
+    group: apps
+    url: http://glance:8080/
+    conditions: ["[STATUS] == 200"]
+    <<: *alert
+
+external-endpoints:
+  - name: nightly backup
+    group: backups
+    token: "${PUSH_TOKEN}"
+    heartbeat:
+      interval: 25h
+    alerts:
+      - type: ntfy
+        failure-threshold: 1
+        success-threshold: 1

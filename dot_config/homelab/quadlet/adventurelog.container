@@ -1,0 +1,23 @@
+[Unit]
+Requires=adventurelog-db.service
+After=adventurelog-db.service
+
+[Container]
+ContainerName=adventurelog
+Image=ghcr.io/seanmorley15/adventurelog@sha256:3d51294be8e94ef997c0cd33a5e0e94636c87b0095344cf557e5de609a381fc6
+Network=skynet.network
+PublishPort=127.0.0.1:9082:80
+Volume=%h/.local/share/adventurelog/media:/code/media:Z
+Environment=SITE_URL=https://trips.ravennest.link PORT=3000 PGHOST=adventurelog-db
+Environment=ENABLE_RATE_LIMITS=true DISABLE_REGISTRATION=true SOCIALACCOUNT_ALLOW_SIGNUP=false
+Environment=DJANGO_ADMIN_USERNAME=haseeb5i DJANGO_ADMIN_EMAIL=haseeb5i@localhost
+Secret=adventurelog_admin_password,type=env,target=DJANGO_ADMIN_PASSWORD
+Secret=adventurelog_db_password,type=env,target=POSTGRES_PASSWORD
+Secret=adventurelog_secret_key,type=env,target=SECRET_KEY
+
+[Service]
+Restart=always
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target

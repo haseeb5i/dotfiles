@@ -1,0 +1,13 @@
+[Container]
+ContainerName=glance
+Image=docker.io/glanceapp/glance:latest
+Network=skynet.network
+PublishPort=127.0.0.1:9081:8080
+Volume=%h/.config/homelab/glance:/app/config:ro,Z
+Volume=/etc/localtime:/etc/localtime:ro
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=default.target

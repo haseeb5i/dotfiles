@@ -1,0 +1,18 @@
+server:
+  proxied: true
+pages:
+  - name: Home
+    columns:
+      - size: small
+        widgets:
+          - type: clock
+          - type: calendar
+      - size: full
+        widgets:
+          - type: search
+          - type: monitor
+            title: Services
+            sites:
+              - title: Glance
+                url: https://glance.ravennest.link
+                check-url: http://localhost:8080

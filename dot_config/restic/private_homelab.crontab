@@ -1,0 +1,1 @@
+0 3 * * * /usr/bin/caffeinate -i /Users/raven/.local/bin/homelab-backup >> /Users/raven/Library/Logs/homelab-backup.log 2>&1

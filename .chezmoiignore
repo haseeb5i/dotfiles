@@ -27,18 +27,14 @@ README.md
 !.config/claude/instructions/**
 
 {{ if ne .chezmoi.os "linux" }}
+.config/btop
 .config/fusuma
 .config/environment.d
 {{ end }}
 
-# homelab, only on the pc
-{{ if ne .chezmoi.hostname "fedora-pc" }}
-.config/containers
-.config/glance
-.config/gatus
-.config/caddy
-.config/authelia
-.config/restic
-.config/systemd/user/restic-backup.*
+# mini homelab app configs; deploy Quadlets into its Podman VM separately
+{{ if ne .chezmoi.hostname "n3o-macmini" }}
+.config/homelab
 {{ end }}
-
+.config/restic/homelab.env
+.config/homelab/private/**
