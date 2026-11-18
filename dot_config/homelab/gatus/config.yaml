@@ -52,7 +52,7 @@ endpoints:
     <<: *alert
   - name: activepieces
     group: apps
-    url: https://flows.ravennest.link/
+    url: http://activepieces:80/
     conditions: ["[STATUS] == 200"]
     ui: *ui
     <<: *alert
