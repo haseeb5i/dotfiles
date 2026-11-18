@@ -1,4 +1,4 @@
-HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
+export HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
 
 for brew_bin in /opt/homebrew/bin/brew /home/linuxbrew/.linuxbrew/bin/brew /usr/local/bin/brew; do
   [[ -x $brew_bin ]] || continue
