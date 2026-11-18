@@ -20,8 +20,6 @@ ui:
       link: https://trips.ravennest.link
     - name: Activepieces
       link: https://flows.ravennest.link
-    - name: Logseq
-      link: https://logseq.ravennest.link
     - name: Glance
       link: https://glance.ravennest.link
 
@@ -38,59 +36,73 @@ x-alert: &alert
   alerts:
     - type: ntfy
 
+x-ui: &ui
+  hide-hostname: true
+
 endpoints:
   - name: hindsight
     group: apps
     url: http://100.84.190.78:8888/health
     conditions: ["[STATUS] == 200"]
+    ui: *ui
     <<: *alert
   - name: logseq sync
     group: apps
     url: https://logseq.ravennest.link/health
     conditions: ["[STATUS] == 200"]
+    ui: *ui
     <<: *alert
   - name: activepieces
     group: apps
     url: https://flows.ravennest.link/
     conditions: ["[STATUS] == 200"]
+    ui: *ui
     <<: *alert
   - name: glance
     group: apps
     url: http://glance:8080/
     conditions: ["[STATUS] == 200"]
+    ui: *ui
     <<: *alert
   - name: adventurelog
     group: apps
     url: http://adventurelog:80/
     conditions: ["[STATUS] == 200"]
+    ui: *ui
     <<: *alert
   - name: actual
     group: apps
     url: http://actual:5006/
     conditions: ["[STATUS] == 200"]
+    ui: *ui
     <<: *alert
   - name: paperless
     group: apps
     url: http://paperless:8000/accounts/login/
     conditions: ["[STATUS] == 200"]
+    ui: *ui
     <<: *alert
   - name: mealie
     group: apps
     url: http://mealie:9000/api/app/about
     conditions: ["[STATUS] == 200"]
+    ui: *ui
     <<: *alert
   - name: freshrss
     group: apps
     url: http://freshrss:80/i/
     conditions: ["[STATUS] == 200"]
+    ui: *ui
     <<: *alert
   - name: atuin
     group: apps
     url: http://atuin:8888/
     conditions: ["[STATUS] == 200"]
+    ui: *ui
     <<: *alert
   - name: karakeep
     group: apps
     url: http://karakeep:3000/api/health
     conditions: ["[STATUS] == 200"]
+    ui: *ui
     <<: *alert

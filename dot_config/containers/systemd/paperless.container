@@ -12,7 +12,7 @@ Volume=%h/.local/share/paperless/media:/usr/src/paperless/media:Z
 Volume=%h/.local/share/paperless/consume:/usr/src/paperless/consume:Z
 Volume=%h/.local/share/paperless/export:/usr/src/paperless/export:Z
 Environment=PAPERLESS_URL=https://docs.ravennest.link PAPERLESS_DBENGINE=postgresql PAPERLESS_DBHOST=paperless-db PAPERLESS_DBNAME=paperless PAPERLESS_DBUSER=paperless PAPERLESS_REDIS=redis://paperless-valkey:6379
-Environment=PAPERLESS_TIME_ZONE=America/Los_Angeles PAPERLESS_ADMIN_USER=raven PAPERLESS_ADMIN_MAIL=raven@localhost
+Environment=PAPERLESS_TIME_ZONE=America/Los_Angeles PAPERLESS_ADMIN_USER=haseeb5i PAPERLESS_ADMIN_MAIL=raven@localhost
 Secret=paperless_db_password,type=env,target=PAPERLESS_DBPASS
 Secret=paperless_signing_key,type=env,target=PAPERLESS_SECRET_KEY
 Secret=paperless_admin_password,type=env,target=PAPERLESS_ADMIN_PASSWORD

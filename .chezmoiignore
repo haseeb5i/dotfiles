@@ -36,7 +36,6 @@ README.md
 .config/environment.d
 {{ end }}
 
-# Mini keeps Hindsight; WSL owns the other apps.
 {{ if eq .chezmoi.hostname "n3o-macmini" }}
 .config/homelab/cloudflared
 .config/homelab/gatus
@@ -46,15 +45,18 @@ README.md
 {{ else }}
 .config/homelab
 {{ end }}
+
 {{ if ne .chezmoi.hostname "fedora-pc" }}
 .config/containers/systemd
 .local/bin/backup-wsl
 .config/systemd/user/backup.service
 .config/systemd/user/backup.timer
 {{ end }}
+
 {{ if ne .chezmoi.hostname "n3o-macmini" }}
 .local/bin/backup-mini
 .config/restic/homelab.crontab
 {{ end }}
+
 .config/restic/homelab.env
 .config/homelab/private/**
