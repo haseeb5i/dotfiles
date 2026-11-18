@@ -15,8 +15,6 @@ ingress:
     service: http://127.0.0.1:9083
   - hostname: docs.ravennest.link
     service: http://127.0.0.1:9084
-  - hostname: meals.ravennest.link
-    service: http://127.0.0.1:9085
   - hostname: rss.ravennest.link
     service: http://127.0.0.1:9086
   - hostname: keep.ravennest.link

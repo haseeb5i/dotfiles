@@ -29,7 +29,7 @@ restart() {
   exit "$rc"
 }
 trap restart EXIT
-for s in karakeep paperless adventurelog activepieces activepieces-redis actual mealie freshrss logseq-sync gatus; do
+for s in karakeep paperless adventurelog activepieces activepieces-redis actual freshrss logseq-sync gatus; do
   if systemctl --user is-active --quiet "$s.service"; then
     stopped=("$s" "${stopped[@]}")
     systemctl --user stop "$s.service"
@@ -54,7 +54,7 @@ restic backup --host fedora-pc --tag homelab \
   "$HOME/.config/systemd/user/backup.timer"
 
 podman unshare restic backup --host fedora-pc --tag homelab-apps \
-  "$data/actual" "$data/mealie" "$data/freshrss" "$data/logseq-sync" "$data/gatus" \
+  "$data/actual" "$data/freshrss" "$data/logseq-sync" "$data/gatus" \
   "$data/activepieces/cache" "$data/activepieces/redis" \
   "$data/paperless/data" "$data/paperless/media" "$data/paperless/consume" "$data/paperless/export" \
   "$data/adventurelog/media"

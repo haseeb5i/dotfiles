@@ -8,8 +8,6 @@ ui:
   buttons:
     - name: Karakeep
       link: https://keep.ravennest.link
-    - name: Mealie
-      link: https://meals.ravennest.link
     - name: Actual
       link: https://budget.ravennest.link
     - name: Paperless
@@ -79,12 +77,6 @@ endpoints:
   - name: paperless
     group: apps
     url: http://paperless:8000/accounts/login/
-    conditions: ["[STATUS] == 200"]
-    ui: *ui
-    <<: *alert
-  - name: mealie
-    group: apps
-    url: http://mealie:9000/api/app/about
     conditions: ["[STATUS] == 200"]
     ui: *ui
     <<: *alert
