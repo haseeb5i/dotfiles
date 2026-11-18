@@ -27,6 +27,7 @@ oxker = "latest"
 rtk = "latest"
 usage = "latest"
 worktrunk = { version = "latest", workflow = "release.yaml" }
+yt-dlp = "latest"
 
 "github:alltuner/mise-completions-sync" = "latest"
 "github:perplexityai/perplexity-cli" = { version = "latest", bin = "pplx" }
