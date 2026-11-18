@@ -1,4 +1,0 @@
-# WSL hosts the server; its container data is in ~/.local/share/atuin-server, apart from the
-# client's ~/.atuin/data. The Windows Tailscale address is unreachable from inside WSL, so use
-# the local server.
-sync_address = "http://127.0.0.1:9087"
