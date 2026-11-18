@@ -5,6 +5,25 @@ storage:
 ui:
   title: homelab status
   header: homelab
+  buttons:
+    - name: Karakeep
+      link: https://keep.ravennest.link
+    - name: Mealie
+      link: https://meals.ravennest.link
+    - name: Actual
+      link: https://budget.ravennest.link
+    - name: Paperless
+      link: https://docs.ravennest.link
+    - name: FreshRSS
+      link: https://rss.ravennest.link
+    - name: AdventureLog
+      link: https://trips.ravennest.link
+    - name: Activepieces
+      link: https://flows.ravennest.link
+    - name: Logseq
+      link: https://logseq.ravennest.link
+    - name: Glance
+      link: https://glance.ravennest.link
 
 alerting:
   ntfy:
