@@ -1,6 +1,11 @@
 {{ if eq .chezmoi.hostname "fedora-pc" -}}
-# WSL hosts the server; the Windows Tailscale address is unreachable from inside WSL.
+# WSL hosts the server: its container owns ~/.local/share/atuin, so the client keeps its data elsewhere,
+# and the Windows Tailscale address is unreachable from inside WSL.
 sync_address = "http://127.0.0.1:9087"
+db_path = "~/.local/share/atuin-client/history.db"
+record_store_path = "~/.local/share/atuin-client/records.db"
+key_path = "~/.local/share/atuin-client/key"
+session_path = "~/.local/share/atuin-client/session"
 {{- else -}}
 sync_address = "http://100.67.166.24:9087"
 {{- end }}
