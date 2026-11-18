@@ -40,3 +40,38 @@ endpoints:
     url: http://glance:8080/
     conditions: ["[STATUS] == 200"]
     <<: *alert
+  - name: adventurelog
+    group: apps
+    url: http://adventurelog:80/
+    conditions: ["[STATUS] == 200"]
+    <<: *alert
+  - name: actual
+    group: apps
+    url: http://actual:5006/
+    conditions: ["[STATUS] == 200"]
+    <<: *alert
+  - name: paperless
+    group: apps
+    url: http://paperless:8000/accounts/login/
+    conditions: ["[STATUS] == 200"]
+    <<: *alert
+  - name: mealie
+    group: apps
+    url: http://mealie:9000/api/app/about
+    conditions: ["[STATUS] == 200"]
+    <<: *alert
+  - name: freshrss
+    group: apps
+    url: http://freshrss:80/i/
+    conditions: ["[STATUS] == 200"]
+    <<: *alert
+  - name: atuin
+    group: apps
+    url: http://atuin:8888/
+    conditions: ["[STATUS] == 200"]
+    <<: *alert
+  - name: karakeep
+    group: apps
+    url: http://karakeep:3000/api/health
+    conditions: ["[STATUS] == 200"]
+    <<: *alert

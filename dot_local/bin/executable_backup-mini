@@ -1,0 +1,41 @@
+#!/bin/bash
+set -euo pipefail
+export PATH=/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin
+umask 077
+. "$HOME/.config/restic/homelab.env"
+
+state="$HOME/.local/share/homelab-backup"
+stage="$state/snapshot"
+lock="$state/lock.pid"
+mkdir -p "$state"
+shlock -f "$lock" -p $$ || { echo "Backup already running: $lock" >&2; exit 1; }
+log() { echo "$(date -u '+%Y-%m-%dT%H:%M:%SZ') backup $*"; }
+cleanup() {
+  local rc=$?
+  rm -rf "$stage" "$lock"
+  log "exit=$rc"
+  exit "$rc"
+}
+trap cleanup EXIT
+trap 'exit 130' INT
+trap 'exit 143' TERM
+log starting
+
+rm -rf "$stage"
+mkdir "$stage"
+[ "$(podman machine inspect --format '{{.State}}' podman-machine-default)" = running ] ||
+  podman machine start podman-machine-default
+
+podman exec hindsight-postgres pg_dump -U hindsight -d hindsight -Fc > "$stage/hindsight.dump"
+podman exec -i hindsight-postgres sh -c 'pg_restore --list; rc=$?; cat > /dev/null; exit $rc' < "$stage/hindsight.dump" > /dev/null
+podman machine ssh 'tar -czf - -C ~/.config/containers systemd' > "$stage/vm-quadlets.tar.gz"
+gzip -t "$stage/vm-quadlets.tar.gz"
+podman secret inspect --showsecret $(podman secret ls --format '{{.Name}}') > "$stage/podman-secrets.json"
+
+restic backup --host n3o-macmini.local --tag homelab \
+  "$stage" "$HOME/.config/homelab" "$HOME/.config/restic" "$HOME/.local/bin/backup-mini"
+restic forget --host n3o-macmini.local --tag homelab --group-by host,tags \
+  --keep-daily 7 --keep-weekly 4 --keep-monthly 6 --prune
+if [ "$(date +%u)" -eq 7 ]; then
+  restic check --read-data-subset=5%
+fi
