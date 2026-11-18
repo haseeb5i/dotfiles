@@ -1,0 +1,6 @@
+{{ if eq .chezmoi.hostname "fedora-pc" -}}
+# WSL hosts the server; the Windows Tailscale address is unreachable from inside WSL.
+sync_address = "http://127.0.0.1:9087"
+{{- else -}}
+sync_address = "http://100.67.166.24:9087"
+{{- end }}
