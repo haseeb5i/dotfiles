@@ -60,3 +60,9 @@ README.md
 
 .config/restic/homelab.env
 .config/homelab/private/**
+
+{{ if eq .chezmoi.hostname "fedora-pc" }}
+.config/atuin
+{{ else }}
+.atuin
+{{ end }}

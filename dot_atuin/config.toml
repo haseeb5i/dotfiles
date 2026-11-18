@@ -1,0 +1,4 @@
+# WSL hosts the server, whose container owns ~/.local/share/atuin. Having ~/.atuin/config.toml
+# makes the client keep its data in ~/.atuin/data instead. The Windows Tailscale address is
+# unreachable from inside WSL, so use the local server.
+sync_address = "http://127.0.0.1:9087"
