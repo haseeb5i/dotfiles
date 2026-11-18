@@ -67,6 +67,8 @@ if (( ${+commands[fzf]} )); then
   source <(fzf --zsh)
 fi
 
+(( ${+commands[atuin]} )) && eval "$(atuin init zsh)"
+
 (( ${+commands[zoxide]} )) && eval "$(zoxide init --cmd cd zsh)"
 
 (( ${+commands[direnv]} )) && eval "$(direnv hook zsh)"

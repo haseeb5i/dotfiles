@@ -1,4 +1,5 @@
 # install with: brew bundle --file ~/.config/homebrew/Brewfile
+brew "atuin"
 brew "bat"
 brew "direnv"
 brew "eza"
