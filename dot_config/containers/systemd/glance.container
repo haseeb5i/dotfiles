@@ -1,8 +1,7 @@
 [Container]
 ContainerName=glance
-Image=docker.io/glanceapp/glance@sha256:4a56c333a0fb0431264bbf1c2e7f2c627fe18ae52c31e1d02c34daab2d800984
+Image=docker.io/glanceapp/glance:v0.8.8@sha256:4d7445bc7971836858ffddee5d7501f1efbabb6e694a45b1dde1a789bb1943bb
 Network=skynet.network
-PublishPort=127.0.0.1:9081:8080
 Volume=%h/.config/homelab/glance:/app/config:ro,Z
 Volume=/etc/localtime:/etc/localtime:ro
 

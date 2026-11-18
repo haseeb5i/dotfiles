@@ -3,7 +3,7 @@
 - install [chezmoi](https://www.chezmoi.io/install/) and make sure it is available in `$PATH`
 - initialize chezmoi with these dotfiles (alternatively use ssh)
 ```
-chezmoi init https://github.com/xCodeR01/dotfiles.git 
+chezmoi init https://github.com/haseeb5i/dotfiles.git
 ```
 - see what changes chezmoi would make 
 ```

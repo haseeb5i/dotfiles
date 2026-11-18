@@ -1,8 +1,8 @@
 [Container]
 ContainerName=activepieces-postgres
-Image=docker.io/pgvector/pgvector:pg17
+Image=docker.io/pgvector/pgvector:pg17@sha256:b513c48566e4777cd3370451400000c78eda6a08131d68f4c31d4a76f27bd8fd
 Network=skynet.network
-Volume=%h/.local/share/activepieces/postgres:/var/lib/postgresql/data:Z
+Volume=%h/.local/share/homelab/activepieces/postgres:/var/lib/postgresql/data:Z
 Environment=POSTGRES_DB=activepieces POSTGRES_USER=activepieces
 Secret=ap_db_password,type=env,target=POSTGRES_PASSWORD
 

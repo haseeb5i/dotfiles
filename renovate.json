@@ -1,0 +1,13 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "enabledManagers": ["quadlet"],
+  "packageRules": [
+    {
+      "description": "Database majors need a dump and restore, so bump them by hand",
+      "matchPackageNames": ["/postgres/", "/pgvector/", "/postgis/", "/redis/", "/valkey/"],
+      "matchUpdateTypes": ["major"],
+      "enabled": false
+    }
+  ]
+}

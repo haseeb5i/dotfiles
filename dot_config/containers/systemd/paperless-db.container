@@ -1,8 +1,8 @@
 [Container]
 ContainerName=paperless-db
-Image=docker.io/library/postgres@sha256:6f7593c161689b6b02c78668b314af7da8811b592c5519108c57a49d0b6ad788
+Image=docker.io/library/postgres:17@sha256:0d938e975177bef9f1f61f3f9dbcf2e0aa0a139568f66d3415ed8892eb97f6ac
 Network=skynet.network
-Volume=%h/.local/share/paperless/postgres:/var/lib/postgresql/data:Z
+Volume=%h/.local/share/homelab/paperless/postgres:/var/lib/postgresql/data:Z
 Environment=POSTGRES_DB=paperless POSTGRES_USER=paperless
 Secret=paperless_db_password,type=env,target=POSTGRES_PASSWORD
 

@@ -1,22 +1,22 @@
 tunnel: a0297e66-5433-43f9-86f3-7a1cc54bde31
-credentials-file: /etc/cloudflared/wsl.json
+credentials-file: /run/secrets/cloudflared_credentials
 ingress:
   - hostname: glance.ravennest.link
-    service: http://127.0.0.1:9081
+    service: http://glance:8080
   - hostname: status.ravennest.link
-    service: http://127.0.0.1:9080
+    service: http://gatus:8080
   - hostname: flows.ravennest.link
-    service: http://127.0.0.1:8080
+    service: http://activepieces:80
   - hostname: logseq.ravennest.link
-    service: http://127.0.0.1:8787
+    service: http://logseq-sync:8787
   - hostname: trips.ravennest.link
-    service: http://127.0.0.1:9082
+    service: http://adventurelog:80
   - hostname: budget.ravennest.link
-    service: http://127.0.0.1:9083
+    service: http://actual:5006
   - hostname: docs.ravennest.link
-    service: http://127.0.0.1:9084
+    service: http://paperless:8000
   - hostname: rss.ravennest.link
-    service: http://127.0.0.1:9086
+    service: http://freshrss:80
   - hostname: keep.ravennest.link
-    service: http://127.0.0.1:9088
+    service: http://karakeep:3000
   - service: http_status:404

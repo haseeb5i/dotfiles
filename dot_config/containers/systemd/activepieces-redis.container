@@ -1,8 +1,8 @@
 [Container]
 ContainerName=activepieces-redis
-Image=docker.io/library/redis:7
+Image=docker.io/library/redis:7@sha256:2e3eb11462c4e3759e6972678dd051d150ff54b1e60714b3c33b701260172a90
 Network=skynet.network
-Volume=%h/.local/share/activepieces/redis:/data:Z
+Volume=%h/.local/share/homelab/activepieces/redis:/data:Z
 Secret=ap_redis_password,type=env,target=REDIS_PASSWORD
 # the queue holds waiting and delayed runs, so write every change to disk
 Exec=sh -c 'exec redis-server --requirepass "$REDIS_PASSWORD" --appendonly yes --dir /data'

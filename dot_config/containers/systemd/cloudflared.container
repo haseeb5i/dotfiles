@@ -4,13 +4,13 @@ Wants=network-online.target
 After=network-online.target
 
 [Container]
-Image=docker.io/cloudflare/cloudflared@sha256:b94b96edf2c9c4360f8879c8580cfaa99077f19c849ec595ca2f711b27d4f344
 ContainerName=cloudflared-wsl
-Network=host
-UserNS=keep-id
-User=0
-Volume=%h/.config/homelab/cloudflared/config.yml:/etc/cloudflared/config.yml:ro,Z
-Volume=%h/.config/homelab/private/cloudflared/wsl.json:/etc/cloudflared/wsl.json:ro,Z
+Image=docker.io/cloudflare/cloudflared:2026.11.0@sha256:b94b96edf2c9c4360f8879c8580cfaa99077f19c849ec595ca2f711b27d4f344
+Network=skynet.network
+Network=karakeep.network
+# the folder, not the file: chezmoi replaces the file on apply and a single-file mount keeps the old one
+Volume=%h/.config/homelab/cloudflared:/etc/cloudflared:ro,Z
+Secret=cloudflared_credentials
 Exec=tunnel --no-autoupdate --config /etc/cloudflared/config.yml run
 
 [Service]

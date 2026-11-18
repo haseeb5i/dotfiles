@@ -5,19 +5,20 @@ Requires=karakeep-chrome.service karakeep-meilisearch.service
 Wants=network-online.target
 
 [Container]
-Image=ghcr.io/karakeep-app/karakeep:release@sha256:119ffa75c677a23945e5535a0808844f10b77d5afe12b37293bee8edc2eaa5a7
 ContainerName=karakeep
-PublishPort=127.0.0.1:9088:3000
-Volume=%h/.local/share/karakeep/data:/data:Z
+Image=ghcr.io/karakeep-app/karakeep:0.35.0@sha256:6f7d32ef296ddf1fc7c67ff56b8a201b7006a6a47b92b202afee1338841b353d
 Network=karakeep.network
-EnvironmentFile=%h/.config/homelab/private/karakeep/karakeep.env
+Volume=%h/.local/share/homelab/karakeep/data:/data:Z
 Environment=DATA_DIR=/data
+Environment=NEXTAUTH_URL=https://keep.ravennest.link
+Environment=DISABLE_SIGNUPS=true
 Environment=MEILI_ADDR=http://karakeep-meilisearch:7700
 Environment=BROWSER_WEB_URL=http://10.89.5.2:9222
 Environment=OPENAI_BASE_URL=https://api.anthropic.com/v1/
 Environment=INFERENCE_TEXT_MODEL=claude-haiku-5-5
 Environment=INFERENCE_IMAGE_MODEL=claude-haiku-5-5
 Environment=INFERENCE_OUTPUT_SCHEMA=plain
+Secret=karakeep_nextauth_secret,type=env,target=NEXTAUTH_SECRET
 Secret=karakeep_meili_master_key,type=env,target=MEILI_MASTER_KEY
 Secret=anthropic_api_key,type=env,target=OPENAI_API_KEY
 

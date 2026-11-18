@@ -1,9 +1,8 @@
 [Container]
 ContainerName=actual
-Image=docker.io/actualbudget/actual-server@sha256:c56adb686c5b72d755a4958905a27212edc6be27d065ebe3cb470c95c552df89
+Image=docker.io/actualbudget/actual-server:26.11.0@sha256:06cf186569cf58d93e12659ff1a517b65b5b0ebee7050a3991d4bd8a1d398da6
 Network=skynet.network
-PublishPort=127.0.0.1:9083:5006
-Volume=%h/.local/share/actual:/data:Z
+Volume=%h/.local/share/homelab/actual:/data:Z
 Environment=ACTUAL_ALLOWED_LOGIN_METHODS=password
 
 [Service]

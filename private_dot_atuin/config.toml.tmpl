@@ -1,7 +1,8 @@
 {{ if eq .chezmoi.hostname "fedora-pc" -}}
 # WSL hosts the server and, with mirrored networking, owns the Windows Tailscale address,
-# so it cannot reach 100.67.166.24 and talks to the local server instead.
-sync_address = "http://127.0.0.1:9087"
+# so it cannot reach 100.67.166.24 and talks to the local server instead. The container
+# publishes 19087 because WSL cannot bind 9087 while tailscale serve on Windows holds it.
+sync_address = "http://127.0.0.1:19087"
 {{- else -}}
 sync_address = "http://100.67.166.24:9087"
 {{- end }}

@@ -1,8 +1,8 @@
 [Container]
 ContainerName=paperless-valkey
-Image=docker.io/valkey/valkey@sha256:b94f4063db6015ab2fd39a764c241a107aa176c5e7801742af81f4f8f3cb532a
+Image=docker.io/valkey/valkey:9@sha256:3add1a336a920ea54770a001ab6feb3da5fceea96a40373a3a2cd469b815f0b7
 Network=skynet.network
-Volume=%h/.local/share/paperless/valkey:/data:Z
+Volume=%h/.local/share/homelab/paperless/valkey:/data:Z
 Exec=valkey-server --save 60 1 --loglevel warning
 
 [Service]

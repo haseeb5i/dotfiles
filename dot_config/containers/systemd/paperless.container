@@ -4,15 +4,14 @@ After=paperless-db.service paperless-valkey.service
 
 [Container]
 ContainerName=paperless
-Image=ghcr.io/paperless-ngx/paperless-ngx@sha256:1856adaeccf1a3bfc58722767321888ee6ecbeeb7807ae5b0836d0f0a4ce3f25
+Image=ghcr.io/paperless-ngx/paperless-ngx:3.4.2@sha256:d704e84f88300eb6ab001ab15720a2330ff99169cf9f94d6b8fcc44b63a84c84
 Network=skynet.network
-PublishPort=127.0.0.1:9084:8000
-Volume=%h/.local/share/paperless/data:/usr/src/paperless/data:Z
-Volume=%h/.local/share/paperless/media:/usr/src/paperless/media:Z
-Volume=%h/.local/share/paperless/consume:/usr/src/paperless/consume:Z
-Volume=%h/.local/share/paperless/export:/usr/src/paperless/export:Z
+Volume=%h/.local/share/homelab/paperless/data:/usr/src/paperless/data:Z
+Volume=%h/.local/share/homelab/paperless/media:/usr/src/paperless/media:Z
+Volume=%h/.local/share/homelab/paperless/consume:/usr/src/paperless/consume:Z
+Volume=%h/.local/share/homelab/paperless/export:/usr/src/paperless/export:Z
 Environment=PAPERLESS_URL=https://docs.ravennest.link PAPERLESS_DBENGINE=postgresql PAPERLESS_DBHOST=paperless-db PAPERLESS_DBNAME=paperless PAPERLESS_DBUSER=paperless PAPERLESS_REDIS=redis://paperless-valkey:6379
-Environment=PAPERLESS_TIME_ZONE=America/Los_Angeles PAPERLESS_ADMIN_USER=haseeb5i PAPERLESS_ADMIN_MAIL=raven@localhost
+Environment=PAPERLESS_TIME_ZONE=Asia/Karachi PAPERLESS_ADMIN_USER=haseeb5i PAPERLESS_ADMIN_MAIL=raven@localhost
 Secret=paperless_db_password,type=env,target=PAPERLESS_DBPASS
 Secret=paperless_signing_key,type=env,target=PAPERLESS_SECRET_KEY
 Secret=paperless_admin_password,type=env,target=PAPERLESS_ADMIN_PASSWORD

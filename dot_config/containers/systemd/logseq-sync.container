@@ -1,8 +1,10 @@
 [Container]
 ContainerName=logseq-sync
-Image=ghcr.io/yshalsager/logseq-selfhost-sync:latest
-PublishPort=127.0.0.1:8787:8787
-Volume=%h/.local/share/logseq-sync:/app/data:Z,U
+# the image publishes no version tags
+Image=ghcr.io/yshalsager/logseq-selfhost-sync:latest@sha256:edd664f49cf82801d6063f9ac1171feb2e2baae071448726603fa28c5e2c118e
+Network=skynet.network
+# U: the image runs as uid 65532 and can't chown
+Volume=%h/.local/share/homelab/logseq-sync:/app/data:Z,U
 Environment=DB_SYNC_BASE_URL=https://logseq.ravennest.link
 Environment=COGNITO_ISSUER=https://cognito-idp.us-east-1.amazonaws.com/us-east-1_dtagLnju8
 Environment=COGNITO_CLIENT_ID=69cs1lgme7p8kbgld8n5kseii6

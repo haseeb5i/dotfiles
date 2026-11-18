@@ -1,4 +1,6 @@
 README.md
+renovate.json
+wsl
 .DS_Store
 **/.DS_Store
 
@@ -36,27 +38,10 @@ README.md
 .config/environment.d
 {{ end }}
 
-{{ if eq .chezmoi.hostname "n3o-macmini" }}
-.config/homelab/cloudflared
-.config/homelab/gatus
-.config/homelab/glance
-{{ else if eq .chezmoi.hostname "fedora-pc" }}
-.config/homelab/quadlet
-{{ else }}
-.config/homelab
-{{ end }}
-
 {{ if ne .chezmoi.hostname "fedora-pc" }}
+.config/homelab
 .config/containers/systemd
 .local/bin/backup-wsl
 .config/systemd/user/backup.service
 .config/systemd/user/backup.timer
 {{ end }}
-
-{{ if ne .chezmoi.hostname "n3o-macmini" }}
-.local/bin/backup-mini
-.config/restic/homelab.crontab
-{{ end }}
-
-.config/restic/homelab.env
-.config/homelab/private/**

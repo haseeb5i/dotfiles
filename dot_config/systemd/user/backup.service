@@ -1,5 +1,5 @@
 [Unit]
-Description=Back up WSL homelab configuration, Atuin, and Podman secrets with Restic
+Description=Back up homelab data and Podman secrets with Restic
 
 [Service]
 Type=oneshot

@@ -4,10 +4,10 @@ After=adventurelog-db.service
 
 [Container]
 ContainerName=adventurelog
-Image=ghcr.io/seanmorley15/adventurelog@sha256:9b9ff375c5e7069f0bcfabc5e0e0b21061dc16d50844c0a56a3ea29f2971edee
+# no release tag matches the running build, so this follows latest by digest
+Image=ghcr.io/seanmorley15/adventurelog:latest@sha256:9b9ff375c5e7069f0bcfabc5e0e0b21061dc16d50844c0a56a3ea29f2971edee
 Network=skynet.network
-PublishPort=127.0.0.1:9082:80
-Volume=%h/.local/share/adventurelog/media:/code/media:Z
+Volume=%h/.local/share/homelab/adventurelog/media:/code/media:Z
 Environment=SITE_URL=https://trips.ravennest.link PORT=3000 PGHOST=adventurelog-db
 Environment=ENABLE_RATE_LIMITS=true DISABLE_REGISTRATION=true SOCIALACCOUNT_ALLOW_SIGNUP=false
 Environment=DJANGO_ADMIN_USERNAME=haseeb5i DJANGO_ADMIN_EMAIL=haseeb5i@localhost
