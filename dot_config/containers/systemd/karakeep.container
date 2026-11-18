@@ -14,7 +14,12 @@ EnvironmentFile=%h/.config/homelab/private/karakeep/karakeep.env
 Environment=DATA_DIR=/data
 Environment=MEILI_ADDR=http://karakeep-meilisearch:7700
 Environment=BROWSER_WEB_URL=http://10.89.5.2:9222
+Environment=OPENAI_BASE_URL=https://api.anthropic.com/v1/
+Environment=INFERENCE_TEXT_MODEL=claude-haiku-5-5
+Environment=INFERENCE_IMAGE_MODEL=claude-haiku-5-5
+Environment=INFERENCE_OUTPUT_SCHEMA=plain
 Secret=karakeep_meili_master_key,type=env,target=MEILI_MASTER_KEY
+Secret=anthropic_api_key,type=env,target=OPENAI_API_KEY
 
 [Service]
 Restart=on-failure
