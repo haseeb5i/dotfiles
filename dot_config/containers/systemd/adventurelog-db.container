@@ -1,6 +1,6 @@
 [Container]
 ContainerName=adventurelog-db
-Image=docker.io/imresamu/postgis:16-3.5-alpine@sha256:9296373e191f9ba9665b58f0c1261c7e3beb2055a5a72e39fa1bf13ee9360977
+Image=docker.io/imresamu/postgis:16-3.5-alpine@sha256:3da7272d4bcaa398edb481a992791245da51d8ddcbdf56cf763aa4615d22fef2
 Network=skynet.network
 Volume=%h/.local/share/adventurelog/postgres:/var/lib/postgresql/data:Z
 Environment=POSTGRES_DB=database POSTGRES_USER=adventure

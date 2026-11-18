@@ -1,4 +1,6 @@
 README.md
+.DS_Store
+**/.DS_Store
 
 #zed
 .config/zed/conversations/*
@@ -21,6 +23,8 @@ README.md
 
 # claude
 .config/claude/*
+!.config/claude/CLAUDE.md
+!.config/claude/RTK.md
 !.config/claude/settings.json
 !.config/claude/statusline.sh
 !.config/claude/instructions
@@ -32,9 +36,25 @@ README.md
 .config/environment.d
 {{ end }}
 
-# mini homelab app configs; deploy Quadlets into its Podman VM separately
-{{ if ne .chezmoi.hostname "n3o-macmini" }}
+# Mini keeps Hindsight; WSL owns the other apps.
+{{ if eq .chezmoi.hostname "n3o-macmini" }}
+.config/homelab/cloudflared
+.config/homelab/gatus
+.config/homelab/glance
+{{ else if eq .chezmoi.hostname "fedora-pc" }}
+.config/homelab/quadlet
+{{ else }}
 .config/homelab
+{{ end }}
+{{ if ne .chezmoi.hostname "fedora-pc" }}
+.config/containers/systemd
+.local/bin/backup-wsl
+.config/systemd/user/backup.service
+.config/systemd/user/backup.timer
+{{ end }}
+{{ if ne .chezmoi.hostname "n3o-macmini" }}
+.local/bin/backup-mini
+.config/restic/homelab.crontab
 {{ end }}
 .config/restic/homelab.env
 .config/homelab/private/**

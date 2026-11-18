@@ -1,0 +1,22 @@
+tunnel: a0297e66-5433-43f9-86f3-7a1cc54bde31
+credentials-file: /etc/cloudflared/wsl.json
+ingress:
+  - hostname: glance.ravennest.link
+    service: http://127.0.0.1:9081
+  - hostname: status.ravennest.link
+    service: http://127.0.0.1:9080
+  - hostname: flows.ravennest.link
+    service: http://127.0.0.1:8080
+  - hostname: logseq.ravennest.link
+    service: http://127.0.0.1:8787
+  - hostname: trips.ravennest.link
+    service: http://127.0.0.1:9082
+  - hostname: budget.ravennest.link
+    service: http://127.0.0.1:9083
+  - hostname: docs.ravennest.link
+    service: http://127.0.0.1:9084
+  - hostname: meals.ravennest.link
+    service: http://127.0.0.1:9085
+  - hostname: rss.ravennest.link
+    service: http://127.0.0.1:9086
+  - service: http_status:404

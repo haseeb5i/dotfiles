@@ -22,7 +22,7 @@ x-alert: &alert
 endpoints:
   - name: hindsight
     group: apps
-    url: http://hindsight:8888/health
+    url: http://100.84.190.78:8888/health
     conditions: ["[STATUS] == 200"]
     <<: *alert
   - name: logseq sync
@@ -40,14 +40,3 @@ endpoints:
     url: http://glance:8080/
     conditions: ["[STATUS] == 200"]
     <<: *alert
-
-external-endpoints:
-  - name: nightly backup
-    group: backups
-    token: "${PUSH_TOKEN}"
-    heartbeat:
-      interval: 25h
-    alerts:
-      - type: ntfy
-        failure-threshold: 1
-        success-threshold: 1

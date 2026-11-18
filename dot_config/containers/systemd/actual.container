@@ -1,6 +1,6 @@
 [Container]
 ContainerName=actual
-Image=docker.io/actualbudget/actual-server@sha256:c3ba5b1350dfa0fe18f451f735f9f3f675505e1233ac90c9ae6ee5ae9808758e
+Image=docker.io/actualbudget/actual-server@sha256:c56adb686c5b72d755a4958905a27212edc6be27d065ebe3cb470c95c552df89
 Network=skynet.network
 PublishPort=127.0.0.1:9083:5006
 Volume=%h/.local/share/actual:/data:Z

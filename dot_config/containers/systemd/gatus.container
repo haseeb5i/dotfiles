@@ -1,16 +1,14 @@
 [Container]
 ContainerName=gatus
-Image=docker.io/twinproduction/gatus:latest
+Image=docker.io/twinproduction/gatus@sha256:b542b3d006eab3320ed6354eaa4a70e005f49c69e14b8f15157ab00d4b8a5703
 Network=skynet.network
 PublishPort=127.0.0.1:9080:8080
 Volume=%h/.config/homelab/gatus:/config:ro,Z
 Volume=%h/.local/share/gatus:/data:Z
 Environment=GATUS_CONFIG_PATH=/config/config.yaml
 Secret=gatus_ntfy_topic,type=env,target=NTFY_TOPIC
-Secret=gatus_push_token,type=env,target=PUSH_TOKEN
 
 [Service]
 Restart=always
-
 [Install]
 WantedBy=default.target

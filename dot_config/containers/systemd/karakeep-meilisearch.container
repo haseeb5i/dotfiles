@@ -1,0 +1,16 @@
+[Unit]
+Description=Karakeep Meilisearch
+
+[Container]
+Image=docker.io/getmeili/meilisearch:v1.55.0@sha256:cad32322d74319f2076f41828094774fbbacacff6bda32e317933293b76db616
+ContainerName=karakeep-meilisearch
+Volume=%h/.local/share/karakeep/meilisearch:/meili_data:Z
+Network=karakeep.network
+Environment=MEILI_NO_ANALYTICS=true
+Secret=karakeep_meili_master_key,type=env,target=MEILI_MASTER_KEY
+
+[Service]
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

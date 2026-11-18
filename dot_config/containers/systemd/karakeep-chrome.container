@@ -1,0 +1,16 @@
+[Unit]
+Description=Karakeep browser
+
+[Container]
+Image=ghcr.io/karakeep-app/karakeep-chrome:release@sha256:9dff4af677073a26a1230db6f88a680c53be0e30ebb6d58ec01a898ba3835faf
+ContainerName=karakeep-chrome
+RunInit=true
+Network=karakeep.network
+IP=10.89.5.2
+Exec=--disable-gpu --disable-dev-shm-usage --hide-scrollbars --disable-blink-features=AutomationControlled --window-size=1440,900
+
+[Service]
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

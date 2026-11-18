@@ -5,9 +5,7 @@
     "ENABLE_CLAUDEAI_MCP_SERVERS": "false"
   },
   "permissions": {
-    "allow": [
-      "mcp__codegraph__*"
-    ],
+    "allow": ["mcp__codegraph__*"],
     "defaultMode": "auto"
   },
   "model": "opus",
@@ -77,8 +75,9 @@
   },
   "statusLine": {
     "type": "command",
-    "command": "$HOME/.config/claude/statusline.sh",
-    "refreshInterval": 1
+    "command": "ccstatusline",
+    "padding": 0,
+    "refreshInterval": 10
   },
   "enabledPlugins": {
     "code-review@claude-plugins-official": true,
@@ -134,6 +133,8 @@
     }
   },
   "tui": "fullscreen",
+  "voice": { "enabled": true, "mode": "hold" },
+  "skipDangerousModePermissionPrompt": true,
   "skipWorkflowUsageWarning": true,
   "theme": "auto",
   "editorMode": "vim",
@@ -148,5 +149,6 @@
       "**Sensitive remote targets**: any namespace, host, or container whose name carries `prod` or `production` as a whole word or name segment (hyphen/underscore/dot-delimited — e.g. matches `prod-db`, not `producer`)",
       "**Protected IaC scopes**: IAM, RBAC, networking, quota, and node-pool resources; anything whose name or tag carries `prod` or `production` as a whole word or name segment"
     ]
-  }
+  },
+  "voiceEnabled": false
 }

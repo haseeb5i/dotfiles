@@ -3,35 +3,36 @@
   "preset": "openai",
   "presets": {
     "openai": {
-      "orchestrator": { "model": "openai/gpt-6.1-sol", "variant": "medium", "skills": ["*"], "mcps": ["*"] },
-      "oracle": { "model": "openai/gpt-6-astra", "variant": "high", "skills": ["simplify"], "mcps": [] },
-      "explorer": { "model": "openai/gpt-6-luna", "skills": [], "mcps": ["context7", "codegraph"] },
-      "designer": { "model": "openai/gpt-6.1-sol", "skills": [], "mcps": [] },
-      "fixer": { "model": "openai/gpt-6-luna", "skills": [], "mcps": [] },
+      "orchestrator": { "model": "openai/gpt-6.1-sol", "variant": "medium", "skills": ["*"], "mcps": ["*", "!context7", "!gh_grep"] },
+      "oracle": { "model": "openai/gpt-6-astra", "variant": "high", "skills": ["simplify"], "mcps": ["codegraph"] },
+      "explorer": { "model": "openai/gpt-6-luna", "variant": "low", "skills": [], "mcps": ["context7", "codegraph", "gh_grep"] },
+      "designer": { "model": "openai/gpt-6.1-sol", "variant": "medium", "skills": [], "mcps": [] },
+      "fixer": { "model": "openai/gpt-6.1-sol", "variant": "low", "skills": [], "mcps": ["codegraph"] },
+      "council": { "model": "openai/gpt-6.1-sol", "variant": "high", "skills": [], "mcps": [] }
     },
     "anthropic": {
-      "orchestrator": { "model": "anthropic/sonnet-5-5", "variant": "medium", "skills": ["*"], "mcps": ["*"] },
-      "oracle": { "model": "openai/opus-5-5", "variant": "high", "skills": ["simplify"], "mcps": [] },
-      "explorer": { "model": "google/haiku-5.5", "skills": [], "mcps": ["context7", "codegraph"] },
-      "designer": { "model": "anthropic/opus-5.5", "skills": [], "mcps": [] },
-      "fixer": { "model": "anthropic/sonnet-5.5", "variant": "high", "skills": [], "mcps": [] },
-    }
-  },
-  "agents": {
-    "worker": {
-      "model": "openai/gpt-6-luna",
-      "prompt": "You are a fast generic execution agent for routine mechanical command work. Run requested shell commands, inspect results, and report concise outcomes. For git commits or pushes, inspect git status, git diff, and recent log first; stage only intended files; avoid secrets; preserve repository commit-message style; never amend, rebase, reset --hard, clean, force-push, delete branches, or perform destructive history operations unless the user explicitly requested that exact operation. Do not edit code or make architecture/design decisions.",
-      "orchestratorPrompt": "Delegate to @worker for routine mechanical command work: git status/diff/log reconnaissance, normal commit preparation, creating commits, pushing commits, and no-edit command validation such as lint, typecheck, static verification, tests, builds, or package-manager equivalents. Ask it to inspect diffs before committing, stage only intended files, avoid secrets, preserve repository commit-message style, and report final commit hashes or push results. Do not use it for code edits, design work, architecture, debugging strategy, docs research, or destructive git history operations such as amend, rebase, reset --hard, clean, force-push, or deleting branches unless the user explicitly requested that exact operation.",
-      "skills": [],
-      "mcps": []
+      "orchestrator": { "model": "anthropic/claude-sonnet-5-5", "variant": "medium", "skills": ["*"], "mcps": ["*", "!context7", "!gh_grep"] },
+      "oracle": { "model": "anthropic/claude-fable-5-2", "variant": "high", "skills": ["simplify"], "mcps": ["codegraph"] },
+      "explorer": { "model": "anthropic/claude-haiku-5-5", "variant": "low", "skills": [], "mcps": ["context7", "codegraph", "gh_grep"] },
+      "designer": { "model": "anthropic/claude-sonnet-5-5", "variant": "medium", "skills": [], "mcps": [] },
+      "fixer": { "model": "anthropic/claude-sonnet-5-5", "variant": "medium", "skills": [], "mcps": ["codegraph"] },
+      "council": { "model": "anthropic/claude-opus-5-5", "variant": "high", "skills": [], "mcps": [] }
+    },
+    "opencode-go": {
+      "orchestrator": { "model": "opencode-go/minimax-m3", "variant": "thinking", "skills": ["*"], "mcps": ["*", "!context7", "!gh_grep"] },
+      "oracle": { "model": "opencode-go/qwen3.8-max", "variant": "xhigh", "skills": ["simplify"], "mcps": ["codegraph"] },
+      "explorer": { "model": "opencode-go/deepseek-v4.1-flash", "variant": "high", "skills": [], "mcps": ["context7", "codegraph", "gh_grep"] },
+      "designer": { "model": "opencode-go/kimi-k2.7-code", "skills": [], "mcps": [] },
+      "fixer": { "model": "opencode-go/deepseek-v4.1-flash", "variant": "high", "skills": [], "mcps": ["codegraph"] },
+      "observer": { "model": "opencode-go/mimo-v2.5", "skills": [], "mcps": [] },
+      "council": { "model": "opencode-go/qwen3.8-max", "variant": "xhigh", "skills": [], "mcps": [] }
     }
   },
   "council": {
-    "default_preset": "openai",
     "presets": {
-      "openai": {
+      "default": {
         "alpha": { "model": "openai/gpt-6-astra", "variant": "high" },
-        "beta": { "model": "anthropic/claude-opus-5-5", "variant": "high" }
+        "beta": { "model": "anthropic/claude-fable-5-2", "variant": "high" }
       }
     }
   }

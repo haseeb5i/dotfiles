@@ -4,7 +4,7 @@ After=adventurelog-db.service
 
 [Container]
 ContainerName=adventurelog
-Image=ghcr.io/seanmorley15/adventurelog@sha256:3d51294be8e94ef997c0cd33a5e0e94636c87b0095344cf557e5de609a381fc6
+Image=ghcr.io/seanmorley15/adventurelog@sha256:9b9ff375c5e7069f0bcfabc5e0e0b21061dc16d50844c0a56a3ea29f2971edee
 Network=skynet.network
 PublishPort=127.0.0.1:9082:80
 Volume=%h/.local/share/adventurelog/media:/code/media:Z

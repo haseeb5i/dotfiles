@@ -10,15 +10,12 @@
   "instructions": [
     "~/.config/claude/instructions/code-standards.md",
     "~/.config/claude/instructions/machines.md",
+    "~/.config/claude/instructions/n3o-team.md",
   ],
   "lsp": true,
   "websearch": { "provider": "exa" },
   "mcp": {
     "servers": {
-      "n3o": {
-        "type": "local",
-        "command": ["n3o", "mcp"],
-      },
       "codegraph": {
         "type": "local",
         "command": ["codegraph", "serve", "--mcp"],

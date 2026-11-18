@@ -1,0 +1,23 @@
+[Unit]
+Description=Karakeep web application
+After=network-online.target karakeep-chrome.service karakeep-meilisearch.service
+Requires=karakeep-chrome.service karakeep-meilisearch.service
+Wants=network-online.target
+
+[Container]
+Image=ghcr.io/karakeep-app/karakeep:release@sha256:119ffa75c677a23945e5535a0808844f10b77d5afe12b37293bee8edc2eaa5a7
+ContainerName=karakeep
+PublishPort=127.0.0.1:9088:3000
+Volume=%h/.local/share/karakeep/data:/data:Z
+Network=karakeep.network
+EnvironmentFile=%h/.config/homelab/private/karakeep/karakeep.env
+Environment=DATA_DIR=/data
+Environment=MEILI_ADDR=http://karakeep-meilisearch:7700
+Environment=BROWSER_WEB_URL=http://10.89.5.2:9222
+Secret=karakeep_meili_master_key,type=env,target=MEILI_MASTER_KEY
+
+[Service]
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,15 @@
+[Container]
+ContainerName=freshrss
+Image=docker.io/freshrss/freshrss@sha256:a003730e81c89abf86c3ca9c8b263c818804734b574469d59586234364f425b0
+Network=skynet.network
+PublishPort=127.0.0.1:9086:80
+Volume=%h/.local/share/freshrss/data:/var/www/FreshRSS/data:Z
+Volume=%h/.local/share/freshrss/extensions:/var/www/FreshRSS/extensions:Z
+Environment=TZ=America/Los_Angeles CRON_MIN=2
+
+[Service]
+Restart=always
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target
