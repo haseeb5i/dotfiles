@@ -1,6 +1,8 @@
 tunnel: a0297e66-5433-43f9-86f3-7a1cc54bde31
 credentials-file: /run/secrets/cloudflared_credentials
 ingress:
+  - hostname: auth.ravennest.link
+    service: http://authelia:9091
   - hostname: glance.ravennest.link
     service: http://glance:8080
   - hostname: status.ravennest.link

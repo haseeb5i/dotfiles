@@ -82,7 +82,7 @@ endpoints:
     <<: *alert
   - name: freshrss
     group: apps
-    url: http://freshrss:80/i/
+    url: http://freshrss:80/api/
     conditions: ["[STATUS] == 200"]
     ui: *ui
     <<: *alert
@@ -95,6 +95,12 @@ endpoints:
   - name: karakeep
     group: apps
     url: http://karakeep:3000/api/health
+    conditions: ["[STATUS] == 200"]
+    ui: *ui
+    <<: *alert
+  - name: authelia
+    group: apps
+    url: http://authelia:9091/api/health
     conditions: ["[STATUS] == 200"]
     ui: *ui
     <<: *alert
