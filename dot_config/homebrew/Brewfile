@@ -1,12 +1,9 @@
 # install with: brew bundle --file ~/.config/homebrew/Brewfile
 brew "bat"
 brew "direnv"
-brew "difftastic"
 brew "eza"
 brew "fd"
-brew "fzf"
 brew "gh"
-brew "neovim"
 brew "ripgrep"
 brew "zoxide"
 brew "starship"
@@ -15,12 +12,9 @@ brew "yq"
 
 if OS.mac?
   brew "ffmpeg"
-  brew "cloudflared"
   brew "podman"
+  brew "cloudflared"
   cask "maccy"
-end
-
-if OS.linux?
-  brew "llvm"
-  brew "syncthing" # run as a service: brew services start syncthing
+  cask "scroll-reverser"
+  cask "stablyai/orca/orca"
 end
