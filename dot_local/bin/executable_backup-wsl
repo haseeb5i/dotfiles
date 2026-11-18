@@ -17,8 +17,8 @@ dst = sqlite3.connect(sys.argv[2])
 src.backup(dst)
 if dst.execute("PRAGMA integrity_check").fetchone() != ("ok",):
     sys.exit("Atuin SQLite integrity check failed")
-' "$data/atuin/atuin.db" "$state/atuin.sqlite3"
-podman unshare cp "$data/atuin/server.toml" "$state/server.toml"
+' "$data/atuin-server/atuin.db" "$state/atuin.sqlite3"
+podman unshare cp "$data/atuin-server/server.toml" "$state/server.toml"
 
 stopped=()
 restart() {

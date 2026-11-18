@@ -6,7 +6,7 @@ Image=ghcr.io/atuinsh/atuin:18.24.8@sha256:dc9a70c0c8c3500ec978851d44e7156f2f8d4
 ContainerName=atuin
 Network=skynet.network
 PublishPort=127.0.0.1:9087:8888
-Volume=%h/.local/share/atuin:/config:Z
+Volume=%h/.local/share/atuin-server:/config:Z
 Environment=ATUIN_HOST=0.0.0.0
 Environment=ATUIN_PORT=8888
 Environment=ATUIN_OPEN_REGISTRATION=false
