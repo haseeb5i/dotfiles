@@ -14,6 +14,8 @@ Environment=DJANGO_ADMIN_USERNAME=haseeb5i DJANGO_ADMIN_EMAIL=haseeb5i@localhost
 Secret=adventurelog_admin_password,type=env,target=DJANGO_ADMIN_PASSWORD
 Secret=adventurelog_db_password,type=env,target=POSTGRES_PASSWORD
 Secret=adventurelog_secret_key,type=env,target=SECRET_KEY
+# read once into the Authelia login provider (SocialApp row)
+Secret=oidc_adventurelog
 
 [Service]
 Restart=always

@@ -21,6 +21,10 @@ Environment=INFERENCE_OUTPUT_SCHEMA=plain
 Secret=karakeep_nextauth_secret,type=env,target=NEXTAUTH_SECRET
 Secret=karakeep_meili_master_key,type=env,target=MEILI_MASTER_KEY
 Secret=anthropic_api_key,type=env,target=OPENAI_API_KEY
+Environment=OAUTH_WELLKNOWN_URL=https://auth.ravennest.link/.well-known/openid-configuration OAUTH_CLIENT_ID=karakeep OAUTH_PROVIDER_NAME=Authelia
+# the Authelia account has the same email as the existing Karakeep account
+Environment=OAUTH_ALLOW_DANGEROUS_EMAIL_ACCOUNT_LINKING=true
+Secret=oidc_karakeep,type=env,target=OAUTH_CLIENT_SECRET
 
 [Service]
 Restart=on-failure

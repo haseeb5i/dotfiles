@@ -1,6 +1,8 @@
 tunnel: a0297e66-5433-43f9-86f3-7a1cc54bde31
 credentials-file: /run/secrets/cloudflared_credentials
 ingress:
+  - hostname: auth.ravennest.link
+    service: http://authelia:9091
   - hostname: glance.ravennest.link
     service: http://glance:8080
   - hostname: status.ravennest.link
@@ -19,4 +21,8 @@ ingress:
     service: http://freshrss:80
   - hostname: keep.ravennest.link
     service: http://karakeep:3000
+  - hostname: photos.ravennest.link
+    service: http://immich-server:2283
+  - hostname: share.ravennest.link
+    service: http://immich-public-proxy:3000
   - service: http_status:404

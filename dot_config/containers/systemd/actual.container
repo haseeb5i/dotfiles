@@ -3,7 +3,11 @@ ContainerName=actual
 Image=docker.io/actualbudget/actual-server:26.11.0@sha256:06cf186569cf58d93e12659ff1a517b65b5b0ebee7050a3991d4bd8a1d398da6
 Network=skynet.network
 Volume=%h/.local/share/homelab/actual:/data:Z
-Environment=ACTUAL_ALLOWED_LOGIN_METHODS=password
+# sso through authelia, switched on once with: podman exec actual node /app/scripts/enable-openid.js
+Environment=ACTUAL_OPENID_DISCOVERY_URL=https://auth.ravennest.link/.well-known/openid-configuration ACTUAL_OPENID_CLIENT_ID=actual
+Environment=ACTUAL_OPENID_SERVER_HOSTNAME=https://budget.ravennest.link ACTUAL_OPENID_AUTH_METHOD=openid ACTUAL_OPENID_PROVIDER_NAME=Authelia
+Environment=ACTUAL_ALLOWED_LOGIN_METHODS=password,openid
+Secret=oidc_actual,type=env,target=ACTUAL_OPENID_CLIENT_SECRET
 
 [Service]
 Restart=always

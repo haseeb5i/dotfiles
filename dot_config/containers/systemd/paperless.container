@@ -15,6 +15,8 @@ Environment=PAPERLESS_TIME_ZONE=Asia/Karachi PAPERLESS_ADMIN_USER=haseeb5i PAPER
 Secret=paperless_db_password,type=env,target=PAPERLESS_DBPASS
 Secret=paperless_signing_key,type=env,target=PAPERLESS_SECRET_KEY
 Secret=paperless_admin_password,type=env,target=PAPERLESS_ADMIN_PASSWORD
+Environment=PAPERLESS_APPS=allauth.socialaccount.providers.openid_connect
+Secret=paperless_oidc_providers,type=env,target=PAPERLESS_SOCIALACCOUNT_PROVIDERS
 
 [Service]
 Restart=always

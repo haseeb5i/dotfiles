@@ -8,6 +8,11 @@
       "matchPackageNames": ["/postgres/", "/pgvector/", "/postgis/", "/redis/", "/valkey/"],
       "matchUpdateTypes": ["major"],
       "enabled": false
+    },
+    {
+      "description": "Immich server and machine-learning must run the same version",
+      "matchPackageNames": ["ghcr.io/immich-app/immich-server", "ghcr.io/immich-app/immich-machine-learning"],
+      "groupName": "immich"
     }
   ]
 }
