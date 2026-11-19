@@ -26,9 +26,7 @@ wsl
 # claude
 .config/claude/*
 !.config/claude/CLAUDE.md
-!.config/claude/RTK.md
 !.config/claude/settings.json
-!.config/claude/statusline.sh
 !.config/claude/instructions
 !.config/claude/instructions/**
 
