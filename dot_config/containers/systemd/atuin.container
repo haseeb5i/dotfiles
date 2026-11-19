@@ -5,8 +5,8 @@ Description=Atuin self-hosted sync server
 ContainerName=atuin
 Image=ghcr.io/atuinsh/atuin:18.24.8@sha256:2bc3a558b236283cd64ce64cf9aa463c24e34f97fc36a4b1a5b2b1853a5dcb49
 Network=skynet.network
-# tailscale serve on Windows forwards tailnet :9087 here; mirrored mode can't bind a port number Windows holds
-PublishPort=127.0.0.1:19087:8888
+# the Windows Tailscale address, mirrored into WSL: tailnet only, and one URL for every machine including this one
+PublishPort=100.67.166.24:9087:8888
 Volume=%h/.local/share/homelab/atuin:/config:Z
 Environment=ATUIN_HOST=0.0.0.0
 Environment=ATUIN_PORT=8888

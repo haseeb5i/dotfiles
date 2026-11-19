@@ -17,6 +17,7 @@ Secret=oidc_karakeep_digest
 Secret=oidc_adventurelog_digest
 Secret=oidc_actual_digest
 Secret=oidc_freshrss_digest
+Secret=oidc_immich_digest
 Environment=X_AUTHELIA_CONFIG=/etc/authelia/configuration.yml X_AUTHELIA_CONFIG_FILTERS=template
 Environment=AUTHELIA_IDENTITY_PROVIDERS_OIDC_HMAC_SECRET_FILE=/run/secrets/authelia_oidc_hmac
 Environment=AUTHELIA_IDENTITY_VALIDATION_RESET_PASSWORD_JWT_SECRET_FILE=/run/secrets/authelia_jwt
