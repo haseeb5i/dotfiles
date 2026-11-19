@@ -6,8 +6,8 @@ After=hindsight-postgres.service
 ContainerName=hindsight
 Image=ghcr.io/vectorize-io/hindsight:1.1.0@sha256:50311d02b4d5d2b7c5242bd336edf8735df8374eaad496a92f49c83b37d2aa06
 Network=skynet.network
-# tailscale serve on Windows forwards tailnet :8888 here; mirrored mode can't bind a port number Windows holds. 9999 is the ui, local only
-PublishPort=127.0.0.1:18888:8888
+# the Windows Tailscale address, mirrored into WSL: tailnet only, and one URL for every machine including this one. 9999 is the ui, local only
+PublishPort=100.67.166.24:8888:8888
 PublishPort=127.0.0.1:9999:9999
 Environment=HINDSIGHT_API_LLM_PROVIDER=anthropic HINDSIGHT_API_LLM_MODEL=claude-haiku-5-5
 Environment=HINDSIGHT_API_TENANT_EXTENSION=hindsight_api.extensions.builtin.tenant:ApiKeyTenantExtension
