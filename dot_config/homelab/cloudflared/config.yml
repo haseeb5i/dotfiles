@@ -21,4 +21,8 @@ ingress:
     service: http://freshrss:80
   - hostname: keep.ravennest.link
     service: http://karakeep:3000
+  - hostname: photos.ravennest.link
+    service: http://immich-server:2283
+  - hostname: share.ravennest.link
+    service: http://immich-public-proxy:3000
   - service: http_status:404
