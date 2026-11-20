@@ -10,33 +10,32 @@ rust = "latest"
 uv = "latest"
 
 1password-cli = "latest"
-antigravity-cli = "latest"
 azure-cli = { version = "latest", python = "3.14" }
 bitwarden = "latest"
 bitwarden-secrets-manager = "latest"
-claude = "latest"
-codegraph = "latest"
-codex = "latest"
 difftastic = "latest"
 fzf = "latest"
-herdr = "latest"
 lazygit = "latest"
-llmfit = "latest"
 neovim = "latest"
-opencode = "latest"
 oxker = "latest"
-rtk = "latest"
 usage = "latest"
 worktrunk = { version = "latest", workflow = "release.yaml" }
 yt-dlp = "latest"
 
-"github:alltuner/mise-completions-sync" = "latest"
-"github:perplexityai/perplexity-cli" = { version = "latest", bin = "pplx" }
-
+herdr = "latest"
+antigravity-cli = "latest"
+claude = "latest"
+codegraph = "latest"
+codex = "latest"
+opencode = "latest"
+rtk = "latest"
 "npm:ccstatusline" = "2.2.34"
 "npm:dev-browser" = "latest"
 "npm:typescript" = "latest"
 "npm:typescript-language-server" = "latest"
+
+"github:alltuner/mise-completions-sync" = "latest"
+"github:perplexityai/perplexity-cli" = { version = "latest", bin = "pplx" }
 
 [bootstrap.packages]
 "brew-cask:font-caskaydia-cove-nerd-font" = "latest"

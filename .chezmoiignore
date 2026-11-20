@@ -34,11 +34,3 @@ renovate.json
 .config/fusuma
 .config/environment.d
 {{ end }}
-
-{{ if ne .chezmoi.hostname "fedora-pc" }}
-.config/homelab
-.config/containers/systemd
-.local/bin/backup-wsl
-.config/systemd/user/backup.service
-.config/systemd/user/backup.timer
-{{ end }}
