@@ -16,6 +16,7 @@ bitwarden = "latest"
 bitwarden-secrets-manager = "latest"
 claude = "latest"
 codegraph = "latest"
+codex = "latest"
 difftastic = "latest"
 fzf = "latest"
 herdr = "latest"
@@ -34,6 +35,8 @@ yt-dlp = "latest"
 
 "npm:ccstatusline" = "2.2.34"
 "npm:dev-browser" = "latest"
+"npm:typescript" = "latest"
+"npm:typescript-language-server" = "latest"
 
 [bootstrap.packages]
 "brew-cask:font-caskaydia-cove-nerd-font" = "latest"

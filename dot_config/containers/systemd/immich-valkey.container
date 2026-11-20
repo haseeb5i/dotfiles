@@ -1,8 +1,0 @@
-[Container]
-ContainerName=immich-valkey
-Image=docker.io/valkey/valkey:9@sha256:418652cfb58ef879d4978c33553735d7147016032d5aefaa14c828e611eb9dfd
-Network=skynet.network
-[Service]
-Restart=always
-[Install]
-WantedBy=default.target

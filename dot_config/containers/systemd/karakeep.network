@@ -1,6 +1,0 @@
-[Unit]
-Description=Private Karakeep service network
-
-[Network]
-NetworkName=karakeep
-Subnet=10.89.5.0/24

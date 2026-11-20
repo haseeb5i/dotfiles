@@ -4,15 +4,6 @@ Host github.com
     ServerAliveInterval 30
     IdentityFile ~/.ssh/github
 
-Host pc-backup
-    HostName n3o-pc1.tail211f3.ts.net
-    User haseeb
-
-Host wsl-backup
-    HostName n3o-pc1.tail211f3.ts.net
-    Port 2222
-    User raven
-
 Host pc
     HostName ssh-pc.ravennest.link
     User haseeb
@@ -24,6 +15,10 @@ Host wsl
     User raven
     ProxyJump pc
 
+Host pc-backup
+    HostName n3o-pc1.tail211f3.ts.net
+    User haseeb
+
 Host macbook
     HostName haseebs-macbook-pro.tail211f3.ts.net
     User raven
@@ -32,6 +27,6 @@ Host mini
     HostName n3os-mac-mini.tail211f3.ts.net
     User raven
 
-Host macbook mini pc wsl pc-backup wsl-backup
+Host macbook mini pc wsl pc-backup
     IdentityFile ~/.ssh/machines
     IdentitiesOnly yes

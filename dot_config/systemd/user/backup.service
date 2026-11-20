@@ -1,6 +1,0 @@
-[Unit]
-Description=Back up homelab data and Podman secrets with Restic
-
-[Service]
-Type=oneshot
-ExecStart=%h/.local/bin/backup-wsl

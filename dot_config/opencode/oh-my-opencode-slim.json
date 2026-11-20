@@ -3,12 +3,12 @@
   "preset": "openai",
   "presets": {
     "openai": {
-      "orchestrator": { "model": "openai/gpt-6.1-sol", "variant": "medium", "skills": ["*"], "mcps": ["*", "!context7", "!gh_grep"] },
-      "oracle": { "model": "openai/gpt-6-astra", "variant": "high", "skills": ["simplify"], "mcps": ["codegraph"] },
+      "orchestrator": { "model": "openai/gpt-6.2-sol", "variant": "medium", "skills": ["*"], "mcps": ["*", "!context7", "!gh_grep"] },
+      "oracle": { "model": "openai/gpt-6.2-astra", "variant": "high", "skills": ["simplify"], "mcps": ["codegraph"] },
       "explorer": { "model": "openai/gpt-6-luna", "variant": "low", "skills": [], "mcps": ["context7", "codegraph", "gh_grep"] },
-      "designer": { "model": "openai/gpt-6.1-sol", "variant": "medium", "skills": [], "mcps": [] },
-      "fixer": { "model": "openai/gpt-6.1-sol", "variant": "low", "skills": [], "mcps": ["codegraph"] },
-      "council": { "model": "openai/gpt-6.1-sol", "variant": "high", "skills": [], "mcps": [] }
+      "designer": { "model": "openai/gpt-6.2-sol", "variant": "medium", "skills": [], "mcps": [] },
+      "fixer": { "model": "openai/gpt-6.1-terra", "variant": "low", "skills": [], "mcps": ["codegraph"] },
+      "council": { "model": "openai/gpt-6.2-sol", "variant": "high", "skills": [], "mcps": [] }
     },
     "anthropic": {
       "orchestrator": { "model": "anthropic/claude-sonnet-5-5", "variant": "medium", "skills": ["*"], "mcps": ["*", "!context7", "!gh_grep"] },
@@ -31,7 +31,7 @@
   "council": {
     "presets": {
       "default": {
-        "alpha": { "model": "openai/gpt-6-astra", "variant": "high" },
+        "alpha": { "model": "openai/gpt-6.2-astra", "variant": "high" },
         "beta": { "model": "anthropic/claude-fable-5-2", "variant": "high" }
       }
     }
