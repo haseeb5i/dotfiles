@@ -4,7 +4,7 @@ Run `hostname` to see which machine you are on (`wsl` has no `hostname` command:
 
 | Alias | Hostname | Notes |
 |---|---|---|
-| `wsl` | `fedora-pc` | Fedora 44 in WSL on the Windows desktop, user `raven`, SSH port 2222; hosts the homelab and the dev setup. The hostname gates chezmoi's homelab files, so keep it `fedora-pc` |
+| `wsl` | `fedora-pc` | Fedora 44 in WSL on the Windows desktop, user `raven`, SSH port 2222; hosts the dev setup |
 | `pc` | `N3O-PC1` | Windows 11 Pro desktop that hosts `wsl`, user `haseeb`, PowerShell shell; no chezmoi |
 | `macbook` | `n3o-lap2.local` | MacBook Pro (Apple M5, macOS), user `raven` |
 | `mini` | `n3o-macmini.local` | Mac mini (Apple M4, macOS), user `raven` |

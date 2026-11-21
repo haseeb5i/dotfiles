@@ -19,7 +19,6 @@ brew "uutils-coreutils"
 brew "ugrep"
 
 if OS.mac?
-  brew "cloudflared"
   brew "ffmpeg"
   brew "podman"
   cask "stablyai/orca/orca"
