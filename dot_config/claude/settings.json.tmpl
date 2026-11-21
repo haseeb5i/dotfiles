@@ -10,7 +10,7 @@
     ],
     "defaultMode": "auto"
   },
-  "model": "{{ if eq .chezmoi.hostname "fedora-pc" }}sonnet{{ else if eq .chezmoi.hostname "n3o-lap2.local" }}fable{{ else }}opus{{ end }}",
+  "model": "{{ if eq .chezmoi.hostname "fedora-pc" }}sonnet{{ else if eq .chezmoi.hostname "n3o-lap2" }}fable{{ else }}opus{{ end }}",
   "hooks": {
     "PreToolUse": [
       {
