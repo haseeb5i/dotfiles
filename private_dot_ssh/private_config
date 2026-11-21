@@ -8,11 +8,22 @@ Host pc
     HostName n3o-pc1.tail211f3.ts.net
     User haseeb
 
+Host pc-warp
+    HostName ssh-pc.ravennest.link
+    User haseeb
+    ProxyCommand /opt/homebrew/bin/cloudflared access ssh --hostname %h
+
 Host wsl
     HostName 127.0.0.1
     Port 2222
     User raven
     ProxyJump pc
+
+Host wsl-warp
+    HostName 127.0.0.1
+    Port 2222
+    User raven
+    ProxyJump pc-warp
 
 Host macbook
     HostName haseebs-macbook-pro.tail211f3.ts.net
