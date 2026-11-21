@@ -14,16 +14,15 @@ Host pc-warp
     ProxyCommand /opt/homebrew/bin/cloudflared access ssh --hostname %h
 
 Host wsl
-    HostName 127.0.0.1
-    Port 2222
-    User raven
     ProxyJump pc
 
 Host wsl-warp
+    ProxyJump pc-warp
+
+Host wsl wsl-warp
     HostName 127.0.0.1
     Port 2222
     User raven
-    ProxyJump pc-warp
 
 Host macbook
     HostName haseebs-macbook-pro.tail211f3.ts.net
