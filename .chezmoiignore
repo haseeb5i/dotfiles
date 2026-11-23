@@ -30,4 +30,5 @@ renovate.json
 .config/btop
 .config/fusuma
 .config/environment.d
+.config/systemd
 {{ end }}
