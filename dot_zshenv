@@ -7,9 +7,7 @@ export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
 
-if [[ -z "${ATUIN_HOME:-}" && -f "$XDG_DATA_HOME/atuin/data/history.db" ]]; then
-  export ATUIN_HOME="$XDG_DATA_HOME/atuin"
-fi
+export ATUIN_HOME="$XDG_DATA_HOME/atuin"
 
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
