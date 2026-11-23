@@ -32,6 +32,6 @@ Host mini
     HostName n3os-mac-mini.tail211f3.ts.net
     User raven
 
-Host macbook mini pc wsl
+Host macbook mini pc pc-warp wsl wsl-warp
     IdentityFile ~/.ssh/machines
     IdentitiesOnly yes
