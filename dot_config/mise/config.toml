@@ -35,9 +35,9 @@ rtk = "latest"
 "npm:typescript" = "latest"
 "npm:typescript-language-server" = "latest"
 
-"github:alltuner/mise-completions-sync" = "latest"
-"github:perplexityai/perplexity-cli" = { version = "latest", bin = "pplx" }
 "github:anomalyco/opentunnel" = "latest"
+"github:perplexityai/perplexity-cli" = { version = "latest", bin = "pplx" }
+"github:alltuner/mise-completions-sync" = "latest"
 
 [bootstrap.packages]
 "brew-cask:font-caskaydia-cove-nerd-font" = "latest"
