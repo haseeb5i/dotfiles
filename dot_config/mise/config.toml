@@ -11,8 +11,6 @@ uv = "latest"
 
 1password-cli = "latest"
 azure-cli = { version = "latest", python = "3.14" }
-bitwarden = "latest"
-bitwarden-secrets-manager = "latest"
 difftastic = "latest"
 fzf = "latest"
 lazygit = "latest"
