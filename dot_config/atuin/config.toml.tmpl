@@ -1,1 +1,1 @@
-sync_address = "http://{{ if and (eq .chezmoi.os "linux") (eq .chezmoi.hostname "fedora-wsl") }}127.0.0.1{{ else }}100.67.166.24{{ end }}:18085"
+sync_address = "http://{{ if eq .chezmoi.hostname "fedora-wsl" }}127.0.0.1{{ else }}100.67.166.24{{ end }}:18085"
