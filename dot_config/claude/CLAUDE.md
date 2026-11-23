@@ -14,4 +14,6 @@ If there is no `.codegraph/` directory, skip CodeGraph entirely — indexing is 
 Ponytail's `shortcut:` comments don't apply. If a shortcut would need a marker comment, don't take it. Comments default to none.
 
 @RTK.md
+@instructions/code-standards.md
+@instructions/machines.md
 @instructions/n3o-team.md
