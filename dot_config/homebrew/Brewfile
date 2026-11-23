@@ -21,7 +21,7 @@ brew "ugrep"
 if OS.mac?
   brew "ffmpeg"
   brew "podman"
-  cask "stablyai/orca/orca"
+  cask "anomalyco/tap/hex"
   cask "maccy"
   cask "scroll-reverser"
 end

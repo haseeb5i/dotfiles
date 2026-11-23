@@ -37,6 +37,7 @@ rtk = "latest"
 
 "github:alltuner/mise-completions-sync" = "latest"
 "github:perplexityai/perplexity-cli" = { version = "latest", bin = "pplx" }
+"github:anomalyco/opentunnel" = "latest"
 
 [bootstrap.packages]
 "brew-cask:font-caskaydia-cove-nerd-font" = "latest"
