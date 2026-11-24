@@ -1,1 +1,6 @@
 sync_address = "http://{{ if eq .chezmoi.hostname "fedora-wsl" }}127.0.0.1{{ else }}100.67.166.24{{ end }}:18085"
+{{ if or (eq .chezmoi.hostname "fedora-wsl") (eq .chezmoi.hostname "n3o-lap2") -}}
+
+[logs]
+dir = "{{ .chezmoi.homeDir }}/.local/state/atuin/logs"
+{{ end -}}
