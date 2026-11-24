@@ -1,3 +1,5 @@
+export ZPROFILE_LOADED=1
+
 # Browser
 if [[ -z "$BROWSER" && "$OSTYPE" == darwin* ]]; then
   export BROWSER='open'

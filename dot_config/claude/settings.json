@@ -10,7 +10,7 @@
     ],
     "defaultMode": "auto"
   },
-  "model": "{{ if eq .chezmoi.hostname "fedora-wsl" }}sonnet{{ else if eq .chezmoi.hostname "n3o-lap2" }}fable{{ else }}opus{{ end }}",
+  "model": "opus",
   "hooks": {
     "PreToolUse": [
       {
