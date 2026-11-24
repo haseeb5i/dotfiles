@@ -8,21 +8,11 @@ Host pc
     HostName n3o-pc1.tail211f3.ts.net
     User haseeb
 
-Host pc-warp
-    HostName ssh-pc.ravennest.link
-    User haseeb
-    ProxyCommand /opt/homebrew/bin/cloudflared access ssh --hostname %h
-
 Host wsl
-    ProxyJump pc
-
-Host wsl-warp
-    ProxyJump pc-warp
-
-Host wsl wsl-warp
     HostName 127.0.0.1
     Port 2222
     User raven
+    ProxyJump pc
 
 Host macbook
     HostName haseebs-macbook-pro.tail211f3.ts.net
@@ -32,7 +22,7 @@ Host mini
     HostName n3os-mac-mini.tail211f3.ts.net
     User raven
 
-Host macbook mini pc pc-warp wsl wsl-warp
+Host macbook mini pc wsl
     IdentityFile ~/.ssh/machines
     IdentitiesOnly yes
     ControlMaster auto
