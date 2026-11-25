@@ -14,7 +14,7 @@ export LANG='en_GB.UTF-8'
 
 # Paths
 # Ensure path arrays do not contain duplicates.
-typeset -gU cdpath fpath mailpath path PATH
+typeset -gU cdpath fpath mailpath path
 
 path=(
   /usr/local/{,s}bin(N)
