@@ -10,17 +10,15 @@ export EDITOR='nvim'
 export VISUAL='nvim'
 
 # Languages
-if [[ -z "$LANG" ]]; then
-  export LANG='en_GB.UTF-8'
-fi
+export LANG='en_GB.UTF-8'
 
 # Paths
 # Ensure path arrays do not contain duplicates.
-typeset -gU cdpath fpath mailpath path
+typeset -gU cdpath fpath mailpath path PATH
 
 path=(
   /usr/local/{,s}bin(N)
-  $HOME/.local/{,s}bin(N)
+  $HOME/.local/bin
   $path
 )
 
@@ -33,6 +31,8 @@ fi
 
 # Application directories
 export ACKRC="$XDG_CONFIG_HOME/ack/ackrc"
+export ATUIN_CONFIG_DIR="$XDG_CONFIG_HOME/atuin"
+export ATUIN_HOME="$XDG_DATA_HOME/atuin"
 export AWS_SHARED_CREDENTIALS_FILE="$XDG_CONFIG_HOME/aws/credentials"
 export AWS_CONFIG_FILE="$XDG_CONFIG_HOME/aws/config"
 export AZURE_CONFIG_DIR="$XDG_CONFIG_HOME/azure"
@@ -44,7 +44,7 @@ export CUDA_CACHE_PATH="$XDG_CACHE_HOME/nv"
 export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
 export FZF_MARKS_FILE="$XDG_CONFIG_HOME/fzf-marks"
 export GNUPGHOME="$XDG_DATA_HOME/gnupg"
-[[ -d $GNUPGHOME ]] || mkdir -m 700 -p "$GNUPGHOME"  # gpg only auto-creates ~/.gnupg
+[[ -d $GNUPGHOME ]] || mkdir -m 700 -p "$GNUPGHOME"
 export GTK_RC_FILES="$XDG_CONFIG_HOME/gtk-1.0/gtkrc"
 export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
 export ICEAUTHORITY="$XDG_CACHE_HOME/ICEauthority"
@@ -52,6 +52,7 @@ export IONIC_CONFIG_DIRECTORY="$XDG_CONFIG_HOME/ionic"
 export IPFS_PATH="$XDG_DATA_HOME/ipfs"
 export KSCRIPT_CACHE_DIR="$XDG_CACHE_HOME/kscript"
 export MACHINE_STORAGE_PATH="$XDG_DATA_HOME/docker-machine"
+export MIX_XDG="true" #elixir
 export SQLITE_HISTORY="$XDG_CACHE_HOME/sqlite_history"
 export TLDR_CACHE_DIR="$XDG_CACHE_HOME/tldr"
 export WGETRC="$XDG_CONFIG_HOME/wgetrc"
@@ -63,6 +64,19 @@ export CODEX_HOME="$XDG_DATA_HOME/codex"
 export HERMES_HOME="$XDG_DATA_HOME/hermes"
 export PI_CODING_AGENT_DIR="$XDG_DATA_HOME/pi"
 
+# C#
+export DOTNET_CLI_HOME="$XDG_DATA_HOME/dotnet"
+export NUGET_PACKAGES="$XDG_CACHE_HOME"/NuGetPackages
+export OMNISHARPHOME="$XDG_CONFIG_HOME"/omnisharp
+path=(
+  $DOTNET_CLI_HOME/.dotnet/tools
+  $path
+)
+
+# Go
+export GOPATH=$XDG_DATA_HOME/go
+export GOMODCACHE=$XDG_CACHE_HOME/go/mod
+
 # Node
 export NPM_CONFIG_CACHE="$XDG_CACHE_HOME/npm"
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
@@ -70,14 +84,10 @@ export NODE_REPL_HISTORY=$XDG_DATA_HOME/node_repl_history
 export BUN_INSTALL="$XDG_DATA_HOME/bun"
 export PNPM_HOME="$XDG_DATA_HOME/pnpm"
 path=(
-  $PNPM_HOME/bin(N)
-  $BUN_INSTALL/bin(N)
+  $PNPM_HOME/bin
+  $BUN_INSTALL/bin
   $path
 )
-
-# Go
-export GOPATH=$XDG_DATA_HOME/go
-export GOMODCACHE=$XDG_CACHE_HOME/go/mod
 
 # Python
 export PYTHON_HISTORY=$XDG_STATE_HOME/python_history
@@ -89,14 +99,6 @@ export WORKON_HOME="$XDG_DATA_HOME/virtualenvs"
 export CARGO_HOME=$XDG_DATA_HOME/cargo
 export RUSTUP_HOME=$XDG_DATA_HOME/rustup
 
-# C#
-export DOTNET_CLI_HOME="$XDG_DATA_HOME/dotnet"
-export NUGET_PACKAGES="$XDG_CACHE_HOME"/NuGetPackages
-export OMNISHARPHOME="$XDG_CONFIG_HOME"/omnisharp
-path=(
-  $DOTNET_CLI_HOME/.dotnet/tools(N)
-  $path
-)
 
 # android
 export ANDROID_HOME="$XDG_DATA_HOME/android-sdk"
@@ -106,9 +108,15 @@ fi
 export ANDROID_USER_HOME="$XDG_DATA_HOME/android"
 export GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
 path=(
-  $ANDROID_HOME/emulator(N)
-  $ANDROID_HOME/platform-tools(N)
+  $ANDROID_HOME/emulator
+  $ANDROID_HOME/platform-tools
   $path
 )
 
-export MIX_XDG="true" # elixir
+
+for brew_bin in {/opt/homebrew,/home/linuxbrew/.linuxbrew,/usr/local}/bin/brew(N); do
+  eval "$($brew_bin shellenv zsh)"
+done
+unset brew_bin
+
+(( ${+commands[mise]} )) && eval "$(mise activate zsh --shims)"

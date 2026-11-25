@@ -1,17 +1,11 @@
 export HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
 
-for brew_bin in /opt/homebrew/bin/brew /home/linuxbrew/.linuxbrew/bin/brew /usr/local/bin/brew; do
-  [[ -x $brew_bin ]] || continue
-  eval "$("$brew_bin" shellenv zsh)"
-  break
-done
-unset brew_bin
-
 fpath=(
   $XDG_DATA_HOME/mise-completions/zsh(N)
   $fpath
 )
 
+[[ -d $XDG_CACHE_HOME/zsh ]] || mkdir -p "$XDG_CACHE_HOME/zsh"
 zstyle ':zim:completion' dumpfile "${XDG_CACHE_HOME}/zsh/zcompdump"
 zstyle ':completion::complete:*' cache-path "${XDG_CACHE_HOME}/zsh/zcompcache"
 zstyle ':zim:input' double-dot-expand yes
@@ -44,7 +38,7 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 zstyle ':fzf-tab:*' switch-group '<' '>'
 
 alias cat='bat --style=plain --paging=never'
-alias grep='rg'
+alias grep='ugrep'
 alias lg='lazygit'
 alias ls='eza --icons=auto'
 alias ll='eza -l --icons=auto --group-directories-first'
@@ -69,9 +63,9 @@ fi
 
 (( ${+commands[atuin]} )) && eval "$(atuin init zsh)"
 
-(( ${+commands[zoxide]} )) && eval "$(zoxide init --cmd cd zsh)"
-
 (( ${+commands[direnv]} )) && eval "$(direnv hook zsh)"
+
+(( ${+commands[zoxide]} )) && eval "$(zoxide init --cmd cd zsh)"
 
 (( ${+commands[starship]} )) && eval "$(starship init zsh)"
 
