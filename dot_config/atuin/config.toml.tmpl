@@ -1,4 +1,4 @@
-sync_address = "http://{{ if eq .chezmoi.hostname "fedora-wsl" }}127.0.0.1{{ else }}100.67.166.24{{ end }}:18085"
+sync_address = "http://{{ if eq .chezmoi.hostname "fedora-wsl" }}127.0.0.1:28085{{ else }}100.67.166.24:18085{{ end }}"
 {{ if or (eq .chezmoi.hostname "fedora-wsl") (eq .chezmoi.hostname "n3o-lap2") -}}
 
 [logs]
