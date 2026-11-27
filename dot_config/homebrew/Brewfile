@@ -17,6 +17,7 @@ brew "tealdeer"
 brew "trash-cli"
 brew "uutils-coreutils"
 brew "ugrep"
+brew "podman-tui"
 
 if OS.mac?
   brew "ffmpeg"
