@@ -20,6 +20,7 @@ brew "ugrep"
 brew "podman-tui"
 
 if OS.mac?
+  brew "cloudflared"
   brew "ffmpeg"
   brew "podman"
   cask "anomalyco/tap/hex"
