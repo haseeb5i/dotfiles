@@ -22,6 +22,7 @@ brew "podman-tui"
 if OS.mac?
   brew "cloudflared"
   brew "ffmpeg"
+  brew "mas"
   brew "podman"
   cask "caskhub"
   cask "iina"
@@ -38,4 +39,25 @@ if OS.mac?
   cask "vorssaint"
   cask "zed"
   cask "zoom"
+  mas "MacDroid", id: 1476545828
+  mas "Microsoft Outlook", id: 985367838
+  mas "Slack", id: 803453959
+  mas "Tailscale", id: 1475387142
+  mas "Telegram", id: 747648890
+  mas "WhatsApp", id: 310633997
+  mas "Windows App", id: 1295203466
+  mas "Xcode", id: 497799835
+end
+
+if OS.linux?
+  brew "syncthing"
+  flatpak "com.google.Chrome"
+  flatpak "com.slack.Slack"
+  flatpak "com.discordapp.Discord"
+  flatpak "org.telegram.desktop"
+  flatpak "org.kde.haruna"
+  flatpak "com.obsproject.Studio"
+  flatpak "org.strawberrymusicplayer.strawberry"
+  flatpak "io.github.martinrotter.rssguard"
+  flatpak "io.dbeaver.DBeaverCommunity"
 end
