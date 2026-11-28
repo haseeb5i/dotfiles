@@ -23,6 +23,8 @@ if OS.mac?
   brew "cloudflared"
   brew "ffmpeg"
   brew "podman"
+  cask "caskhub"
+  cask "iina"
   cask "anomalyco/tap/hex"
   cask "vorssaint"
 end

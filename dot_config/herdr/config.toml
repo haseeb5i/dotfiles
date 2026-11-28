@@ -17,13 +17,6 @@ rows = [
   ["tab"],
 ]
 
-
-[[keys.command]]
-key = "prefix+d"
-type = "plugin_action"
-command = "persiyanov.reviewr.toggle"
-description = "review diff"
-
 [[keys.command]]
 key = "prefix+a"
 type = "plugin_action"
@@ -35,18 +28,6 @@ key = "prefix+shift+a"
 type = "plugin_action"
 command = "annotate.copy-context"
 description = "copy annotations as context"
-
-[[keys.command]]
-key = "prefix+o"
-type = "plugin_action"
-command = "annotate.open"
-description = "review documents in this folder"
-
-[[keys.command]]
-key = "prefix+shift+o"
-type = "plugin_action"
-command = "annotate.last"
-description = "review the agent's last reply"
 
 [[keys.command]]
 key = "prefix+ctrl+s"
@@ -61,7 +42,13 @@ command = "annotate.manage"
 description = "manage annotations"
 
 [[keys.command]]
-key = "prefix+e"
+key = "prefix+d"
 type = "plugin_action"
-command = "herdr-sidebar.open-sidebar"
-description = "toggle explorer sidebar"
+command = "annotate.open"
+description = "review documents in this folder"
+
+[[keys.command]]
+key = "prefix+shift+o"
+type = "plugin_action"
+command = "annotate.last"
+description = "review the agent's last reply"
