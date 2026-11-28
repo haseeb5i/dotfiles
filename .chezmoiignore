@@ -36,6 +36,7 @@ renovate.json
 !.gemini/config/mcp_config.json
 !.gemini/antigravity-cli
 !.gemini/antigravity-cli/settings.json
+!.gemini/antigravity-cli/statusline.py
 
 {{ if ne .chezmoi.os "linux" }}
 .config/btop
