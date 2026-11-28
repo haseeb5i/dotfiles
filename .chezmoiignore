@@ -11,6 +11,7 @@ renovate.json
 # zsh
 .config/zsh/*
 !.config/zsh/.zprofile
+!.config/zsh/.zshenv
 !.config/zsh/.zshrc
 !.config/zsh/.zimrc
 
