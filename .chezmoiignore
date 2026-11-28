@@ -28,6 +28,15 @@ renovate.json
 !.config/claude/instructions
 !.config/claude/instructions/**
 
+# antigravity-cli
+.gemini/*
+!.gemini/config
+!.gemini/config/AGENTS.md
+!.gemini/config/config.json
+!.gemini/config/mcp_config.json
+!.gemini/antigravity-cli
+!.gemini/antigravity-cli/settings.json
+
 {{ if ne .chezmoi.os "linux" }}
 .config/btop
 .config/fusuma

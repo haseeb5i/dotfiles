@@ -1,0 +1,14 @@
+{
+  "plugins": {
+    "context7": {
+      "installedFrom": {
+        "id": "antigravity-plugins-partners/plugin/context7",
+        "marketplace": "antigravity-plugins-partners",
+        "version": "1.0.1"
+      }
+    },
+    "swarm": {
+      "enabled": true
+    }
+  }
+}
