@@ -85,23 +85,17 @@ def git_info(vcs: dict | None, cwd: str) -> tuple[str, bool]:
 
 
 def format_context(ctx: dict | None) -> str:
-    """Format context window percentage bar and token usage."""
+    """Format context window token usage (e.g. ctx 231k/1.0M)."""
     if not isinstance(ctx, dict):
         return f"{GRAY}ctx 0%{RESET}"
     pct = float(ctx.get("used_percentage") or 0.0)
     win = int(ctx.get("context_window_size") or 0)
     color = RED if pct >= 90 else YELLOW if pct >= 60 else WHITE
 
-    bar_len = 8
-    filled = min(bar_len, max(0, int(round(pct / 100 * bar_len))))
-    bar = "█" * filled + "░" * (bar_len - filled)
-
-    if win > 0 and pct > 0:
-        used_tokens = pct / 100.0 * win
-        return f"{color}{bar} {pct:.1f}%{RESET} {GRAY}({fmt_tokens(used_tokens)}/{fmt_tokens(win)}){RESET}"
     if win > 0:
-        return f"{color}{bar} {pct:.1f}%{RESET} {GRAY}(/{fmt_tokens(win)}){RESET}"
-    return f"{color}{bar} {pct:.1f}%{RESET}"
+        used_tokens = pct / 100.0 * win
+        return f"{GRAY}ctx{RESET} {color}{fmt_tokens(used_tokens)}/{fmt_tokens(win)}{RESET}"
+    return f"{GRAY}ctx{RESET} {color}{pct:.1f}%{RESET}" if pct > 0 else f"{GRAY}ctx 0%{RESET}"
 
 
 def format_quota(quota: dict | None) -> str:

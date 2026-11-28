@@ -1,35 +1,35 @@
+# Repository files and Finder metadata
 AGENTS.md
 README.md
 renovate.json
-.DS_Store
 **/.DS_Store
 
-#zed
+# Zed: keep local conversations and prompts out of chezmoi.
 .config/zed/conversations/*
 .config/zed/prompts/*
 
-# zsh
+# Zsh: startup files only.
 .config/zsh/*
 !.config/zsh/.zprofile
 !.config/zsh/.zshenv
 !.config/zsh/.zshrc
 !.config/zsh/.zimrc
 
-# opencode
+# OpenCode: allow configuration files, not backups.
 .config/opencode/*
 !.config/opencode/cli.json
-!.config/opencode/opencode.json*
+!.config/opencode/opencode.json
+!.config/opencode/opencode.jsonc
 !.config/opencode/oh-my-opencode-slim.json
 
-# claude
+# Claude Code: settings and the shared instructions directory.
 .config/claude/*
 !.config/claude/CLAUDE.md
 !.config/claude/settings.json
 !.config/claude/instructions
-!.config/claude/instructions/**
 
-# antigravity-cli
-.gemini/*
+# Antigravity CLI: ignore .gemini contents except the shared config files.
+.gemini/**/*
 !.gemini/config
 !.gemini/config/AGENTS.md
 !.gemini/config/config.json
@@ -38,6 +38,7 @@ renovate.json
 !.gemini/antigravity-cli/settings.json
 !.gemini/antigravity-cli/statusline.py
 
+# Linux-only configs
 {{ if ne .chezmoi.os "linux" }}
 .config/btop
 .config/fusuma
@@ -45,6 +46,7 @@ renovate.json
 .config/systemd
 {{ end }}
 
+# macOS-only configs
 {{ if ne .chezmoi.os "darwin" }}
 .config/vorssaint
 Library
