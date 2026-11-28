@@ -10,10 +10,12 @@ rust = "latest"
 uv = "latest"
 
 azure-cli = { version = "latest", python = "3.14" }
+cloudflared = { version = "latest", os = ["macos"] }
 difftastic = "latest"
 fzf = "latest"
 lazygit = "latest"
 neovim = "latest"
+podman-tui = "latest"
 usage = "latest"
 worktrunk = { version = "latest", workflow = "release.yaml" }
 yt-dlp = "latest"
@@ -36,6 +38,12 @@ rtk = "latest"
 [bootstrap.packages]
 "brew-cask:font-caskaydia-cove-nerd-font" = "latest"
 "brew-cask:font-fira-code-nerd-font" = "latest"
+# Keep the native builds for media, App Store access, and containers.
+"brew:ffmpeg" = { os = "macos" }
+"brew:mas" = { os = "macos" }
+"brew:podman" = { os = "macos" }
+# Install into the Brew prefix so `brew services` can manage it.
+"brew:syncthing" = { os = "linux" }
 
 [hooks]
 postinstall = "misecompsync --shell zsh"

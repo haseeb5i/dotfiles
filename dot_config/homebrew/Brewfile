@@ -1,4 +1,5 @@
 # install with: brew bundle --file ~/.config/homebrew/Brewfile
+# Shared CLI tools from https://docs.getaurora.dev/guides/aurora-cli/
 brew "atuin"
 brew "bat"
 brew "direnv"
@@ -10,20 +11,13 @@ brew "zoxide"
 brew "starship"
 brew "yq"
 brew "chezmoi"
-brew "mise"
 brew "bbrew"
 brew "dysk"
 brew "tealdeer"
-brew "trash-cli"
 brew "uutils-coreutils"
 brew "ugrep"
-brew "podman-tui"
 
 if OS.mac?
-  brew "cloudflared"
-  brew "ffmpeg"
-  brew "mas"
-  brew "podman"
   cask "caskhub"
   cask "iina"
   cask "anomalyco/tap/hex"
@@ -50,14 +44,5 @@ if OS.mac?
 end
 
 if OS.linux?
-  brew "syncthing"
-  flatpak "com.google.Chrome"
-  flatpak "com.slack.Slack"
-  flatpak "com.discordapp.Discord"
-  flatpak "org.telegram.desktop"
-  flatpak "org.kde.haruna"
-  flatpak "com.obsproject.Studio"
-  flatpak "org.strawberrymusicplayer.strawberry"
-  flatpak "io.github.martinrotter.rssguard"
-  flatpak "io.dbeaver.DBeaverCommunity"
+  brew "trash-cli"
 end
